@@ -119,3 +119,14 @@ button {
         font-size: 1.2rem;
     }
 }
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: #000000;
+    background: #FFFFFF;
+}
+
+::selection {
+    color: #000000;
+    background: #FFFFFF;
+}
