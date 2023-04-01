@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import styled from 'styled-components';
 
-export const Container = styled.div`
-
-
+const Container = styled.div`
 	.wrapper {
 		max-width: 1080px;
 		margin-left: auto;
@@ -86,7 +84,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const OurClients = styled.section`
+const OurClients = styled.section`
 	margin-top: 140px;
 
 	h3 {
@@ -109,7 +107,7 @@ export const OurClients = styled.section`
 	}
 `;
 
-export const Services = styled.section`
+const Services = styled.section`
 	margin-top: 40px;
 
 	h3 {
@@ -223,7 +221,7 @@ type OurProcessProps = {
 	activeTab: number;
 };
 
-export const OurProcess = styled.section<OurProcessProps>`
+const OurProcess = styled.section<OurProcessProps>`
 	background: #fff;
 	color: #000;
 	padding-top: 40px;
@@ -331,7 +329,7 @@ export const OurProcess = styled.section<OurProcessProps>`
 	}
 `;
 
-export const Depoiments = styled.section`
+const Depoiments = styled.section`
 	background: #005DFF;
 	padding-top: 40px;
 	padding-bottom: 100px;
@@ -394,7 +392,7 @@ export const Depoiments = styled.section`
 	}
 `;
 
-export const Contact = styled.section`
+const Contact = styled.section`
 	display: flex;
 	flex-direction: column;
 	padding-top: 100px;
@@ -483,7 +481,7 @@ export const Contact = styled.section`
 	}
 `;
 
-export const Footer = styled.footer`
+const Footer = styled.footer`
 	display: flex;
 	align-items: center;
 	background: #fff;
@@ -520,3 +518,5 @@ export const Footer = styled.footer`
 
 	}
 `;
+
+export default {Container, OurClients, Services, OurProcess, Depoiments, Contact, Footer};

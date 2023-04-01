@@ -1,6 +1,6 @@
 import React from 'react';
 import {StaticImage} from 'gatsby-plugin-image';
-import {Container, Services, OurClients, OurProcess, Depoiments, Footer, Contact} from './styles';
+import * as Styles from './styles';
 import {Helmet} from 'react-helmet';
 import GlobalStyle from '../styles/global-styles';
 import {Button} from '../components/button';
@@ -101,7 +101,7 @@ const IndexPage = () => {
 				<meta name='referrer' content='origin' />
 			</Helmet>
 			<GlobalStyle />
-			<Container ref={homeRef}>
+			<Styles.default.Container ref={homeRef}>
 				<header className='wrapper'>
 					<StaticImage
 						src='../images/blackelephant-logo.png'
@@ -154,7 +154,7 @@ const IndexPage = () => {
 						className='mobile-apps'
 					/>
 				</main>
-				<OurClients className='wrapper'>
+				<Styles.default.OurClients className='wrapper'>
 					<h3>
 						Confiam em nosso trabalho
 					</h3>
@@ -187,8 +187,8 @@ const IndexPage = () => {
 						</li>
 					</ul>
 
-				</OurClients>
-				<Services ref={servicesRef}>
+				</Styles.default.OurClients>
+				<Styles.default.Services ref={servicesRef}>
 					<h3>
 						<div className='wrapper'>
 
@@ -258,9 +258,9 @@ const IndexPage = () => {
 							</div>
 						</li>
 					</ul>
-				</Services>
+				</Styles.default.Services>
 
-				<OurProcess activeTab={tabProcessActive} ref={ourProcessesRef}>
+				<Styles.default.OurProcess activeTab={tabProcessActive} ref={ourProcessesRef}>
 					<div className='wrapper'>
 						<h3>
 							Nosso processo
@@ -405,10 +405,10 @@ const IndexPage = () => {
 						</ul>
 					</div>
 
-				</OurProcess>
-				<Depoiments ref={depoimentsRef}>
+				</Styles.default.OurProcess>
+				<Styles.default.Depoiments ref={depoimentsRef}>
 					<div className='wrapper'>
-						<h3>
+						Styles.default.<h3>
 						Depoimentos
 						</h3>
 						<ul>
@@ -428,8 +428,8 @@ const IndexPage = () => {
 							</li>
 						</ul>
 					</div>
-				</Depoiments>
-				<Contact ref={contactRef}>
+				</Styles.default.Depoiments>
+				<Styles.default.Contact ref={contactRef}>
 					<div className='wrapper content-contact'>
 						<h3>
 						Que tal conversarmos?
@@ -523,8 +523,8 @@ const IndexPage = () => {
 							</div>
 						</form>
 					</div>
-				</Contact>
-				<Footer>
+				</Styles.default.Contact>
+				<Styles.default.Footer>
 					<div className='wrapper footer-content'>
 						<span>
 							Política de privacidade
@@ -549,8 +549,8 @@ const IndexPage = () => {
 							</li>
 						</ul>
 					</div>
-				</Footer>
-			</Container>
+				</Styles.default.Footer>
+			</Styles.default.Container>
 		</React.Fragment>
 	);
 };
