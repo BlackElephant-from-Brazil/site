@@ -2,7 +2,7 @@ import React from 'react';
 import {StaticImage} from 'gatsby-plugin-image';
 import * as Styles from './styles';
 import {Helmet} from 'react-helmet';
-import GlobalStyle from './global-styles';
+import GlobalStyle from '../styles/global-styles';
 import {Button} from '../components/button';
 import {Input} from '../components/input';
 import {Select} from '../components/select';
