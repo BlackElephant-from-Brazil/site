@@ -9,8 +9,16 @@ import {Select} from '../components/select';
 import {Textarea} from '../components/textarea';
 import {Radio} from '../components/radio';
 
+const texts = [
+	'ter o software que você precisa',
+	'botar a mão na massa com seu time de tecnologia',
+	'dar um upgrade nos seus processos internos com automação',
+	'validar sua ideia de negócio antes de ser lançada',
+	'inserir seu produto no mercado',
+];
+
 const IndexPage = () => {
-	const [weHelpYouInText, setWeHelpYouInText] = React.useState('Ter o software que você precisa');
+	const [weHelpYouInText, setWeHelpYouInText] = React.useState(texts[0]);
 	const [tabProcessActive, setTabProcessActive] = React.useState(0);
 	const [selectedProjectDescription, setSelectedProjectDescription] = React.useState(-1);
 	const [nameErrorMessage, setNameErrorMessage] = React.useState('');
@@ -29,6 +37,43 @@ const IndexPage = () => {
 	const emailRef = React.useRef<HTMLInputElement>(null);
 	const phoneRef = React.useRef<HTMLInputElement>(null);
 	const messageRef = React.useRef<HTMLTextAreaElement>(null);
+
+	useEffect(() => {
+		let text = '';
+		let isDeleting = false;
+		let currentIndex = 0;
+		let typingTimeout = 0;
+
+		const type = () => {
+			typingTimeout = window.setTimeout(() => {
+				text = isDeleting
+					? texts[currentIndex].substring(0, text.length - 1)
+					: texts[currentIndex].substring(0, text.length + 1);
+
+				setWeHelpYouInText(text);
+
+				if (!isDeleting && text === texts[currentIndex]) {
+					isDeleting = true;
+					clearTimeout(typingTimeout);
+					setTimeout(type, 1000);
+				} else if (isDeleting && text === '') {
+					isDeleting = false;
+					currentIndex = (currentIndex + 1) % texts.length;
+					clearTimeout(typingTimeout);
+					setTimeout(type, 33);
+				} else {
+					clearTimeout(typingTimeout);
+					setTimeout(type, isDeleting ? 25 : 33);
+				}
+			}, isDeleting ? 25 : 33);
+		};
+
+		type();
+
+		return () => {
+			clearTimeout(typingTimeout);
+		};
+	}, []);
 
 	const handleGoToSection = (ref: React.RefObject<HTMLDivElement>) => {
 		const section = ref.current;
@@ -154,7 +199,7 @@ const IndexPage = () => {
 				</header>
 				<main className='wrapper'>
 					<h1>Nós ajudamos você a</h1>
-					<h2>{weHelpYouInText}</h2>
+					<h2>{weHelpYouInText} <span className='cursor' /> </h2>
 					<Button text='Vamos conversar' className='bt-lets-talk' startIcon={
 						<StaticImage
 							src='../images/send.svg'

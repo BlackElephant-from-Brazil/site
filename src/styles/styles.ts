@@ -57,6 +57,23 @@ export const Container = styled.div`
 			font-size: 50px;
 			margin-top: 24px;
 			max-width: 600px;
+			height: 200px;
+
+			.cursor {
+				transform: translateY(8px);
+				width: 35px;
+				height: 12px;
+				background: #fff;
+				display: inline-block;
+				animation: blink 1s infinite;
+
+				@keyframes blink {
+					50% {
+						opacity: 0;
+					}
+				}
+
+			}
 		}
 
 		.bt-lets-talk {
