@@ -258,6 +258,7 @@ export const OurProcess = styled.section<OurProcessProps>`
 	background: #fff;
 	color: #000;
 	padding-top: 40px;
+	height: 700px;
 
 	h3 {
 		font-weight: 400;
@@ -299,11 +300,27 @@ export const OurProcess = styled.section<OurProcessProps>`
 		}
 	}
 
+	.tab-container {
+		display: flex;
+		flex-direction: row;
+	}
+
 	ul.processes {
 		display: flex;
 		margin-top: 36px;
 		justify-content: space-between;
 		flex-wrap: wrap;
+		width: 100%;
+
+
+		&.ux-processes {
+			${({activeTab}) => activeTab === 1 ? 'display: none' : ''}
+		}
+
+		&.dev-processes {
+			${({activeTab}) => activeTab === 0 ? 'display: none' : ''}
+		}
+
 
 		> li {
 			width: 250px;
@@ -543,11 +560,12 @@ export const Footer = styled.footer`
 
 		li {
 			cursor: pointer;
+			width: 24px;
+			height: 24px;
 		}
 
-		li:last-child {
-			margin-left: 10px;
+		li:not(:last-child) {
+			margin-right: 10px;
 		}
-
 	}
 `;

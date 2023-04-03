@@ -344,134 +344,136 @@ const IndexPage = () => {
 						</ul>
 						<div className='line'>
 						</div>
-						<ul className='processes ux-processes'>
-							<li>
-								<h4>
+						<div className='tab-container'>
+							<ul className='processes ux-processes'>
+								<li>
+									<h4>
 									Mergulho no negócio
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Compreendemos mais sobre as necessidades e desejos do seu negócio
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>Workshops</li>
-										<li>Survey</li>
-										<li>Analytics</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>Workshops</li>
+											<li>Survey</li>
+											<li>Analytics</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									Pesquisa com usuários
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Entendemos o problema conduzindo em profundidade com uma pesquisa primária
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>Usabilidade</li>
-										<li>Entrevistas</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>Usabilidade</li>
+											<li>Entrevistas</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									Idealizar
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Rapidamente idealizar soluções mapeando jornadas e definindo a arquitetura
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>Matriz CSD</li>
-										<li>Personas</li>
-										<li>Canvas BM</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>Matriz CSD</li>
+											<li>Personas</li>
+											<li>Canvas BM</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									Materialização
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Projetar produtos bonitos, usáveis e de marca que atendam seus objetivos
-								</p>
-								<div className='tags'>
-									<ul>
-										<li>Prototipação</li>
-										<li>UI</li>
-									</ul>
-								</div>
-							</li>
-						</ul>
-						<ul className='processes dev-processes'>
-							<li>
-								<h4>
+									</p>
+									<div className='tags'>
+										<ul>
+											<li>Prototipação</li>
+											<li>UI</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<ul className='processes dev-processes'>
+								<li>
+									<h4>
 									Arq. da informação
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Organização da estrutura lógica dos dados do sistema
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>DB</li>
-										<li>ERD</li>
-										<li>Diagrama</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>DB</li>
+											<li>ERD</li>
+											<li>Diagrama</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									Mão na massa
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Programar todo o sistema seguindo as decisões tomadas pelos processos anteriores.
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>Front-end</li>
-										<li>Back-end</li>
-										<li>API</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>Front-end</li>
+											<li>Back-end</li>
+											<li>API</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									QA
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Realização de testes para validação do bom funcionamento do projeto
-								</p>
-								<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
-								<div className='tags'>
-									<ul>
-										<li>Matriz CSD</li>
-										<li>Personas</li>
-										<li>Canvas BM</li>
-									</ul>
-								</div>
-							</li>
-							<li>
-								<h4>
+									</p>
+									<StaticImage src='../images/right-arrow.png' alt='Seta indicando a direção do processo' className='right-arrow'/>
+									<div className='tags'>
+										<ul>
+											<li>Testes</li>
+											<li>E2E</li>
+											<li>Refactoring</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h4>
 									Suporte
-								</h4>
-								<p>
+									</h4>
+									<p>
 									Manutenção, tratamento de bugs, evolução do projeto e novas demandas
-								</p>
-								<div className='tags'>
-									<ul>
-										<li>CI/CD</li>
-										<li>AWS</li>
-										<li>Netlify</li>
-									</ul>
-								</div>
-							</li>
-						</ul>
+									</p>
+									<div className='tags'>
+										<ul>
+											<li>CI/CD</li>
+											<li>AWS</li>
+											<li>Netlify</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 
 				</OurProcess>
@@ -602,6 +604,20 @@ const IndexPage = () => {
 							Todos os direitos reservados ©
 						</span>
 						<ul>
+							<li>
+								<a href='https://api.whatsapp.com/send?phone=5519971100867&text=Ol%C3%A1,%20pessoal%20da%20BlackElephant.%20Gostaria%20de%20saber%20mais%20sobre%20o%20servi%C3%A7o%20de%20voc%C3%AAs.%20Bora%20bater%20um%20papo?' target='_blank' rel='noreferrer'>
+									<StaticImage
+										src='../images/whatsapp.png'
+										alt='Ícone do Whatsapp que irá te redirecionar ao nosso contato' />
+								</a>
+							</li>
+							<li>
+								<a href='https://github.com/blackElephant-from-Brazil/' target='_blank' rel='noreferrer'>
+									<StaticImage
+										src='../images/github.png'
+										alt='Ícone do Github que irá te redirecionar ao nosso repositório' />
+								</a>
+							</li>
 							<li>
 								<a href='https://www.instagram.com/blackelephant.br/' target='_blank' rel='noreferrer'>
 									<StaticImage
