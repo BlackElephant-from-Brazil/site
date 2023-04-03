@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StaticImage} from 'gatsby-plugin-image';
 import {Container, Services, OurClients, OurProcess, Depoiments, Footer, Contact} from '../styles/styles';
 import {Helmet} from 'react-helmet';
@@ -37,7 +37,7 @@ const IndexPage = () => {
 		}
 	};
 
-	const handleContactFormSubmit = () => {
+	const handleContactFormSubmit = async () => {
 		setNameErrorMessage('');
 		setEmailErrorMessage('');
 		setPhoneErrorMessage('');
@@ -83,6 +83,29 @@ const IndexPage = () => {
 
 		if (!message) {
 			setMessageErrorMessage('Preencha o campo mensagem');
+		}
+
+		const formData = {
+			name,
+			email,
+			phone,
+			budget: selectedBudget,
+			projectDescription: selectedProjectDescription,
+			message,
+		};
+
+		const sendData = JSON.stringify(formData);
+
+		try {
+			await fetch('https://op018ht8n1.execute-api.us-east-1.amazonaws.com/site-form-submit', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: sendData,
+			});
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
