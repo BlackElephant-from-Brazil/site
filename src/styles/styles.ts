@@ -67,6 +67,19 @@ export const Container = styled.div`
 			display: flex;
 			margin-left: 100px;
 			margin-top: 40px;
+			animation-name: get-in-from-right-down;
+			animation-duration: 1s;
+
+			@keyframes get-in-from-right-down {
+        from {
+					transform: translate(450px, 100px);
+					opacity: 0;
+        }
+        to {
+					transform: translate(0, 0);
+					opacity: 1;
+        }
+      }
 
 			span {
 				display: block;
@@ -76,6 +89,7 @@ export const Container = styled.div`
 				transform: translateY(24px);
 				margin-left: 30px;
 			}
+
 		}
 
 		.mobile-apps {

@@ -1,0 +1,18 @@
+# API
+PORT=3333
+
+# POSTGRES
+POSTGRES_PORT=5432
+POSTGRES_USERNAME=nosconformes
+POSTGRES_PASSWORD=nosconformes
+POSTGRES_DATABASE=nosconformes
+
+# EMAIL
+MAIL_USER=postmaster@sandboxf4ea7cb9ef1540e491d02168733077bb.mailgun.org
+MAIL_PASSWORD=09a312c434f6a5ce8fb0b3a1fc97ef00-75cd784d-79c0616c
+
+
+
+# DOCKER
+sudo docker run --name nosconformes -p 5432:5432 -e POSTGRES_USER=nosconformes -e POSTGRES_PASSWORD=nosconformes -e POSTGRES_DB=nosconformes -d postgres
+sudo docker exec -it nosconformes psql -U nosconformes

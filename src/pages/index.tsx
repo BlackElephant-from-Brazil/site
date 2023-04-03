@@ -94,9 +94,10 @@ const IndexPage = () => {
 				<link href='https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap' rel='stylesheet' />
 				<link href='https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap' rel='stylesheet'></link>
 				<title>BlackElephant do Brasil</title>
+				<link rel='icon' type='image/jpeg' href='/favicon.jpeg' />
 				<meta
 					name='description'
-					content='Gatsby example site using Styled Components'
+					content='BlackElephant do Brasil. A empresa que vai revolucionar o mercado de software nacional.'
 				/>
 				<meta name='referrer' content='origin' />
 			</Helmet>
@@ -213,7 +214,7 @@ const IndexPage = () => {
 							<div className='inner-box-sm right-box'>
 								<h4>2</h4>
 								<h5>Alocamos uma equipe no seu time</h5>
-								<p>Está querendo ajuntar um time de craques em tecnologia, a gente cuida disso pra você! Estamos prontos para te ajudar em todas as etapas do projeto.</p>
+								<p>Está querendo ajuntar um time de craques em tecnologia, a gente cuida disso para você! Estamos prontos para te ajudar em todas as etapas do projeto.</p>
 								<StaticImage
 									className='img-box'
 									src='../images/users.png'
@@ -483,10 +484,10 @@ const IndexPage = () => {
 								<Select text='Tô bolando um negócio e gostaria de validar minha ideia' onClick={() => {
 									setSelectedProjectDescription(3);
 								}} active={selectedProjectDescription === 3} />
-								<Select text='Tô pronto pronto pra inserir meu produto no mercado' onClick={() => {
+								<Select text='Tô pronto pronto para inserir meu produto no mercado' onClick={() => {
 									setSelectedProjectDescription(4);
 								}} active={selectedProjectDescription === 4} />
-								<Select text='Quero dar um up nos meus processos internos' onClick={() => {
+								<Select text='Quero dar um up nos processos internos da minha empresa' onClick={() => {
 									setSelectedProjectDescription(5);
 								}} active={selectedProjectDescription === 5} />
 								{
