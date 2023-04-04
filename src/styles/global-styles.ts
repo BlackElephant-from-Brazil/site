@@ -23,11 +23,12 @@ const GlobalStyle = createGlobalStyle`
 
 	::-moz-selection {
 		color: #000000;
-		background: #ffffff;
+		background: #dadada;
 	}
+
 	::selection {
 		color: #000000;
-		background: #ffffff;
+		background: #dadada;
 	}
 `;
 

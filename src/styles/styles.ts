@@ -2,10 +2,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-
+	@media screen and (max-width: 1330px) {
+		main {
+			h2 {
+				width: 600px;
+				height: 200px !important;
+			}
+		}
+	}
 
 	.wrapper {
-		max-width: 1080px;
+		padding-left: 72px;
+		padding-right: 72px;
+		max-width: 1440px;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -15,36 +24,51 @@ export const Container = styled.div`
 		align-items: center;
 		justify-content: space-between;
 		height: 96px;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		background: #000;
+		z-index: 99;
 
-		.logo {
-			cursor: pointer;
-		}
+		.wrapper {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
 
-		nav {
-			ul {
-				list-style: none;
-				display: flex;
+			.image-logo-header {
+				cursor: pointer;
+			}
 
-				li {
-					font-weight: 400;
-					font-size: 24px;
-					cursor: pointer;
-					transition: 0.2s ease-in-out;
+			nav {
+				ul {
+					list-style: none;
+					display: flex;
 
-					:not(:first-child) {
-						margin-left: 44px;
-					}
+					li {
+						font-weight: 400;
+						font-size: 24px;
+						cursor: pointer;
+						transition: 0.2s ease-in-out;
 
-					:hover {
-						text-shadow: 0px 0px 24px rgba(255, 255, 255, 0.7);
+						:not(:first-child) {
+							margin-left: 44px;
+						}
+
+						:hover {
+							text-shadow: 0px 0px 24px rgba(255, 255, 255, 0.7);
+						}
 					}
 				}
 			}
+
 		}
+
 	}
 
 	main {
 		position: relative;
+		margin-top: 136px;
+
 
 		h1 {
 			margin-top: 40px;
@@ -56,8 +80,8 @@ export const Container = styled.div`
 			font-weight: 700;
 			font-size: 50px;
 			margin-top: 24px;
-			max-width: 600px;
-			height: 200px;
+			max-width: 870px;
+			height: 140px;
 
 			.cursor {
 				transform: translateY(8px);
@@ -77,7 +101,7 @@ export const Container = styled.div`
 		}
 
 		.bt-lets-talk {
-			margin-top: 100px;
+			margin-top: 40px;
 		}
 
 		.text-us {
@@ -118,7 +142,7 @@ export const Container = styled.div`
 `;
 
 export const OurClients = styled.section`
-	margin-top: 140px;
+	margin-top: 240px;
 
 	h3 {
 		font-weight: 400;
@@ -134,8 +158,11 @@ export const OurClients = styled.section`
 		justify-content: center;
 
 		li {
-			margin-left: 80px;
 			margin-bottom: 40px;
+
+			:not(:first-child) {
+				margin-left: 40px;
+			}
 		}
 	}
 `;
@@ -159,23 +186,33 @@ export const Services = styled.section`
 		li {
 			display: flex;
 			flex-direction: column;
-			padding: 40px;
 			position: relative;
 			overflow: hidden;
 
 			.inner-box-sm {
-				width: 500px;
+				max-width: 720px;
+				width: 100%;
+				padding-bottom: 40px;
 			}
 
 			.left-box {
 				margin-left: auto;
+				padding-left: 72px;
+				justify-self: flex-end;
+				padding-right: 40px;
+
+
 			}
 
 			.right-box {
 				margin-right: auto;
+				padding-right: 72px;
+				justify-self: flex-start;
+				padding-left: 40px;
+				position: relative;
 
 				.img-box {
-					left: 380px;
+					right: -32px;
 				}
 			}
 
@@ -199,6 +236,7 @@ export const Services = styled.section`
 			&.orange-box {
 				background: #E05F3F;
 				width: 100%;
+				padding-bottom: 40px;
 
 				.wrapper {
 					position: relative;
@@ -214,37 +252,39 @@ export const Services = styled.section`
 				}
 
 				.img-box {
-					top: -20px;
-					left: 920px;
-					width: 210px;
-					height: 220px;
+					right: -32px;
 				}
 			}
 
 			h4 {
 				font-weight: 400;
 				font-size: 100px;
+
+
 			}
 
 			h5 {
 				font-weight: 700;
 				font-size: 26px;
-				max-width: 360px;
+				max-width: 500px;
+
+				@media screen and (max-width: 1330px) {
+					max-width: 360px;
+				}
 			}
 
 			p {
 				font-weight: 400;
 				font-size: 22px;
 				margin-top: 14px;
-				max-width: 460px;
 			}
 
 			.img-box {
 				position: absolute;
 				top: 0;
 				right: -40px;
-				width: fit-content;
-				height: fit-content;
+				width: 200px;
+				height: 200px;
 			}
 		}
 	}
@@ -258,7 +298,7 @@ export const OurProcess = styled.section<OurProcessProps>`
 	background: #fff;
 	color: #000;
 	padding-top: 40px;
-	height: 700px;
+	min-height: 700px;
 
 	h3 {
 		font-weight: 400;
@@ -323,7 +363,20 @@ export const OurProcess = styled.section<OurProcessProps>`
 
 
 		> li {
-			width: 250px;
+			@media screen and (max-width: 1450px) {
+				width: 276px;
+			}
+
+			@media screen and (max-width: 1330px) {
+				width: 213px;
+
+				h4 {
+					hyphens: manual;
+
+				}
+			}
+
+			width: 306px;
 			border: 2px solid #000000;
 			border-radius: 20px;
 			padding: 24px;
@@ -332,6 +385,9 @@ export const OurProcess = styled.section<OurProcessProps>`
 			flex-direction: column;
 			position: relative;
 
+			&:not(:first-child) {
+				margin-left: 22px;
+			}
 
 			h4 {
 				font-weight: 700;
@@ -449,7 +505,7 @@ export const Contact = styled.section`
 	padding-bottom: 72px;
 
 	.content-contact {
-		width: 620px;
+		width: 777px;
 		display: flex;
 		flex-direction: column;
 		margin: 0 auto;
@@ -540,32 +596,66 @@ export const Footer = styled.footer`
 
 	.footer-content {
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		width: 1080px;
-	}
+		width: 100%;
 
-	span {
-		font-weight: 400;
-		font-size: 18px;
-	}
+		.footer-left-content {
+			span {
+				:first-child {
+					padding-right: 28px;
+					border-right: 1px solid #000;
+				}
 
-	.rights {
-		margin-left: auto;
-	}
-
-	ul {
-		list-style: none;
-		display: flex;
-		margin-left: auto;
-
-		li {
-			cursor: pointer;
-			width: 24px;
-			height: 24px;
+				:last-child {
+					margin-left: 28px;
+				}
+			}
 		}
 
-		li:not(:last-child) {
-			margin-right: 10px;
+		.footer-right-content {
+			display: flex;
+
+			span {
+				:first-child {
+					padding-right: 28px;
+					border-right: 1px solid #000;
+				}
+
+				padding-left: 28px;
+				padding-right: 28px;
+				cursor: pointer;
+
+				> a {
+					font-style: unset;
+					color: #000;
+					text-decoration: none;
+					font-weight: 400;
+					font-size: 18px;
+				}
+			}
+		}
+
+		span {
+			font-weight: 400;
+			font-size: 18px;
+		}
+
+		ul {
+			list-style: none;
+			display: flex;
+			margin-left: auto;
+
+			li {
+				cursor: pointer;
+				width: 24px;
+				height: 24px;
+			}
+
+			li:not(:last-child) {
+				margin-right: 10px;
+			}
 		}
 	}
+
 `;

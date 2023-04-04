@@ -18,6 +18,7 @@ export const Container = styled.button`
 	}
 
 	:hover {
-		box-shadow: 0px 0px 50px rgba(255, 255, 255, .55);
+		background: linear-gradient(90.15deg, #FFFFFF 18.95%, rgba(255, 255, 255, 0) 168.98%);
+		box-shadow: 0px 0px 25px #FFFFFF;
 	}
 `;

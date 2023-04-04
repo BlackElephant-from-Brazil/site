@@ -28,7 +28,6 @@ const IndexPage = () => {
 	const [budgetErrorMessage, setBudgetErrorMessage] = React.useState('');
 	const [projectDescriptionErrorMessage, setProjectDescriptionErrorMessage] = React.useState('');
 	const [selectedBudget, setSelectedBudget] = React.useState(0);
-	const homeRef = React.useRef<HTMLDivElement>(null);
 	const servicesRef = React.useRef<HTMLDivElement>(null);
 	const ourProcessesRef = React.useRef<HTMLDivElement>(null);
 	const depoimentsRef = React.useRef<HTMLDivElement>(null);
@@ -63,9 +62,9 @@ const IndexPage = () => {
 					setTimeout(type, 33);
 				} else {
 					clearTimeout(typingTimeout);
-					setTimeout(type, isDeleting ? 25 : 33);
+					setTimeout(type, isDeleting ? 13 : 33);
 				}
-			}, isDeleting ? 25 : 33);
+			}, isDeleting ? 13 : 33);
 		};
 
 		type();
@@ -80,6 +79,10 @@ const IndexPage = () => {
 		if (section) {
 			section.scrollIntoView({behavior: 'smooth'});
 		}
+	};
+
+	const handleGoToTop = () => {
+		window.scrollTo({top: 0, behavior: 'smooth'});
 	};
 
 	const handleContactFormSubmit = async () => {
@@ -170,32 +173,34 @@ const IndexPage = () => {
 				<meta name='referrer' content='origin' />
 			</Helmet>
 			<GlobalStyle />
-			<Container ref={homeRef}>
-				<header className='wrapper'>
-					<StaticImage
-						src='../images/blackelephant-logo.png'
-						alt='Logo da maior empresa da américa latina de desenvolvimento e softwares e UX'
-						onClick={() => {
-							handleGoToSection(homeRef);
-						}}
-					/>
-					<nav>
-						<ul>
-							<li onClick={() => {
-								handleGoToSection(servicesRef);
-							}
-							}>Serviços</li>
-							<li onClick={() => {
-								handleGoToSection(ourProcessesRef);
-							}}>Nossos processo</li>
-							<li onClick={() => {
-								handleGoToSection(depoimentsRef);
-							}}>Depoimentos</li>
-							<li onClick={() => {
-								handleGoToSection(contactRef);
-							}}>Contato</li>
-						</ul>
-					</nav>
+			<Container >
+				<header >
+					<div className='wrapper'>
+						<a onClick={handleGoToTop} className='image-logo-header'>
+							<StaticImage
+								src='../images/blackelephant-logo.png'
+								alt='Logo da maior empresa da américa latina de desenvolvimento e softwares e UX'
+							/>
+						</a>
+						<nav>
+							<ul>
+								<li onClick={() => {
+									handleGoToSection(servicesRef);
+								}
+								}>Serviços</li>
+								<li onClick={() => {
+									handleGoToSection(ourProcessesRef);
+								}}>Nossos processo</li>
+								<li onClick={() => {
+									handleGoToSection(depoimentsRef);
+								}}>Depoimentos</li>
+								<li onClick={() => {
+									handleGoToSection(contactRef);
+								}}>Contato</li>
+							</ul>
+						</nav>
+					</div>
+
 				</header>
 				<main className='wrapper'>
 					<h1>Nós ajudamos você a</h1>
@@ -329,7 +334,7 @@ const IndexPage = () => {
 					</ul>
 				</Services>
 
-				<OurProcess activeTab={tabProcessActive} ref={ourProcessesRef}>
+				<OurProcess activeTab={tabProcessActive} ref={ourProcessesRef} className='white-bg'>
 					<div className='wrapper'>
 						<h3>
 							Nosso processo
@@ -395,7 +400,7 @@ const IndexPage = () => {
 								</li>
 								<li>
 									<h4>
-									Materialização
+									Materializa&shy;ção
 									</h4>
 									<p>
 									Projetar produtos bonitos, usáveis e de marca que atendam seus objetivos
@@ -519,16 +524,16 @@ const IndexPage = () => {
 								<h4>
 									Budget {'(orçamento)'}
 								</h4>
-								<Radio label='R$ 10.000 - R$ 25.000,00' name='budget' id='first-budget' onClick={() => {
+								<Radio label='R$ 10.000,00 - R$ 25.000,00' name='budget' id='first-budget' onClick={() => {
 									setSelectedBudget(1);
 								}} />
-								<Radio label='R$ 25.000 - R$ 50.000' name='budget' id='second-budget' onClick={() => {
+								<Radio label='R$ 25.000,00 - R$ 50.000,00' name='budget' id='second-budget' onClick={() => {
 									setSelectedBudget(2);
 								}} />
-								<Radio label='R$ 50.000 - R$ 100.000' name='budget' id='third-budget' onClick={() => {
+								<Radio label='R$ 50.000,00 - R$ 100.000,00' name='budget' id='third-budget' onClick={() => {
 									setSelectedBudget(3);
 								}} />
-								<Radio label='Acima de R$ 100.000' name='budget' id='fourth-budget' onClick={() => {
+								<Radio label='Acima de R$ 100.000,00' name='budget' id='fourth-budget' onClick={() => {
 									setSelectedBudget(4);
 								}} />
 								<Radio label='Ainda não financiado' name='budget' id='fiveth-budget' onClick={() => {
@@ -557,7 +562,7 @@ const IndexPage = () => {
 								<Select text='Tô pronto pronto para inserir meu produto no mercado' onClick={() => {
 									setSelectedProjectDescription(4);
 								}} active={selectedProjectDescription === 4} />
-								<Select text='Quero dar um up nos processos internos da minha empresa' onClick={() => {
+								<Select text='Quero dar um up nos processos da minha empresa' onClick={() => {
 									setSelectedProjectDescription(5);
 								}} active={selectedProjectDescription === 5} />
 								{
@@ -597,42 +602,56 @@ const IndexPage = () => {
 				</Contact>
 				<Footer>
 					<div className='wrapper footer-content'>
-						<span>
-							Política de privacidade
-						</span>
-						<span className='rights'>
-							Todos os direitos reservados ©
-						</span>
-						<ul>
-							<li>
-								<a href='https://api.whatsapp.com/send?phone=5519971100867&text=Ol%C3%A1,%20pessoal%20da%20BlackElephant.%20Gostaria%20de%20saber%20mais%20sobre%20o%20servi%C3%A7o%20de%20voc%C3%AAs.%20Bora%20bater%20um%20papo?' target='_blank' rel='noreferrer'>
-									<StaticImage
-										src='../images/whatsapp.png'
-										alt='Ícone do Whatsapp que irá te redirecionar ao nosso contato' />
+						<div className='footer-left-content'>
+							<span>
+								@2023 BlackElephant
+							</span>
+							<span>
+								Política de privacidade
+							</span>
+						</div>
+						<div className='footer-right-content'>
+							<span>
+								<a href='mailto:contato@blackelephant.com.br'>
+									contato@blackelephant.com.br
 								</a>
-							</li>
-							<li>
-								<a href='https://github.com/blackElephant-from-Brazil/' target='_blank' rel='noreferrer'>
-									<StaticImage
-										src='../images/github.png'
-										alt='Ícone do Github que irá te redirecionar ao nosso repositório' />
+							</span>
+							<span>
+								<a href='callto:+5519995545043'>
+									+55 {'('}19{')'} 97110-0867
 								</a>
-							</li>
-							<li>
-								<a href='https://www.instagram.com/blackelephant.br/' target='_blank' rel='noreferrer'>
-									<StaticImage
-										src='../images/instagram.png'
-										alt='Ícone do Instagram que irá te redirecionar à nossa página' />
-								</a>
-							</li>
-							<li>
-								<a href='https://www.linkedin.com/company/blackelephant/' target='_blank' rel='noreferrer'>
-									<StaticImage
-										src='../images/linkedin.png'
-										alt='Ícone do LinkedIn que irá te redirecionar à nossa página' />
-								</a>
-							</li>
-						</ul>
+							</span>
+							<ul>
+								<li>
+									<a href='https://api.whatsapp.com/send?phone=5519971100867&text=Ol%C3%A1,%20pessoal%20da%20BlackElephant.%20Gostaria%20de%20saber%20mais%20sobre%20o%20servi%C3%A7o%20de%20voc%C3%AAs.%20Bora%20bater%20um%20papo?' target='_blank' rel='noreferrer'>
+										<StaticImage
+											src='../images/whatsapp.png'
+											alt='Ícone do Whatsapp que irá te redirecionar ao nosso contato' />
+									</a>
+								</li>
+								<li>
+									<a href='https://github.com/blackElephant-from-Brazil/' target='_blank' rel='noreferrer'>
+										<StaticImage
+											src='../images/github.png'
+											alt='Ícone do Github que irá te redirecionar ao nosso repositório' />
+									</a>
+								</li>
+								<li>
+									<a href='https://www.instagram.com/blackelephant.br/' target='_blank' rel='noreferrer'>
+										<StaticImage
+											src='../images/instagram.png'
+											alt='Ícone do Instagram que irá te redirecionar à nossa página' />
+									</a>
+								</li>
+								<li>
+									<a href='https://www.linkedin.com/company/blackelephant/' target='_blank' rel='noreferrer'>
+										<StaticImage
+											src='../images/linkedin.png'
+											alt='Ícone do LinkedIn que irá te redirecionar à nossa página' />
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</Footer>
 			</Container>
