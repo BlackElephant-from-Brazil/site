@@ -1,10 +1,19 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
+import { useState, useEffect, useRef } from 'react'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { Logo } from '@/components/ui'
 import { cn } from '@/lib/utils'
+
+const localeFlags: Record<string, { flag: string; name: string }> = {
+  pt: { flag: '🇧🇷', name: 'Português' },
+  en: { flag: '🇺🇸', name: 'English' },
+  es: { flag: '🇪🇸', name: 'Español' },
+  de: { flag: '🇩🇪', name: 'Deutsch' },
+  fr: { flag: '🇫🇷', name: 'Français' },
+  it: { flag: '🇮🇹', name: 'Italiano' },
+}
 
 export interface HeaderProps {
   /** Classes CSS adicionais */
@@ -17,8 +26,13 @@ export interface HeaderProps {
  */
 export function Header({ className }: HeaderProps) {
   const t = useTranslations('navigation')
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
+  const langRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +41,21 @@ export function Header({ className }: HeaderProps) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleLocaleChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale })
+    setIsLangOpen(false)
+  }
 
   const navLinks = [
     { href: '/', label: t('home') },
@@ -92,8 +121,66 @@ export function Header({ className }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Login Button - Desktop */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Login Button & Language Selector - Desktop */}
+          <div className="hidden lg:flex items-center gap-3">
+            {/* Language Selector */}
+            <div ref={langRef} className="relative">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className={cn(
+                  'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xl transition-all duration-300',
+                  'hover:bg-white/10 active:scale-95',
+                  isLangOpen && 'bg-white/10'
+                )}
+                aria-label="Selecionar idioma"
+              >
+                <span>{localeFlags[locale]?.flag}</span>
+                <svg 
+                  className={cn('w-3 h-3 transition-transform duration-200', isLangOpen && 'rotate-180')}
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                  style={{ color: 'var(--foreground-muted)' }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {/* Dropdown */}
+              <div
+                className={cn(
+                  'absolute right-0 top-full mt-2 py-2 rounded-xl border border-white/10 shadow-xl',
+                  'transition-all duration-200 origin-top-right',
+                  isLangOpen 
+                    ? 'opacity-100 scale-100 pointer-events-auto' 
+                    : 'opacity-0 scale-95 pointer-events-none'
+                )}
+                style={{
+                  backgroundColor: 'rgba(20, 20, 20, 0.95)',
+                  backdropFilter: 'blur(20px)',
+                  minWidth: '140px',
+                }}
+              >
+                {Object.entries(localeFlags).map(([code, { flag, name }]) => (
+                  <button
+                    key={code}
+                    onClick={() => handleLocaleChange(code)}
+                    className={cn(
+                      'w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200',
+                      'hover:bg-white/10',
+                      locale === code && 'bg-white/5'
+                    )}
+                    style={{ 
+                      color: locale === code ? 'var(--color-lime)' : 'var(--foreground-muted)',
+                    }}
+                  >
+                    <span className="text-lg">{flag}</span>
+                    <span>{name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <Link
               href="/login"
               className={cn(
@@ -173,7 +260,29 @@ export function Header({ className }: HeaderProps) {
               </Link>
             ))}
           </nav>
-          <div className="mt-4 pt-4 border-t border-white/5">
+          <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
+            {/* Language Selector - Mobile */}
+            <div className="flex flex-wrap gap-2 px-2">
+              {Object.entries(localeFlags).map(([code, { flag }]) => (
+                <button
+                  key={code}
+                  onClick={() => {
+                    handleLocaleChange(code)
+                    setIsMenuOpen(false)
+                  }}
+                  className={cn(
+                    'flex items-center justify-center w-10 h-10 rounded-xl text-xl transition-all duration-200',
+                    'hover:bg-white/10 active:scale-95',
+                    locale === code 
+                      ? 'bg-[var(--color-lime)]/20 ring-1 ring-[var(--color-lime)]' 
+                      : 'bg-white/5'
+                  )}
+                >
+                  {flag}
+                </button>
+              ))}
+            </div>
+            
             <Link
               href="/login"
               className="block px-4 py-3 rounded-xl text-base font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-lime)]/20"
