@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Vino | Vinhos Selecionados</title>
+    <meta name="description" content="Villa Vino - Importadora de vinhos finos. Descubra sabores únicos de vinícolas renomadas do mundo todo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F0A08;
+            --bg-card: #1A1410;
+            --burgundy: #722F37;
+            --burgundy-light: #8B3A42;
+            --gold: #C9A962;
+            --gold-light: #D4B978;
+            --text: #F5F0EB;
+            --text-muted: #A89F94;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(15, 10, 8, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--text);
+        }
+
+        .nav-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            padding: 30px 20px;
+            display: none;
+            flex-direction: column;
+            gap: 25px;
+            text-align: center;
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, rgba(114, 47, 55, 0.15) 0%, transparent 60%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="%23C9A962" opacity="0.1"/></svg>');
+            background-size: 30px 30px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 25px auto;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 35px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--burgundy);
+            color: var(--text);
+            padding: 16px 35px;
+            border: 1px solid var(--burgundy);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--burgundy-light);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        /* About */
+        .about {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .section-tag {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .section-line {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 30px;
+        }
+
+        .about-text {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Collection */
+        .collection {
+            padding: 100px 0;
+        }
+
+        .collection-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .wines-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .wine-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            padding: 40px 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .wine-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .wine-bottle {
+            font-size: 5rem;
+            margin-bottom: 25px;
+        }
+
+        .wine-region {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .wine-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .wine-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .wine-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        /* Experience */
+        .experience {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .exp-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .exp-item {
+            text-align: center;
+            padding: 40px 25px;
+            border: 1px solid rgba(201, 169, 98, 0.1);
+        }
+
+        .exp-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .exp-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .exp-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 40px auto 0;
+        }
+
+        .newsletter-form input {
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(201, 169, 98, 0.1);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .footer-warning {
+            color: var(--burgundy-light);
+            font-size: 0.75rem;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Age Gate */
+        .age-gate {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .age-gate.hidden {
+            display: none;
+        }
+
+        .age-gate-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .age-gate-content p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .age-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Back Link */
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--burgundy);
+            color: var(--text);
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            z-index: 100;
+            border: 1px solid var(--gold);
+        }
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+
+            .nav-menu {
+                position: static;
+                display: flex;
+                flex-direction: row;
+                background: transparent;
+                padding: 0;
+                gap: 40px;
+            }
+
+            .wines-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .exp-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .newsletter-form {
+                flex-direction: row;
+            }
+
+            .newsletter-form input {
+                flex: 1;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .wines-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Age Gate -->
+    <div class="age-gate" id="ageGate">
+        <div class="age-gate-content">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🍷</div>
+            <h2>Bem-vindo à Villa Vino</h2>
+            <p>Este site é destinado a maiores de 18 anos.<br>Você tem mais de 18 anos?</p>
+            <div class="age-buttons">
+                <button class="btn" onclick="enterSite()">Sim, tenho 18+</button>
+                <button class="btn btn-outline" onclick="leaveSite()">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">Villa <span>Vino</span></a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="#sobre">Nossa História</a>
+                <a href="#colecao">Coleção</a>
+                <a href="#experiencia">Experiência</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🍷</div>
+            <h1>A arte de<br><span>saborear</span></h1>
+            <div class="hero-line"></div>
+            <p>Importamos os mais refinados vinhos do mundo para sua mesa. Cada garrafa conta uma história de tradição e excelência.</p>
+            <a href="#colecao" class="btn">Explorar Coleção</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-content">
+                <span class="section-tag">Desde 1998</span>
+                <h2 class="section-title">Nossa História</h2>
+                <div class="section-line"></div>
+                <p class="about-text">
+                    Há mais de 25 anos, a Villa Vino percorre os mais renomados vinhedos do mundo 
+                    em busca de rótulos excepcionais. Nossa missão é trazer até você vinhos que 
+                    transcendem o comum, selecionados com paixão e conhecimento por nossos sommeliers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section class="collection" id="colecao">
+        <div class="container">
+            <div class="collection-header">
+                <span class="section-tag">Seleção Premium</span>
+                <h2 class="section-title">Nossa Coleção</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="wines-grid">
+                <div class="wine-card">
+                    <div class="wine-bottle">🍷</div>
+                    <span class="wine-region">Bordeaux, França</span>
+                    <h3>Château Margaux</h3>
+                    <p class="wine-description">Elegante e complexo, com notas de cassis e violetas</p>
+                    <span class="wine-price">R$ 890</span>
+                </div>
+                <div class="wine-card">
+                    <div class="wine-bottle">🍷</div>
+                    <span class="wine-region">Toscana, Itália</span>
+                    <h3>Brunello di Montalcino</h3>
+                    <p class="wine-description">Intenso e estruturado, notas de cereja e especiarias</p>
+                    <span class="wine-price">R$ 650</span>
+                </div>
+                <div class="wine-card">
+                    <div class="wine-bottle">🍷</div>
+                    <span class="wine-region">Mendoza, Argentina</span>
+                    <h3>Malbec Reserva</h3>
+                    <p class="wine-description">Frutado e aveludado, com taninos macios</p>
+                    <span class="wine-price">R$ 280</span>
+                </div>
+                <div class="wine-card">
+                    <div class="wine-bottle">🥂</div>
+                    <span class="wine-region">Champagne, França</span>
+                    <h3>Dom Pérignon</h3>
+                    <p class="wine-description">Borbulhas finas, elegância e sofisticação</p>
+                    <span class="wine-price">R$ 1.890</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience" id="experiencia">
+        <div class="container">
+            <div class="collection-header">
+                <span class="section-tag">Serviços</span>
+                <h2 class="section-title">A Experiência Villa Vino</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="exp-grid">
+                <div class="exp-item">
+                    <div class="exp-icon">🎁</div>
+                    <h3>Clube do Vinho</h3>
+                    <p>Receba rótulos exclusivos selecionados mensalmente por nossos sommeliers</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-icon">🏆</div>
+                    <h3>Degustações</h3>
+                    <p>Eventos exclusivos para apreciadores em nossa adega climatizada</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-icon">🚚</div>
+                    <h3>Entrega Premium</h3>
+                    <p>Envio com temperatura controlada para todo o Brasil</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contato">
+        <div class="container">
+            <span class="section-tag">Fique por Dentro</span>
+            <h2 class="section-title">Receba Novidades</h2>
+            <div class="section-line"></div>
+            <p class="about-text">Cadastre-se e seja o primeiro a saber sobre novos rótulos e eventos exclusivos.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail">
+                <button type="submit" class="btn">Cadastrar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">Villa Vino</div>
+            <p class="footer-text">contato@villavino.com.br | (11) 3456-7890</p>
+            <p class="footer-text">Rua dos Vinhedos, 500 - Jardins, São Paulo</p>
+            <p class="footer-warning">⚠️ Beba com moderação. Venda proibida para menores de 18 anos.</p>
+            <p class="footer-text" style="margin-top: 20px;">Desenvolvido por <a href="../../index.html">BlackElephant</a></p>
+        </div>
+    </footer>
+
+    <!-- Back Link -->
+    <a href="../../index.html#portfolio" class="back-link">← Voltar ao Portfólio</a>
+
+    <script>
+        // Age Gate
+        function enterSite() {
+            document.getElementById('ageGate').classList.add('hidden');
+            sessionStorage.setItem('ageVerified', 'true');
+        }
+
+        function leaveSite() {
+            window.location.href = 'https://google.com';
+        }
+
+        // Check if already verified
+        if (sessionStorage.getItem('ageVerified')) {
+            document.getElementById('ageGate').classList.add('hidden');
+        }
+
+        // Mobile menu
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

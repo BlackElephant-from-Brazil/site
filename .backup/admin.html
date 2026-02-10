@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Contatos BlackElephant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #111;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 2px solid #39FF14;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-primary {
+            color: #39FF14;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #111;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #39FF14;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #39FF14;
+        }
+
+        .stat-label {
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #39FF14;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #2ecc11;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .btn-danger {
+            background: #ff3333;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+
+        .contacts-table {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #1a1a1a;
+            border-bottom: 2px solid #39FF14;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #39FF14;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #222;
+        }
+
+        tr:hover {
+            background: #1a1a1a;
+        }
+
+        .contact-name {
+            font-weight: 600;
+            color: #39FF14;
+        }
+
+        .contact-email {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .contact-message {
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .contact-date {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            margin: 0 0.25rem;
+            font-size: 0.85rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #888;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #39FF14;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #111;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            border: 2px solid #39FF14;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-detail {
+            margin-bottom: 1rem;
+        }
+
+        .contact-detail label {
+            display: block;
+            color: #39FF14;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-detail p {
+            color: #f0f0f0;
+            padding: 0.5rem;
+            background: #0a0a0a;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .contacts-table {
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐘 Admin <span class="text-primary">BlackElephant</span></h1>
+            <p>Gerenciamento de Contatos</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalContacts">0</div>
+                <div class="stat-label">Total de Contatos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="todayContacts">0</div>
+                <div class="stat-label">Hoje</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="thisWeekContacts">0</div>
+                <div class="stat-label">Esta Semana</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="loadContacts()">🔄 Atualizar</button>
+            <button class="btn btn-secondary" onclick="exportContacts()">📥 Exportar JSON</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/'">🏠 Voltar ao Site</button>
+        </div>
+
+        <div class="contacts-table">
+            <div id="loading" class="loading">
+                <div>⏳ Carregando contatos...</div>
+            </div>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">📭</div>
+                <h3>Nenhum contato ainda</h3>
+                <p>Os contatos recebidos aparecerão aqui</p>
+            </div>
+            <table id="contactsTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Mensagem</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for contact details -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalhes do Contato</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        let contacts = [];
+
+        // Load contacts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContacts();
+        });
+
+        // Load contacts from API
+        async function loadContacts() {
+            const loading = document.getElementById('loading');
+            const emptyState = document.getElementById('emptyState');
+            const table = document.getElementById('contactsTable');
+            
+            loading.style.display = 'block';
+            emptyState.style.display = 'none';
+            table.style.display = 'none';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/contatos');
+                const result = await response.json();
+
+                if (result.success) {
+                    contacts = result.data;
+                    updateStats();
+                    renderContacts();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar contatos:', error);
+                alert('Erro ao carregar contatos. Verifique se o servidor está rodando.');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            weekAgo.setHours(0, 0, 0, 0);
+
+            const todayCount = contacts.filter(c => {
+                const contactDate = new Date(c.created_at);
+                contactDate.setHours(0, 0, 0, 0);
+                return contactDate.getTime() === today.getTime();
+            }).length;
+
+            const weekCount = contacts.filter(c => {
+                const contactDate = new Date(c.created_at);
+                return contactDate >= weekAgo;
+            }).length;
+
+            document.getElementById('totalContacts').textContent = contacts.length;
+            document.getElementById('todayContacts').textContent = todayCount;
+            document.getElementById('thisWeekContacts').textContent = weekCount;
+        }
+
+        // Render contacts table
+        function renderContacts() {
+            const tbody = document.getElementById('contactsBody');
+            const table = document.getElementById('contactsTable');
+            const emptyState = document.getElementById('emptyState');
+
+            if (contacts.length === 0) {
+                emptyState.style.display = 'block';
+                table.style.display = 'none';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            table.style.display = 'table';
+
+            contacts.forEach(contact => {
+                const tr = document.createElement('tr');
+                const date = new Date(contact.created_at);
+                const formattedDate = date.toLocaleString('pt-BR');
+
+                tr.innerHTML = `
+                    <td>
+                        <div class="contact-name">${escapeHtml(contact.name)}</div>
+                    </td>
+                    <td>
+                        <div class="contact-email">${escapeHtml(contact.email)}</div>
+                    </td>
+                    <td>${contact.phone || '-'}</td>
+                    <td>
+                        <div class="contact-message" title="${escapeHtml(contact.message)}">
+                            ${escapeHtml(contact.message)}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="contact-date">${formattedDate}</div>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary action-btn" onclick="viewContact(${contact.id})">👁️ Ver</button>
+                        <button class="btn btn-danger action-btn" onclick="deleteContact(${contact.id})">🗑️</button>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        // View contact details
+        function viewContact(id) {
+            const contact = contacts.find(c => c.id === id);
+            if (!contact) return;
+
+            const date = new Date(contact.created_at);
+            const formattedDate = date.toLocaleString('pt-BR');
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="contact-detail">
+                    <label>Nome:</label>
+                    <p>${escapeHtml(contact.name)}</p>
+                </div>
+                <div class="contact-detail">
+                    <label>Email:</label>
+                    <p><a href="mailto:${contact.email}" style="color: #39FF14;">${escapeHtml(contact.email)}</a></p>
+                </div>
+                <div class="contact-detail">
+                    <label>Telefone:</label>
+                    <p>${contact.phone || 'Não informado'}</p>
+                </div>
+                <div class="contact-detail">
+                    <label>Mensagem:</label>
+                    <p>${escapeHtml(contact.message)}</p>
+                </div>
+                <div class="contact-detail">
+                    <label>Data:</label>
+                    <p>${formattedDate}</p>
+                </div>
+            `;
+
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        // Delete contact
+        async function deleteContact(id) {
+            if (!confirm('Tem certeza que deseja remover este contato?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/contatos/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Contato removido com sucesso!');
+                    loadContacts();
+                } else {
+                    alert('Erro ao remover contato.');
+                }
+            } catch (error) {
+                console.error('Erro ao remover contato:', error);
+                alert('Erro ao remover contato.');
+            }
+        }
+
+        // Export contacts
+        function exportContacts() {
+            window.location.href = 'http://localhost:3000/api/contatos/export/json';
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('contactModal').addEventListener('click', (e) => {
+            if (e.target.id === 'contactModal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizonte Imóveis | Alto Padrão</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d3e50;
+            --accent: #e67e22;
+            --light: #f4f6f8;
+            --dark: #1a252f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #fff;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../../assets/real_estate_hero_generated.png') center/cover;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Search Bar (Fake) */
+        .search-box {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin-top: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Featured */
+        .property-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .property-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .prop-img {
+            height: 250px;
+            background: #ddd;
+            position: relative;
+        }
+
+        .prop-details {
+            padding: 1.5rem;
+        }
+
+        .price {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .specs {
+            display: flex;
+            gap: 1rem;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* About */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .review {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        /* Contact */
+        .contact-section {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 4px;
+        }
+
+        @media (min-width: 768px) {
+            nav ul {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+
+            .property-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand">Horizonte Imóveis</a>
+            <nav>
+                <ul>
+                    <li><a href="#destaques">Imóveis</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>O Lar dos Seus Sonhos <br>Está Aqui</h1>
+            <p>Curadoria exclusiva de imóveis de alto padrão nas melhores localizações.</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Digite o bairro ou cidade...">
+                <input type="text" class="search-input" placeholder="Faixa de Preço">
+                <button class="btn" style="border:none; cursor:pointer;">Buscar Imóveis</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="destaques" class="section">
+        <div class="container">
+            <h2 class="section-title">Destaques da Semana</h2>
+            <div class="property-grid">
+                <div class="property-card">
+                    <div class="prop-img"
+                        style="background: url('https://images.unsplash.com/photo-1600596542815-27b88e31e62f?auto=format&fit=crop&q=80') center/cover;">
+                        <span
+                            style="position:absolute; top:10px; left:10px; background:var(--accent); color:#fff; padding:4px 8px; font-size:0.8rem; border-radius:4px;">Venda</span>
+                    </div>
+                    <div class="prop-details">
+                        <span class="price">R$ 2.500.000</span>
+                        <h3>Casa Alphaville Premium</h3>
+                        <p>Jardim América, São Paulo</p>
+                        <div class="specs">
+                            <span>🛏️ 4 Quartos</span>
+                            <span>🚿 5 Banhos</span>
+                            <span>🚗 4 Vagas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="prop-img"
+                        style="background: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80') center/cover;">
+                        <span
+                            style="position:absolute; top:10px; left:10px; background:var(--primary); color:#fff; padding:4px 8px; font-size:0.8rem; border-radius:4px;">Aluguel</span>
+                    </div>
+                    <div class="prop-details">
+                        <span class="price">R$ 15.000/mês</span>
+                        <h3>Penthouse Vista Mar</h3>
+                        <p>Barra da Tijuca, Rio de Janeiro</p>
+                        <div class="specs">
+                            <span>🛏️ 3 Quartos</span>
+                            <span>🚿 3 Banhos</span>
+                            <span>📐 200m²</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="prop-img"
+                        style="background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80') center/cover;">
+                        <span
+                            style="position:absolute; top:10px; left:10px; background:var(--accent); color:#fff; padding:4px 8px; font-size:0.8rem; border-radius:4px;">Venda</span>
+                    </div>
+                    <div class="prop-details">
+                        <span class="price">R$ 3.800.000</span>
+                        <h3>Mansão Contemporânea</h3>
+                        <p>Lago Sul, Brasília</p>
+                        <div class="specs">
+                            <span>🛏️ 5 Quartos</span>
+                            <span>🏊 Piscina</span>
+                            <span>🌳 1000m²</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn"
+                    style="background: transparent; color: var(--primary); border: 1px solid var(--primary);">Ver Todos
+                    os Imóveis</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="section" style="background: var(--light);">
+        <div class="container about-content">
+            <h2 class="section-title">Experiência e Confiança</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Há mais de 15 anos no mercado, o Horizonte Imóveis conecta pessoas a lugares extraordinários. Nossa
+                curadoria é rigorosa e nosso atendimento é focado em entender o seu estilo de vida para encontrar o
+                imóvel perfeito.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">500+</h3>
+                    <p>Famílias Felizes</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">R$ 1Bi</h3>
+                    <p>Em Negócios</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section">
+        <div class="container">
+            <h2 class="section-title">Quem Confia</h2>
+            <div class="testimonial-grid">
+                <div class="review">
+                    <p>"Encontraram a casa exata que eu procurava em tempo recorde. Profissionalismo puro."</p>
+                    <h4 style="margin-top: 1rem;">- Marcos Vinicius</h4>
+                </div>
+                <div class="review">
+                    <p>"A assessoria jurídica deles me deu total segurança na compra do meu primeiro imóvel de
+                        investimento."</p>
+                    <h4 style="margin-top: 1rem;">- Sofia Lemos</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #fff;">Fale com um Especialista</h2>
+            <div class="contact-grid">
+                <div>
+                    <h3>Encontre seu novo lar</h3>
+                    <p style="margin-bottom: 2rem; opacity: 0.8;">Preencha o formulário e um de nossos consultores
+                        entrará em contato em até 1 hora.</p>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>📞 Telefone/WhatsApp:</strong><br>
+                        (11) 99999-8888
+                    </div>
+                    <div>
+                        <strong>✉️ Email:</strong><br>
+                        atendimento@horizonteimoveis.com.br
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Nome Completo">
+                    <input type="email" placeholder="Email">
+                    <input type="tel" placeholder="Telefone">
+                    <textarea rows="4" placeholder="Tenho interesse em..."></textarea>
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Enviar
+                        Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="padding: 2rem 0; text-align: center; color: #888; font-size: 0.9rem;">
+            &copy; 2025 Horizonte Imóveis. CRECI 12345-J.
+        </div>
+    </footer>
+
+</body>
+
+</html>

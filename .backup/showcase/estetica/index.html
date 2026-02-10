@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Estética Avançada</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Placeholder for icons if needed, using text emojis for now -->
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --text-color: #555;
+            --primary-color: #d4a373;
+            /* Gold/Beige */
+            --accent-color: #e0b0b0;
+            /* Soft Pink */
+            --surface-color: #fff;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            color: #333;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #c59090;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url('../../assets/clinic_hero_generated.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4rem 2rem;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #fff;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .stars {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .author {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-top: 1rem;
+            display: block;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            background: #fff;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            nav ul {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Lum<span>ina</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">A Clínica</a></li>
+                    <li><a href="#tratamentos">Tratamentos</a></li>
+                    <li><a href="#depoimentos">Resultados</a></li>
+                    <li><a href="#contato">Agendar</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Beleza <br>Natural</h1>
+                <p>Realce sua essência com tratamentos dermatológicos de ponta em um ambiente pensado para o seu
+                    bem-estar.</p>
+                <a href="#contato" class="btn">Agendar Avaliação</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div
+                    style="background-color: #eee; height: 100%; min-height: 400px; display: flex; align-items: center; justify-content: center; color: #aaa;">
+                    Imagem da Clínica
+                </div>
+                <div>
+                    <h2 class="section-title" style="text-align: left;">Nossa <span>Filosofia</span></h2>
+                    <p style="margin-bottom: 1.5rem;">Acreditamos que a verdadeira beleza vem de dentro para fora. Na
+                        Lumina, unimos ciência, tecnologia e um olhar humano para oferecer resultados que elevam sua
+                        autoestima sem perder sua identidade.</p>
+                    <p>Nossa equipe multidisciplinar é liderada pela Dra. Ana Sophia, referência em harmonização natural
+                        e cuidados integrativos.</p>
+                    <div style="margin-top: 2rem; display: flex; gap: 2rem;">
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--accent-color);">10+</h3>
+                            <p>Anos de Excelência</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--accent-color);">5k+</h3>
+                            <p>Pacientes Felizes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tratamentos" class="section" style="background: #fff;">
+        <div class="container">
+            <h2 class="section-title">Nossos <span>Tratamentos</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">✨</span>
+                    <h3>Harmonização Facial</h3>
+                    <p>Preenchimentos e toxina botulínica aplicados com técnica avançada para resultados naturais.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">💆‍♀️</span>
+                    <h3>Spa & Relaxamento</h3>
+                    <p>Massagens terapêuticas e rituais de bem-estar para corpo e mente.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🔍</span>
+                    <h3>Laser Lavieen</h3>
+                    <p>Tecnologia de ponta para rejuvenescimento, manchas e textura da pele.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🧴</span>
+                    <h3>Skincare Personalizado</h3>
+                    <p>Protocolos exclusivos desenvolvidos após análise detalhada da sua pele.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">❄️</span>
+                    <h3>Criolipólise</h3>
+                    <p>Tratamento não invasivo para redução de gordura localizada.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🥗</span>
+                    <h3>Nutrição Estética</h3>
+                    <p>Acompanhamento nutricional focado na saúde da pele e longevidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section">
+        <div class="container">
+            <h2 class="section-title">Amor dos <span>Clientes</span></h2>
+            <div class="testimonial-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"O melhor lugar para cuidar de mim. A Dra. Ana é incrível e o ambiente é super acolhedor."</p>
+                    <span class="author">Juliana Paes</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Fiz o protocolo de laser e minha pele mudou completamente. Recomendo de olhos fechados!"</p>
+                    <span class="author">Fernanda Lima</span>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Atendimento impecável desde a recepção. Me sinto em casa sempre que vou."</p>
+                    <span class="author">Patricia Poeta</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section" style="background: #fff;">
+        <div class="container">
+            <h2 class="section-title">Agende sua <span>Visita</span></h2>
+            <div class="contact-container">
+                <div>
+                    <h3>Horário de Atendimento</h3>
+                    <p style="margin-bottom: 2rem;">Segunda a Sexta: 09h às 19h<br>Sábado: 09h às 14h</p>
+
+                    <h3>Endereço</h3>
+                    <p style="margin-bottom: 2rem;">Rua Oscar Freire, 1500 - Jardins<br>São Paulo, SP</p>
+
+                    <h3>Contato</h3>
+                    <p>contato@luminaestetica.com.br<br>(11) 98888-7777</p>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="Seu Nome Completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Seu Telefone / WhatsApp">
+                    </div>
+                    <div class="form-group">
+                        <select>
+                            <option>Interesse em...</option>
+                            <option>Facial</option>
+                            <option>Corporal</option>
+                            <option>Avaliação Geral</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Solicitar Horário</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Lumina Estética Avançada. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
