@@ -154,7 +154,7 @@ function ContactForm({ t }: { t: ReturnType<typeof useTranslations> }) {
     setSubmitStatus('idle')
 
     try {
-      const response = await fetch('https://black-elephant.app.n8n.cloud/webhook/contact-form', {
+      const response = await fetch('https://black-elephant.app.n8n.cloud/webhook/blackelephant-contact-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
