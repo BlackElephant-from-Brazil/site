@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20.11.0"
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL"
+  SECRETS_SCAN_OMIT_PATHS = ".backup,.netlify,docs,README.md"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
