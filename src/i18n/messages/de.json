@@ -93,6 +93,22 @@
     "aboutTitle": "Über Uns",
     "aboutSubtitle": "Innovation mit Sinn",
     "aboutText": "Wir sind ein Technologieunternehmen, das sich darauf konzentriert, Lösungen zu schaffen, die einen Unterschied machen. Wir kombinieren technische Expertise mit strategischer Vision, um außergewöhnliche Ergebnisse zu liefern.",
+    "pricingSubtitle": "Investition",
+    "pricingDesc": "Flexible Pläne, die mit Ihrem Unternehmen wachsen. Keine Überraschungen, alles inklusive.",
+    "pricingNote": "Alle Pläne beinhalten Support und Updates. Keine versteckten Gebühren.",
+    "pricingCompare": "Alle Pläne vergleichen",
+    "testimonial1Quote": "Unglaubliche Teamagilität. Das System hat unser Management komplett verändert und wir sparen täglich Arbeitsstunden.",
+    "testimonial1Author": "Carlos M.",
+    "testimonial1Role": "CEO bei FinMove",
+    "testimonial2Quote": "Tadelloses Design und immer präsenter Support. Die Website wurde genau so, wie wir es uns vorgestellt hatten. Sehr empfehlenswert!",
+    "testimonial2Author": "Ana S.",
+    "testimonial2Role": "Direktorin bei SolarTech",
+    "testimonial3Quote": "Professionalität von Anfang bis Ende. Unsere App ist ein Erfolg bei den Kunden und das Team liebt es, sie zu nutzen.",
+    "testimonial3Author": "Roberto J.",
+    "testimonial3Role": "Gründer Urban Mobility",
+    "testimonial4Quote": "Die Automatisierung hat uns Stunden manueller Arbeit gespart. Die Investition amortisierte sich in wenigen Monaten.",
+    "testimonial4Author": "Lúcia P.",
+    "testimonial4Role": "Managerin AgroVale",
     "ctaTitle": "Bereit, Ihr Geschäft zu transformieren?",
     "ctaDescription": "Kontaktieren Sie uns und erfahren Sie, wie wir Ihrem Unternehmen helfen können, neue Höhen zu erreichen."
   },
@@ -141,6 +157,37 @@
     "design": {
       "title": "UI/UX Design",
       "description": "Wir schaffen elegante Oberflächen und unvergessliche Benutzererfahrungen."
+    }
+  },
+  "portfolio": {
+    "meta": {
+      "title": "Portfolio | BlackElephant Projekte",
+      "description": "Entdecken Sie die von uns entwickelten Projekte: Websites, Systeme und Anwendungen, die Unternehmen transformieren."
+    },
+    "badge": "Unsere Arbeit",
+    "title": {
+      "part1": "Beispiele unserer",
+      "part2": "Arbeit"
+    },
+    "description": "Jedes Projekt ist einzigartig, mit den besten Technologien entwickelt und darauf ausgelegt, echte Ergebnisse für unsere Kunden zu erzielen.",
+    "breadcrumb": "Portfolio",
+    "stats": {
+      "projects": "Projekte",
+      "sites": "Websites",
+      "systems": "Systeme",
+      "apps": "Apps"
+    },
+    "detail": {
+      "client": "Kunde",
+      "technologies": "Technologien",
+      "about": "Über das Projekt",
+      "related": "Verwandte Projekte",
+      "backToPortfolio": "Zurück zum Portfolio",
+      "cta": {
+        "title": "Möchten Sie ein ähnliches Projekt?",
+        "description": "Kontaktieren Sie uns und lassen Sie uns gemeinsam etwas Großartiges schaffen.",
+        "button": "Angebot anfordern"
+      }
     }
   },
   "plans": {

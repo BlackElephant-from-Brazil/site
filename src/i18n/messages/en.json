@@ -91,6 +91,22 @@
     "testimonialsTitle": "What our clients say",
     "partnersSubtitle": "Partners",
     "partnersTitle": "Who trusts our work",
+    "pricingSubtitle": "Investment",
+    "pricingDesc": "Flexible plans that grow with your business. No surprises, everything included.",
+    "pricingNote": "All plans include support and updates. No hidden fees.",
+    "pricingCompare": "Compare all plans",
+    "testimonial1Quote": "Incredible team agility. The system completely changed our management and we save hours of work per day.",
+    "testimonial1Author": "Carlos M.",
+    "testimonial1Role": "CEO at FinMove",
+    "testimonial2Quote": "Impeccable design and always present support. The website turned out exactly as we imagined. Highly recommend!",
+    "testimonial2Author": "Ana S.",
+    "testimonial2Role": "Director at SolarTech",
+    "testimonial3Quote": "Professionalism from start to finish. Our app is a success among customers and the team loves using it.",
+    "testimonial3Author": "Roberto J.",
+    "testimonial3Role": "Founder Urban Mobility",
+    "testimonial4Quote": "The automation saved us hours of manual work. The investment paid off in just a few months.",
+    "testimonial4Author": "Lúcia P.",
+    "testimonial4Role": "Manager AgroVale",
     "ctaTitle": "Ready to transform your business?",
     "ctaDescription": "Get in touch and discover how we can help your company reach new heights. Free consultation!",
     "ctaButton": "Start now",
@@ -153,6 +169,37 @@
     "design": {
       "title": "UI/UX Design",
       "description": "We create elegant interfaces and memorable user experiences."
+    }
+  },
+  "portfolio": {
+    "meta": {
+      "title": "Portfolio | BlackElephant Projects",
+      "description": "Discover the projects we developed: websites, systems and applications that transform businesses."
+    },
+    "badge": "Our Work",
+    "title": {
+      "part1": "Examples of",
+      "part2": "our work"
+    },
+    "description": "Each project is unique, developed with the best technologies and designed to generate real results for our clients.",
+    "breadcrumb": "Portfolio",
+    "stats": {
+      "projects": "Projects",
+      "sites": "Websites",
+      "systems": "Systems",
+      "apps": "Apps"
+    },
+    "detail": {
+      "client": "Client",
+      "technologies": "Technologies",
+      "about": "About the Project",
+      "related": "Related Projects",
+      "backToPortfolio": "Back to Portfolio",
+      "cta": {
+        "title": "Want a project like this?",
+        "description": "Get in touch and let's create something amazing together.",
+        "button": "Request a Quote"
+      }
     }
   },
   "plans": {

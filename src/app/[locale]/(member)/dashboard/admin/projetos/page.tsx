@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getProjects } from '@/lib/actions/projects'
+
+export const dynamic = 'force-dynamic'
 import { getClients } from '@/lib/actions/clients'
 import { getProjectTypes } from '@/lib/actions/project-types'
 import { ProjectsView } from '@/components/admin/views/ProjectsView'

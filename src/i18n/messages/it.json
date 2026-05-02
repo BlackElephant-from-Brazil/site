@@ -93,6 +93,22 @@
     "aboutTitle": "Chi Siamo",
     "aboutSubtitle": "Innovazione con uno scopo",
     "aboutText": "Siamo un'azienda tecnologica focalizzata sulla creazione di soluzioni che fanno la differenza. Combiniamo competenza tecnica e visione strategica per fornire risultati straordinari.",
+    "pricingSubtitle": "Investimento",
+    "pricingDesc": "Piani flessibili che crescono con la tua azienda. Nessuna sorpresa, tutto incluso.",
+    "pricingNote": "Tutti i piani includono supporto e aggiornamenti. Nessun costo nascosto.",
+    "pricingCompare": "Confronta tutti i piani",
+    "testimonial1Quote": "Incredibile l'agilità del team. Il sistema ha completamente cambiato la nostra gestione e risparmiamo ore di lavoro al giorno.",
+    "testimonial1Author": "Carlos M.",
+    "testimonial1Role": "CEO di FinMove",
+    "testimonial2Quote": "Design impeccabile e supporto sempre presente. Il sito è esattamente come lo immaginavamo. Consigliato!",
+    "testimonial2Author": "Ana S.",
+    "testimonial2Role": "Direttrice di SolarTech",
+    "testimonial3Quote": "Professionalità dall'inizio alla fine. La nostra app è un successo tra i clienti e il team la adora.",
+    "testimonial3Author": "Roberto J.",
+    "testimonial3Role": "Fondatore Urban Mobility",
+    "testimonial4Quote": "L'automazione ci ha risparmiato ore di lavoro manuale. L'investimento si è ripagato in pochi mesi.",
+    "testimonial4Author": "Lúcia P.",
+    "testimonial4Role": "Manager AgroVale",
     "ctaTitle": "Pronto a trasformare il tuo business?",
     "ctaDescription": "Contattaci e scopri come possiamo aiutare la tua azienda a raggiungere nuovi livelli."
   },
@@ -141,6 +157,37 @@
     "design": {
       "title": "Design UI/UX",
       "description": "Creiamo interfacce eleganti ed esperienze utente memorabili."
+    }
+  },
+  "portfolio": {
+    "meta": {
+      "title": "Portfolio | Progetti BlackElephant",
+      "description": "Scopri i progetti che abbiamo sviluppato: siti web, sistemi e applicazioni che trasformano le aziende."
+    },
+    "badge": "Il Nostro Lavoro",
+    "title": {
+      "part1": "Esempi del",
+      "part2": "nostro lavoro"
+    },
+    "description": "Ogni progetto è unico, sviluppato con le migliori tecnologie e pensato per generare risultati reali per i nostri clienti.",
+    "breadcrumb": "Portfolio",
+    "stats": {
+      "projects": "Progetti",
+      "sites": "Siti web",
+      "systems": "Sistemi",
+      "apps": "Applicazioni"
+    },
+    "detail": {
+      "client": "Cliente",
+      "technologies": "Tecnologie",
+      "about": "Sul Progetto",
+      "related": "Progetti Correlati",
+      "backToPortfolio": "Torna al Portfolio",
+      "cta": {
+        "title": "Vuoi un progetto simile?",
+        "description": "Contattaci e creiamo qualcosa di straordinario insieme.",
+        "button": "Richiedi un Preventivo"
+      }
     }
   },
   "plans": {

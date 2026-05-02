@@ -5,7 +5,12 @@
       "Bash(xargs grep *)",
       "Bash(dir \"C:\\\\Users\\\\guilh\\\\OneDrive\\\\Documents\\\\BlackElephant\\\\Projetos\\\\site\\\\src\\\\app\" /s /b)",
       "Bash(findstr \"login\\\\|dashboard\")",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git reset *)",
+      "Bash(Get-ChildItem -Recurse \"C:\\\\Users\\\\guilh\\\\OneDrive\\\\Documents\\\\BlackElephant\\\\Projetos\\\\site\\\\src\\\\app\\\\[locale]\\\\\\(member\\)\" -Filter \"*.tsx\")",
+      "Bash(Select-Object FullName)"
     ]
   }
 }

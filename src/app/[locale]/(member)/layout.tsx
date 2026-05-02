@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation'
 import { getCurrentUser } from '@/lib/supabase/queries/users'
 
+export const dynamic = 'force-dynamic'
+
 type Params = Promise<{ locale: string }>
 
 export default async function MemberLayout({

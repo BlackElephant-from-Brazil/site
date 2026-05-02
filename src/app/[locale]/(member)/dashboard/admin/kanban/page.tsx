@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getKanbanBoard } from '@/lib/actions/kanban-cards'
+
+export const dynamic = 'force-dynamic'
 import { getProjects } from '@/lib/actions/projects'
 import { KanbanBoard } from '@/components/admin/kanban/KanbanBoard'
 

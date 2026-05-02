@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getProjectTypes } from '@/lib/actions/project-types'
+
+export const dynamic = 'force-dynamic'
 import { ProjectTypesView } from '@/components/admin/views/ProjectTypesView'
 
 type Params = Promise<{ locale: string }>

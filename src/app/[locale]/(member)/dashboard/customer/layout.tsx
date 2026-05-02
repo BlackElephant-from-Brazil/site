@@ -1,4 +1,6 @@
 import { getCurrentUser } from '@/lib/supabase/queries/users'
+
+export const dynamic = 'force-dynamic'
 import { signOut } from '@/lib/auth/actions'
 import { Logo } from '@/components/ui'
 

@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getClients } from '@/lib/actions/clients'
+
+export const dynamic = 'force-dynamic'
 import { ClientsView } from '@/components/admin/views/ClientsView'
 
 type Params = Promise<{ locale: string }>

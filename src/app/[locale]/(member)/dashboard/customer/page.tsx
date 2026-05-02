@@ -1,6 +1,8 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getCurrentUser } from '@/lib/supabase/queries/users'
 
+export const dynamic = 'force-dynamic'
+
 type Params = Promise<{ locale: string }>
 
 export default async function CustomerDashboardPage({ params }: { params: Params }) {

@@ -1,5 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getKanbanColumns } from '@/lib/actions/kanban-columns'
+
+export const dynamic = 'force-dynamic'
 import { KanbanColumnsConfigView } from '@/components/admin/views/KanbanColumnsConfigView'
 
 type Params = Promise<{ locale: string }>
