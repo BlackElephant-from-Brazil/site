@@ -38,6 +38,11 @@
     "passwordsDoNotMatch": "Las contraseñas no coinciden"
   },
   "home": {
+    "meta": {
+      "title": "BlackElephant | Tecnología e Innovación para tu Empresa",
+      "description": "Sitios web, Sistemas, Apps y Automatización con Inteligencia Artificial. Transforma tu empresa con tecnología de vanguardia. ¡Consultoría gratuita!",
+      "keywords": "desarrollo web, aplicaciones, sistemas, automatización, inteligencia artificial, transformación digital"
+    },
     "title": "Black Elephant",
     "subtitle": "Transformando ideas en realidad",
     "heroTagline": "Tecnología e Innovación",
@@ -136,6 +141,68 @@
     "design": {
       "title": "Diseño UI/UX",
       "description": "Creamos interfaces elegantes y experiencias de usuario memorables."
+    }
+  },
+  "plans": {
+    "meta": {
+      "title": "Planes y Precios | BlackElephant",
+      "description": "Planes flexibles para tu empresa digital. Sitio web, email profesional, sistemas y más. Consulta nuestros precios."
+    },
+    "badge": "Inversión",
+    "title": {
+      "part1": "Planes",
+      "part2": "& Precios"
+    },
+    "description": "Elige el plan ideal para tu empresa. Todos incluyen soporte, actualizaciones y sin tarifas ocultas.",
+    "breadcrumb": "Planes",
+    "additionalUsers": {
+      "title": "¿Necesitas más usuarios?",
+      "description": "En todos los planes, cada nuevo usuario de email añade solo $9,99/mes. Escala tu equipo sin preocupaciones."
+    },
+    "comparison": {
+      "title": "Comparar Planes"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "q1": {
+        "question": "¿Cuál es la diferencia entre los planes?",
+        "answer": "El plan Empresa Digital es ideal para quienes están comenzando digitalmente, con sitio web y email profesional. Digital+ añade Google Workspace o Microsoft 365 para productividad. Completa incluye un sistema de gestión personalizado para tu operación."
+      },
+      "q2": {
+        "question": "¿Necesito pagar hosting o dominio por separado?",
+        "answer": "¡No! Todos los planes incluyen hosting premium y dominio .com gratuito. Sin tarifas ocultas."
+      },
+      "q3": {
+        "question": "¿Puedo cambiar de plan después?",
+        "answer": "¡Sí! Puedes hacer un upgrade en cualquier momento. Ajustamos el valor proporcional y migramos todo sin costo adicional."
+      },
+      "q4": {
+        "question": "¿Cómo funciona el soporte?",
+        "answer": "Ofrecemos soporte por email y WhatsApp en todos los planes. Los planes superiores tienen atención prioritaria e incluso soporte VIP dedicado."
+      },
+      "q5": {
+        "question": "¿El sitio es responsivo (funciona en móvil)?",
+        "answer": "¡Por supuesto! Todos nuestros sitios se desarrollan con diseño responsivo, funcionando perfectamente en cualquier dispositivo."
+      }
+    },
+    "cta": {
+      "title": "¿Aún tienes dudas?",
+      "description": "Habla con uno de nuestros consultores. La consultoría es gratuita y sin compromiso.",
+      "button": "Agendar Consultoría",
+      "whatsapp": "Escribir por WhatsApp"
+    },
+    "detail": {
+      "about": "Sobre este Plan",
+      "features": "Qué está incluido",
+      "highlights": "Destacados",
+      "backToPlans": "Volver a los Planes",
+      "otherPlans": "Otros Planes",
+      "cta": {
+        "title": "Elige este plan",
+        "initial": "Inversión inicial",
+        "monthly": "Mensualidad",
+        "additionalUser": "Por usuario adicional"
+      }
     }
   },
   "contact": {

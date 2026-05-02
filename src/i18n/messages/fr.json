@@ -38,6 +38,11 @@
     "passwordsDoNotMatch": "Les mots de passe ne correspondent pas"
   },
   "home": {
+    "meta": {
+      "title": "BlackElephant | Technologie et Innovation pour votre Entreprise",
+      "description": "Sites web, Systèmes, Applications et Automatisation avec l'Intelligence Artificielle. Transformez votre entreprise avec la technologie de pointe. Consultation gratuite !",
+      "keywords": "développement web, applications, systèmes, automatisation, intelligence artificielle, transformation numérique"
+    },
     "title": "Black Elephant",
     "subtitle": "Transformer les idées en réalité",
     "heroTagline": "Technologie & Innovation",
@@ -136,6 +141,68 @@
     "design": {
       "title": "Design UI/UX",
       "description": "Nous créons des interfaces élégantes et des expériences utilisateur mémorables."
+    }
+  },
+  "plans": {
+    "meta": {
+      "title": "Offres & Tarifs | BlackElephant",
+      "description": "Des offres flexibles pour votre entreprise digitale. Site web, email professionnel, systèmes et plus encore. Consultez nos prix."
+    },
+    "badge": "Investissement",
+    "title": {
+      "part1": "Offres",
+      "part2": "& Tarifs"
+    },
+    "description": "Choisissez l'offre idéale pour votre entreprise. Toutes incluent le support, les mises à jour et sans frais cachés.",
+    "breadcrumb": "Offres",
+    "additionalUsers": {
+      "title": "Besoin de plus d'utilisateurs ?",
+      "description": "Dans tous les plans, chaque nouvel utilisateur d'email ajoute seulement 9,99 €/mois. Faites évoluer votre équipe sans soucis."
+    },
+    "comparison": {
+      "title": "Comparer les offres"
+    },
+    "faq": {
+      "title": "Questions Fréquentes",
+      "q1": {
+        "question": "Quelle est la différence entre les offres ?",
+        "answer": "L'offre Entreprise Digitale est idéale pour ceux qui débutent dans le numérique, avec site web et email professionnel. Digital+ ajoute Google Workspace ou Microsoft 365 pour la productivité. Complète comprend un système de gestion personnalisé pour votre activité."
+      },
+      "q2": {
+        "question": "Dois-je payer l'hébergement ou le domaine séparément ?",
+        "answer": "Non ! Tous les plans comprennent un hébergement premium et un domaine .com gratuit. Pas de frais cachés."
+      },
+      "q3": {
+        "question": "Puis-je changer d'offre ultérieurement ?",
+        "answer": "Oui ! Vous pouvez passer à une offre supérieure à tout moment. Nous ajustons la valeur proportionnelle et migrons tout sans frais supplémentaires."
+      },
+      "q4": {
+        "question": "Comment fonctionne le support ?",
+        "answer": "Nous offrons le support par email et WhatsApp sur tous les plans. Les plans supérieurs bénéficient d'un service prioritaire et même d'un support VIP dédié."
+      },
+      "q5": {
+        "question": "Le site est-il responsive (fonctionne sur mobile) ?",
+        "answer": "Absolument ! Tous nos sites sont développés avec un design responsive, fonctionnant parfaitement sur n'importe quel appareil."
+      }
+    },
+    "cta": {
+      "title": "Vous avez encore des questions ?",
+      "description": "Parlez à l'un de nos consultants. La consultation est gratuite et sans engagement.",
+      "button": "Planifier une consultation",
+      "whatsapp": "Discuter sur WhatsApp"
+    },
+    "detail": {
+      "about": "À propos de cette offre",
+      "features": "Ce qui est inclus",
+      "highlights": "Points forts",
+      "backToPlans": "Retour aux offres",
+      "otherPlans": "Autres offres",
+      "cta": {
+        "title": "Choisir cette offre",
+        "initial": "Investissement initial",
+        "monthly": "Mensualité",
+        "additionalUser": "Par utilisateur supplémentaire"
+      }
     }
   },
   "contact": {

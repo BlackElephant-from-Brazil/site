@@ -155,6 +155,68 @@
       "description": "We create elegant interfaces and memorable user experiences."
     }
   },
+  "plans": {
+    "meta": {
+      "title": "Plans & Pricing | BlackElephant",
+      "description": "Flexible plans for your digital company. Website, professional email, systems and more. Check our prices."
+    },
+    "badge": "Investment",
+    "title": {
+      "part1": "Plans",
+      "part2": "& Pricing"
+    },
+    "description": "Choose the ideal plan for your company. All plans include support, updates and no hidden fees.",
+    "breadcrumb": "Plans",
+    "additionalUsers": {
+      "title": "Need more users?",
+      "description": "In all plans, each new email user adds only $9.99/month. Scale your team without worries."
+    },
+    "comparison": {
+      "title": "Compare Plans"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "What's the difference between plans?",
+        "answer": "The Digital Business plan is ideal for those starting out digitally, with website and professional email. Digital+ adds Google Workspace or Microsoft 365 for productivity. Complete includes a custom management system for your operation."
+      },
+      "q2": {
+        "question": "Do I need to pay for hosting or domain separately?",
+        "answer": "No! All plans include premium hosting and a free .com domain. No hidden fees."
+      },
+      "q3": {
+        "question": "Can I change plans later?",
+        "answer": "Yes! You can upgrade at any time. We adjust the proportional value and migrate everything at no additional cost."
+      },
+      "q4": {
+        "question": "How does support work?",
+        "answer": "We offer support via email and WhatsApp on all plans. Higher plans have priority service and even dedicated VIP support."
+      },
+      "q5": {
+        "question": "Is the website responsive (works on mobile)?",
+        "answer": "Absolutely! All our websites are developed with responsive design, working perfectly on any device."
+      }
+    },
+    "cta": {
+      "title": "Still have questions?",
+      "description": "Talk to one of our consultants. The consultation is free and no commitment required.",
+      "button": "Schedule Consultation",
+      "whatsapp": "Chat on WhatsApp"
+    },
+    "detail": {
+      "about": "About this Plan",
+      "features": "What's included",
+      "highlights": "Highlights",
+      "backToPlans": "Back to Plans",
+      "otherPlans": "Other Plans",
+      "cta": {
+        "title": "Choose this plan",
+        "initial": "Initial investment",
+        "monthly": "Monthly fee",
+        "additionalUser": "Per additional user"
+      }
+    }
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "Let's talk",

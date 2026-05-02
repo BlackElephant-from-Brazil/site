@@ -38,6 +38,11 @@
     "passwordsDoNotMatch": "Die Passwörter stimmen nicht überein"
   },
   "home": {
+    "meta": {
+      "title": "BlackElephant | Technologie und Innovation für Ihr Unternehmen",
+      "description": "Websites, Systeme, Apps und Automatisierung mit Künstlicher Intelligenz. Transformieren Sie Ihr Unternehmen mit modernster Technologie. Kostenlose Beratung!",
+      "keywords": "Webentwicklung, Apps, Systeme, Automatisierung, künstliche Intelligenz, digitale Transformation"
+    },
     "title": "Black Elephant",
     "subtitle": "Ideen in Realität verwandeln",
     "heroTagline": "Technologie & Innovation",
@@ -136,6 +141,68 @@
     "design": {
       "title": "UI/UX Design",
       "description": "Wir schaffen elegante Oberflächen und unvergessliche Benutzererfahrungen."
+    }
+  },
+  "plans": {
+    "meta": {
+      "title": "Pläne & Preise | BlackElephant",
+      "description": "Flexible Pläne für Ihr digitales Unternehmen. Website, professionelle E-Mail, Systeme und mehr. Informieren Sie sich über unsere Preise."
+    },
+    "badge": "Investition",
+    "title": {
+      "part1": "Pläne",
+      "part2": "& Preise"
+    },
+    "description": "Wählen Sie den idealen Plan für Ihr Unternehmen. Alle Pläne beinhalten Support, Updates und keine versteckten Gebühren.",
+    "breadcrumb": "Pläne",
+    "additionalUsers": {
+      "title": "Benötigen Sie mehr Benutzer?",
+      "description": "Bei allen Plänen kostet jeder neue E-Mail-Benutzer nur 9,99 €/Monat. Skalieren Sie Ihr Team ohne Sorgen."
+    },
+    "comparison": {
+      "title": "Pläne vergleichen"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Was ist der Unterschied zwischen den Plänen?",
+        "answer": "Der Digital Business-Plan ist ideal für Einsteiger im digitalen Bereich, mit Website und professioneller E-Mail. Digital+ fügt Google Workspace oder Microsoft 365 für Produktivität hinzu. Complete umfasst ein maßgeschneidertes Verwaltungssystem für Ihren Betrieb."
+      },
+      "q2": {
+        "question": "Muss ich Hosting oder Domain separat bezahlen?",
+        "answer": "Nein! Alle Pläne beinhalten Premium-Hosting und eine kostenlose .com-Domain. Keine versteckten Gebühren."
+      },
+      "q3": {
+        "question": "Kann ich später den Plan wechseln?",
+        "answer": "Ja! Sie können jederzeit upgraden. Wir passen den proportionalen Wert an und migrieren alles ohne zusätzliche Kosten."
+      },
+      "q4": {
+        "question": "Wie funktioniert der Support?",
+        "answer": "Wir bieten Support per E-Mail und WhatsApp bei allen Plänen. Höhere Pläne haben Prioritätsservice und sogar dedizierten VIP-Support."
+      },
+      "q5": {
+        "question": "Ist die Website responsiv (funktioniert auf Mobilgeräten)?",
+        "answer": "Absolut! Alle unsere Websites werden mit responsivem Design entwickelt und funktionieren auf jedem Gerät einwandfrei."
+      }
+    },
+    "cta": {
+      "title": "Haben Sie noch Fragen?",
+      "description": "Sprechen Sie mit einem unserer Berater. Die Beratung ist kostenlos und unverbindlich.",
+      "button": "Beratung planen",
+      "whatsapp": "WhatsApp-Chat"
+    },
+    "detail": {
+      "about": "Über diesen Plan",
+      "features": "Was ist enthalten",
+      "highlights": "Highlights",
+      "backToPlans": "Zurück zu den Plänen",
+      "otherPlans": "Andere Pläne",
+      "cta": {
+        "title": "Diesen Plan wählen",
+        "initial": "Anfangsinvestition",
+        "monthly": "Monatliche Gebühr",
+        "additionalUser": "Pro zusätzlichem Benutzer"
+      }
     }
   },
   "contact": {
