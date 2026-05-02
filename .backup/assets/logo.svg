@@ -1,0 +1,16 @@
+<svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Elephant Icon based on company logo -->
+  <g transform="translate(5, 5) scale(1)">
+    <!-- Main elephant shape -->
+    <path d="M8 8 L8 38 Q8 46 18 46 L32 46" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Top of head curving to trunk -->
+    <path d="M8 8 Q8 0 20 0 Q42 0 42 16 Q42 26 38 32" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Trunk curl -->
+    <path d="M38 32 Q46 36 44 44 Q42 52 34 48" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Eye -->
+    <circle cx="30" cy="14" r="2.5" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="62" y="38" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">Black<tspan fill="#B7FD13">Elephant</tspan></text>
+</svg>

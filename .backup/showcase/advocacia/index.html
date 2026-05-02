@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justiça & Valor | Advocacia de Excelência</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --accent-color: #c5a059;
+            --surface-color: #1e293b;
+            --border-color: rgba(197, 160, 89, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+        }
+
+        .gold {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            background: rgba(15, 23, 42, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        nav ul {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 4rem;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('../../assets/law_firm_hero_generated.png');
+            /* To be replaced by generated image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            color: #94a3b8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #d4b06a;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Contact */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: #64748b;
+        }
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 5rem;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            nav ul {
+                display: flex;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">JUSTIÇA <span class="gold">&</span> VALOR</a>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#areas">Áreas</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <div class="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Defendendo o seu <br><span class="gold">Legado</span></h1>
+            <p>Consultoria jurídica estratégica para empresas e patrimônios. Mais de 20 anos de excelência e tradição em
+                cada caso.</p>
+            <a href="#contato" class="btn">Agendar Consulta</a>
+        </div>
+    </section>
+
+    <section id="sobre" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title" style="text-align: left;">Nossa História</h2>
+                    <p class="about-text">
+                        A Justiça & Valor nasceu com um propósito claro: oferecer advocacia de alta performance com um
+                        atendimento personalizado e humano.
+                        Entendemos que por trás de cada processo existem pessoas, histórias e patrimônios que precisam
+                        ser preservados.
+                    </p>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <h4>20+</h4>
+                            <p>Anos de Experiência</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>500+</h4>
+                            <p>Casos na Área Civil</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>R$100M+</h4>
+                            <p>Ativos Preservados</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>98%</h4>
+                            <p>Taxa de Êxito</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image placeholder, ideal would be generated office image -->
+                <div
+                    style="background: var(--surface-color); height: 400px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
+                    <span style="color: var(--accent-color);">Imagem Institucional</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="section" style="background: #162036;">
+        <div class="container">
+            <h2 class="section-title">Áreas de Atuação</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>⚖️ Direito Empresarial</h3>
+                    <p>Fusões, aquisições e estruturação societária. Proteção jurídica para o crescimento do seu
+                        negócio.</p>
+                </div>
+                <div class="service-card">
+                    <h3>📊 Tributário</h3>
+                    <p>Planejamento fiscal estratégico e recuperação de créditos. Otimize sua carga tributária com
+                        segurança.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏛️ Civil & Família</h3>
+                    <p>Sucessões, inventários e proteção patrimonial. Cuidamos do que é mais importante para você.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🤝 Trabalhista</h3>
+                    <p>Consultoria preventiva e contenciosa para empresas, minimizando riscos e passivos.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏢 Imobiliário</h3>
+                    <p>Assessoria completa em compra, venda e regularização de imóveis e grandes empreendimentos.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💻 Digital</h3>
+                    <p>Proteção de dados (LGPD), contratos digitais e propriedade intelectual no ambiente online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section">
+        <div class="container">
+            <h2 class="section-title">O que dizem nossos clientes</h2>
+            <div class="services-grid"> <!-- Reusing grid for layout simplicity -->
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"A equipe demonstrou um conhecimento técnico impressionante e uma
+                        dedicação ímpar no nosso caso de fusão."</p>
+                    <p class="testimonial-author">- Roberto Almeida, CEO TechSolutions</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Conseguiram reverter uma situação tributária complexa que salvou nossa
+                        operação no estado."</p>
+                    <p class="testimonial-author">- Carla Mendes, Diretora Financeira</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Muito além de advogados, são parceiros estratégicos que entendem do
+                        nosso negócio."</p>
+                    <p class="testimonial-author">- Grupo Carvalho & Filhos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section" style="background: #162036;">
+        <div class="container">
+            <h2 class="section-title">Agende sua Consulta</h2>
+            <div class="contact-container">
+                <div>
+                    <h3 class="gold" style="margin-bottom: 1rem;">Visite nosso escritório</h3>
+                    <p style="margin-bottom: 2rem;">Av. Paulista, 1000 - Cj 1500<br>Bela Vista, São Paulo - SP</p>
+                    <h3 class="gold" style="margin-bottom: 1rem;">Contato Direto</h3>
+                    <p>contato@justicaevalor.com.br<br>(11) 3333-4444</p>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nome Completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Seu Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Telefone">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="Breve descrição do caso"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Solicitação</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Justiça & Valor Advocacia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

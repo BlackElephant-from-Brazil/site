@@ -1,0 +1,209 @@
+{
+  "common": {
+    "welcome": "Benvenuto",
+    "loading": "Caricamento...",
+    "error": "Si è verificato un errore",
+    "retry": "Riprova",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "search": "Cerca",
+    "close": "Chiudi",
+    "learnMore": "Scopri di più",
+    "getStarted": "Inizia ora",
+    "viewAll": "Vedi tutti"
+  },
+  "auth": {
+    "login": "Accedi",
+    "logout": "Esci",
+    "signup": "Crea account",
+    "email": "E-mail",
+    "password": "Password",
+    "confirmPassword": "Conferma password",
+    "forgotPassword": "Hai dimenticato la password?",
+    "resetPassword": "Reimposta password",
+    "continueWithGoogle": "Continua con Google",
+    "orContinueWith": "o continua con",
+    "alreadyHaveAccount": "Hai già un account?",
+    "dontHaveAccount": "Non hai un account?",
+    "invalidCredentials": "E-mail o password non validi",
+    "emailRequired": "L'e-mail è obbligatoria",
+    "passwordRequired": "La password è obbligatoria",
+    "passwordMinLength": "La password deve contenere almeno 8 caratteri",
+    "passwordsDoNotMatch": "Le password non corrispondono"
+  },
+  "home": {
+    "title": "Black Elephant",
+    "subtitle": "Trasformare le idee in realtà",
+    "heroTagline": "Tecnologia & Innovazione",
+    "heroTitle": "Costruiamo il futuro digitale della tua azienda",
+    "heroDescription": "La soluzione a tutti i tuoi problemi digitali. Siti web, sistemi, app e automazione IA per far decollare la tua azienda negli affari.",
+    "ctaPrimary": "Contattaci",
+    "ctaSecondary": "I nostri servizi",
+    "ourNumbers": "I Nostri Numeri",
+    "statsTitle": "Risultati che parlano da soli",
+    "statsClients": "Clienti serviti",
+    "statsProjects": "Progetti consegnati",
+    "statsYears": "Anni di esperienza",
+    "statsSatisfaction": "Soddisfazione",
+    "processSubtitle": "Come Lavoriamo",
+    "processTitle": "Il Nostro Processo",
+    "processDelivery": "Consegna garantita",
+    "processSupport": "Supporto dedicato",
+    "process1Title": "Immersione",
+    "process1Desc": "Ci immergiamo nella tua azienda per capire le tue esigenze.",
+    "process1Details": "Realizziamo un'analisi completa della tua azienda, comprendendo le tue esigenze, sfide e obiettivi. Questa fase è fondamentale per creare una soluzione che faccia davvero la differenza.",
+    "process1Duration": "1-2 settimane",
+    "process2Title": "Prototipazione",
+    "process2Desc": "Progettiamo soluzioni che si adattano perfettamente alla tua azienda.",
+    "process2Details": "Creiamo wireframe e prototipi interattivi per visualizzare la soluzione prima dello sviluppo. Partecipi attivamente alle decisioni di design.",
+    "process2Duration": "2-3 settimane",
+    "process3Title": "Costruzione",
+    "process3Desc": "Sviluppo agile con le tecnologie più moderne.",
+    "process3Details": "Sviluppiamo il tuo progetto utilizzando le tecnologie più moderne del mercato, con sprint settimanali e consegne costanti.",
+    "process3Duration": "4-8 settimane",
+    "process4Title": "Integrazione",
+    "process4Desc": "Formiamo te e il tuo team sulle tecnologie.",
+    "process4Details": "Formiamo il tuo team per utilizzare tutte le funzionalità della soluzione, garantendo che tutti siano pronti a estrarre il massimo valore.",
+    "process4Duration": "1 settimana",
+    "process5Title": "Supporto",
+    "process5Desc": "Contatto continuo che offre sicurezza e tranquillità.",
+    "process5Details": "Offriamo supporto continuo e manutenzione per garantire che la tua soluzione continui a funzionare perfettamente e ad evolversi con la tua azienda.",
+    "process5Duration": "Continuo",
+    "servicesTitle": "I Nostri Servizi",
+    "servicesSubtitle": "Soluzioni complete per la tua trasformazione digitale",
+    "service1Title": "Sviluppo Web",
+    "service1Desc": "Siti e applicazioni web moderne con le migliori tecnologie del mercato.",
+    "service2Title": "App Mobile",
+    "service2Desc": "App native e ibride per iOS e Android con un'esperienza eccezionale.",
+    "service3Title": "Intelligenza Artificiale",
+    "service3Desc": "Soluzioni AI e Machine Learning per automatizzare e ottimizzare i processi.",
+    "service4Title": "Consulenza Tech",
+    "service4Desc": "Strategia e pianificazione tecnologica per accelerare la tua crescita.",
+    "aboutTitle": "Chi Siamo",
+    "aboutSubtitle": "Innovazione con uno scopo",
+    "aboutText": "Siamo un'azienda tecnologica focalizzata sulla creazione di soluzioni che fanno la differenza. Combiniamo competenza tecnica e visione strategica per fornire risultati straordinari.",
+    "ctaTitle": "Pronto a trasformare il tuo business?",
+    "ctaDescription": "Contattaci e scopri come possiamo aiutare la tua azienda a raggiungere nuovi livelli."
+  },
+  "about": {
+    "title": "Chi Siamo",
+    "subtitle": "Scopri BlackElephant",
+    "heroText": "Siamo appassionati di tecnologia e innovazione. La nostra missione è trasformare le idee in soluzioni digitali che impattano positivamente aziende e persone.",
+    "missionTitle": "La Nostra Missione",
+    "missionText": "Fornire soluzioni tecnologiche innovative che guidano il successo dei nostri clienti.",
+    "visionTitle": "La Nostra Visione",
+    "visionText": "Essere un riferimento nell'innovazione tecnologica, riconosciuti per l'eccellenza e l'impatto delle nostre soluzioni.",
+    "valuesTitle": "I Nostri Valori",
+    "value1": "Innovazione",
+    "value1Desc": "Cerchiamo costantemente nuovi modi per risolvere i problemi.",
+    "value2": "Eccellenza",
+    "value2Desc": "Consegniamo qualità in ogni linea di codice.",
+    "value3": "Trasparenza",
+    "value3Desc": "Comunicazione chiara e onesta in tutte le relazioni.",
+    "value4": "Collaborazione",
+    "value4Desc": "Lavoriamo insieme per raggiungere risultati straordinari."
+  },
+  "services": {
+    "title": "Servizi",
+    "subtitle": "Soluzioni complete per la tua azienda",
+    "description": "Offriamo un portafoglio completo di servizi tecnologici per soddisfare tutte le esigenze della tua azienda.",
+    "web": {
+      "title": "Sviluppo Web",
+      "description": "Creiamo siti e applicazioni web moderne, veloci e sicure utilizzando le tecnologie più avanzate del mercato."
+    },
+    "mobile": {
+      "title": "App Mobile",
+      "description": "Sviluppiamo applicazioni native e ibride per iOS e Android con focus su usabilità e prestazioni."
+    },
+    "ai": {
+      "title": "Intelligenza Artificiale",
+      "description": "Implementiamo soluzioni AI e Machine Learning per automatizzare processi e generare insight preziosi."
+    },
+    "consulting": {
+      "title": "Consulenza Tech",
+      "description": "Offriamo consulenza strategica per aiutare la tua azienda a prendere le migliori decisioni tecnologiche."
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "Progettiamo e gestiamo infrastrutture cloud scalabili e sicure."
+    },
+    "design": {
+      "title": "Design UI/UX",
+      "description": "Creiamo interfacce eleganti ed esperienze utente memorabili."
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "subtitle": "Parliamo",
+    "description": "Siamo pronti ad ascoltare il tuo progetto. Contattaci e trasformiamo le tue idee in realtà.",
+    "tabs": {
+      "contact": "Invia messaggio",
+      "consultation": "Prenota consulenza"
+    },
+    "contactForm": {
+      "title": "Invia messaggio",
+      "subtitle": "Compila il modulo e ti ricontatteremo presto."
+    },
+    "consultationForm": {
+      "badge": "1 ora • Gratuito",
+      "title": "Consulenza Gratuita",
+      "subtitle": "Prenota ora la tua consulenza gratuita di 1 ora. Capiremo le esigenze della tua azienda e proporremo soluzioni che ti porteranno al livello successivo.",
+      "selectDate": "Seleziona la data",
+      "selectTime": "Seleziona l'orario",
+      "description": "Descrivi brevemente il tuo progetto",
+      "descriptionPlaceholder": "Es: Ho bisogno di un sistema per gestire il mio negozio online...",
+      "submit": "Prenota consulenza"
+    },
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "phone": "Telefono",
+      "company": "Azienda",
+      "message": "Messaggio",
+      "submit": "Invia messaggio",
+      "success": "Messaggio inviato con successo!",
+      "error": "Errore nell'invio del messaggio. Riprova."
+    },
+    "info": {
+      "addressTitle": "Indirizzo",
+      "address": "Santana de Parnaíba, SP",
+      "emailTitle": "E-mail",
+      "email": "guilherme@blackelephant.com.br",
+      "phoneTitle": "WhatsApp",
+      "phone": "+55 (19) 9.7805-5531",
+      "hoursTitle": "Orario",
+      "hours": "Lun - Ven: 9 alle 18"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "portfolio": "Portfolio",
+    "plans": "Piani",
+    "contact": "Contatti",
+    "dashboard": "Dashboard",
+    "login": "Accedi"
+  },
+  "member": {
+    "dashboard": "Dashboard Membro",
+    "profile": "Il mio profilo",
+    "settings": "Impostazioni"
+  },
+  "footer": {
+    "description": "Trasformare le aziende attraverso la tecnologia e l'innovazione.",
+    "solutions": "Soluzioni",
+    "solutionSites": "Siti Istituzionali",
+    "solutionSystems": "Sistemi Personalizzati",
+    "solutionApps": "App Mobile",
+    "solutionAI": "Automazione & IA",
+    "company": "Azienda",
+    "copyright": "© 2025 BlackElephant Technology. All rights reserved.",
+    "madeWith": "Sviluppato da BlackElephant"
+  }
+}

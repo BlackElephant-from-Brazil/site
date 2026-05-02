@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exato | Soluções Contábeis</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f766e;
+            /* Teal */
+            --secondary: #134e4a;
+            --accent: #2dd4bf;
+            --bg: #f0fdfa;
+            --text: #334155;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: #fff;
+            padding: 4rem 0;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: 1fr;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Technology */
+        .tech-section {
+            background: var(--secondary);
+            color: #fff;
+        }
+
+        .tech-section h2 {
+            color: #fff;
+        }
+
+        .tech-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .review {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Contact */
+        .contact-form {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            ring: 2px solid var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            nav ul {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-img {
+                height: 500px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-wrap">
+            <a href="#" class="logo">Exato <span>Contábil</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#solucoes">Soluções</a></li>
+                    <li><a href="#digital">Tecnologia</a></li>
+                    <li><a href="#depoimentos">Quem Aprova</a></li>
+                    <li><a href="#" class="btn btn-outline">Área do Cliente</a></li>
+                    <li><a href="#contato" class="btn">Falar Conosco</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Contabilidade Inteligente para Negócios Modernos</h1>
+                <p>Deixe a burocracia com a gente e foque no crescimento da sua empresa. Tecnologia, agilidade e
+                    consultoria estratégica em um só lugar.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#contato" class="btn">Abrir minha Empresa</a>
+                    <a href="#solucoes" class="btn btn-outline">Conhecer Planos</a>
+                </div>
+                <div style="margin-top: 2.5rem; display: flex; gap: 2rem; font-size: 0.9rem; color: #64748b;">
+                    <span>✓ Abertura Grátis</span>
+                    <span>✓ Suporte Humanizado</span>
+                    <span>✓ 100% Digital</span>
+                </div>
+            </div>
+            <div class="hero-img">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80"
+                    alt="Office Workspace">
+            </div>
+        </div>
+    </section>
+
+    <section id="solucoes" class="section">
+        <div class="container">
+            <h2 class="section-title">Soluções Completas</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="icon">📊</span>
+                    <h3>BPO Financeiro</h3>
+                    <p>Terceirização completa do seu financeiro: contas a pagar, receber, fluxo de caixa e relatórios.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">⚖️</span>
+                    <h3>Gestão Fiscal</h3>
+                    <p>Planejamento tributário para reduzir seus impostos dentro da lei com total segurança.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">👥</span>
+                    <h3>Departamento Pessoal</h3>
+                    <p>Folha de pagamento, admissões, rescisões e gestão de benefícios sem dor de cabeça.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">🚀</span>
+                    <h3>Abertura de Empresas</h3>
+                    <p>Processo rápido e 100% digital. Cuidamos de toda a documentação para você começar certo.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">💡</span>
+                    <h3>Consultoria Empresarial</h3>
+                    <p>Análise de dados financeiros para apoiar suas decisões estratégicas de crescimento.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">📝</span>
+                    <h3>Imposto de Renda</h3>
+                    <p>Declaração de IRPF e IRPJ com análise detalhada para evitar malha fina.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="digital" class="section tech-section">
+        <div class="container">
+            <h2 class="section-title">Sua Contabilidade na Palma da Mão</h2>
+            <div class="hero-grid" style="align-items: center;">
+                <div class="tech-text">
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">
+                        Adeus papelada! Nossa plataforma digital integra tudo o que você precisa. Emita notas, gerencie
+                        documentos e acompanhe seus impostos pelo app.
+                    </p>
+                    <div class="tech-grid">
+                        <div class="tech-item">Evisão de Notas em 1 clique</div>
+                        <div class="tech-item">Gestão de Documentos na Nuvem</div>
+                        <div class="tech-item">Conciliação Bancária Automática</div>
+                        <div class="tech-item">Dashboard Financeiro em Tempo Real</div>
+                    </div>
+                </div>
+                <!-- Ideal here: screenshot of app or abstract tech illustration, using placeholder div for now -->
+                <div
+                    style="background: rgba(255,255,255,0.1); height: 300px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 2px dashed rgba(255,255,255,0.2);">
+                    <span>App Demo Interface</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section">
+        <div class="container">
+            <h2 class="section-title">Quem Confia na Exato</h2>
+            <div class="testimonial-grid">
+                <div class="review">
+                    <p>"A migração para a Exato foi a melhor decisão. O atendimento é rápido e a plataforma é muito
+                        intuitiva."</p>
+                    <h4 style="margin-top: 1rem;">- Rafael Torres, Agência Bold</h4>
+                </div>
+                <div class="review">
+                    <p>"Eles organizaram toda a bagunça fiscal da minha empresa e ainda reduziram meus impostos.
+                        Recomendo!"</p>
+                    <h4 style="margin-top: 1rem;">- Mariana Costa, E-commerce Beauty</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section" style="background: var(--bg);">
+        <div class="container">
+            <h2 class="section-title">Vamos Crescer Juntos?</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label>Email Corporativo</label>
+                    <input type="email" placeholder="seuemail@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label>Qual sua necessidade?</label>
+                    <select>
+                        <option>Abrir Empresa</option>
+                        <option>Trocar de Contador</option>
+                        <option>Consultoria Financeira</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Solicitar Proposta</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Exato Soluções Contábeis. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

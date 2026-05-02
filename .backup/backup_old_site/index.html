@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>BlackElephant | Soluções Digitais para sua Empresa Crescer</title>
+    <meta name="description" content="Transforme sua empresa com soluções digitais completas: sites profissionais, aplicativos, automações, segurança digital e identidade visual. Especialistas em pequenas e médias empresas.">
+    <meta name="keywords" content="criação de sites, desenvolvimento web, aplicativos, automação empresarial, segurança digital, identidade visual, marketing digital, pequenas empresas, startup tecnologia, São Paulo, Brasil">
+    <meta name="author" content="BlackElephant">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://blackelephant.com.br">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blackelephant.com.br">
+    <meta property="og:title" content="BlackElephant | Soluções Digitais para sua Empresa Crescer">
+    <meta property="og:description" content="Transforme sua empresa com soluções digitais completas. Sites, aplicativos, automações e muito mais.">
+    <meta property="og:image" content="https://blackelephant.com.br/assets/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="BlackElephant">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://blackelephant.com.br">
+    <meta name="twitter:title" content="BlackElephant | Soluções Digitais para sua Empresa Crescer">
+    <meta name="twitter:description" content="Transforme sua empresa com soluções digitais completas. Sites, aplicativos, automações e muito mais.">
+    <meta name="twitter:image" content="https://blackelephant.com.br/assets/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BlackElephant",
+        "description": "Startup de tecnologia especializada em soluções digitais para empresas",
+        "url": "https://blackelephant.com.br",
+        "logo": "https://blackelephant.com.br/assets/logo.svg",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": "Portuguese"
+        },
+        "sameAs": [
+            "https://www.instagram.com/blackelephant",
+            "https://www.linkedin.com/company/blackelephant"
+        ],
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "BRL",
+            "lowPrice": "199",
+            "highPrice": "999",
+            "offerCount": "3"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "BlackElephant",
+        "url": "https://blackelephant.com.br",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://blackelephant.com.br/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="announcement-content">
+            <span class="pulse-dot"></span>
+            <span class="announcement-text">🚀 <strong>Oferta especial:</strong> 20% OFF no primeiro mês para novos clientes</span>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="logo" aria-label="BlackElephant Home">
+                <svg class="logo-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Elephant shape based on company logo -->
+                    <path d="M10 10 L10 38 Q10 44 18 44 L30 44" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 10 Q10 4 20 4 Q38 4 38 16 Q38 24 34 30" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M34 30 Q42 34 40 42 Q38 48 32 46" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="28" cy="14" r="2.5" fill="#FFFFFF"/>
+                </svg>
+                <span class="logo-text">Black<span class="highlight">Elephant</span></span>
+            </a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+                <li><a href="#sobre" class="nav-link">Quem Somos</a></li>
+                <li><a href="#pacotes" class="nav-link">Pacotes</a></li>
+                <li><a href="#beneficios" class="nav-link">Benefícios</a></li>
+                <li><a href="#contato" class="nav-link nav-cta">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-background">
+                <canvas id="particleCanvas"></canvas>
+                <div class="gradient-overlay"></div>
+            </div>
+            
+            <div class="hero-content container">
+                <div class="hero-badge animate-fade-up">
+                    <span class="badge-pulse"></span>
+                    <span>Transformação Digital</span>
+                </div>
+                
+                <h1 class="hero-title animate-fade-up delay-1">
+                    Sua empresa merece <br>
+                    <span class="highlight-text">presença digital</span> <br>
+                    de verdade.
+                </h1>
+                
+                <p class="hero-subtitle animate-fade-up delay-2">
+                    Não fique para trás enquanto seus concorrentes conquistam clientes online. 
+                    Criamos soluções digitais completas para empresas que querem crescer com segurança.
+                </p>
+                
+                <div class="hero-buttons animate-fade-up delay-3">
+                    <a href="#portfolio" class="btn btn-secondary">
+                        <span>Ver Portfólio</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                    <a href="#pacotes" class="btn btn-primary">
+                        <span>Começar Agora</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="hero-stats animate-fade-up delay-4">
+                    <div class="stat">
+                        <span class="stat-number" data-count="150">0</span>
+                        <span class="stat-label">Projetos Entregues</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="98">0</span>
+                        <span class="stat-suffix">%</span>
+                        <span class="stat-label">Satisfação</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="5">0</span>
+                        <span class="stat-suffix">anos</span>
+                        <span class="stat-label">de Experiência</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-3d-container" id="hero3d">
+                <!-- Three.js 3D Elephant will be rendered here -->
+            </div>
+            
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Role para explorar</span>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio" id="portfolio">
+            <div class="section-header container">
+                <span class="section-tag animate-on-scroll">Nossos Trabalhos</span>
+                <h2 class="section-title animate-on-scroll">Portfólio</h2>
+                <p class="section-description animate-on-scroll">
+                    Cada projeto é uma história de transformação. Veja como ajudamos empresas 
+                    a conquistarem seu espaço no mundo digital.
+                </p>
+            </div>
+            
+            <div class="portfolio-slider" id="portfolioSlider">
+                <div class="portfolio-track">
+                    <article class="portfolio-card">
+                        <a href="./portfolio/barbearia/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>BarberKing</h3>
+                                <p>Barbearia premium com estilo dark e sistema de agendamentos online</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="barbearia">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">✂️</span>
+                                        <span>BarberKing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/vinhos/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>Villa Vino</h3>
+                                <p>Vinícola elegante com catálogo de vinhos e experiências de degustação</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="vinhos">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">🍷</span>
+                                        <span>Villa Vino</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/fertilizantes/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>AgroVerde</h3>
+                                <p>Fertilizantes agrícolas com foco em sustentabilidade e tecnologia</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="fertilizantes">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">🌱</span>
+                                        <span>AgroVerde</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/arquiteto/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>ArqStudio</h3>
+                                <p>Portfólio arquitetônico minimalista e sofisticado</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="arquiteto">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">📐</span>
+                                        <span>ArqStudio</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/medico/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>Dr. Ricardo Mendes</h3>
+                                <p>Cardiologista com sistema de agendamento e convênios médicos</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="medico">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">🏥</span>
+                                        <span>Dr. Ricardo Mendes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/advogado/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>Moreira & Associados</h3>
+                                <p>Escritório de advocacia com áreas de atuação e equipe especializada</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="advogado">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">⚖️</span>
+                                        <span>Moreira & Associados</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/contador/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>ContaExata</h3>
+                                <p>Contabilidade digital com planos e serviços empresariais completos</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="contador">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">💼</span>
+                                        <span>ContaExata</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <a href="./portfolio/dentista/index.html" target="_blank" class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>Sorria Clínica</h3>
+                                <p>Clínica odontológica com atendimento humanizado e tecnologia avançada</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="dentista">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">😁</span>
+                                        <span>Sorria Clínica</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    
+                    <article class="portfolio-card">
+                        <div class="portfolio-card-inner">
+                            <div class="portfolio-info glass-effect">
+                                <h3>Academia FitLife</h3>
+                                <p>App de treinos personalizados e acompanhamento de alunos</p>
+                            </div>
+                            <div class="portfolio-image">
+                                <div class="portfolio-placeholder" data-project="academia">
+                                    <div class="placeholder-content">
+                                        <span class="placeholder-icon">💪</span>
+                                        <span>Academia FitLife</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+            <div class="portfolio-nav container">
+                <button class="portfolio-btn prev" id="portfolioPrev" aria-label="Projeto anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <div class="portfolio-dots" id="portfolioDots"></div>
+                <button class="portfolio-btn next" id="portfolioNext" aria-label="Próximo projeto">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="avaliacoes">
+            <div class="section-header container">
+                <span class="section-tag animate-on-scroll">Depoimentos</span>
+                <h2 class="section-title animate-on-scroll">O que nossos clientes dizem</h2>
+                <p class="section-description animate-on-scroll">
+                    A confiança de quem já transformou seu negócio com a BlackElephant.
+                </p>
+            </div>
+            
+            <div class="testimonials-wrapper">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Testimonial 1 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "Depois de 20 anos no mercado, finalmente entendi que precisava estar online. 
+                                A BlackElephant criou um site que meus clientes adoram e que traz resultados reais. 
+                                As vendas aumentaram 40% em 3 meses."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">JM</div>
+                                <div class="author-info">
+                                    <strong>José Mendes</strong>
+                                    <span>Diretor, Móveis Mendes Ltda</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 2 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "Tinha medo de tecnologia, mas a equipe da BlackElephant tornou tudo simples. 
+                                Hoje tenho um site profissional, emails corporativos e me sinto segura. 
+                                Recomendo para todos os empresários da minha idade."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">MC</div>
+                                <div class="author-info">
+                                    <strong>Maria Conceição</strong>
+                                    <span>Proprietária, Confeitaria Doce Lar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 3 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "O aplicativo que desenvolveram para minha clínica revolucionou o atendimento. 
+                                Meus pacientes agendam consultas online e eu economizo tempo e dinheiro. 
+                                Investimento que valeu cada centavo."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">RA</div>
+                                <div class="author-info">
+                                    <strong>Dr. Roberto Andrade</strong>
+                                    <span>Médico, Clínica Andrade</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 4 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "Minha advocacia precisava de uma presença online séria e profissional. 
+                                A BlackElephant entregou exatamente isso. O site transmite a credibilidade 
+                                que nossos clientes esperam. Excelente trabalho!"
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">PS</div>
+                                <div class="author-info">
+                                    <strong>Dra. Patricia Santos</strong>
+                                    <span>Sócia, Santos & Associados Advogados</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 5 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "Terceira empresa que contrato para fazer meu site e a primeira que realmente entregou. 
+                                Profissionais sérios, prazo cumprido e resultado impecável. 
+                                Finalmente encontrei parceiros de confiança."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">CF</div>
+                                <div class="author-info">
+                                    <strong>Carlos Ferreira</strong>
+                                    <span>CEO, Ferreira Distribuidora</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 6 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "O sistema de automação que implementaram economiza 15 horas por semana da minha equipe. 
+                                O que parecia complicado, eles tornaram simples. 
+                                Investir em tecnologia foi a melhor decisão do ano."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AL</div>
+                                <div class="author-info">
+                                    <strong>Ana Lucia</strong>
+                                    <span>Gerente, Contabilidade Exata</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 7 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "Tenho 58 anos e achava que tecnologia não era pra mim. A BlackElephant 
+                                mostrou que estava errado. Hoje minha loja tem e-commerce e vendo para todo o Brasil. 
+                                Meu faturamento triplicou!"
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">RN</div>
+                                <div class="author-info">
+                                    <strong>Ricardo Nogueira</strong>
+                                    <span>Proprietário, Artesanato Nogueira</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Testimonial 8 -->
+                    <article class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <blockquote>
+                                "A identidade visual que criaram para minha empresa transformou como 
+                                os clientes nos veem. Profissionalismo em cada detalhe. 
+                                O suporte continua excelente mesmo após a entrega."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">BM</div>
+                                <div class="author-info">
+                                    <strong>Beatriz Machado</strong>
+                                    <span>Diretora, Machado Consultoria</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="sobre">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <span class="section-tag animate-on-scroll">Quem Somos</span>
+                        <h2 class="section-title animate-on-scroll">
+                            Tecnologia que <span class="highlight-text">você entende</span>, 
+                            resultados que você vê.
+                        </h2>
+                        
+                        <div class="about-text animate-on-scroll">
+                            <p>
+                                A <strong>BlackElephant</strong> nasceu de uma missão clara: fazer com que 
+                                pequenas e médias empresas tenham acesso às mesmas ferramentas digitais 
+                                que as grandes corporações, mas de forma simples, acessível e sem complicação.
+                            </p>
+                            <p>
+                                Sabemos que você construiu seu negócio com muito trabalho e dedicação. 
+                                <strong>Nosso papel é garantir que esse esforço seja reconhecido no mundo digital</strong>, 
+                                onde seus clientes estão cada vez mais presentes.
+                            </p>
+                            <p>
+                                Somos uma equipe de especialistas em tecnologia que fala a sua língua. 
+                                Nada de termos complicados ou promessas vazias — apenas soluções que funcionam 
+                                e um suporte que você pode contar.
+                            </p>
+                        </div>
+                        
+                        <div class="about-values animate-on-scroll">
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <strong>Segurança</strong>
+                                    <span>Seus dados protegidos</span>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <strong>Agilidade</strong>
+                                    <span>Entregas no prazo</span>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="9" cy="7" r="4"/>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <strong>Suporte Humano</strong>
+                                    <span>Atendimento real</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-visual animate-on-scroll">
+                        <div class="about-image-container">
+                            <div class="about-pattern"></div>
+                            <div class="about-stats-float glass-effect">
+                                <div class="float-stat">
+                                    <span class="float-number">+150</span>
+                                    <span class="float-label">Empresas atendidas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section class="packages" id="pacotes">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag animate-on-scroll">Nossos Pacotes</span>
+                    <h2 class="section-title animate-on-scroll">
+                        Escolha o plano ideal <br>para o seu negócio
+                    </h2>
+                    <p class="section-description animate-on-scroll">
+                        Soluções completas, sem surpresas. Tudo o que sua empresa precisa 
+                        para ter presença digital profissional.
+                    </p>
+                </div>
+                
+                <div class="packages-grid">
+                    <!-- Package 1 - Pequena Empresa -->
+                    <article class="package-card animate-on-scroll">
+                        <div class="package-header">
+                            <span class="package-tag">Essencial</span>
+                            <h3 class="package-name">Pequena Empresa</h3>
+                            <p class="package-description">
+                                Tudo para começar sua jornada digital com o pé direito
+                            </p>
+                        </div>
+                        
+                        <div class="package-price">
+                            <span class="price-currency">R$</span>
+                            <span class="price-value">299</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        
+                        <ul class="package-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Site completo e responsivo</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>SEO otimizado para Google</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Segurança digital (SSL + Firewall)</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Até 5 emails corporativos</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Hospedagem inclusa</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Suporte por email e WhatsApp</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#contato" class="btn btn-outline package-btn">
+                            Começar agora
+                        </a>
+                    </article>
+                    
+                    <!-- Package 2 - Pequena Empresa Moderna (Recommended) -->
+                    <article class="package-card featured animate-on-scroll">
+                        <div class="package-badge">Recomendado</div>
+                        <div class="package-header">
+                            <span class="package-tag">Completo</span>
+                            <h3 class="package-name">Pequena Empresa Moderna</h3>
+                            <p class="package-description">
+                                Produtividade máxima com ferramentas profissionais
+                            </p>
+                        </div>
+                        
+                        <div class="package-price">
+                            <span class="price-currency">R$</span>
+                            <span class="price-value">398</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        
+                        <ul class="package-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span><strong>Tudo do plano Pequena Empresa</strong></span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Google Workspace ou Microsoft 365</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Configuração completa de ambiente</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Gerenciamento de usuários</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Drive e armazenamento na nuvem</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Suporte prioritário</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#contato" class="btn btn-primary package-btn">
+                            Escolher este plano
+                        </a>
+                    </article>
+                    
+                    <!-- Package 3 - Pequena Empresa Black -->
+                    <article class="package-card premium animate-on-scroll">
+                        <div class="package-header">
+                            <span class="package-tag">Premium</span>
+                            <h3 class="package-name">Pequena Empresa Black</h3>
+                            <p class="package-description">
+                                Solução completa para empresas que querem o melhor
+                            </p>
+                        </div>
+                        
+                        <div class="package-price">
+                            <span class="price-currency">R$</span>
+                            <span class="price-value">599</span>
+                            <span class="price-period">/mês</span>
+                        </div>
+                        
+                        <ul class="package-features">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span><strong>Tudo do plano Moderna</strong></span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Identidade visual completa</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Automações personalizadas</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Relatórios mensais de performance</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Consultoria digital mensal</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                <span>Suporte VIP 24/7</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#contato" class="btn btn-outline package-btn">
+                            Falar com especialista
+                        </a>
+                    </article>
+                </div>
+                
+                <p class="packages-note animate-on-scroll">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                    Todos os planos incluem setup inicial gratuito e 30 dias de garantia de satisfação.
+                </p>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits" id="beneficios">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag animate-on-scroll">Por que escolher a BlackElephant?</span>
+                    <h2 class="section-title animate-on-scroll">
+                        Benefícios de ter a gente <br>como parceiro digital
+                    </h2>
+                </div>
+                
+                <div class="benefits-grid">
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Segurança Garantida</h3>
+                        <p>
+                            Seu site e dados protegidos com as melhores práticas de segurança. 
+                            Certificado SSL, backups automáticos e monitoramento 24h.
+                        </p>
+                    </article>
+                    
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h3>Design Profissional</h3>
+                        <p>
+                            Sites modernos que funcionam perfeitamente em celulares, tablets e computadores. 
+                            Sua empresa com aparência de grande empresa.
+                        </p>
+                    </article>
+                    
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <h3>Suporte Humanizado</h3>
+                        <p>
+                            Nada de robôs ou respostas prontas. Você fala com pessoas reais 
+                            que entendem seu negócio e resolvem seus problemas.
+                        </p>
+                    </article>
+                    
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h3>Resultados Rápidos</h3>
+                        <p>
+                            Seu site no ar em até 15 dias úteis. Metodologia ágil que 
+                            entrega valor desde o primeiro momento.
+                        </p>
+                    </article>
+                    
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3>Preço Justo</h3>
+                        <p>
+                            Sem taxas escondidas ou surpresas. Você sabe exatamente 
+                            quanto vai pagar e o que vai receber.
+                        </p>
+                    </article>
+                    
+                    <article class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                <path d="M18 20V10M12 20V4M6 20v-6"/>
+                            </svg>
+                        </div>
+                        <h3>Foco em Resultados</h3>
+                        <p>
+                            Não fazemos sites bonitos que não funcionam. Tudo é pensado 
+                            para trazer clientes e aumentar suas vendas.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ecosystem Section -->
+        <section class="ecosystem" id="ecossistema">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag animate-on-scroll">Nosso Ecossistema</span>
+                    <h2 class="section-title animate-on-scroll">
+                        Conheça o <span class="highlight-text">HUBFIVE</span>
+                    </h2>
+                    <p class="section-description animate-on-scroll">
+                        Fazemos parte de um ecossistema de empresas inovadoras, 
+                        unidas para entregar soluções completas para seu negócio.
+                    </p>
+                </div>
+                
+                <div class="ecosystem-grid">
+                    <article class="ecosystem-card animate-on-scroll">
+                        <div class="ecosystem-logo">
+                            <span class="ecosystem-icon">🐘</span>
+                        </div>
+                        <h3>BlackElephant</h3>
+                        <p>Soluções digitais completas para empresas</p>
+                    </article>
+                    
+                    <article class="ecosystem-card animate-on-scroll">
+                        <div class="ecosystem-logo">
+                            <span class="ecosystem-icon">🔬</span>
+                        </div>
+                        <h3>Hub 5.0</h3>
+                        <p>Inovação e transformação digital</p>
+                    </article>
+                    
+                    <article class="ecosystem-card animate-on-scroll">
+                        <div class="ecosystem-logo">
+                            <span class="ecosystem-icon">🌊</span>
+                        </div>
+                        <h3>Depp</h3>
+                        <p>Inteligência de dados e analytics</p>
+                    </article>
+                    
+                    <article class="ecosystem-card animate-on-scroll">
+                        <div class="ecosystem-logo">
+                            <span class="ecosystem-icon">💡</span>
+                        </div>
+                        <h3>Invente Labs</h3>
+                        <p>Pesquisa e desenvolvimento tecnológico</p>
+                    </article>
+                    
+                    <article class="ecosystem-card animate-on-scroll">
+                        <div class="ecosystem-logo">
+                            <span class="ecosystem-icon">🚀</span>
+                        </div>
+                        <h3>Orbit Growth</h3>
+                        <p>Marketing digital e crescimento</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contato">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-content">
+                        <span class="section-tag animate-on-scroll">Vamos Conversar</span>
+                        <h2 class="section-title animate-on-scroll">
+                            Quer seu próprio <br><span class="highlight-text">software?</span>
+                        </h2>
+                        <p class="section-description animate-on-scroll">
+                            Se você tem uma ideia específica ou precisa de uma solução personalizada, 
+                            estamos prontos para transformar sua visão em realidade.
+                        </p>
+                        
+                        <div class="contact-info animate-on-scroll">
+                            <div class="contact-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                <span>contato@blackelephant.com.br</span>
+                            </div>
+                            <div class="contact-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B7FD13" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                <span>(11) 99999-9999</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container animate-on-scroll">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nome completo</label>
+                                <input type="text" id="name" name="name" required placeholder="Seu nome">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Nome da empresa</label>
+                                <input type="text" id="company" name="company" placeholder="Sua empresa">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefone / WhatsApp</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message">Conte-nos sobre seu projeto</label>
+                                <textarea id="message" name="message" rows="4" required placeholder="Descreva sua ideia ou necessidade..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary full-width">
+                                <span>Enviar mensagem</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Elephant shape based on company logo -->
+                            <path d="M10 10 L10 38 Q10 44 18 44 L30 44" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 10 Q10 4 20 4 Q38 4 38 16 Q38 24 34 30" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                            <path d="M34 30 Q42 34 40 42 Q38 48 32 46" stroke="#FFFFFF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                            <circle cx="28" cy="14" r="2.5" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="logo-text">Black<span class="highlight">Elephant</span></span>
+                    </a>
+                    <p>Transformando empresas através da tecnologia desde 2019.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#pacotes">Pacotes</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#pacotes">Criação de Sites</a></li>
+                        <li><a href="#pacotes">Aplicativos</a></li>
+                        <li><a href="#pacotes">Automações</a></li>
+                        <li><a href="#pacotes">Segurança Digital</a></li>
+                        <li><a href="#pacotes">Identidade Visual</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <p>contato@blackelephant.com.br</p>
+                    <p>(11) 99999-9999</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="WhatsApp" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 BlackElephant. Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+{
+  "common": {
+    "welcome": "Bem-vindo",
+    "loading": "Carregando...",
+    "error": "Ocorreu um erro",
+    "retry": "Tentar novamente",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "close": "Fechar",
+    "learnMore": "Saiba mais",
+    "getStarted": "Começar agora",
+    "viewAll": "Ver todos"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "signup": "Criar conta",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirmar senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "resetPassword": "Redefinir senha",
+    "continueWithGoogle": "Continuar com Google",
+    "orContinueWith": "ou continue com",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "dontHaveAccount": "Não tem uma conta?",
+    "invalidCredentials": "E-mail ou senha inválidos",
+    "emailRequired": "E-mail é obrigatório",
+    "passwordRequired": "Senha é obrigatória",
+    "passwordMinLength": "A senha deve ter no mínimo 8 caracteres",
+    "passwordsDoNotMatch": "As senhas não coincidem"
+  },
+  "home": {
+    "meta": {
+      "title": "BlackElephant | Tecnologia e Inovação para sua Empresa",
+      "description": "Sites, Sistemas, Apps e Automação com Inteligência Artificial. Transforme sua empresa com tecnologia de ponta. Consultoria gratuita!",
+      "keywords": "desenvolvimento web, aplicativos, sistemas, automação, inteligência artificial, transformação digital"
+    },
+    "heroTagline": "Tecnologia & Inovação",
+    "heroTitle": "Integre-se ao FUTURO",
+    "heroDescription": "Tenha a solução para todos os seus problemas digitais. Sites, sistemas, apps e automação com IA para sua empresa decolar nos negócios.",
+    "ctaPrimary": "Consultoria Gratuita",
+    "ctaSecondary": "Ver Planos",
+    "ourNumbers": "Nossos Números",
+    "statsTitle": "Resultados que falam por si",
+    "statsClients": "Clientes satisfeitos",
+    "statsProjects": "Projetos entregues",
+    "statsYears": "Anos de mercado",
+    "statsSatisfaction": "De satisfação",
+    "portfolioSubtitle": "Nosso Trabalho",
+    "portfolioTitle": "Projetos que fazem a diferença",
+    "portfolioDesc": "Conheça alguns dos projetos que desenvolvemos. Cada solução é única, pensada especialmente para as necessidades de cada cliente.",
+    "portfolioViewAll": "Ver todos os projetos",
+    "processSubtitle": "Como Trabalhamos",
+    "processTitle": "Nosso Processo",
+    "processDelivery": "Entrega garantida",
+    "processSupport": "Suporte dedicado",
+    "process1Title": "Imersão",
+    "process1Desc": "Mergulhamos no seu negócio para entender necessidades e oportunidades únicas.",
+    "process1Details": "Realizamos uma análise completa do seu negócio, entendendo suas necessidades, desafios e objetivos. Esta etapa é fundamental para criar uma solução que realmente faça diferença.",
+    "process1Duration": "1-2 semanas",
+    "process2Title": "Prototipação",
+    "process2Desc": "Desenhamos soluções que encaixam perfeitamente para seu negócio.",
+    "process2Details": "Criamos wireframes e protótipos interativos para visualizar a solução antes do desenvolvimento. Você participa ativamente das decisões de design.",
+    "process2Duration": "2-3 semanas",
+    "process3Title": "Construção",
+    "process3Desc": "Desenvolvimento ágil com as tecnologias mais modernas do mercado.",
+    "process3Details": "Desenvolvemos seu projeto utilizando as tecnologias mais modernas do mercado, com sprints semanais e entregas constantes para você acompanhar.",
+    "process3Duration": "4-8 semanas",
+    "process4Title": "Integração",
+    "process4Desc": "Ensinamos você e sua equipe a utilizar as tecnologias contratadas.",
+    "process4Details": "Treinamos sua equipe para utilizar todas as funcionalidades da solução, garantindo que todos estejam preparados para extrair o máximo valor.",
+    "process4Duration": "1 semana",
+    "process5Title": "Suporte",
+    "process5Desc": "Contato contínuo que proporciona segurança e tranquilidade.",
+    "process5Details": "Oferecemos suporte contínuo e manutenção para garantir que sua solução continue funcionando perfeitamente e evoluindo com seu negócio.",
+    "process5Duration": "Contínuo",
+    "pricingSubtitle": "Investimento",
+    "pricingDesc": "Planos flexíveis que crescem com o seu negócio. Sem surpresas, tudo incluso.",
+    "pricingNote": "Todos os planos incluem suporte e atualizações. Sem taxas escondidas.",
+    "pricingCompare": "Comparar todos os planos",
+    "testimonialsSubtitle": "Depoimentos",
+    "testimonial1Quote": "Incrível a agilidade da equipe. O sistema mudou completamente nossa gestão e economizamos horas de trabalho por dia.",
+    "testimonial1Author": "Carlos M.",
+    "testimonial1Role": "CEO da FinMove",
+    "testimonial2Quote": "Design impecável e suporte sempre presente. O site ficou exatamente como imaginávamos. Recomendo demais!",
+    "testimonial2Author": "Ana S.",
+    "testimonial2Role": "Diretora na SolarTech",
+    "testimonial3Quote": "Profissionalismo do início ao fim. Nosso app é um sucesso entre os clientes e a equipe adora usar.",
+    "testimonial3Author": "Roberto J.",
+    "testimonial3Role": "Founder Urban Mobility",
+    "testimonial4Quote": "A automação nos poupou horas de trabalho manual. O investimento se pagou em poucos meses.",
+    "testimonial4Author": "Lúcia P.",
+    "testimonial4Role": "Gerente AgroVale",
+    "partnersSubtitle": "Fazemos parte do grupo",
+    "ctaTitle": "Vamos construir o futuro juntos?",
+    "ctaDescription": "Entre em contato para uma consultoria gratuita e descubra como podemos transformar seu negócio com tecnologia de ponta."
+  },
+  "about": {
+    "title": "Quem Somos",
+    "subtitle": "Conheça a BlackElephant",
+    "heroText": "Somos apaixonados por tecnologia e inovação. Nossa missão é transformar ideias em soluções digitais que impactam positivamente negócios e pessoas.",
+    "missionTitle": "Nossa Missão",
+    "missionText": "Entregar soluções tecnológicas inovadoras que impulsionam o sucesso dos nossos clientes.",
+    "visionTitle": "Nossa Visão",
+    "visionText": "Ser referência em inovação tecnológica, reconhecidos pela excelência e impacto de nossas soluções.",
+    "valuesTitle": "Nossos Valores",
+    "value1": "Inovação",
+    "value1Desc": "Buscamos constantemente novas formas de resolver problemas.",
+    "value2": "Excelência",
+    "value2Desc": "Entregamos qualidade em cada linha de código.",
+    "value3": "Transparência",
+    "value3Desc": "Comunicação clara e honesta em todas as relações.",
+    "value4": "Colaboração",
+    "value4Desc": "Trabalhamos juntos para alcançar resultados extraordinários."
+  },
+  "services": {
+    "title": "Serviços",
+    "subtitle": "Soluções completas para sua empresa",
+    "description": "Oferecemos um portfólio completo de serviços tecnológicos para atender todas as necessidades do seu negócio.",
+    "web": {
+      "title": "Desenvolvimento Web",
+      "description": "Criamos sites e aplicações web modernas, rápidas e seguras utilizando as tecnologias mais avançadas do mercado."
+    },
+    "mobile": {
+      "title": "Aplicativos Mobile",
+      "description": "Desenvolvemos aplicativos nativos e híbridos para iOS e Android com foco em usabilidade e performance."
+    },
+    "ai": {
+      "title": "Inteligência Artificial",
+      "description": "Implementamos soluções de IA e Machine Learning para automatizar processos e gerar insights valiosos."
+    },
+    "consulting": {
+      "title": "Consultoria Tech",
+      "description": "Oferecemos consultoria estratégica para ajudar sua empresa a tomar as melhores decisões tecnológicas."
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "Arquitetamos e gerenciamos infraestruturas em nuvem escaláveis e seguras."
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "Criamos interfaces elegantes e experiências de usuário memoráveis."
+    }
+  },
+  "portfolio": {
+    "meta": {
+      "title": "Portfólio | Projetos BlackElephant",
+      "description": "Conheça os projetos que desenvolvemos: sites, sistemas e aplicativos que transformam negócios."
+    },
+    "badge": "Nosso Trabalho",
+    "title": {
+      "part1": "Exemplos do",
+      "part2": "nosso trabalho"
+    },
+    "description": "Cada projeto é único, desenvolvido com as melhores tecnologias e pensado para gerar resultados reais para nossos clientes.",
+    "breadcrumb": "Portfólio",
+    "stats": {
+      "projects": "Projetos",
+      "sites": "Sites",
+      "systems": "Sistemas",
+      "apps": "Aplicativos"
+    },
+    "detail": {
+      "client": "Cliente",
+      "technologies": "Tecnologias",
+      "about": "Sobre o Projeto",
+      "related": "Projetos Relacionados",
+      "backToPortfolio": "Voltar ao Portfólio",
+      "cta": {
+        "title": "Quer um projeto assim?",
+        "description": "Entre em contato e vamos criar algo incrível juntos.",
+        "button": "Solicitar Orçamento"
+      }
+    }
+  },
+  "plans": {
+    "meta": {
+      "title": "Planos e Preços | BlackElephant",
+      "description": "Planos flexíveis para sua empresa digital. Site, email profissional, sistemas e muito mais. Consulte nossos preços."
+    },
+    "badge": "Investimento",
+    "title": {
+      "part1": "Planos",
+      "part2": "& Preços"
+    },
+    "description": "Escolha o plano ideal para sua empresa. Todos incluem suporte, atualizações e sem taxas escondidas.",
+    "breadcrumb": "Planos",
+    "additionalUsers": {
+      "title": "Precisa de mais usuários?",
+      "description": "Em todos os planos, cada novo usuário de email adiciona apenas R$ 9,99/mês. Escale sua equipe sem preocupações."
+    },
+    "comparison": {
+      "title": "Compare os Planos"
+    },
+    "faq": {
+      "title": "Perguntas Frequentes",
+      "q1": {
+        "question": "Qual a diferença entre os planos?",
+        "answer": "O Empresa Digital é ideal para quem está começando no digital, com site e email profissional. O Digital+ adiciona Google Workspace ou Microsoft 365 para produtividade. O Completa inclui sistema de gestão personalizado para sua operação."
+      },
+      "q2": {
+        "question": "Preciso pagar hospedagem ou domínio separado?",
+        "answer": "Não! Todos os planos incluem hospedagem premium e domínio .com.br gratuito. Nada de taxas escondidas."
+      },
+      "q3": {
+        "question": "Posso trocar de plano depois?",
+        "answer": "Sim! Você pode fazer upgrade a qualquer momento. Ajustamos o valor proporcional e migramos tudo sem custo adicional."
+      },
+      "q4": {
+        "question": "Como funciona o suporte?",
+        "answer": "Oferecemos suporte via email e WhatsApp em todos os planos. Planos superiores têm atendimento prioritário e até suporte VIP dedicado."
+      },
+      "q5": {
+        "question": "O site é responsivo (funciona no celular)?",
+        "answer": "Com certeza! Todos os nossos sites são desenvolvidos com design responsivo, funcionando perfeitamente em qualquer dispositivo."
+      }
+    },
+    "cta": {
+      "title": "Ainda tem dúvidas?",
+      "description": "Fale com um de nossos consultores. A consultoria é gratuita e sem compromisso.",
+      "button": "Agendar Consultoria",
+      "whatsapp": "Chamar no WhatsApp"
+    },
+    "detail": {
+      "about": "Sobre este Plano",
+      "features": "O que está incluso",
+      "highlights": "Destaques",
+      "backToPlans": "Voltar aos Planos",
+      "otherPlans": "Outros Planos",
+      "cta": {
+        "title": "Escolha este plano",
+        "initial": "Investimento inicial",
+        "monthly": "Mensalidade",
+        "additionalUser": "Por usuário adicional"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Vamos conversar",
+    "description": "Estamos prontos para ouvir sobre seu projeto. Entre em contato e vamos transformar suas ideias em realidade.",
+    "tabs": {
+      "contact": "Enviar Mensagem",
+      "consultation": "Agendar Consultoria"
+    },
+    "contactForm": {
+      "title": "Enviar Mensagem",
+      "subtitle": "Preencha o formulário abaixo e entraremos em contato em breve."
+    },
+    "consultationForm": {
+      "badge": "1 hora • Gratuito",
+      "title": "Consultoria Gratuita",
+      "subtitle": "Agende agora mesmo sua consultoria de 1 hora gratuitamente conosco. Vamos entender as necessidades da sua empresa e propor soluções que farão você ir para o próximo nível.",
+      "selectDate": "Selecione a data",
+      "selectTime": "Selecione o horário",
+      "description": "Conte brevemente sobre seu projeto",
+      "descriptionPlaceholder": "Ex: Preciso de um sistema para gerenciar minha loja virtual...",
+      "submit": "Agendar Consultoria"
+    },
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "company": "Empresa",
+      "message": "Mensagem",
+      "submit": "Enviar mensagem",
+      "success": "Mensagem enviada com sucesso!",
+      "error": "Erro ao enviar mensagem. Tente novamente."
+    },
+    "info": {
+      "addressTitle": "Endereço",
+      "address": "Santana de Parnaíba, SP",
+      "emailTitle": "E-mail",
+      "email": "guilherme@blackelephant.com.br",
+      "phoneTitle": "WhatsApp",
+      "phone": "(19) 9.7805-5531",
+      "hoursTitle": "Horário",
+      "hours": "Seg - Sex: 9h às 18h"
+    }
+  },
+  "navigation": {
+    "home": "Início",
+    "about": "Quem Somos",
+    "portfolio": "Portfólio",
+    "plans": "Planos",
+    "contact": "Contato",
+    "dashboard": "Painel",
+    "login": "Entrar"
+  },
+  "member": {
+    "dashboard": "Painel do Membro",
+    "profile": "Meu Perfil",
+    "settings": "Configurações"
+  },
+  "footer": {
+    "description": "Transformando empresas através da tecnologia e inovação.",
+    "solutions": "Soluções",
+    "solutionSites": "Sites Institucionais",
+    "solutionSystems": "Sistemas Personalizados",
+    "solutionApps": "Aplicativos Mobile",
+    "solutionAI": "Automação & IA",
+    "company": "Empresa",
+    "copyright": "© 2025 BlackElephant Tecnologia. Todos os direitos reservados.",
+    "madeWith": "Desenvolvido por BlackElephant"
+  }
+}

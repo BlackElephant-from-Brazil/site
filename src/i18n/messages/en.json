@@ -1,0 +1,226 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "close": "Close",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "viewAll": "View all"
+  },
+  "auth": {
+    "login": "Log in",
+    "logout": "Log out",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset password",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "or continue with",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "invalidCredentials": "Invalid email or password",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordsDoNotMatch": "Passwords do not match"
+  },
+  "home": {
+    "meta": {
+      "title": "BlackElephant | Technology and Innovation for your Business",
+      "description": "Websites, Systems, Apps and Automation with Artificial Intelligence. Transform your business with cutting-edge technology. Free consultation!",
+      "keywords": "web development, apps, systems, automation, artificial intelligence, digital transformation"
+    },
+    "title": "Black Elephant",
+    "subtitle": "Transforming ideas into reality",
+    "heroTagline": "Technology & Innovation",
+    "heroTitle": "Integrate into the FUTURE",
+    "heroDescription": "Have the solution for all your digital problems. Websites, systems, apps and AI automation for your company to take off in business.",
+    "ctaPrimary": "Free Consultation",
+    "ctaSecondary": "View Plans",
+    "ourNumbers": "Our Numbers",
+    "statsTitle": "Results that speak for themselves",
+    "statsClients": "Satisfied clients",
+    "statsProjects": "Projects delivered",
+    "statsYears": "Years of experience",
+    "statsSatisfaction": "Satisfaction rate",
+    "portfolioSubtitle": "Our Work",
+    "portfolioTitle": "Projects that make a difference",
+    "portfolioDesc": "Discover some of the projects we've developed. Each solution is unique, specially designed for each client's needs.",
+    "portfolioViewAll": "View all projects",
+    "processSubtitle": "How We Work",
+    "processTitle": "Our Process",
+    "processDelivery": "Guaranteed delivery",
+    "processSupport": "Dedicated support",
+    "process1Title": "Immersion",
+    "process1Desc": "We deeply understand your business and needs",
+    "process1Details": "We conduct a complete analysis of your business, understanding your needs, challenges and objectives. This stage is fundamental to create a solution that really makes a difference.",
+    "process1Duration": "1-2 weeks",
+    "process2Title": "Planning",
+    "process2Desc": "We create a detailed strategy and roadmap",
+    "process2Details": "We create wireframes and interactive prototypes to visualize the solution before development. You actively participate in design decisions.",
+    "process2Duration": "2-3 weeks",
+    "process3Title": "Development",
+    "process3Desc": "We build with the best technologies",
+    "process3Details": "We develop your project using the most modern technologies on the market, with weekly sprints and constant deliveries for you to follow.",
+    "process3Duration": "4-8 weeks",
+    "process4Title": "Testing",
+    "process4Desc": "We validate every detail before launch",
+    "process4Details": "We train your team to use all the solution's features, ensuring everyone is prepared to extract maximum value.",
+    "process4Duration": "1 week",
+    "process5Title": "Launch",
+    "process5Desc": "We deliver and monitor success",
+    "process5Details": "We offer continuous support and maintenance to ensure your solution continues working perfectly and evolving with your business.",
+    "process5Duration": "Ongoing",
+    "plansSubtitle": "Plans & Pricing",
+    "plansTitle": "Complete solutions for every need",
+    "plansViewAll": "See all plans and details",
+    "testimonialsSubtitle": "Testimonials",
+    "testimonialsTitle": "What our clients say",
+    "partnersSubtitle": "Partners",
+    "partnersTitle": "Who trusts our work",
+    "ctaTitle": "Ready to transform your business?",
+    "ctaDescription": "Get in touch and discover how we can help your company reach new heights. Free consultation!",
+    "ctaButton": "Start now",
+    "servicesTitle": "Our Services",
+    "servicesSubtitle": "Complete solutions for your digital transformation",
+    "service1Title": "Web Development",
+    "service1Desc": "Modern websites and web applications with the best technologies on the market.",
+    "service2Title": "Mobile Apps",
+    "service2Desc": "Native and hybrid apps for iOS and Android with exceptional experience.",
+    "service3Title": "Artificial Intelligence",
+    "service3Desc": "AI and Machine Learning solutions to automate and optimize processes.",
+    "service4Title": "Tech Consulting",
+    "service4Desc": "Strategy and technology planning to accelerate your growth.",
+    "aboutTitle": "About Us",
+    "aboutSubtitle": "Innovation with purpose",
+    "aboutText": "We are a technology company focused on creating solutions that make a difference. We combine technical expertise with strategic vision to deliver extraordinary results."
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Meet BlackElephant",
+    "heroText": "We are passionate about technology and innovation. Our mission is to transform ideas into digital solutions that positively impact businesses and people.",
+    "missionTitle": "Our Mission",
+    "missionText": "Deliver innovative technology solutions that drive our clients' success.",
+    "visionTitle": "Our Vision",
+    "visionText": "Be a reference in technological innovation, recognized for the excellence and impact of our solutions.",
+    "valuesTitle": "Our Values",
+    "value1": "Innovation",
+    "value1Desc": "We constantly seek new ways to solve problems.",
+    "value2": "Excellence",
+    "value2Desc": "We deliver quality in every line of code.",
+    "value3": "Transparency",
+    "value3Desc": "Clear and honest communication in all relationships.",
+    "value4": "Collaboration",
+    "value4Desc": "We work together to achieve extraordinary results."
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Complete solutions for your company",
+    "description": "We offer a complete portfolio of technology services to meet all your business needs.",
+    "web": {
+      "title": "Web Development",
+      "description": "We create modern, fast, and secure websites and web applications using the most advanced technologies on the market."
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "We develop native and hybrid applications for iOS and Android focused on usability and performance."
+    },
+    "ai": {
+      "title": "Artificial Intelligence",
+      "description": "We implement AI and Machine Learning solutions to automate processes and generate valuable insights."
+    },
+    "consulting": {
+      "title": "Tech Consulting",
+      "description": "We offer strategic consulting to help your company make the best technology decisions."
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "We architect and manage scalable and secure cloud infrastructures."
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "We create elegant interfaces and memorable user experiences."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk",
+    "description": "We're ready to hear about your project. Get in touch and let's turn your ideas into reality.",
+    "tabs": {
+      "contact": "Send Message",
+      "consultation": "Schedule Consultation"
+    },
+    "contactForm": {
+      "title": "Send Message",
+      "subtitle": "Fill out the form below and we'll get back to you soon."
+    },
+    "consultationForm": {
+      "badge": "1 hour • Free",
+      "title": "Free Consultation",
+      "subtitle": "Schedule your free 1-hour consultation with us now. We'll understand your company's needs and propose solutions that will take you to the next level.",
+      "selectDate": "Select date",
+      "selectTime": "Select time",
+      "description": "Briefly tell us about your project",
+      "descriptionPlaceholder": "E.g.: I need a system to manage my online store...",
+      "submit": "Schedule Consultation"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Message sent successfully!",
+      "error": "Error sending message. Please try again."
+    },
+    "info": {
+      "addressTitle": "Address",
+      "address": "Santana de Parnaíba, SP",
+      "emailTitle": "Email",
+      "email": "guilherme@blackelephant.com.br",
+      "phoneTitle": "WhatsApp",
+      "phone": "+55 (19) 9.7805-5531",
+      "hoursTitle": "Hours",
+      "hours": "Mon - Fri: 9am to 6pm"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "plans": "Plans",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "login": "Log in"
+  },
+  "footer": {
+    "description": "Transforming businesses through technology and innovation.",
+    "solutions": "Solutions",
+    "solutionSites": "Institutional Websites",
+    "solutionSystems": "Custom Systems",
+    "solutionApps": "Mobile Apps",
+    "solutionAI": "Automation & AI",
+    "company": "Company",
+    "copyright": "© 2025 BlackElephant Technology. All rights reserved.",
+    "madeWith": "Developed by BlackElephant"
+  },
+  "member": {
+    "dashboard": "Member Dashboard",
+    "profile": "My Profile",
+    "settings": "Settings"
+  }
+}

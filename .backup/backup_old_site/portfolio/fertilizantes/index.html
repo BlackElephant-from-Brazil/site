@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroVerde | Fertilizantes e Soluções Agrícolas</title>
+    <meta name="description" content="AgroVerde - Líder em fertilizantes e nutrição vegetal. Soluções completas para aumentar sua produtividade no campo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --bg-light: #F8FAF5;
+            --green-dark: #1B5E20;
+            --green: #2E7D32;
+            --green-light: #4CAF50;
+            --green-pale: #E8F5E9;
+            --text: #1A1A1A;
+            --text-muted: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--green-dark);
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .nav-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--green);
+            border-radius: 2px;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 65px;
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            padding: 25px;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            color: var(--green);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 20px 60px;
+            background: linear-gradient(135deg, var(--green-pale) 0%, var(--bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -20%;
+            top: 10%;
+            width: 60%;
+            height: 80%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 C60 30, 80 40, 50 90 C20 40, 40 30, 50 10" fill="%234CAF50" opacity="0.1"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--green);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--green-dark);
+        }
+
+        .hero h1 span {
+            color: var(--green-light);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green);
+            color: var(--bg);
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 2px solid var(--green);
+        }
+
+        .btn:hover {
+            background: var(--green-dark);
+            border-color: var(--green-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--green);
+        }
+
+        .btn-outline:hover {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-dark);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Products */
+        .products {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--green-dark);
+        }
+
+        .products-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--green-light);
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.15);
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--green-pale);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .product-link {
+            color: var(--green);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-link:hover {
+            gap: 10px;
+        }
+
+        /* Benefits */
+        .benefits {
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 25px;
+            background: var(--green-pale);
+            border-radius: 12px;
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-item h4 {
+            font-size: 1rem;
+            color: var(--green-dark);
+            margin-bottom: 5px;
+        }
+
+        .benefit-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 0;
+            background: var(--green-dark);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--bg);
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,0.8);
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+
+        .cta .btn {
+            background: var(--bg);
+            color: var(--green-dark);
+            border-color: var(--bg);
+        }
+
+        .cta .btn:hover {
+            background: var(--green-pale);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--green-dark);
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item span:first-child {
+            font-size: 1.3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            background: var(--green-dark);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--bg);
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--green-light);
+            text-decoration: none;
+        }
+
+        /* Back Link */
+        .back-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--green);
+            color: var(--bg);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Desktop */
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+
+            .nav-menu {
+                position: static;
+                display: flex;
+                flex-direction: row;
+                background: transparent;
+                padding: 0;
+                box-shadow: none;
+                gap: 35px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🌱</span>
+                AgroVerde
+            </a>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="#produtos">Produtos</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#contato">Contato</a>
+                <a href="#" class="btn" style="padding: 10px 20px;">Seja Revendedor</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">🌾 Líder no Agronegócio</span>
+                <h1>Nutrição que <span>transforma</span> sua lavoura</h1>
+                <p>Fertilizantes de alta performance desenvolvidos com tecnologia de ponta para maximizar sua produtividade no campo.</p>
+                <div class="hero-buttons">
+                    <a href="#produtos" class="btn">Ver Produtos →</a>
+                    <a href="#contato" class="btn btn-outline">Falar com Especialista</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Anos no Mercado</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Fazendas Atendidas</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="produtos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Linha Completa</span>
+                <h2 class="section-title">Nossos Produtos</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">🌿</div>
+                    <h3>Fertilizantes Foliares</h3>
+                    <p>Absorção rápida e eficiente para resultados imediatos na sua lavoura.</p>
+                    <a href="#" class="product-link">Saiba mais →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🧪</div>
+                    <h3>NPK Premium</h3>
+                    <p>Formulações balanceadas para cada fase do desenvolvimento da planta.</p>
+                    <a href="#" class="product-link">Saiba mais →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🦠</div>
+                    <h3>Biofertilizantes</h3>
+                    <p>Soluções orgânicas para agricultura sustentável e regenerativa.</p>
+                    <a href="#" class="product-link">Saiba mais →</a>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">💧</div>
+                    <h3>Fertirrigação</h3>
+                    <p>Produtos solúveis de alta qualidade para sistemas de irrigação.</p>
+                    <a href="#" class="product-link">Saiba mais →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits" id="beneficios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Por que escolher</span>
+                <h2 class="section-title">Vantagens AgroVerde</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔬</div>
+                    <div>
+                        <h4>Tecnologia Avançada</h4>
+                        <p>Produtos desenvolvidos em laboratórios próprios com os melhores insumos.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">👨‍🌾</div>
+                    <div>
+                        <h4>Suporte Técnico</h4>
+                        <p>Equipe de agrônomos especializados para auxiliar em cada etapa.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚛</div>
+                    <div>
+                        <h4>Logística Eficiente</h4>
+                        <p>Entrega rápida em todo território nacional com rastreamento.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">♻️</div>
+                    <div>
+                        <h4>Sustentabilidade</h4>
+                        <p>Compromisso com práticas agrícolas sustentáveis e responsáveis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>Pronto para aumentar sua produtividade?</h2>
+            <p>Entre em contato e receba um orçamento personalizado para sua lavoura.</p>
+            <a href="#contato" class="btn">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fale Conosco</span>
+                <h2 class="section-title">Entre em Contato</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informações</h3>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Rod. BR-153, Km 42 - Zona Rural<br>Goiânia - GO</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>(62) 3333-4444</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>contato@agroverde.com.br</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>⏰</span>
+                        <span>Seg - Sex: 7h às 17h</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Seu nome">
+                    <input type="email" placeholder="Seu e-mail">
+                    <input type="text" placeholder="Tamanho da propriedade (hectares)">
+                    <textarea placeholder="Como podemos ajudar?"></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">🌱 AgroVerde</div>
+            <p>Nutrindo o campo, alimentando o futuro.</p>
+            <p style="margin-top: 15px;">Desenvolvido por <a href="../../index.html">BlackElephant</a></p>
+        </div>
+    </footer>
+
+    <!-- Back Link -->
+    <a href="../../index.html#portfolio" class="back-link">← Voltar ao Portfólio</a>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

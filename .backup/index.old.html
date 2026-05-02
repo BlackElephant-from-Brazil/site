@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackElephant | Tecnologia e Inovação</title>
+    <meta name="description"
+        content="BlackElephant: Sites, Sistemas, Apps e Automação com Inteligência Artificial. Transforme sua empresa com tecnologia de ponta.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=chillax@200,300,400,500,600,700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css?v=6">
+    
+    <style>
+        /* Matter.js Canvas Styles */
+        #matter-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .hero-content .btn,
+        .hero-content a {
+            pointer-events: auto;
+        }
+        
+        main {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header" class="site-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="BlackElephant Logo" class="logo-img">
+                <span class="logo-text">Black<span class="text-primary">Elephant</span></span>
+            </a>
+
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#processo">O Nosso Jeito</a></li>
+                    <li><a href="#solucoes">Soluções</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#contato" class="btn-nav">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Matter.js -->
+        <section id="home" class="hero-section">
+            <canvas id="matter-canvas"></canvas>
+            <div class="container hero-content text-center">
+                <h1 class="animate-fade-in hero-title-large title-epic">
+                    Integre-se ao <span class="text-futuristic" data-text="FUTURO">FUTURO</span>
+                </h1>
+
+                <div class="cyberpunk-card">
+                    <div class="card-border-gradient"></div>
+                    <div class="card-content">
+                        <h2 class="cyber-title">Sua Empresa Digital</h2>
+                        <p class="cyber-text">Tenha a solução para todos os seus problemas digitais e se integre ao
+                            futuro.</p>
+                        <div class="cyber-scanline"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BlackElephant</h4>
+                    <p>Transformando empresas através da tecnologia e inovação.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/blackelephant-tech" target="_blank" aria-label="LinkedIn">in</a>
+                        <a href="https://instagram.com/blackelephant.tech" target="_blank" aria-label="Instagram">ig</a>
+                        <a href="https://github.com/blackelephant-tech" target="_blank" aria-label="GitHub">gh</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Soluções</h4>
+                    <ul>
+                        <li><a href="#solucoes">Sites Institucionais</a></li>
+                        <li><a href="#solucoes">Sistemas Personalizados</a></li>
+                        <li><a href="#solucoes">Aplicativos Mobile</a></li>
+                        <li><a href="#solucoes">Automação & IA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#processo">Nosso Processo</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#avaliacoes">Avaliações</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:guilherme@blackelephant.com.br">guilherme@blackelephant.com.br</a></li>
+                        <li><a href="https://wa.me/5519978055531" target="_blank">(19) 9.7805-5531</a></li>
+                        <li>Santana de Parnaíba, SP</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BlackElephant Tecnologia. Todos os direitos reservados.</p>
+                <p class="footer-credits">Desenvolvido com 🖤 por BlackElephant</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Matter.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    
+    <!-- Matter.js Physics Scene -->
+    <script>
+        (function() {
+            // Matter.js module aliases
+            const Engine = Matter.Engine,
+                  Render = Matter.Render,
+                  Runner = Matter.Runner,
+                  Bodies = Matter.Bodies,
+                  Body = Matter.Body,
+                  Composite = Matter.Composite,
+                  Mouse = Matter.Mouse,
+                  Events = Matter.Events,
+                  Vector = Matter.Vector;
+
+            // Colors from theme
+            const colors = {
+                primary: '#39FF14',      // Neon lime
+                primaryDark: '#2acc10',
+                primaryGlow: 'rgba(57, 255, 20, 0.4)',
+                white: '#f0f0f0',
+                gray: '#888888',
+                dark: '#333333',
+                darker: '#1a1a1a',
+                surface: '#111111'
+            };
+
+            // Shape colors palette
+            const shapeColors = [
+                '#39FF14',  // Primary neon lime
+                '#32d912',  // Darker lime
+                '#2acc10',  // Even darker
+                '#f0f0f0',  // White
+                '#888888',  // Gray
+                '#555555',  // Dark gray
+                'rgba(57, 255, 20, 0.7)',  // Semi-transparent lime
+                '#1a1a1a',  // Very dark (subtle)
+            ];
+
+            // Canvas setup
+            const canvas = document.getElementById('matter-canvas');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // Create engine with light gravity
+            const engine = Engine.create({
+                gravity: { x: 0, y: 0.15 }  // Light gravity
+            });
+
+            // Create renderer
+            const render = Render.create({
+                canvas: canvas,
+                engine: engine,
+                options: {
+                    width: width,
+                    height: height,
+                    wireframes: false,
+                    background: '#0a0a0a',
+                    pixelRatio: window.devicePixelRatio || 1
+                }
+            });
+
+            // Wall thickness
+            const wallThickness = 100;
+
+            // Create invisible walls
+            const walls = [
+                // Bottom wall
+                Bodies.rectangle(width / 2, height + wallThickness / 2, width + wallThickness * 2, wallThickness, {
+                    isStatic: true,
+                    render: { visible: false }
+                }),
+                // Top wall
+                Bodies.rectangle(width / 2, -wallThickness / 2, width + wallThickness * 2, wallThickness, {
+                    isStatic: true,
+                    render: { visible: false }
+                }),
+                // Left wall
+                Bodies.rectangle(-wallThickness / 2, height / 2, wallThickness, height + wallThickness * 2, {
+                    isStatic: true,
+                    render: { visible: false }
+                }),
+                // Right wall
+                Bodies.rectangle(width + wallThickness / 2, height / 2, wallThickness, height + wallThickness * 2, {
+                    isStatic: true,
+                    render: { visible: false }
+                })
+            ];
+
+            Composite.add(engine.world, walls);
+
+            // Shape creation functions
+            const size = 40;
+
+            function createCircle(x, y) {
+                const color = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+                return Bodies.circle(x, y, size / 2, {
+                    restitution: 0.2,      // Low bounce
+                    friction: 0.05,        // Low friction
+                    frictionAir: 0.01,
+                    render: {
+                        fillStyle: color,
+                        strokeStyle: colors.primary,
+                        lineWidth: 1
+                    }
+                });
+            }
+
+            function createSquare(x, y) {
+                const color = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+                return Bodies.rectangle(x, y, size, size, {
+                    restitution: 0.3,
+                    friction: 0.1,
+                    frictionAir: 0.01,
+                    render: {
+                        fillStyle: color,
+                        strokeStyle: colors.primary,
+                        lineWidth: 1
+                    }
+                });
+            }
+
+            function createTriangle(x, y) {
+                const color = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+                return Bodies.polygon(x, y, 3, size / 2, {
+                    restitution: 0.3,
+                    friction: 0.1,
+                    frictionAir: 0.01,
+                    render: {
+                        fillStyle: color,
+                        strokeStyle: colors.primary,
+                        lineWidth: 1
+                    }
+                });
+            }
+
+            function createStar(x, y) {
+                const color = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+                // Create a 5-pointed star using vertices
+                const outerRadius = size / 2;
+                const innerRadius = size / 4;
+                const points = 5;
+                const vertices = [];
+                
+                for (let i = 0; i < points * 2; i++) {
+                    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                    const angle = (Math.PI / points) * i - Math.PI / 2;
+                    vertices.push({
+                        x: Math.cos(angle) * radius,
+                        y: Math.sin(angle) * radius
+                    });
+                }
+
+                return Bodies.fromVertices(x, y, vertices, {
+                    restitution: 0.3,
+                    friction: 0.1,
+                    frictionAir: 0.01,
+                    render: {
+                        fillStyle: color,
+                        strokeStyle: colors.primary,
+                        lineWidth: 1
+                    }
+                });
+            }
+
+            // Create 300 bodies
+            const bodies = [];
+            const shapeTypes = [createCircle, createSquare, createTriangle, createStar];
+
+            for (let i = 0; i < 300; i++) {
+                const x = Math.random() * (width - size * 2) + size;
+                const y = Math.random() * (height - size * 2) + size;
+                const shapeCreator = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+                const body = shapeCreator(x, y);
+                
+                if (body) {
+                    bodies.push(body);
+                }
+            }
+
+            Composite.add(engine.world, bodies);
+
+            // Mouse tracking
+            let mousePosition = { x: width / 2, y: height / 2 };
+            let mouseActive = false;
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mousePosition = {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+                mouseActive = true;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                mouseActive = false;
+            });
+
+            canvas.addEventListener('mouseenter', () => {
+                mouseActive = true;
+            });
+
+            // Touch support
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                mousePosition = {
+                    x: touch.clientX - rect.left,
+                    y: touch.clientY - rect.top
+                };
+                mouseActive = true;
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', () => {
+                mouseActive = false;
+            });
+
+            // Mouse attractor force with falloff and soft-body effect
+            const mouseForceRadius = 200;      // Radius of influence
+            const mouseForceStrength = 0.0008; // Base force strength
+
+            Events.on(engine, 'beforeUpdate', () => {
+                if (!mouseActive) return;
+
+                bodies.forEach(body => {
+                    const dx = body.position.x - mousePosition.x;
+                    const dy = body.position.y - mousePosition.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseForceRadius && distance > 1) {
+                        // Falloff: force decreases with distance
+                        const falloff = 1 - (distance / mouseForceRadius);
+                        const falloffCubed = falloff * falloff * falloff; // Cubic falloff for smoother effect
+                        
+                        // Soft-body effect: add slight oscillation based on time
+                        const time = engine.timing.timestamp * 0.001;
+                        const oscillation = 1 + Math.sin(time * 3 + body.id) * 0.2;
+                        
+                        // Calculate force (pushing away from mouse)
+                        const forceMagnitude = mouseForceStrength * falloffCubed * oscillation;
+                        const forceX = (dx / distance) * forceMagnitude;
+                        const forceY = (dy / distance) * forceMagnitude;
+
+                        Body.applyForce(body, body.position, {
+                            x: forceX,
+                            y: forceY
+                        });
+
+                        // Soft-body fake: slightly scale bodies near mouse
+                        const scaleFactor = 1 + falloff * 0.05;
+                        if (!body.originalScale) {
+                            body.originalScale = 1;
+                        }
+                        // Visual feedback through render options
+                        if (body.render) {
+                            const glowIntensity = falloff * 0.5;
+                            body.render.strokeStyle = `rgba(57, 255, 20, ${0.5 + glowIntensity})`;
+                            body.render.lineWidth = 1 + falloff * 2;
+                        }
+                    } else {
+                        // Reset visual when out of range
+                        if (body.render) {
+                            body.render.strokeStyle = colors.primary;
+                            body.render.lineWidth = 1;
+                        }
+                    }
+                });
+            });
+
+            // Draw mouse force field indicator
+            Events.on(render, 'afterRender', () => {
+                if (!mouseActive) return;
+
+                const ctx = render.context;
+                
+                // Draw gradient circle around mouse
+                const gradient = ctx.createRadialGradient(
+                    mousePosition.x, mousePosition.y, 0,
+                    mousePosition.x, mousePosition.y, mouseForceRadius
+                );
+                gradient.addColorStop(0, 'rgba(57, 255, 20, 0.15)');
+                gradient.addColorStop(0.5, 'rgba(57, 255, 20, 0.05)');
+                gradient.addColorStop(1, 'rgba(57, 255, 20, 0)');
+
+                ctx.beginPath();
+                ctx.arc(mousePosition.x, mousePosition.y, mouseForceRadius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Draw center glow
+                const centerGradient = ctx.createRadialGradient(
+                    mousePosition.x, mousePosition.y, 0,
+                    mousePosition.x, mousePosition.y, 30
+                );
+                centerGradient.addColorStop(0, 'rgba(57, 255, 20, 0.4)');
+                centerGradient.addColorStop(1, 'rgba(57, 255, 20, 0)');
+
+                ctx.beginPath();
+                ctx.arc(mousePosition.x, mousePosition.y, 30, 0, Math.PI * 2);
+                ctx.fillStyle = centerGradient;
+                ctx.fill();
+            });
+
+            // Run the engine and renderer
+            const runner = Runner.create();
+            Runner.run(runner, engine);
+            Render.run(render);
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const newWidth = window.innerWidth;
+                const newHeight = window.innerHeight;
+
+                // Update renderer dimensions
+                render.canvas.width = newWidth;
+                render.canvas.height = newHeight;
+                render.options.width = newWidth;
+                render.options.height = newHeight;
+
+                // Update walls
+                Composite.remove(engine.world, walls);
+                
+                walls[0] = Bodies.rectangle(newWidth / 2, newHeight + wallThickness / 2, newWidth + wallThickness * 2, wallThickness, {
+                    isStatic: true,
+                    render: { visible: false }
+                });
+                walls[1] = Bodies.rectangle(newWidth / 2, -wallThickness / 2, newWidth + wallThickness * 2, wallThickness, {
+                    isStatic: true,
+                    render: { visible: false }
+                });
+                walls[2] = Bodies.rectangle(-wallThickness / 2, newHeight / 2, wallThickness, newHeight + wallThickness * 2, {
+                    isStatic: true,
+                    render: { visible: false }
+                });
+                walls[3] = Bodies.rectangle(newWidth + wallThickness / 2, newHeight / 2, wallThickness, newHeight + wallThickness * 2, {
+                    isStatic: true,
+                    render: { visible: false }
+                });
+
+                Composite.add(engine.world, walls);
+            });
+
+        })();
+    </script>
+
+    <!-- Main JS for menu toggle -->
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (menuBtn && mainNav) {
+                menuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    menuBtn.classList.toggle('active');
+                });
+
+                // Close menu when clicking a link
+                mainNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mainNav.classList.remove('active');
+                        menuBtn.classList.remove('active');
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

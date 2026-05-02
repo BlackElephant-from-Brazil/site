@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Force)",
+      "Bash(xargs grep *)",
+      "Bash(dir \"C:\\\\Users\\\\guilh\\\\OneDrive\\\\Documents\\\\BlackElephant\\\\Projetos\\\\site\\\\src\\\\app\" /s /b)",
+      "Bash(findstr \"login\\\\|dashboard\")",
+      "Bash(git branch *)"
+    ]
+  }
+}
