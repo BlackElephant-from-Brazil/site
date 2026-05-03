@@ -20,6 +20,7 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete 
   const [saving, setSaving] = useState(false)
   const [assigneeId, setAssigneeId] = useState<string>('')
   const nameInputRef = useRef<HTMLInputElement>(null)
+  const latestAssigneeRequest = useRef<string | null>(null)
 
   useEffect(() => {
     if (!card) return
@@ -68,13 +69,15 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete 
     if (!card) return
     const newAssigneeId = value || null
     if (newAssigneeId === card.assignee_id) return
+    latestAssigneeRequest.current = value
     setSaving(true)
     try {
       const updated = await updateKanbanCard(card.id, { assignee_id: newAssigneeId })
+      if (latestAssigneeRequest.current !== value) return
       const newAssignee = adminUsers.find(u => u.id === newAssigneeId) ?? null
       onUpdate({ ...card, ...updated, assignee: newAssignee })
     } finally {
-      setSaving(false)
+      if (latestAssigneeRequest.current === value) setSaving(false)
     }
   }
 
