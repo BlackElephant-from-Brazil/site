@@ -6,14 +6,21 @@ import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { CardDetailModal } from '@/components/admin/kanban/CardDetailModal'
 import { createKanbanCard, moveKanbanCard } from '@/lib/actions/kanban-cards'
-import type { KanbanColumnWithCards, KanbanCardWithProject, Project } from '@/types'
+import type { KanbanColumnWithCards, KanbanCardWithProject, Project, User } from '@/types'
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(' ')
+  if (parts.length === 1) return parts[0][0].toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
 
 interface Props {
   initialBoard: KanbanColumnWithCards[]
   projects: Project[]
+  adminUsers: Pick<User, 'id' | 'name' | 'avatar_url'>[]
 }
 
-export function KanbanBoard({ initialBoard, projects }: Props) {
+export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [board, setBoard] = useState(initialBoard)
@@ -232,6 +239,23 @@ export function KanbanBoard({ initialBoard, projects }: Props) {
                       >
                         {card.description}
                       </p>
+                    )}
+                    {card.assignee && (
+                      <div className="mt-2 flex justify-end">
+                        <div
+                          className="flex items-center justify-center rounded-full text-xs font-semibold"
+                          style={{
+                            width: 28,
+                            height: 28,
+                            background: 'rgba(57,255,20,0.15)',
+                            color: 'var(--color-lime)',
+                            flexShrink: 0,
+                          }}
+                          title={card.assignee.name}
+                        >
+                          {getInitials(card.assignee.name)}
+                        </div>
+                      </div>
                     )}
                   </div>
                 ))}
