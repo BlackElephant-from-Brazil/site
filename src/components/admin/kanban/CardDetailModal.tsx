@@ -76,6 +76,10 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete 
       if (latestAssigneeRequest.current !== value) return
       const newAssignee = adminUsers.find(u => u.id === newAssigneeId) ?? null
       onUpdate({ ...card, ...updated, assignee: newAssignee })
+    } catch {
+      if (latestAssigneeRequest.current === value) {
+        setAssigneeId(card.assignee_id ?? '')
+      }
     } finally {
       if (latestAssigneeRequest.current === value) setSaving(false)
     }
