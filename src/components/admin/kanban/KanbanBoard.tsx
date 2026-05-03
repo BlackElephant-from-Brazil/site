@@ -81,7 +81,9 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     return () => document.removeEventListener('mousedown', handleMouseDown)
   }, [])
 
-  function handleDragStart(cardId: string, sourceColumnId: string, sourceIndex: number) {
+  function handleDragStart(cardId: string, sourceColumnId: string) {
+    const sourceCol = board.find(c => c.id === sourceColumnId)!
+    const sourceIndex = sourceCol.cards.findIndex(c => c.id === cardId)
     dragCard.current = { cardId, sourceColumnId, sourceIndex }
   }
 
@@ -410,7 +412,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
                   <div
                     key={card.id}
                     draggable
-                    onDragStart={() => handleDragStart(card.id, col.id, cardIndex)}
+                    onDragStart={() => handleDragStart(card.id, col.id)}
                     onDragOver={e => { e.preventDefault(); e.stopPropagation() }}
                     onDrop={e => { e.stopPropagation(); handleDropOnCard(col.id, cardIndex) }}
                     onClick={() => setSelectedCard(card)}
