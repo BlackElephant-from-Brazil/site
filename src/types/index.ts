@@ -8,6 +8,7 @@ export interface User {
   email: string
   name: string
   role: UserRole
+  avatar_url: string | null
   created_at: string
   updated_at: string
 }
@@ -63,6 +64,7 @@ export interface KanbanCard {
   id: string
   column_id: string
   project_id: string | null
+  assignee_id: string | null
   name: string
   description: string | null
   card_number: number
@@ -73,6 +75,7 @@ export interface KanbanCard {
 
 export interface KanbanCardWithProject extends KanbanCard {
   project: ProjectWithRefs | null
+  assignee: Pick<User, 'id' | 'name' | 'avatar_url'> | null
 }
 
 export interface KanbanColumnWithCards extends KanbanColumn {
