@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/server'
 import type { User } from '@/types'
 
 export async function getUsers(): Promise<User[]> {
@@ -99,4 +100,16 @@ export async function getAdminUsers(): Promise<Pick<User, 'id' | 'name' | 'avata
     .order('name', { ascending: true })
   if (error) throw new Error(error.message)
   return data ?? []
+}
+
+export async function getCurrentUserPublicId(): Promise<string | null> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+  const { data } = await supabase
+    .from('users')
+    .select('id')
+    .eq('user_id', user.id)
+    .single()
+  return data?.id ?? null
 }
