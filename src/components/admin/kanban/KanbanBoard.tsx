@@ -121,10 +121,12 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     }
   }
 
-  async function handleDropOnCard(targetColumnId: string, targetIndex: number) {
+  async function handleDropOnCard(targetColumnId: string, targetCardId: string) {
     const drag = dragCard.current
     if (!drag) return
 
+    const targetCol = board.find(c => c.id === targetColumnId)!
+    const targetIndex = targetCol.cards.findIndex(c => c.id === targetCardId)
     const sourceCol = board.find(c => c.id === drag.sourceColumnId)!
     const movingCard = sourceCol.cards.find(c => c.id === drag.cardId)!
 
@@ -414,7 +416,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
                     draggable
                     onDragStart={() => handleDragStart(card.id, col.id)}
                     onDragOver={e => { e.preventDefault(); e.stopPropagation() }}
-                    onDrop={e => { e.stopPropagation(); handleDropOnCard(col.id, cardIndex) }}
+                    onDrop={e => { e.stopPropagation(); handleDropOnCard(col.id, card.id) }}
                     onClick={() => setSelectedCard(card)}
                     className="cursor-pointer rounded-lg border p-3 transition-all"
                     style={{
