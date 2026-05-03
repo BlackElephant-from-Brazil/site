@@ -243,9 +243,13 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
               onChange={e => {
                 const newClientId = e.target.value
                 setFilterClientId(newClientId)
-                if (newClientId && filterProjectId) {
-                  const proj = projects.find(p => p.id === filterProjectId)
-                  if (proj?.client_id !== newClientId) setFilterProjectId('')
+                if (filterProjectId) {
+                  if (!newClientId) {
+                    setFilterProjectId('')
+                  } else {
+                    const proj = projects.find(p => p.id === filterProjectId)
+                    if (proj?.client_id !== newClientId) setFilterProjectId('')
+                  }
                 }
               }}
             >
