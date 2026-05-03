@@ -410,7 +410,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
 
               {/* cards */}
               <div className="flex flex-1 flex-col gap-2 overflow-y-auto p-3">
-                {col.cards.map((card, cardIndex) => (
+                {col.cards.map(card => (
                   <div
                     key={card.id}
                     draggable
