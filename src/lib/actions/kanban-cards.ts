@@ -20,7 +20,8 @@ export async function getKanbanBoard(): Promise<KanbanColumnWithCards[]> {
         *,
         client:clients(*),
         project_type:project_types(*)
-      )
+      ),
+      assignee:users(id, name, avatar_url)
     `)
     .order('position', { ascending: true })
   if (cardErr) throw new Error(cardErr.message)
@@ -36,6 +37,7 @@ export async function createKanbanCard(payload: {
   name: string
   description?: string | null
   project_id?: string | null
+  assignee_id?: string | null
 }): Promise<KanbanCard> {
   const supabase = createAdminClient()
 
@@ -131,7 +133,7 @@ export async function moveKanbanCard(
 
 export async function updateKanbanCard(
   id: string,
-  payload: Partial<{ name: string; description: string | null; project_id: string | null }>
+  payload: Partial<{ name: string; description: string | null; project_id: string | null; assignee_id: string | null }>
 ): Promise<KanbanCard> {
   const supabase = createAdminClient()
   const { data, error } = await supabase
