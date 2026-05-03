@@ -27,7 +27,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
   const [board, setBoard] = useState(initialBoard)
   const [selectedCard, setSelectedCard] = useState<KanbanCardWithProject | null>(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [newCardForm, setNewCardForm] = useState({ name: '', description: '', project_id: '' })
+  const [newCardForm, setNewCardForm] = useState({ name: '', description: '', project_id: '', assignee_id: '' })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
@@ -116,9 +116,10 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
         name: newCardForm.name.trim(),
         description: newCardForm.description.trim() || null,
         project_id: newCardForm.project_id || null,
+        assignee_id: newCardForm.assignee_id || null,
       })
       setDrawerOpen(false)
-      setNewCardForm({ name: '', description: '', project_id: '' })
+      setNewCardForm({ name: '', description: '', project_id: '', assignee_id: '' })
       startTransition(() => router.refresh())
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erro ao criar atividade.')
@@ -313,6 +314,20 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
               <option value="">Sem projeto</option>
               {projects.map(p => (
                 <option key={p.id} value={p.id}>{p.acronym} — {p.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style={labelStyle}>Responsável</label>
+            <select
+              style={inputStyle}
+              value={newCardForm.assignee_id}
+              onChange={e => setNewCardForm(f => ({ ...f, assignee_id: e.target.value }))}
+            >
+              <option value="">— Sem responsável —</option>
+              {adminUsers.map(u => (
+                <option key={u.id} value={u.id}>{u.name}</option>
               ))}
             </select>
           </div>
