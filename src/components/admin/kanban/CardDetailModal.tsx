@@ -3,26 +3,29 @@
 import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { updateKanbanCard, deleteKanbanCard } from '@/lib/actions/kanban-cards'
-import type { KanbanCardWithProject } from '@/types'
+import type { KanbanCardWithProject, User } from '@/types'
 
 interface Props {
   card: KanbanCardWithProject | null
+  adminUsers: Pick<User, 'id' | 'name' | 'avatar_url'>[]
   onClose: () => void
   onUpdate: (card: KanbanCardWithProject) => void
   onDelete: (cardId: string) => void
 }
 
-export function CardDetailModal({ card, onClose, onUpdate, onDelete }: Props) {
+export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete }: Props) {
   const [name, setName] = useState('')
   const [editingName, setEditingName] = useState(false)
   const [description, setDescription] = useState('')
   const [saving, setSaving] = useState(false)
+  const [assigneeId, setAssigneeId] = useState<string>('')
   const nameInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!card) return
     setName(card.name)
     setDescription(card.description ?? '')
+    setAssigneeId(card.assignee_id ?? '')
     setEditingName(false)
   }, [card?.id])
 
@@ -56,6 +59,20 @@ export function CardDetailModal({ card, onClose, onUpdate, onDelete }: Props) {
     try {
       const updated = await updateKanbanCard(card.id, { description: description || null })
       onUpdate({ ...card, ...updated })
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function saveAssignee(value: string) {
+    if (!card) return
+    const newAssigneeId = value || null
+    if (newAssigneeId === card.assignee_id) return
+    setSaving(true)
+    try {
+      const updated = await updateKanbanCard(card.id, { assignee_id: newAssigneeId })
+      const newAssignee = adminUsers.find(u => u.id === newAssigneeId) ?? null
+      onUpdate({ ...card, ...updated, assignee: newAssignee })
     } finally {
       setSaving(false)
     }
@@ -186,6 +203,29 @@ export function CardDetailModal({ card, onClose, onUpdate, onDelete }: Props) {
                   )}
                 </div>
               )}
+
+              {/* assignee */}
+              <div>
+                <p className="mb-1.5 text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--foreground-muted)' }}>
+                  Responsável
+                </p>
+                <select
+                  className="w-full rounded-lg px-2 py-1.5 text-sm"
+                  style={{
+                    background: 'var(--background)',
+                    border: '1px solid var(--card-border)',
+                    color: 'var(--foreground)',
+                    outline: 'none',
+                  }}
+                  value={assigneeId}
+                  onChange={e => { setAssigneeId(e.target.value); saveAssignee(e.target.value) }}
+                >
+                  <option value="">— Sem responsável —</option>
+                  {adminUsers.map(u => (
+                    <option key={u.id} value={u.id}>{u.name}</option>
+                  ))}
+                </select>
+              </div>
 
               <div className="mt-auto flex flex-col gap-2">
                 <button

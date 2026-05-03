@@ -367,6 +367,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
 
       <CardDetailModal
         card={selectedCard}
+        adminUsers={adminUsers}
         onClose={() => setSelectedCard(null)}
         onUpdate={handleCardUpdate}
         onDelete={handleCardDelete}
