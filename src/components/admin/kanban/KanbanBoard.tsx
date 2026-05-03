@@ -9,7 +9,8 @@ import { createKanbanCard, moveKanbanCard } from '@/lib/actions/kanban-cards'
 import type { KanbanColumnWithCards, KanbanCardWithProject, Project, User } from '@/types'
 
 function getInitials(name: string): string {
-  const parts = name.trim().split(' ')
+  const parts = name.trim().split(' ').filter(p => p.length > 0)
+  if (parts.length === 0) return '?'
   if (parts.length === 1) return parts[0][0].toUpperCase()
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
 }
