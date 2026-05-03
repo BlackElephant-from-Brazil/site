@@ -230,8 +230,154 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
           Nenhuma coluna criada. Configure as colunas em Configurações &rarr; Colunas do Kanban.
         </p>
       ) : (
-        <div className="flex flex-1 gap-4 overflow-x-auto pb-4">
-          {board.map(col => (
+        <>
+          {/* Filter bar */}
+          <div className="flex flex-wrap items-center gap-2 py-3">
+            <select
+              style={filterControlStyle}
+              value={filterClientId}
+              onChange={e => {
+                const newClientId = e.target.value
+                setFilterClientId(newClientId)
+                if (newClientId && filterProjectId) {
+                  const proj = projects.find(p => p.id === filterProjectId)
+                  if (proj?.client_id !== newClientId) setFilterProjectId('')
+                }
+              }}
+            >
+              <option value="">Todos os clientes</option>
+              {clients.map(c => (
+                <option key={c.id} value={c.id}>{c.trade_name}</option>
+              ))}
+            </select>
+
+            <select
+              style={{ ...filterControlStyle, opacity: availableProjects.length === 0 ? 0.5 : 1 }}
+              value={filterProjectId}
+              onChange={e => setFilterProjectId(e.target.value)}
+              disabled={availableProjects.length === 0}
+            >
+              <option value="">Todos os projetos</option>
+              {availableProjects.map(p => (
+                <option key={p.id} value={p.id}>{p.acronym} — {p.name}</option>
+              ))}
+            </select>
+
+            <div ref={userDropdownRef} style={{ position: 'relative' }}>
+              <button
+                type="button"
+                onClick={() => setUserDropdownOpen(o => !o)}
+                style={{ ...filterControlStyle, minWidth: '160px', textAlign: 'left' }}
+              >
+                {filterUserIds.length === 0
+                  ? 'Todos os usuários'
+                  : filterUserIds.length === 1
+                    ? (adminUsers.find(u => u.id === filterUserIds[0])?.name ?? '1 usuário')
+                    : `${filterUserIds.length} usuários`}
+                {' ▾'}
+              </button>
+              {userDropdownOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 4px)',
+                    left: 0,
+                    zIndex: 50,
+                    background: 'var(--background-secondary)',
+                    border: '1px solid var(--card-border)',
+                    borderRadius: '0.5rem',
+                    minWidth: '200px',
+                    padding: '0.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.25rem',
+                  }}
+                >
+                  {adminUsers.map(u => (
+                    <label
+                      key={u.id}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        padding: '0.375rem 0.5rem',
+                        borderRadius: '0.375rem',
+                        cursor: 'pointer',
+                        fontSize: '0.875rem',
+                        color: 'var(--foreground)',
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={filterUserIds.includes(u.id)}
+                        onChange={e => {
+                          setFilterUserIds(prev =>
+                            e.target.checked ? [...prev, u.id] : prev.filter(id => id !== u.id)
+                          )
+                        }}
+                        style={{ accentColor: 'var(--color-lime)' }}
+                      />
+                      {u.name}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {currentUserId !== null && (
+              <button
+                type="button"
+                onClick={() => {
+                  const onlyMe = filterUserIds.length === 1 && filterUserIds[0] === currentUserId
+                  setFilterUserIds(onlyMe ? [] : [currentUserId])
+                }}
+                style={{
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.875rem',
+                  border: '1px solid',
+                  cursor: 'pointer',
+                  borderColor: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
+                    ? 'var(--color-lime)'
+                    : 'var(--card-border)',
+                  color: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
+                    ? 'var(--color-lime)'
+                    : 'var(--foreground-muted)',
+                  background: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
+                    ? 'rgba(57,255,20,0.05)'
+                    : 'transparent',
+                }}
+              >
+                Apenas para mim
+              </button>
+            )}
+
+            {(filterClientId !== '' || filterProjectId !== '' || filterUserIds.length > 0) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setFilterClientId('')
+                  setFilterProjectId('')
+                  setFilterUserIds([])
+                }}
+                style={{
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.875rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--foreground-muted)',
+                  background: 'transparent',
+                }}
+              >
+                × Limpar
+              </button>
+            )}
+          </div>
+
+          {/* Board columns */}
+          <div className="flex flex-1 gap-4 overflow-x-auto pb-4">
+            {filteredBoard.map(col => (
             <div
               key={col.id}
               className="flex w-72 shrink-0 flex-col rounded-xl"
@@ -340,7 +486,8 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
               )}
             </div>
           ))}
-        </div>
+          </div>
+        </>
       )}
 
       <Drawer
