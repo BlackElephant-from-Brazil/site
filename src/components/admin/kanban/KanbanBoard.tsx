@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useRef, useTransition } from 'react'
+import { useState, useRef, useTransition, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { CardDetailModal } from '@/components/admin/kanban/CardDetailModal'
 import { createKanbanCard, moveKanbanCard } from '@/lib/actions/kanban-cards'
-import type { KanbanColumnWithCards, KanbanCardWithProject, Project, User } from '@/types'
+import type { KanbanColumnWithCards, KanbanCardWithProject, ProjectWithRefs, Client, User } from '@/types'
 
 function getInitials(name: string): string {
   const parts = name.trim().split(' ').filter(p => p.length > 0)
@@ -17,11 +17,13 @@ function getInitials(name: string): string {
 
 interface Props {
   initialBoard: KanbanColumnWithCards[]
-  projects: Project[]
+  projects: ProjectWithRefs[]
   adminUsers: Pick<User, 'id' | 'name' | 'avatar_url'>[]
+  clients: Client[]
+  currentUserId: string | null
 }
 
-export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
+export function KanbanBoard({ initialBoard, projects, adminUsers, clients, currentUserId }: Props) {
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [board, setBoard] = useState(initialBoard)
@@ -30,11 +32,54 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
   const [newCardForm, setNewCardForm] = useState({ name: '', description: '', project_id: '', assignee_id: '' })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [filterClientId, setFilterClientId] = useState('')
+  const [filterProjectId, setFilterProjectId] = useState('')
+  const [filterUserIds, setFilterUserIds] = useState<string[]>([])
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false)
+  const userDropdownRef = useRef<HTMLDivElement>(null)
 
   // DnD state
   const dragCard = useRef<{ cardId: string; sourceColumnId: string; sourceIndex: number } | null>(null)
 
   const firstColumnId = board[0]?.id
+
+  const availableProjects = filterClientId
+    ? projects.filter(p => p.client_id === filterClientId)
+    : projects
+
+  const filteredBoard = useMemo(() => {
+    const clientActive  = filterClientId !== ''
+    const projectActive = filterProjectId !== ''
+    const usersActive   = filterUserIds.length > 0
+
+    if (!clientActive && !projectActive && !usersActive) return board
+
+    return board.map(col => ({
+      ...col,
+      cards: col.cards.filter(card => {
+        if (clientActive || projectActive) {
+          if (!card.project) return false
+          if (clientActive && card.project.client_id !== filterClientId) return false
+          if (projectActive && card.project_id !== filterProjectId) return false
+        }
+        if (usersActive) {
+          if (!card.assignee_id) return false
+          if (!filterUserIds.includes(card.assignee_id)) return false
+        }
+        return true
+      }),
+    }))
+  }, [board, filterClientId, filterProjectId, filterUserIds])
+
+  useEffect(() => {
+    function handleMouseDown(e: MouseEvent) {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleMouseDown)
+    return () => document.removeEventListener('mousedown', handleMouseDown)
+  }, [])
 
   function handleDragStart(cardId: string, sourceColumnId: string, sourceIndex: number) {
     dragCard.current = { cardId, sourceColumnId, sourceIndex }
@@ -163,6 +208,17 @@ export function KanbanBoard({ initialBoard, projects, adminUsers }: Props) {
     fontWeight: 500,
     color: 'var(--foreground-muted)',
     marginBottom: '0.375rem',
+  }
+
+  const filterControlStyle: React.CSSProperties = {
+    background: 'var(--background-secondary)',
+    border: '1px solid var(--card-border)',
+    borderRadius: '0.5rem',
+    padding: '0.5rem 0.75rem',
+    fontSize: '0.875rem',
+    color: 'var(--foreground)',
+    outline: 'none',
+    cursor: 'pointer',
   }
 
   return (
