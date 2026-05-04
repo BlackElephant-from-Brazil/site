@@ -172,7 +172,28 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
                     borderBottom: i < initialClients.length - 1 ? '1px solid var(--card-border)' : undefined,
                   }}
                 >
-                  <td className="px-4 py-3 font-medium" style={{ color: 'var(--foreground)' }}>{c.trade_name}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2.5">
+                      <div
+                        style={{
+                          width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
+                          overflow: 'hidden', border: '1px solid var(--card-border)',
+                          background: 'var(--background-secondary)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        }}
+                      >
+                        {c.logo_url ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={c.logo_url} alt={c.trade_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--foreground-muted)' }}>
+                            {c.trade_name[0]?.toUpperCase() ?? '?'}
+                          </span>
+                        )}
+                      </div>
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>{c.trade_name}</span>
+                    </div>
+                  </td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.company_name ?? '—'}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj ?? '—'}</td>
                   <td className="px-4 py-3 text-right">
@@ -242,8 +263,17 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
             <input
               style={inputStyle}
               value={form.cnpj}
-              onChange={e => setForm(f => ({ ...f, cnpj: e.target.value }))}
+              onChange={e => {
+                const digits = e.target.value.replace(/\D/g, '').slice(0, 14)
+                let masked = digits
+                if (digits.length > 12) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5,8)}/${digits.slice(8,12)}-${digits.slice(12)}`
+                else if (digits.length > 8) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5,8)}/${digits.slice(8)}`
+                else if (digits.length > 5) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5)}`
+                else if (digits.length > 2) masked = `${digits.slice(0,2)}.${digits.slice(2)}`
+                setForm(f => ({ ...f, cnpj: masked }))
+              }}
               placeholder="00.000.000/0000-00"
+              inputMode="numeric"
             />
           </div>
           <div>

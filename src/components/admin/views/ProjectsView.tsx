@@ -246,7 +246,23 @@ export function ProjectsView({ initialProjects, clients, projectTypes }: Props) 
                       {p.acronym}
                     </span>
                   </td>
-                  <td className="px-4 py-3 font-medium" style={{ color: 'var(--foreground)' }}>{p.name}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>{p.name}</span>
+                      {p.is_internal && (
+                        <span
+                          className="rounded px-1.5 py-0.5 text-xs font-semibold"
+                          style={{
+                            background: 'rgba(57,255,20,0.08)',
+                            color: 'var(--color-lime)',
+                            border: '1px solid rgba(57,255,20,0.2)',
+                          }}
+                        >
+                          Interno
+                        </span>
+                      )}
+                    </div>
+                  </td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{p.client?.trade_name ?? '—'}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{p.project_type?.name ?? '—'}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>

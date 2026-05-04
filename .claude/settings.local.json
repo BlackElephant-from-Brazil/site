@@ -23,7 +23,11 @@
       "Bash(Sort-Object -Descending)",
       "Bash(Select-Object -First 10)",
       "PowerShell(Test-Path *)",
-      "Bash(grep -A 30 \"## Tabela: \\\\`public.kanban_cards\\\\`\")"
+      "Bash(grep -A 30 \"## Tabela: \\\\`public.kanban_cards\\\\`\")",
+      "Bash(npx eslint *)",
+      "Bash(Select-String -Pattern \"KanbanBoard|src/\")",
+      "Bash(Select-Object -First 30)",
+      "Bash(grep -E \"^C:\\\\\\\\\\\\\\\\.*KanbanBoard|^C:\\\\\\\\\\\\\\\\.*users\\\\.ts|^C:\\\\\\\\\\\\\\\\.*kanban/page\")"
     ]
   }
 }

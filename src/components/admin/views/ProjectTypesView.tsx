@@ -58,6 +58,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerTitle, setDrawerTitle] = useState('Novo Tipo de Projeto')
   const [editing, setEditing] = useState<ProjectType | null>(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [error, setError] = useState('')
@@ -66,6 +67,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
   function openNew() {
     setEditing(null)
     setForm(EMPTY_FORM)
+    setDrawerTitle('Novo Tipo de Projeto')
     setError('')
     setDrawerOpen(true)
   }
@@ -79,6 +81,21 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       one_time_value: pt.one_time_value?.toString() ?? '',
       recurring_value: pt.recurring_value?.toString() ?? '',
     })
+    setDrawerTitle('Editar Tipo')
+    setError('')
+    setDrawerOpen(true)
+  }
+
+  function openDuplicate(pt: ProjectType) {
+    setEditing(null)
+    setForm({
+      name: `${pt.name} (cópia)`,
+      is_internal: pt.is_internal,
+      is_recurring: pt.is_recurring,
+      one_time_value: pt.one_time_value?.toString() ?? '',
+      recurring_value: pt.recurring_value?.toString() ?? '',
+    })
+    setDrawerTitle('Duplicar Tipo')
     setError('')
     setDrawerOpen(true)
   }
@@ -164,8 +181,12 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           <table className="w-full text-sm">
             <thead>
               <tr style={{ borderBottom: '1px solid var(--card-border)', background: 'var(--background-secondary)' }}>
-                {['Nome', 'Recorrente', 'Valor Avulso', 'Mensalidade', ''].map(h => (
-                  <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--foreground-muted)' }}>
+                {['Nome', 'Recorrente', 'Valor Avulso', 'Mensalidade', 'Ações'].map(h => (
+                  <th
+                    key={h}
+                    className={`px-4 py-3 text-xs font-semibold uppercase tracking-wider ${h === 'Ações' ? 'text-center' : 'text-left'}`}
+                    style={{ color: 'var(--foreground-muted)' }}
+                  >
                     {h}
                   </th>
                 ))}
@@ -197,6 +218,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => openEdit(t)} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
+                      <button onClick={() => openDuplicate(t)} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--foreground-muted)' }}>Duplicar</button>
                       <button onClick={() => handleDelete(t.id)} className="rounded px-2 py-1 text-xs" style={{ color: '#ff4d4f' }}>Excluir</button>
                     </div>
                   </td>
@@ -210,7 +232,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       <Drawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        title={editing ? 'Editar Tipo' : 'Novo Tipo de Projeto'}
+        title={drawerTitle}
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
