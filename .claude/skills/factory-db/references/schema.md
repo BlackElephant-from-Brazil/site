@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 007 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 009 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -157,6 +157,110 @@ CREATE TRIGGER trg_<tabela>_updated
   BEFORE UPDATE ON public.<tabela>
   FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 ```
+
+---
+
+## Tabela: `public.goals`
+
+Metas estratégicas da empresa, visíveis a todos os admins.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `name` | TEXT | NOT NULL |
+| `objective` | TEXT | NOT NULL |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado
+**Policies:** `goals_admin` — FOR ALL, apenas role='admin'
+**Trigger:** `trg_goals_updated`
+
+---
+
+## Tabela: `public.goal_activities`
+
+Atividades (todo list) de cada meta.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK |
+| `goal_id` | UUID | NOT NULL, FK → public.goals(id) ON DELETE CASCADE |
+| `title` | TEXT | NOT NULL |
+| `is_completed` | BOOLEAN | NOT NULL DEFAULT false |
+| `position` | INTEGER | NOT NULL DEFAULT 0 |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado
+**Policies:** `goal_activities_admin` — FOR ALL, apenas role='admin'
+**Trigger:** `trg_goal_activities_updated`
+**Index:** `idx_goal_activities_goal`
+
+---
+
+## Tabela: `public.user_todos`
+
+Tarefas individuais por usuário (todo list pessoal).
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK |
+| `user_id` | UUID | NOT NULL, FK → auth.users(id) ON DELETE CASCADE |
+| `title` | TEXT | NOT NULL |
+| `description` | TEXT | nullable |
+| `due_date` | TIMESTAMPTZ | nullable |
+| `is_completed` | BOOLEAN | NOT NULL DEFAULT false |
+| `completed_at` | TIMESTAMPTZ | nullable |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado
+**Policies:** `user_todos_own` — FOR ALL WHERE auth.uid() = user_id
+**Trigger:** `trg_user_todos_updated`
+**Index:** `idx_user_todos_user`
+
+---
+
+## Tabela: `public.user_notes`
+
+Notas adesivas individuais por usuário, com suporte a markdown e cor.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK |
+| `user_id` | UUID | NOT NULL, FK → auth.users(id) ON DELETE CASCADE |
+| `content` | TEXT | NOT NULL DEFAULT '' |
+| `color` | TEXT | NOT NULL DEFAULT '#2a2a1a' |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado
+**Policies:** `user_notes_own` — FOR ALL WHERE auth.uid() = user_id
+**Trigger:** `trg_user_notes_updated`
+**Index:** `idx_user_notes_user`
+
+---
+
+## Tabela: `public.user_passwords`
+
+Senhas individuais por usuário (não compartilhadas). Senha armazenada em texto.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK |
+| `user_id` | UUID | NOT NULL, FK → auth.users(id) ON DELETE CASCADE |
+| `service_name` | TEXT | NOT NULL |
+| `username` | TEXT | nullable |
+| `password` | TEXT | NOT NULL |
+| `url` | TEXT | nullable |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado
+**Policies:** `user_passwords_own` — FOR ALL WHERE auth.uid() = user_id
+**Trigger:** `trg_user_passwords_updated`
+**Index:** `idx_user_passwords_user`
 
 ---
 
