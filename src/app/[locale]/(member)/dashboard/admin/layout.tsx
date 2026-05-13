@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/supabase/queries/users'
 
 export const dynamic = 'force-dynamic'
 import { AdminSidebar } from '@/components/admin/AdminSidebar'
+import { AdminShell } from '@/components/admin/AdminShell'
 
 type Params = Promise<{ locale: string }>
 
@@ -22,7 +23,9 @@ export default async function AdminLayout({
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--background)' }}>
       <AdminSidebar user={user} />
-      <main className="flex-1 overflow-y-auto px-8 py-8">{children}</main>
+      <AdminShell userId={user.user_id}>
+        {children}
+      </AdminShell>
     </div>
   )
 }

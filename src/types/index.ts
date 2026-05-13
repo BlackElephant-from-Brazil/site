@@ -82,6 +82,67 @@ export interface KanbanColumnWithCards extends KanbanColumn {
   cards: KanbanCardWithProject[]
 }
 
+// ─── Goals ───────────────────────────────────────────────────
+export interface Goal {
+  id: string
+  name: string
+  objective: string
+  created_at: string
+  updated_at: string
+}
+
+export interface GoalActivity {
+  id: string
+  goal_id: string
+  title: string
+  is_completed: boolean
+  position: number
+  created_at: string
+  updated_at: string
+}
+
+export interface GoalWithActivities extends Goal {
+  activities: GoalActivity[]
+}
+
+export interface GoalWithProgress extends Goal {
+  total: number
+  completed: number
+}
+
+// ─── User Widgets ─────────────────────────────────────────────
+export interface UserTodo {
+  id: string
+  user_id: string
+  title: string
+  description: string | null
+  due_date: string | null
+  is_completed: boolean
+  completed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface UserNote {
+  id: string
+  user_id: string
+  content: string
+  color: string
+  created_at: string
+  updated_at: string
+}
+
+export interface UserPassword {
+  id: string
+  user_id: string
+  service_name: string
+  username: string | null
+  password: string
+  url: string | null
+  created_at: string
+  updated_at: string
+}
+
 // ─── Shared ──────────────────────────────────────────────────
 export interface ApiResponse<T> {
   data: T | null
