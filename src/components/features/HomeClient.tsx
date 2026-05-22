@@ -9,8 +9,7 @@ import { PricingGrid } from '@/components/features';
 import { getLatestPortfolioItems } from '@/data/portfolio';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { AnimatedSection, AnimatedItem } from '@/components/ui/AnimatedSection';
-import { FloatingElement, GlowPulse } from '@/components/ui/ParallaxContainer';
-import { GradientText } from '@/components/ui/TextAnimations';
+import { ScrollytellingSection } from '@/components/home/ScrollytellingSection';
 
 interface HomeClientProps {
   locale: string;
@@ -22,7 +21,7 @@ export function HomeClient({ locale }: HomeClientProps) {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
-      <HeroSection t={t} locale={locale} />
+      <ScrollytellingSection />
       <StatsSection t={t} />
       <PortfolioPreviewSection t={t} locale={locale} items={latestProjects} />
       <ProcessSection t={t} />
@@ -34,189 +33,6 @@ export function HomeClient({ locale }: HomeClientProps) {
   );
 }
 
-function HeroSection({ t, locale }: { t: ReturnType<typeof useTranslations>; locale: string }) {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-20">
-      {/* Animated Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Animated Grid */}
-        <motion.div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(var(--primary) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--primary) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
-          animate={{
-            backgroundPosition: ['0px 0px', '60px 60px'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
-
-        {/* Main Glow */}
-        <motion.div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full blur-[150px]"
-          style={{ backgroundColor: 'var(--color-lime)' }}
-          animate={{
-            opacity: [0.15, 0.25, 0.15],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-
-        {/* Floating Orbs */}
-        <FloatingElement className="absolute top-1/3 left-1/4" duration={4} distance={20} delay={0}>
-          <div className="w-4 h-4 rounded-full bg-[var(--color-lime)]/30 blur-sm" />
-        </FloatingElement>
-        <FloatingElement className="absolute top-2/3 right-1/4" duration={5} distance={15} delay={1}>
-          <div className="w-3 h-3 rounded-full bg-purple-500/30 blur-sm" />
-        </FloatingElement>
-        <FloatingElement className="absolute top-1/2 right-1/3" duration={6} distance={25} delay={2}>
-          <div className="w-2 h-2 rounded-full bg-blue-500/30 blur-sm" />
-        </FloatingElement>
-
-        {/* Corner Gradients */}
-        <div
-          className="absolute top-0 right-0 w-[600px] h-[600px] opacity-10"
-          style={{
-            background: 'radial-gradient(circle at top right, var(--color-lime), transparent 60%)',
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] opacity-10"
-          style={{
-            background: 'radial-gradient(circle at bottom left, var(--color-lime), transparent 60%)',
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 site-container py-20 lg:py-32">
-        <div className="text-center">
-          {/* Tagline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-8 backdrop-blur-sm"
-            style={{
-              backgroundColor: 'rgba(57, 255, 20, 0.1)',
-              color: 'var(--color-lime)',
-              border: '1px solid rgba(57, 255, 20, 0.3)',
-            }}
-          >
-            <motion.span
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: 'var(--color-lime)' }}
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-            {t('heroTagline')}
-          </motion.div>
-
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.1] mb-8"
-            style={{
-              fontFamily: 'var(--font-title)',
-              color: 'var(--foreground)',
-            }}
-          >
-            Integre-se ao{' '}
-            <span className="relative inline-block">
-              <GradientText animate={true}>FUTURO</GradientText>
-              <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[var(--color-lime)] to-transparent"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-3xl mx-auto text-lg lg:text-xl mb-12 leading-relaxed"
-            style={{
-              color: 'var(--foreground-muted)',
-              fontFamily: 'var(--font-primary)',
-            }}
-          >
-            {t('heroDescription')}
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <GlowPulse duration={3}>
-              <Link
-                href={`/${locale}/contact?tab=consultation`}
-                className="px-10 py-4 rounded-xl font-semibold text-base transition-all duration-300"
-                style={{
-                  backgroundColor: 'var(--color-lime)',
-                  color: 'var(--color-black)',
-                }}
-              >
-                {t('ctaPrimary')}
-              </Link>
-            </GlowPulse>
-            <Link
-              href={`/${locale}/plans`}
-              className="group px-10 py-4 rounded-xl font-semibold text-base transition-all duration-300 border-2 flex items-center gap-2"
-              style={{
-                borderColor: 'var(--card-border)',
-                color: 'var(--foreground)',
-              }}
-            >
-              {t('ctaSecondary')}
-              <motion.svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                whileHover={{ x: 5 }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </motion.svg>
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-[var(--color-gray-600)] flex justify-center pt-2">
-            <motion.div
-              className="w-1.5 h-3 rounded-full bg-[var(--color-lime)]"
-              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 // Animated counter component
 function AnimatedCounter({ value, suffix = '', duration = 2 }: { value: number; suffix?: string; duration?: number }) {

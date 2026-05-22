@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TopNavbar } from './TopNavbar'
+import { AgendaPanel } from './panels/AgendaPanel'
 import { TodoPanel } from './panels/TodoPanel'
 import { NotesPanel } from './panels/NotesPanel'
 import { PasswordsPanel } from './panels/PasswordsPanel'
 
-type Panel = 'todos' | 'notes' | 'passwords'
+type Panel = 'agenda' | 'todos' | 'notes' | 'passwords'
 
 interface Props {
   children: React.ReactNode
@@ -33,11 +34,14 @@ export function AdminShell({ children, userId }: Props) {
             <motion.div
               key={activePanel}
               initial={{ width: 0 }}
-              animate={{ width: 320 }}
+              animate={{ width: activePanel === 'agenda' ? 360 : 320 }}
               exit={{ width: 0 }}
               transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
               style={{ overflow: 'hidden', flexShrink: 0, height: '100%' }}
             >
+              {activePanel === 'agenda' && (
+                <AgendaPanel userId={userId} onClose={() => setActivePanel(null)} />
+              )}
               {activePanel === 'todos' && (
                 <TodoPanel userId={userId} onClose={() => setActivePanel(null)} />
               )}

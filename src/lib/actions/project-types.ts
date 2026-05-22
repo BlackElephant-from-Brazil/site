@@ -20,6 +20,8 @@ export async function createProjectType(payload: {
   is_recurring: boolean
   one_time_value?: number | null
   recurring_value?: number | null
+  monthly_hours?: number | null
+  has_monthly_bank?: boolean
 }): Promise<ProjectType> {
   const supabase = createAdminClient()
   const { data, error } = await supabase
@@ -40,6 +42,8 @@ export async function updateProjectType(
     is_recurring: boolean
     one_time_value: number | null
     recurring_value: number | null
+    monthly_hours: number | null
+    has_monthly_bank: boolean
   }>
 ): Promise<ProjectType> {
   const supabase = createAdminClient()

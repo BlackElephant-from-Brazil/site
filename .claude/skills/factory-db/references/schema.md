@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 009 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 012 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -62,6 +62,8 @@ Tipos de projeto (ex: site, app, manutenção).
 | `is_internal` | BOOLEAN | NOT NULL DEFAULT FALSE |
 | `one_time_value` | NUMERIC(12,2) | nullable |
 | `recurring_value` | NUMERIC(12,2) | nullable |
+| `monthly_hours` | NUMERIC(8,2) | nullable — horas disponíveis/mês (banco de horas) |
+| `has_monthly_bank` | BOOLEAN | NOT NULL DEFAULT false — ativa banco de horas mensal |
 | `created_at` | TIMESTAMPTZ | DEFAULT utc now |
 | `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
 
@@ -180,12 +182,13 @@ Metas estratégicas da empresa, visíveis a todos os admins.
 
 ## Tabela: `public.goal_activities`
 
-Atividades (todo list) de cada meta.
+Atividades (todo list) de cada meta. Suporta sub-atividades infinitas via `parent_id`.
 
 | Coluna | Tipo | Constraints |
 |--------|------|-------------|
 | `id` | UUID | PK |
 | `goal_id` | UUID | NOT NULL, FK → public.goals(id) ON DELETE CASCADE |
+| `parent_id` | UUID | nullable, FK → public.goal_activities(id) ON DELETE CASCADE |
 | `title` | TEXT | NOT NULL |
 | `is_completed` | BOOLEAN | NOT NULL DEFAULT false |
 | `position` | INTEGER | NOT NULL DEFAULT 0 |
@@ -195,7 +198,7 @@ Atividades (todo list) de cada meta.
 **RLS:** habilitado
 **Policies:** `goal_activities_admin` — FOR ALL, apenas role='admin'
 **Trigger:** `trg_goal_activities_updated`
-**Index:** `idx_goal_activities_goal`
+**Indexes:** `idx_goal_activities_goal`, `idx_goal_activities_parent`
 
 ---
 
@@ -261,6 +264,33 @@ Senhas individuais por usuário (não compartilhadas). Senha armazenada em texto
 **Policies:** `user_passwords_own` — FOR ALL WHERE auth.uid() = user_id
 **Trigger:** `trg_user_passwords_updated`
 **Index:** `idx_user_passwords_user`
+
+---
+
+---
+
+## Tabela: `public.agenda_entries`
+
+Registros de horas dos administradores. Vinculado a cliente, projeto ou card do kanban.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `user_id` | UUID | NOT NULL, FK → auth.users(id) ON DELETE CASCADE |
+| `client_id` | UUID | nullable, FK → public.clients(id) ON DELETE SET NULL |
+| `project_id` | UUID | nullable, FK → public.projects(id) ON DELETE SET NULL |
+| `kanban_card_id` | UUID | nullable, FK → public.kanban_cards(id) ON DELETE SET NULL |
+| `date` | DATE | NOT NULL |
+| `start_time` | TIME | nullable |
+| `minutes` | INTEGER | NOT NULL CHECK > 0 |
+| `description` | TEXT | nullable |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado  
+**Policies:** `agenda_entries_admin` — FOR ALL, apenas role='admin'  
+**Trigger:** `trg_agenda_entries_updated`  
+**Indexes:** `idx_agenda_entries_user`, `idx_agenda_entries_client`, `idx_agenda_entries_project`, `idx_agenda_entries_date`
 
 ---
 

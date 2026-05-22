@@ -29,6 +29,8 @@ export interface ProjectType {
   is_recurring: boolean
   one_time_value: number | null
   recurring_value: number | null
+  monthly_hours: number | null
+  has_monthly_bank: boolean
   created_at: string
   updated_at: string
 }
@@ -94,11 +96,16 @@ export interface Goal {
 export interface GoalActivity {
   id: string
   goal_id: string
+  parent_id: string | null
   title: string
   is_completed: boolean
   position: number
   created_at: string
   updated_at: string
+}
+
+export interface GoalActivityWithChildren extends GoalActivity {
+  children: GoalActivityWithChildren[]
 }
 
 export interface GoalWithActivities extends Goal {
@@ -141,6 +148,38 @@ export interface UserPassword {
   url: string | null
   created_at: string
   updated_at: string
+}
+
+// ─── Agenda ──────────────────────────────────────────────────
+export interface AgendaEntry {
+  id: string
+  user_id: string
+  client_id: string | null
+  project_id: string | null
+  kanban_card_id: string | null
+  date: string
+  start_time: string | null
+  minutes: number
+  description: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface AgendaEntryWithRefs extends AgendaEntry {
+  client: Client | null
+  project: Project | null
+  kanban_card: Pick<KanbanCard, 'id' | 'name' | 'card_number'> | null
+}
+
+export interface UserAgendaSummary {
+  user: User
+  total_minutes: number
+}
+
+export interface ProjectBankSummary {
+  project: ProjectWithRefs
+  used_minutes: number
+  available_hours: number | null
 }
 
 // ─── Shared ──────────────────────────────────────────────────

@@ -23,7 +23,11 @@ export async function deleteGoal(id: string): Promise<void> {
   revalidatePath('/dashboard/admin/metas')
 }
 
-export async function createGoalActivity(goalId: string, title: string): Promise<GoalActivity> {
+export async function createGoalActivity(
+  goalId: string,
+  title: string,
+  parentId?: string | null
+): Promise<GoalActivity> {
   const supabase = createAdminClient()
   const { count } = await supabase
     .from('goal_activities')
@@ -32,7 +36,7 @@ export async function createGoalActivity(goalId: string, title: string): Promise
   const position = count ?? 0
   const { data, error } = await supabase
     .from('goal_activities')
-    .insert({ goal_id: goalId, title, position })
+    .insert({ goal_id: goalId, title, position, parent_id: parentId ?? null })
     .select()
     .single()
   if (error) throw new Error(error.message)

@@ -7,7 +7,7 @@ import { Drawer } from '@/components/admin/Drawer'
 import { createProjectType, updateProjectType, deleteProjectType } from '@/lib/actions/project-types'
 import type { ProjectType } from '@/types'
 
-const EMPTY_FORM = { name: '', is_internal: false, is_recurring: false, one_time_value: '', recurring_value: '' }
+const EMPTY_FORM = { name: '', is_internal: false, is_recurring: false, one_time_value: '', recurring_value: '', monthly_hours: '', has_monthly_bank: false }
 
 function Switch({
   checked,
@@ -80,6 +80,8 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       is_recurring: pt.is_recurring,
       one_time_value: pt.one_time_value?.toString() ?? '',
       recurring_value: pt.recurring_value?.toString() ?? '',
+      monthly_hours: pt.monthly_hours?.toString() ?? '',
+      has_monthly_bank: pt.has_monthly_bank,
     })
     setDrawerTitle('Editar Tipo')
     setError('')
@@ -94,6 +96,8 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       is_recurring: pt.is_recurring,
       one_time_value: pt.one_time_value?.toString() ?? '',
       recurring_value: pt.recurring_value?.toString() ?? '',
+      monthly_hours: pt.monthly_hours?.toString() ?? '',
+      has_monthly_bank: pt.has_monthly_bank,
     })
     setDrawerTitle('Duplicar Tipo')
     setError('')
@@ -106,12 +110,15 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
     setSaving(true)
     setError('')
     try {
+      const isRecurring = !form.is_internal && form.is_recurring
       const payload = {
         name: form.name.trim(),
         is_internal: form.is_internal,
-        is_recurring: form.is_internal ? false : form.is_recurring,
+        is_recurring: isRecurring,
         one_time_value: form.is_internal ? null : (form.one_time_value ? parseFloat(form.one_time_value) : null),
         recurring_value: form.is_internal ? null : (form.recurring_value ? parseFloat(form.recurring_value) : null),
+        has_monthly_bank: isRecurring ? form.has_monthly_bank : false,
+        monthly_hours: isRecurring && form.has_monthly_bank ? (form.monthly_hours ? parseFloat(form.monthly_hours) : null) : null,
       }
       if (editing) {
         await updateProjectType(editing.id, payload)
@@ -308,6 +315,41 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                 placeholder="0,00"
               />
             </div>
+          )}
+
+          {/* banco de horas — só aparece em projetos recorrentes */}
+          {form.is_recurring && (
+            <>
+              <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(57,255,20,0.04)', border: '1px solid rgba(57,255,20,0.15)' }}>
+                <div>
+                  <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
+                    Banco de horas mensal
+                  </p>
+                  <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>
+                    Define um limite de horas disponíveis por mês
+                  </p>
+                </div>
+                <Switch
+                  checked={form.has_monthly_bank}
+                  onChange={v => setForm(f => ({ ...f, has_monthly_bank: v }))}
+                />
+              </div>
+
+              {form.has_monthly_bank && (
+                <div>
+                  <label style={{ ...labelStyle, color: 'var(--primary)' }}>Horas disponíveis / mês</label>
+                  <input
+                    style={{ ...inputStyle, borderColor: 'rgba(57,255,20,0.4)' }}
+                    type="number"
+                    step="0.5"
+                    min="0"
+                    value={form.monthly_hours}
+                    onChange={e => setForm(f => ({ ...f, monthly_hours: e.target.value }))}
+                    placeholder="Ex: 40"
+                  />
+                </div>
+              )}
+            </>
           )}
             </>
           )}
