@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Link } from '@/i18n/navigation';
 import type { ReactNode } from 'react';
 
 type ServiceCard = {
@@ -14,6 +13,8 @@ type ServiceCard = {
   icon: ReactNode;
   /** Quando true, destaca o card com lime accent (oferta fechada e ágil). */
   highlight?: boolean;
+  /** URL externa (Stripe Checkout). Quando ausente, leva para /contact. */
+  checkoutUrl?: string;
 };
 
 const SERVICES: ServiceCard[] = [
@@ -26,6 +27,7 @@ const SERVICES: ServiceCard[] = [
     priceNote: 'valor fechado',
     delivery: '5 dias úteis',
     highlight: true,
+    checkoutUrl: 'https://buy.stripe.com/test_14AfZh3RB9dTgBS9icenS02',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="9" />
@@ -38,10 +40,11 @@ const SERVICES: ServiceCard[] = [
     title: 'Landing page completa',
     description:
       'Página de conversão focada em campanha, produto ou captação de leads.',
-    price: 'R$ 1.196',
+    price: 'R$ 1.889',
     priceNote: 'valor fechado',
     delivery: '3 dias úteis',
     highlight: true,
+    checkoutUrl: 'https://buy.stripe.com/test_7sYfZh5ZJ0Hn4TacuoenS01',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="9" />
@@ -235,21 +238,42 @@ function ServiceCardItem({ service }: { service: ServiceCard }) {
         </div>
       </div>
 
-      {/* CTA */}
-      <Link
-        href={`/contact?service=${encodeURIComponent(service.title)}`}
-        className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
-        style={{
-          backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
-          color: service.highlight ? '#0a0a0a' : 'var(--foreground)',
-          border: service.highlight ? 'none' : '1px solid rgba(255,255,255,0.1)',
-        }}
-      >
-        <span>Solicitar agora</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </Link>
+      {/* CTA — checkout externo (Stripe) ou contato interno */}
+      {service.checkoutUrl ? (
+        <a
+          href={service.checkoutUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
+          style={{
+            backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
+            color: service.highlight ? '#0a0a0a' : 'var(--foreground)',
+            border: service.highlight ? 'none' : '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
+          <span>Solicitar agora</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      ) : (
+        <a
+          href="https://calendly.com/guilherme-blackelephant/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
+          style={{
+            backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
+            color: service.highlight ? '#0a0a0a' : 'var(--foreground)',
+            border: service.highlight ? 'none' : '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
+          <span>Solicitar agora</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      )}
     </motion.article>
   );
 }
@@ -380,8 +404,10 @@ export function ServicesSection() {
           >
             Tem outra demanda em mente?
           </p>
-          <Link
-            href="/contact?tab=consultation"
+          <a
+            href="https://calendly.com/guilherme-blackelephant/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[14px] transition-all duration-300 border-2 hover:border-[var(--color-lime)] hover:text-[var(--color-lime)]"
             style={{
               borderColor: 'rgba(255,255,255,0.18)',
@@ -392,7 +418,7 @@ export function ServicesSection() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>

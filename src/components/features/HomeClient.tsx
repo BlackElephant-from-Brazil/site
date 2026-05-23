@@ -1,6 +1,7 @@
 'use client';
 
 import { ScrollytellingSection } from '@/components/home/ScrollytellingSection';
+import { MobileHeroSection } from '@/components/home/MobileHeroSection';
 import { StatsSection } from '@/components/home/StatsSection';
 import { ReviewsCarousel } from '@/components/home/ReviewsCarousel';
 import { SectorsMarquee } from '@/components/home/SectorsMarquee';
@@ -17,7 +18,11 @@ export function HomeClient({ locale }: HomeClientProps) {
       className="min-h-screen"
       style={{ backgroundColor: 'var(--background)' }}
     >
+      {/* Hero — cada um dos dois se auto-controla via media query:
+          - ScrollytellingSection: renderiza apenas ≥1024px (Lottie + snap).
+          - MobileHeroSection: renderiza apenas <1024px (layout vertical natural). */}
       <ScrollytellingSection />
+      <MobileHeroSection />
       <StatsSection />
       <ReviewsCarousel />
       <SectorsMarquee />

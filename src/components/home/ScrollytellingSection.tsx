@@ -2,9 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { useLottieScroll } from '@/hooks/useLottieScroll';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 type Scene = {
   id: string;
@@ -136,7 +136,24 @@ function getSceneIndex(progress: number): number {
   return SCENES.length - 1;
 }
 
+/**
+ * Outer wrapper. Renderiza o scrollytelling APENAS no desktop (≥1024px).
+ * No mobile, retorna null — quem cuida da experiência mobile equivalente é
+ * o MobileHeroSection (sem Lottie, sem snap, layout vertical natural).
+ *
+ * Isso evita que useLottieScroll, useScroll, listeners de scroll/touch e o
+ * GSAP ScrollTrigger sejam instanciados no mobile, eliminando travas de
+ * performance e o problema do scroll snap mobile não conseguir convergir.
+ */
 export function ScrollytellingSection() {
+  // Default true no SSR — assume desktop, então o markup do scrollytelling
+  // sai no HTML inicial. Após hidratação, se for mobile, o componente desmonta.
+  const isDesktop = useMediaQuery('(min-width: 1024px)', true);
+  if (!isDesktop) return null;
+  return <ScrollytellingSectionInner />;
+}
+
+function ScrollytellingSectionInner() {
   const containerRef = useRef<HTMLDivElement>(null);
   const lottieContainerRef = useRef<HTMLDivElement>(null);
   const prevProgressRef = useRef(0);
@@ -157,82 +174,197 @@ export function ScrollytellingSection() {
     0.12,
   );
 
-  // Scroll livre + snap suave debounced ao soltar
+  // Scroll livre + snap direcional robusto.
+  //
+  // Decisões importantes:
+  // - `isSnapping` é liberado por RAF-based settled detection (não setTimeout
+  //   fixo). Espera o scrollY estabilizar por N frames antes de aceitar novo
+  //   gesto. Isso garante que o smooth scroll programático termine antes do
+  //   sistema considerar o próximo gesto.
+  // - Cooldown extra (~220ms) após o snap. Ignora os resíduos de scroll events
+  //   que o browser dispara logo após o smooth scroll completar — eram esses
+  //   resíduos que estavam sendo interpretados como "gesto pequeno" e fazendo
+  //   o sistema voltar para a cena anterior.
+  // - Direção do gesto (deltaY vs gestureStartY) determina próxima/anterior.
+  //   Se a inércia foi forte e levou várias cenas, respeitamos a posição final
+  //   (Math.max/Math.min com `currentIdx`) em vez de forçar 1 cena por vez.
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    // ===== State =====
     let scrollEndTimer: ReturnType<typeof setTimeout> | null = null;
-    let snapReleaseTimer: ReturnType<typeof setTimeout> | null = null;
+    let touchSnapTimer: ReturnType<typeof setTimeout> | null = null;
+    let settledRafId: number | null = null;
     let isSnapping = false;
+    let postSnapCooldownUntil = 0;
     let touchActive = false;
+    let gestureStartY: number | null = null;
+    let gestureStartIdx: number | null = null;
 
-    const isStickyActive = () => {
-      const rect = container.getBoundingClientRect();
-      return rect.top <= 1 && rect.bottom >= window.innerHeight - 1;
-    };
+    // ===== Helpers =====
+    const inCooldown = () => performance.now() < postSnapCooldownUntil;
 
-    const snapToNearest = () => {
-      if (!isStickyActive() || touchActive || isSnapping) return;
-
+    const computeProgress = () => {
       const rect = container.getBoundingClientRect();
       const scrollable = container.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
+      if (scrollable <= 0) return null;
       const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+      return { progress, scrollable, rect };
+    };
 
-      // Liberar saída pelas extremidades — não snappar se estiver tentando sair.
-      // O limite superior (0.92) coincide com o range[1] da última cena (bank),
-      // criando uma zona morta de saída em [0.92, 1.0] que libera o scroll
-      // para as seções abaixo sem puxar de volta.
-      if (progress < 0.015 || progress > 0.92) return;
+    const captureGestureStart = () => {
+      if (gestureStartY !== null) return;
+      const data = computeProgress();
+      if (!data) return;
+      gestureStartY = window.scrollY;
+      gestureStartIdx = getSceneIndex(data.progress);
+    };
 
-      // Encontra a cena cujo centro está mais próximo do progress atual
-      let nearestIdx = 0;
-      let nearestDist = Infinity;
-      for (let i = 0; i < SCENES.length; i++) {
-        const center = (SCENES[i].range[0] + SCENES[i].range[1]) / 2;
-        const dist = Math.abs(progress - center);
-        if (dist < nearestDist) {
-          nearestDist = dist;
-          nearestIdx = i;
-        }
+    const resetGesture = () => {
+      gestureStartY = null;
+      gestureStartIdx = null;
+    };
+
+    const cancelSettledRaf = () => {
+      if (settledRafId !== null) {
+        cancelAnimationFrame(settledRafId);
+        settledRafId = null;
       }
+    };
 
-      const targetProgress = SCENES[nearestIdx].range[0];
+    // Espera o scroll programático REALMENTE terminar. ScrollY tem que ficar
+    // estável por 8 frames (~133ms) para liberar isSnapping. Cobre smooth
+    // scrolls longos no mobile que excedem qualquer setTimeout fixo razoável.
+    const waitForScrollSettled = () => {
+      cancelSettledRaf();
+      let lastY = window.scrollY;
+      let stillFrames = 0;
+      const STILL_FRAMES = 8;
+
+      const tick = () => {
+        const currentY = window.scrollY;
+        if (Math.abs(currentY - lastY) < 0.5) {
+          stillFrames++;
+          if (stillFrames >= STILL_FRAMES) {
+            isSnapping = false;
+            postSnapCooldownUntil = performance.now() + 220;
+            settledRafId = null;
+            return;
+          }
+        } else {
+          stillFrames = 0;
+          lastY = currentY;
+        }
+        settledRafId = requestAnimationFrame(tick);
+      };
+      settledRafId = requestAnimationFrame(tick);
+    };
+
+    const snapToScene = (idx: number) => {
+      const data = computeProgress();
+      if (!data) return;
+      const { scrollable, rect } = data;
+      const targetProgress = SCENES[idx].range[0];
       const containerTop = rect.top + window.scrollY;
       const targetY = containerTop + targetProgress * scrollable;
-
       if (Math.abs(window.scrollY - targetY) < 6) return;
 
+      // Reset ANTES do scrollTo para evitar race com scroll events do próprio
+      // smooth scroll (que poderiam re-capturar gestureStartY no destino).
+      resetGesture();
       isSnapping = true;
       window.scrollTo({ top: targetY, behavior: 'smooth' });
-      if (snapReleaseTimer) clearTimeout(snapReleaseTimer);
-      snapReleaseTimer = setTimeout(() => { isSnapping = false; }, 700);
+      waitForScrollSettled();
     };
 
+    const snapAfterGesture = () => {
+      if (touchActive || isSnapping) return;
+
+      const data = computeProgress();
+      if (!data) {
+        resetGesture();
+        return;
+      }
+      const { progress } = data;
+
+      // Zonas de saída — libera scroll natural para seções vizinhas
+      if (progress < 0.015 || progress > 0.92) {
+        resetGesture();
+        return;
+      }
+
+      const currentIdx = getSceneIndex(progress);
+
+      // Sem origem capturada: snap para a cena atual (CORREÇÃO do bug "nearest
+      // center" — antes, progress=0.22 era classificado mais perto de hero
+      // (0.11) do que de transport (0.335), puxando sempre pra trás).
+      if (gestureStartY === null || gestureStartIdx === null) {
+        snapToScene(currentIdx);
+        return;
+      }
+
+      // Decisão direcional + respeito à magnitude da inércia
+      const deltaY = window.scrollY - gestureStartY;
+      const threshold = window.innerHeight * 0.035; // ~3.5vh
+
+      let targetIdx: number;
+      if (deltaY > threshold) {
+        // Pra baixo: ao menos +1, mas respeita inércia mais forte
+        targetIdx = Math.max(gestureStartIdx + 1, currentIdx);
+        targetIdx = Math.min(targetIdx, SCENES.length - 1);
+      } else if (deltaY < -threshold) {
+        // Pra cima: ao menos -1, mas respeita inércia mais forte
+        targetIdx = Math.min(gestureStartIdx - 1, currentIdx);
+        targetIdx = Math.max(targetIdx, 0);
+      } else {
+        // Movimento insuficiente: fica onde está (não na origem, porque a
+        // inércia pode ter movido). Se já está numa cena válida, snap nela.
+        targetIdx = currentIdx;
+      }
+
+      snapToScene(targetIdx);
+    };
+
+    // ===== Event handlers =====
     const onScroll = () => {
-      if (isSnapping) return;
+      if (isSnapping || inCooldown()) return;
+      captureGestureStart();
       if (scrollEndTimer) clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(snapToNearest, 130);
+      scrollEndTimer = setTimeout(snapAfterGesture, 120);
     };
 
-    const onTouchStart = () => { touchActive = true; };
+    const onTouchStart = () => {
+      touchActive = true;
+      if (touchSnapTimer) clearTimeout(touchSnapTimer);
+      // Não captura novo gesto durante cooldown (resíduo de snap anterior)
+      if (!inCooldown() && !isSnapping) {
+        captureGestureStart();
+      }
+    };
+
     const onTouchEnd = () => {
       touchActive = false;
-      if (scrollEndTimer) clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(snapToNearest, 200);
+      // Fallback caso o scroll natural não dispare mais eventos (swipe curto
+      // sem inércia). 480ms é tempo suficiente pra inércia normal acabar e
+      // o scrollEndTimer disparar primeiro; senão, este aqui dispara.
+      if (touchSnapTimer) clearTimeout(touchSnapTimer);
+      touchSnapTimer = setTimeout(snapAfterGesture, 480);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
       if (scrollEndTimer) clearTimeout(scrollEndTimer);
-      if (snapReleaseTimer) clearTimeout(snapReleaseTimer);
+      if (touchSnapTimer) clearTimeout(touchSnapTimer);
+      cancelSettledRaf();
     };
   }, []);
 
@@ -250,8 +382,9 @@ export function ScrollytellingSection() {
 
   const scene = SCENES[activeIndex];
 
+  // Componente é desktop-only (guard no wrapper externo). Altura fixa em 720vh.
   return (
-    <div ref={containerRef} className="relative" style={{ height: '720vh' }}>
+    <div ref={containerRef} className="relative h-[720vh]">
       <div
         className="sticky top-0 h-screen overflow-hidden"
         style={{ isolation: 'isolate' }}
@@ -276,12 +409,12 @@ export function ScrollytellingSection() {
         {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a0a]/70 to-transparent" />
 
-        {/* Desktop card — canto inferior direito (cobre marca d'água).
+        {/* Card no canto inferior direito (cobre marca d'água).
             O GlassCard permanece ESTÁTICO. Apenas o conteúdo interno anima
             entre as cenas, preservando o efeito de vidro de forma contínua. */}
-        <div className="absolute inset-0 hidden lg:flex items-end justify-end pb-14 pr-14 xl:pr-20">
+        <div className="absolute inset-0 flex items-end justify-end pb-14 pr-14 xl:pr-20">
           <div className="w-full max-w-[560px] xl:max-w-[600px]">
-            <GlassCard mobile={false}>
+            <GlassCard>
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={activeIndex}
@@ -291,33 +424,15 @@ export function ScrollytellingSection() {
                   animate="center"
                   exit="exit"
                 >
-                  <SceneContent scene={scene} mobile={false} />
+                  <SceneContent scene={scene} />
                 </motion.div>
               </AnimatePresence>
             </GlassCard>
           </div>
         </div>
 
-        {/* Mobile card — bottom right */}
-        <div className="lg:hidden absolute inset-x-0 bottom-0 px-4 pb-8">
-          <GlassCard mobile={true}>
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={activeIndex}
-                custom={direction}
-                variants={contentVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-              >
-                <SceneContent scene={scene} mobile={true} />
-              </motion.div>
-            </AnimatePresence>
-          </GlassCard>
-        </div>
-
-        {/* Scene dots — desktop */}
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3 items-center">
+        {/* Scene dots — indicador vertical à direita */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 items-center">
           {SCENES.map((_, i) => (
             <motion.div
               key={i}
@@ -330,22 +445,6 @@ export function ScrollytellingSection() {
                 opacity: i === activeIndex ? 1 : 0.6,
               }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-            />
-          ))}
-        </div>
-
-        {/* Scene dots — mobile */}
-        <div className="absolute top-[72px] left-1/2 -translate-x-1/2 flex gap-2 lg:hidden">
-          {SCENES.map((_, i) => (
-            <motion.div
-              key={i}
-              className="h-0.5 rounded-full"
-              animate={{
-                width: i === activeIndex ? 28 : 10,
-                backgroundColor:
-                  i === activeIndex ? 'var(--color-lime)' : 'rgba(255,255,255,0.2)',
-              }}
-              transition={{ duration: 0.35 }}
             />
           ))}
         </div>
@@ -372,7 +471,7 @@ export function ScrollytellingSection() {
  * `min-h` dimensionado para o conteúdo mais alto (case com métrica gigante),
  * evitando que o card pulse de altura entre transições.
  */
-function GlassCard({ children, mobile }: { children: React.ReactNode; mobile: boolean }) {
+function GlassCard({ children, mobile = false }: { children: React.ReactNode; mobile?: boolean }) {
   return (
     <div
       className={cn(
@@ -421,7 +520,7 @@ function GlassCard({ children, mobile }: { children: React.ReactNode; mobile: bo
  * cena (via key no motion.div pai dentro do AnimatePresence). Como o pai
  * cuida da animação de entrada/saída, aqui não há motion.div próprio.
  */
-function SceneContent({ scene, mobile }: { scene: Scene; mobile: boolean }) {
+function SceneContent({ scene, mobile = false }: { scene: Scene; mobile?: boolean }) {
   const isHero = scene.id === 'hero';
 
   return (
@@ -604,8 +703,10 @@ function SceneContent({ scene, mobile }: { scene: Scene; mobile: boolean }) {
       {/* CTA — only hero */}
       {isHero && (
         <div className="mt-8">
-          <Link
-            href="/contact?tab=consultation"
+          <a
+            href="https://calendly.com/guilherme-blackelephant/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               'inline-flex items-center gap-2.5 rounded-xl font-semibold transition-all duration-300',
               'bg-[var(--color-lime)] text-black',
@@ -627,7 +728,7 @@ function SceneContent({ scene, mobile }: { scene: Scene; mobile: boolean }) {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>
-          </Link>
+          </a>
         </div>
       )}
     </>
