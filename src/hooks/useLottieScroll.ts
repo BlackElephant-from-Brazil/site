@@ -15,7 +15,7 @@ export function useLottieScroll(
   lottieContainerRef: RefObject<HTMLDivElement | null>,
   sectionRef: RefObject<HTMLDivElement | null>,
   animationPath: string,
-  scrubSeconds = 0.3,
+  scrubSeconds = 0.15,
 ): void {
   const cleanupRef = useRef<(() => void) | null>(null);
 
