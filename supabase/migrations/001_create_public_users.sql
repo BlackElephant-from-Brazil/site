@@ -1,5 +1,5 @@
 -- Migration: 001_create_public_users
--- Tabela de usuários no schema public do projeto Black Elephant.
+-- Tabela de usuários no schema public do projeto BlackElephant.
 -- Sem trigger para espelhar auth.users — o registro é criado manualmente via server action no cadastro.
 
 CREATE TABLE IF NOT EXISTS public.users (

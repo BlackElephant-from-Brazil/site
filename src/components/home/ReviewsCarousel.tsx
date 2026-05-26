@@ -223,7 +223,7 @@ export function ReviewsCarousel() {
             className="text-[15px] lg:text-[16px] max-w-md leading-relaxed"
             style={{ color: 'rgba(255,255,255,0.55)' }}
           >
-            Histórias reais de quem confiou na engenharia da Black Elephant.
+            Histórias reais de quem confiou na engenharia da BlackElephant.
           </p>
         </motion.div>
       </div>

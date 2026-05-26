@@ -165,7 +165,7 @@ export default function LoginContent() {
               className="text-[0.82rem] leading-relaxed"
               style={{ color: 'var(--foreground-subtle)' }}
             >
-              A Black Elephant não entrega sites. Entrega resultados que você pode
+              A BlackElephant não entrega sites. Entrega resultados que você pode
               medir, acompanhar e escalar.
             </p>
           </div>
@@ -312,7 +312,7 @@ function RegisterForm({ error, success, isPending, onSubmit, onSwitchMode }: Reg
           Crie sua conta.
         </h2>
         <p className="mt-2 text-sm" style={{ color: 'var(--foreground-muted)' }}>
-          Acesso exclusivo para clientes Black Elephant
+          Acesso exclusivo para clientes BlackElephant
         </p>
       </div>
 

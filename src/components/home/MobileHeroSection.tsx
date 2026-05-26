@@ -208,7 +208,7 @@ function HeroBlock() {
             className="text-[9.5px] font-semibold uppercase tracking-[0.32em] whitespace-nowrap"
             style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.55)' }}
           >
-            Black Elephant · Eng. de Software
+            BlackElephant · Eng. de Software
           </span>
         </div>
       </motion.header>
