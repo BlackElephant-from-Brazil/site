@@ -245,7 +245,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
               style={inputStyle}
               value={form.trade_name}
               onChange={e => setForm(f => ({ ...f, trade_name: e.target.value }))}
-              placeholder="Ex: Black Elephant"
+              placeholder="Ex: BlackElephant"
               required
             />
           </div>

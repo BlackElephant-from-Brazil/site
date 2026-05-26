@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing'
 import { LoadingProvider } from '@/components/providers/LoadingProvider'
 import { SiteShell } from '@/components/layout/SiteShell'
 import { GoogleTagManager } from '@next/third-parties/google'
+import Head from 'next/head';
 import '@/styles/design-tokens.css'
 import '../globals.css'
 
@@ -21,12 +22,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const siteUrl = 'https://blackelephant.com.br'
   
   const titles: Record<string, string> = {
-    pt: 'Black Elephant | Desenvolvimento de Software & Automações',
-    en: 'Black Elephant | Software Development & Automation',
-    es: 'Black Elephant | Desarrollo de Software y Automatización',
-    de: 'Black Elephant | Softwareentwicklung & Automatisierung',
-    fr: 'Black Elephant | Développement de Logiciels & Automatisation',
-    it: 'Black Elephant | Sviluppo Software e Automazione',
+    pt: 'BlackElephant | Desenvolvimento de Software & Automações',
+    en: 'BlackElephant | Software Development & Automation',
+    es: 'BlackElephant | Desarrollo de Software y Automatización',
+    de: 'BlackElephant | Softwareentwicklung & Automatisierung',
+    fr: 'BlackElephant | Développement de Logiciels & Automatisation',
+    it: 'BlackElephant | Sviluppo Software e Automazione',
   }
   
   const descriptions: Record<string, string> = {
@@ -41,10 +42,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: titles[locale] || titles.pt,
     description: descriptions[locale] || descriptions.pt,
-    keywords: ['desenvolvimento de software', 'automação', 'sites', 'aplicativos', 'sistemas web', 'Black Elephant', 'tecnologia', 'inovação'],
-    authors: [{ name: 'Black Elephant' }],
-    creator: 'Black Elephant',
-    publisher: 'Black Elephant',
+    keywords: ['desenvolvimento de software', 'automação', 'sites', 'aplicativos', 'sistemas web', 'BlackElephant', 'tecnologia', 'inovação'],
+    authors: [{ name: 'BlackElephant' }],
+    creator: 'BlackElephant',
+    publisher: 'BlackElephant',
     metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `${siteUrl}/${locale}`,
@@ -58,13 +59,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       },
     },
     icons: {
-      icon: '/logo.png',
-      shortcut: '/logo.png',
-      apple: '/logo.png',
+      icon: '/favicon.ico',
     },
     openGraph: {
       type: 'website',
-      siteName: 'Black Elephant',
+      siteName: 'BlackElephant',
       title: titles[locale] || titles.pt,
       description: descriptions[locale] || descriptions.pt,
       url: `${siteUrl}/${locale}`,
@@ -75,7 +74,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
           url: `${siteUrl}/logo.png`,
           width: 512,
           height: 512,
-          alt: 'Black Elephant Logo',
+          alt: 'BlackElephant Logo',
         },
       ],
     },
