@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 import Script from 'next/script'
+import { useEffect } from 'react'
+import Clarity from '@microsoft/clarity'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { usePathname } from '@/i18n/navigation'
 import { Header } from './Header'
@@ -10,6 +12,7 @@ import { Footer } from './Footer'
 const HIDE_CHROME = ['/login', '/signup', '/forgot-password', '/dashboard', '/reset-password']
 const GTM_ID = 'GTM-TL3KWXFR'
 const UMAMI_WEBSITE_ID = 'cef9a48e-8eea-4d3a-bba8-6a2f8db03723'
+const CLARITY_PROJECT_ID = 'wxsoe8gkq7'
 
 function PublicGoogleTagManager() {
   return (
@@ -64,6 +67,14 @@ function PublicUmamiAnalytics() {
   )
 }
 
+function PublicClarityAnalytics() {
+  useEffect(() => {
+    Clarity.init(CLARITY_PROJECT_ID)
+  }, [])
+
+  return null
+}
+
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const hideChrome = HIDE_CHROME.some(p => pathname.startsWith(p))
@@ -76,6 +87,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <>
       <PublicGoogleTagManager />
       <PublicUmamiAnalytics />
+      <PublicClarityAnalytics />
       <Header />
       <div className="flex flex-col min-h-screen">
         <main className="flex-1">{children}</main>
