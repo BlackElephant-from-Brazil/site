@@ -97,8 +97,8 @@ export function SectorsMarquee() {
                 className="leading-none text-[2.25rem] sm:text-[3rem] lg:text-[4rem] xl:text-[4.5rem] tracking-[-0.03em]"
                 style={{
                   fontFamily: sector.style === 'italic' ? 'var(--font-serif)' : 'var(--font-title)',
-                  fontStyle: sector.style === 'italic' ? 'italic' : 'normal',
-                  fontWeight: sector.style === 'italic' ? 400 : 700,
+                  fontStyle: 'normal',
+                  fontWeight: sector.style === 'italic' ? 100 : 700,
                   color: sector.style === 'italic' ? 'var(--color-lime)' : 'var(--foreground)',
                 }}
               >

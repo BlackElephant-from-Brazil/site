@@ -625,7 +625,8 @@ function SceneContent({ scene, mobile = false }: { scene: Scene; mobile?: boolea
                 )}
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
+                  fontStyle: 'normal',
+                  fontWeight: 100,
                   color: 'var(--color-lime)',
                   opacity: 0.85,
                 }}
@@ -680,8 +681,8 @@ function SceneContent({ scene, mobile = false }: { scene: Scene; mobile?: boolea
                 key={i}
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontWeight: 100,
                   color: 'rgba(255,255,255,0.95)',
                 }}
               >
@@ -751,8 +752,8 @@ function HeroTitle({ parts, mobile }: { parts: TitlePart[]; mobile: boolean }) {
               key={i}
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
-                fontWeight: 400,
+                fontStyle: 'normal',
+                fontWeight: 100,
                 color: 'rgba(255,255,255,0.6)',
                 display: 'block',
                 marginBottom: '0.08em',
@@ -818,8 +819,8 @@ function CaseTitle({ parts, mobile }: { parts: TitlePart[]; mobile: boolean }) {
               <em
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontWeight: 100,
                   color: 'var(--color-lime)',
                 }}
               >

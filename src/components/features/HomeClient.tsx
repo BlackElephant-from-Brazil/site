@@ -1,7 +1,7 @@
 'use client';
 
 import { ScrollytellingSection } from '@/components/home/ScrollytellingSection';
-import { MobileHeroSection } from '@/components/home/MobileHeroSection';
+import { MobileCasesSection, MobileHeroSection } from '@/components/home/MobileHeroSection';
 import { StatsSection } from '@/components/home/StatsSection';
 import { ReviewsCarousel } from '@/components/home/ReviewsCarousel';
 import { SectorsMarquee } from '@/components/home/SectorsMarquee';
@@ -24,6 +24,7 @@ export function HomeClient({ locale }: HomeClientProps) {
       <ScrollytellingSection />
       <MobileHeroSection />
       <StatsSection />
+      <MobileCasesSection />
       <ReviewsCarousel />
       <SectorsMarquee />
       <ServicesSection />

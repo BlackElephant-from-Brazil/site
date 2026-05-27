@@ -1,10 +1,37 @@
 'use client'
 
+import Image from 'next/image'
 import { usePathname } from '@/i18n/navigation'
 import { Header } from './Header'
 import { Footer } from './Footer'
 
 const HIDE_CHROME = ['/login', '/signup', '/forgot-password', '/dashboard', '/reset-password']
+
+function FloatingWhatsAppButton() {
+  return (
+    <a
+      href="https://wa.me/5519978055531"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Tirar dúvidas no WhatsApp"
+      className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full lg:hidden"
+      style={{
+        backgroundColor: 'var(--color-lime)',
+        color: '#0a0a0a',
+        boxShadow:
+          '0 14px 34px rgba(57,255,20,0.30), 0 0 0 1px rgba(10,10,10,0.18)',
+      }}
+    >
+      <Image
+        src="/whatsapp.png"
+        alt=""
+        width={35}
+        height={35}
+        aria-hidden="true"
+      />
+    </a>
+  )
+}
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -21,6 +48,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
+      <FloatingWhatsAppButton />
     </>
   )
 }

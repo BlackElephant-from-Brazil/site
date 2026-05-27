@@ -141,8 +141,8 @@ export function StatsSection() {
               <em
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontWeight: 100,
                   color: 'var(--color-lime)',
                 }}
               >
@@ -163,9 +163,9 @@ export function StatsSection() {
               className="text-[1.05rem] lg:text-[1.15rem] leading-[1.55]"
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
+                fontStyle: 'normal',
                 color: 'rgba(255,255,255,0.7)',
-                fontWeight: 400,
+                fontWeight: 100,
               }}
             >
               Cada número aqui representa empresas reais transformadas por software bem feito,
@@ -238,9 +238,9 @@ export function StatsSection() {
                   className="leading-none text-[1.75rem] sm:text-[2rem] lg:text-[2.5rem] xl:text-[3rem]"
                   style={{
                     fontFamily: 'var(--font-serif)',
-                    fontStyle: 'italic',
+                    fontStyle: 'normal',
                     color: 'var(--color-lime)',
-                    fontWeight: 400,
+                    fontWeight: 100,
                   }}
                 >
                   {stat.suffix}
@@ -263,9 +263,9 @@ export function StatsSection() {
                 className="text-[13px] lg:text-[14px] leading-[1.5] max-w-[200px]"
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
+                  fontStyle: 'normal',
                   color: 'rgba(255,255,255,0.5)',
-                  fontWeight: 400,
+                  fontWeight: 100,
                 }}
               >
                 {stat.kicker}

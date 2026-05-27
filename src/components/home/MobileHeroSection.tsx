@@ -112,33 +112,26 @@ function AtmosphereBg({ variant = 'hero' }: { variant?: 'hero' | 'case' }) {
 // ----------------------------------------------------------------------------
 // Direção: capa de revista editorial em modo dark, com "GRANDES" como peça
 // dominante (display gigante, quase rompendo a margem direita por design),
-// numeração editorial (ED. 01), hairlines de 1px, asterisco rotativo, e
-// timestamp/créditos no rodapé. Staggered reveal letter-by-letter no onload.
+// hairlines de 1px e timestamp/créditos no rodapé.
 // ============================================================================
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-function RotatingAsterisk({ size = 26 }: { size?: number }) {
-  return (
-    <motion.span
-      aria-hidden
-      animate={{ rotate: 360 }}
-      transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
-      className="inline-block leading-none"
-      style={{
-        fontSize: size,
-        color: 'var(--color-lime)',
-        textShadow: '0 0 18px rgba(57,255,20,0.45)',
-      }}
-    >
-      ✦
-    </motion.span>
-  );
-}
+const HERO_MARQUEE_ITEMS = [
+  'APPs',
+  'Landing Pages',
+  'Automações',
+  'Agentes de IA',
+  'Site institucional',
+  'Blog',
+  'eCommerce',
+  'Sistemas Embarcados',
+];
 
 function HeroBlock() {
   // "GRANDES" letra por letra para staggered reveal
   const grandesLetters = ['G', 'R', 'A', 'N', 'D', 'E', 'S'];
+  const marqueeItems = [...HERO_MARQUEE_ITEMS, ...HERO_MARQUEE_ITEMS];
 
   return (
     <div
@@ -187,55 +180,72 @@ function HeroBlock() {
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE_OUT }}
-        className="relative z-10 px-7 pt-28"
+        className="relative z-10 pt-28"
       >
-        <div className="flex items-center justify-between gap-3 mb-3">
-          <span
-            className="text-[10.5px] font-bold tabular-nums tracking-[0.3em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
-          >
-            ED. 01
-          </span>
-          <RotatingAsterisk size={22} />
-        </div>
-        <div className="flex items-center gap-3">
-          <span
+        <div className="relative overflow-hidden mx-4 rounded-full marquee-fade">
+          <div
             aria-hidden
-            className="h-px flex-1"
-            style={{ backgroundColor: 'rgba(255,255,255,0.18)' }}
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, rgba(57,255,20,0.08), rgba(255,255,255,0.045), rgba(57,255,20,0.08))',
+              border: '1px solid rgba(255,255,255,0.11)',
+              boxShadow:
+                '0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08)',
+            }}
           />
-          <span
-            className="text-[9.5px] font-semibold uppercase tracking-[0.32em] whitespace-nowrap"
-            style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.55)' }}
+          <motion.div
+            aria-label="Serviços BlackElephant"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 30, ease: 'linear', repeat: Infinity }}
+            className="relative z-10 flex w-max items-center gap-3 py-2.5 px-3"
           >
-            BlackElephant · Eng. de Software
+            {marqueeItems.map((item, index) => (
+              <span key={`${item}-${index}`} className="flex items-center gap-3">
+                <span
+                  className="rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] whitespace-nowrap"
+                  style={{
+                    fontFamily: 'var(--font-title)',
+                    color: 'rgba(255,255,255,0.7)',
+                    backgroundColor: 'rgba(10,10,10,0.42)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                  }}
+                >
+                  {item}
+                </span>
+                <span
+                  aria-hidden
+                  className="relative h-1.5 w-1.5 rounded-full"
+                  style={{
+                    backgroundColor: 'var(--color-lime)',
+                    boxShadow: '0 0 12px rgba(57,255,20,0.7)',
+                  }}
+                />
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="mt-7 flex justify-center px-7">
+          <span
+            className="relative inline-flex items-center justify-center rounded-full px-5 py-2 text-[10.5px] font-bold uppercase tracking-[0.24em] whitespace-nowrap"
+            style={{
+              fontFamily: 'var(--font-title)',
+              color: 'var(--color-lime)',
+              background:
+                'linear-gradient(135deg, rgba(57,255,20,0.14), rgba(17,17,17,0.78))',
+              border: '1px solid rgba(57,255,20,0.28)',
+              boxShadow:
+                '0 0 24px rgba(57,255,20,0.10), inset 0 1px 0 rgba(255,255,255,0.09)',
+            }}
+          >
+            Consultoria de TI
           </span>
         </div>
       </motion.header>
 
       {/* ===== Title block ===== */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-7 py-10">
-        {/* Deck eyebrow — Capítulo */}
-        <motion.div
-          initial={{ opacity: 0, x: -8 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.55, delay: 0.08, ease: EASE_OUT }}
-          className="flex items-baseline gap-3 mb-6"
-        >
-          <span
-            className="text-[10.5px] font-bold tabular-nums tracking-[0.28em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.35)' }}
-          >
-            /00
-          </span>
-          <span
-            className="text-[10.5px] font-semibold uppercase tracking-[0.28em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.45)' }}
-          >
-            Manifesto
-          </span>
-        </motion.div>
-
+      <div className="relative z-10 flex flex-1 flex-col justify-end px-7 pt-16 pb-6">
         {/* Title — "gostamos de" (serif italic, low contrast) */}
         <motion.span
           initial={{ opacity: 0, y: 18 }}
@@ -243,10 +253,10 @@ function HeroBlock() {
           transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
           className="block text-[1.55rem] leading-none mb-2"
           style={{
-            fontFamily: 'var(--font-serif)',
-            fontStyle: 'italic',
-            fontWeight: 400,
-            color: 'rgba(255,255,255,0.45)',
+            fontFamily: "'Barlow', var(--font-primary)",
+            fontWeight: 100,
+            letterSpacing: '0.02em',
+            color: 'rgba(255,255,255,0.48)',
             marginLeft: '0.15em',
           }}
         >
@@ -329,16 +339,15 @@ function HeroBlock() {
         >
           Estamos aqui para resolver os problemas mais complexos da sua empresa
           e te dar{' '}
-          <em
+          <strong
             style={{
-              fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
-              fontWeight: 400,
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 700,
               color: 'var(--color-lime)',
             }}
           >
             escala
-          </em>
+          </strong>
           .
         </motion.p>
 
@@ -347,13 +356,13 @@ function HeroBlock() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.85, ease: EASE_OUT }}
-          className="mt-8 flex items-center gap-4"
+          className="mt-8 flex flex-col items-stretch gap-3"
         >
           <a
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
+            className="group inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
             style={{
               backgroundColor: 'var(--color-lime)',
               color: '#0a0a0a',
@@ -362,7 +371,7 @@ function HeroBlock() {
               fontFamily: 'var(--font-title)',
             }}
           >
-            <span>Entrar em contato</span>
+            <span>Agendar consultoria de 1h</span>
             <svg
               width="14"
               height="14"
@@ -376,28 +385,21 @@ function HeroBlock() {
             </svg>
           </a>
 
-          {/* Counter editorial — pequena "stat" decorativa */}
-          <div
-            className="flex flex-col items-start leading-tight"
-            style={{ fontFamily: 'var(--font-title)' }}
+          <a
+            href="https://wa.me/5519978055531"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-5 py-3.5 rounded-full font-semibold text-[13px] transition-all duration-300 active:scale-95"
+            style={{
+              backgroundColor: 'rgba(17,17,17,0.72)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              color: 'rgba(255,255,255,0.86)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+              fontFamily: 'var(--font-title)',
+            }}
           >
-            <span
-              className="text-[10px] uppercase tracking-[0.22em]"
-              style={{ color: 'rgba(255,255,255,0.4)' }}
-            >
-              30 min
-            </span>
-            <span
-              className="text-[10px]"
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
-                color: 'rgba(255,255,255,0.45)',
-              }}
-            >
-              sem compromisso
-            </span>
-          </div>
+            Tirar dúvidas no whatsapp
+          </a>
         </motion.div>
       </div>
 
@@ -431,7 +433,7 @@ function HeroBlock() {
                 color: 'rgba(255,255,255,0.55)',
               }}
             >
-              Cases reais abaixo
+              Em números abaixo
             </span>
           </div>
           <span
@@ -483,8 +485,8 @@ function CasesHeader() {
         <em
           style={{
             fontFamily: 'var(--font-serif)',
-            fontStyle: 'italic',
-            fontWeight: 400,
+            fontStyle: 'normal',
+            fontWeight: 100,
             color: 'var(--color-lime)',
           }}
         >
@@ -618,7 +620,8 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
               className="text-[1.6rem] sm:text-[1.85rem] leading-none"
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
+                fontStyle: 'normal',
+                fontWeight: 100,
                 color: 'var(--color-lime)',
                 opacity: 0.85,
               }}
@@ -657,8 +660,8 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
                 <em
                   style={{
                     fontFamily: 'var(--font-serif)',
-                    fontStyle: 'italic',
-                    fontWeight: 400,
+                    fontStyle: 'normal',
+                    fontWeight: 100,
                     color: 'var(--color-lime)',
                   }}
                 >
@@ -730,6 +733,17 @@ export function MobileHeroSection() {
   return (
     <section style={{ backgroundColor: 'var(--background)' }}>
       <HeroBlock />
+    </section>
+  );
+}
+
+export function MobileCasesSection() {
+  // Default false no SSR — não duplica conteúdo do desktop scrollytelling.
+  const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
+  if (!isMobile) return null;
+
+  return (
+    <section style={{ backgroundColor: 'var(--background)' }}>
       <CasesBlock />
     </section>
   );
