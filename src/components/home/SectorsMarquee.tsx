@@ -87,9 +87,10 @@ export function SectorsMarquee() {
 
       {/* Marquee track — direção invertida (esquerda → direita) */}
       <div className="marquee-fade relative z-10">
-        <div
-          className="flex items-center w-max marquee-track marquee-reverse whitespace-nowrap"
-          style={{ ['--marquee-duration' as string]: '38s' }}
+        <motion.div
+          animate={{ x: ['-33.333%', '0%'] }}
+          transition={{ duration: 38, ease: 'linear', repeat: Infinity }}
+          className="flex w-max items-center whitespace-nowrap"
         >
           {loop.map((sector, i) => (
             <span key={i} className="flex items-center">
@@ -107,7 +108,7 @@ export function SectorsMarquee() {
               <Asterisk />
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

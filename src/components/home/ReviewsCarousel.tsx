@@ -230,14 +230,15 @@ export function ReviewsCarousel() {
 
       {/* Auto-scrolling track */}
       <div className="marquee-fade">
-        <div
-          className="flex gap-5 w-max marquee-track"
-          style={{ ['--marquee-duration' as string]: '70s' }}
+        <motion.div
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 70, ease: 'linear', repeat: Infinity }}
+          className="flex w-max gap-5"
         >
           {loop.map((review, i) => (
             <ReviewCard key={`${review.name}-${i}`} review={review} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

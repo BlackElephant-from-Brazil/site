@@ -622,11 +622,7 @@ function CaseImageCarousel({ data }: { data: Case }) {
 
 function CaseCard({ data, position }: { data: Case; position: number }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    <article
       className="relative min-w-[86vw] snap-center overflow-hidden rounded-[20px] p-5"
       style={{
         background:
@@ -816,7 +812,7 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
           /{String(position).padStart(2, '0')}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -832,7 +828,7 @@ function CasesBlock() {
     >
       <CasesHeader />
 
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {CASES.map((c, i) => (
           <CaseCard key={c.index} data={c} position={i + 1} />
         ))}
