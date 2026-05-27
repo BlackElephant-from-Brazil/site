@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 // ============================================================================
 // Conteúdo dos cases (espelho ao desktop scrollytelling, sem range/snap).
@@ -386,6 +387,7 @@ function HeroBlock() {
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={reportReservarHorarioConversion}
             className="group inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
             style={{
               backgroundColor: 'var(--color-lime)',

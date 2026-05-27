@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import { cn } from '@/lib/utils';
 import { useLottieScroll } from '@/hooks/useLottieScroll';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 type Scene = {
   id: string;
@@ -708,6 +709,7 @@ function SceneContent({ scene, mobile = false }: { scene: Scene; mobile?: boolea
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={reportReservarHorarioConversion}
             className={cn(
               'inline-flex items-center gap-2.5 rounded-xl font-semibold transition-all duration-300',
               'bg-[var(--color-lime)] text-black',
