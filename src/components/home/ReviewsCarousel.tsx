@@ -209,8 +209,8 @@ export function ReviewsCarousel() {
               <em
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'italic',
-                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontWeight: 100,
                   color: 'var(--color-lime)',
                 }}
               >

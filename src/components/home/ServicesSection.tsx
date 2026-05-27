@@ -208,7 +208,8 @@ function ServiceCardItem({ service }: { service: ServiceCard }) {
             className="text-[11px] mt-1"
             style={{
               fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
+              fontStyle: 'normal',
+              fontWeight: 100,
               color: 'rgba(255,255,255,0.4)',
             }}
           >
@@ -335,8 +336,8 @@ export function ServicesSection() {
             <em
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
-                fontWeight: 400,
+                fontStyle: 'normal',
+                fontWeight: 100,
                 color: 'var(--color-lime)',
               }}
             >
@@ -392,29 +393,47 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-16 lg:mt-20 text-center"
+          className="mt-16 lg:mt-20 mx-1 sm:mx-0 overflow-hidden rounded-[28px] p-7 sm:p-9 lg:p-12 text-center"
+          style={{
+            background:
+              'radial-gradient(circle at 18% 0%, rgba(57,255,20,0.30) 0%, rgba(57,255,20,0.10) 28%, transparent 48%), linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(24,24,24,0.95) 42%, rgba(10,10,10,0.96) 100%)',
+            border: '1px solid rgba(57,255,20,0.24)',
+            boxShadow:
+              '0 24px 70px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.10)',
+          }}
         >
-          <p
-            className="text-[15px] mb-5"
+          <h2
+            className="text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] leading-[1.02] tracking-[-0.03em]"
             style={{
-              color: 'rgba(255,255,255,0.5)',
-              fontFamily: 'var(--font-serif)',
-              fontStyle: 'italic',
+              color: 'var(--foreground)',
+              fontFamily: 'var(--font-title)',
+              fontWeight: 800,
             }}
           >
-            Tem outra demanda em mente?
+            Tem algum projeto em mente?
+          </h2>
+          <p
+            className="mx-auto mt-4 max-w-[32rem] text-[15px] sm:text-[16px] leading-[1.55]"
+            style={{
+              color: 'rgba(255,255,255,0.72)',
+              fontFamily: 'var(--font-primary)',
+            }}
+          >
+            Fale com nossos especialistas para receber as melhores orientações para o seu projeto.
           </p>
           <a
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[14px] transition-all duration-300 border-2 hover:border-[var(--color-lime)] hover:text-[var(--color-lime)]"
+            className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
             style={{
-              borderColor: 'rgba(255,255,255,0.18)',
-              color: 'var(--foreground)',
+              backgroundColor: 'var(--color-lime)',
+              color: '#0a0a0a',
+              boxShadow:
+                '0 0 0 1px rgba(57,255,20,0.35), 0 18px 38px rgba(57,255,20,0.20), inset 0 1px 0 rgba(255,255,255,0.35)',
             }}
           >
-            Conversar com um especialista
+            Agendar consultoria de 1h
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
