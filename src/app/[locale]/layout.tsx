@@ -5,8 +5,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { LoadingProvider } from '@/components/providers/LoadingProvider'
 import { SiteShell } from '@/components/layout/SiteShell'
-import { GoogleTagManager } from '@next/third-parties/google'
-import Head from 'next/head';
+import { GoogleAnalytics } from '@next/third-parties/google'
 import '@/styles/design-tokens.css'
 import '../globals.css'
 
@@ -129,7 +128,7 @@ export default async function LocaleLayout({
           </LoadingProvider>
         </NextIntlClientProvider>
       </body>
-      <GoogleTagManager gtmId="AW-18077342694" />
+      <GoogleAnalytics gaId="AW-18077342694" />
     </html>
   )
 }
