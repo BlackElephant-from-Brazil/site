@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 // ============================================================================
@@ -17,43 +19,12 @@ type Case = {
   metricLabel: string;
   title: { text: string; italic?: boolean }[];
   description: string;
+  images: { src: string; alt: string; portrait?: boolean }[];
 };
 
 const CASES: Case[] = [
   {
     index: '01',
-    total: '03',
-    name: 'Transportadora Regional',
-    sector: 'Logística',
-    metric: 'R$100k',
-    metricSuffix: '+',
-    metricLabel: 'economizados por ano',
-    title: [
-      { text: 'Automações que geram' },
-      { text: 'economia', italic: true },
-      { text: 'real.' },
-    ],
-    description:
-      'Sistema de gestão operacional que eliminou desperdícios invisíveis e transformou a operação de uma transportadora regional.',
-  },
-  {
-    index: '02',
-    total: '03',
-    name: 'Empresa de Serviços',
-    sector: 'Serviços',
-    metric: '30',
-    metricSuffix: ' dias',
-    metricLabel: 'do zero ao deploy',
-    title: [
-      { text: 'Sistema + 2 apps. Em' },
-      { text: '1 mês', italic: true },
-      { text: '.' },
-    ],
-    description:
-      'Plataforma de gestão completa e dois aplicativos mobile entregues em trinta dias. Do briefing aos apps nas lojas.',
-  },
-  {
-    index: '03',
     total: '03',
     name: 'Banco Regional',
     sector: 'Financeiro',
@@ -67,6 +38,59 @@ const CASES: Case[] = [
     ],
     description:
       'Plataforma bancária que substituiu processos manuais críticos e praticamente zerou os erros humanos na operação.',
+    images: [
+      { src: '/portfolio/banco/1.png', alt: 'Tela do sistema bancário - visão geral' },
+      { src: '/portfolio/banco/2.png', alt: 'Tela do sistema bancário - operação' },
+      { src: '/portfolio/banco/3.png', alt: 'Tela do sistema bancário - dados financeiros' },
+      { src: '/portfolio/banco/4.png', alt: 'Tela do sistema bancário - gestão' },
+    ],
+  },
+  {
+    index: '02',
+    total: '03',
+    name: 'Transportadora Regional',
+    sector: 'Logística',
+    metric: 'R$100k',
+    metricSuffix: '+',
+    metricLabel: 'economizados por ano',
+    title: [
+      { text: 'Automações que geram' },
+      { text: 'economia', italic: true },
+      { text: 'real.' },
+    ],
+    description:
+      'Sistema de gestão operacional que eliminou desperdícios invisíveis e transformou a operação de uma transportadora regional.',
+    images: [
+      { src: '/portfolio/logistica/1.png', alt: 'Tela do sistema logístico - painel operacional' },
+      { src: '/portfolio/logistica/2.png', alt: 'Tela do sistema logístico - controle de viagens' },
+      { src: '/portfolio/logistica/3.png', alt: 'Tela do sistema logístico - indicadores' },
+      { src: '/portfolio/logistica/4.png', alt: 'Tela do sistema logístico - gestão' },
+    ],
+  },
+  {
+    index: '03',
+    total: '03',
+    name: 'Empresa de Serviços',
+    sector: 'Serviços',
+    metric: '30',
+    metricSuffix: ' dias',
+    metricLabel: 'do zero ao deploy',
+    title: [
+      { text: 'Sistema + 2 apps. Em' },
+      { text: '1 mês', italic: true },
+      { text: '.' },
+    ],
+    description:
+      'Plataforma de gestão completa e dois aplicativos mobile entregues em trinta dias. Do briefing aos apps nas lojas.',
+    images: [
+      { src: '/portfolio/servicos/1.png', alt: 'Tela da plataforma de serviços - dashboard' },
+      { src: '/portfolio/servicos/2.png', alt: 'Tela da plataforma de serviços - agenda' },
+      { src: '/portfolio/servicos/3.png', alt: 'Tela da plataforma de serviços - operação' },
+      { src: '/portfolio/servicos/4.png', alt: 'Tela da plataforma de serviços - gestão' },
+      { src: '/portfolio/servicos/5.png', alt: 'Aplicativo mobile de serviços - tela inicial', portrait: true },
+      { src: '/portfolio/servicos/6.png', alt: 'Aplicativo mobile de serviços - detalhes', portrait: true },
+      { src: '/portfolio/servicos/7.png', alt: 'Aplicativo mobile de serviços - acompanhamento', portrait: true },
+    ],
   },
 ];
 
@@ -474,25 +498,14 @@ function CasesHeader() {
           className="text-[10px] font-bold uppercase tracking-[0.28em]"
           style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
         >
-          Cases de sucesso
+          Soluções que agregam
         </span>
       </div>
       <h2
         className="leading-[1] tracking-[-0.025em] text-[2.25rem]"
         style={{ fontFamily: 'var(--font-title)', color: 'var(--foreground)', fontWeight: 700 }}
       >
-        Resultados que{' '}
-        <em
-          style={{
-            fontFamily: 'var(--font-serif)',
-            fontStyle: 'normal',
-            fontWeight: 100,
-            color: 'var(--color-lime)',
-          }}
-        >
-          comprovam
-        </em>
-        .
+        Nossos 3 principais cases de sucesso
       </h2>
     </motion.div>
   );
@@ -502,6 +515,111 @@ function CasesHeader() {
 // Single case card
 // ============================================================================
 
+function CaseImageCarousel({ data }: { data: Case }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const image = data.images[activeIndex];
+
+  function goToPrevious() {
+    setActiveIndex((current) =>
+      current === 0 ? data.images.length - 1 : current - 1,
+    );
+  }
+
+  function goToNext() {
+    setActiveIndex((current) =>
+      current === data.images.length - 1 ? 0 : current + 1,
+    );
+  }
+
+  return (
+    <div className="relative mb-5 overflow-hidden rounded-[16px]">
+      <div
+        className="relative aspect-[16/9] w-full overflow-hidden"
+        style={{
+          background:
+            'linear-gradient(145deg, rgba(255,255,255,0.055), rgba(0,0,0,0.34))',
+          border: '1px solid rgba(255,255,255,0.10)',
+        }}
+      >
+        <Image
+          key={image.src}
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="86vw"
+          className={image.portrait ? 'object-contain p-2' : 'object-cover'}
+          priority={data.index === '01' && activeIndex === 0}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-16"
+          style={{
+            background:
+              'linear-gradient(180deg, transparent, rgba(0,0,0,0.72))',
+          }}
+        />
+      </div>
+
+      {data.images.length > 1 && (
+        <>
+          <button
+            type="button"
+            aria-label={`Imagem anterior do case ${data.name}`}
+            onClick={goToPrevious}
+            className="absolute left-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition-transform active:scale-95"
+            style={{
+              backgroundColor: 'rgba(10,10,10,0.72)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              color: 'var(--foreground)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label={`Próxima imagem do case ${data.name}`}
+            onClick={goToNext}
+            className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full transition-transform active:scale-95"
+            style={{
+              backgroundColor: 'rgba(10,10,10,0.72)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              color: 'var(--foreground)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+              <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5">
+            {data.images.map((item, index) => (
+              <button
+                key={item.src}
+                type="button"
+                aria-label={`Ver imagem ${index + 1} do case ${data.name}`}
+                onClick={() => setActiveIndex(index)}
+                className="h-1.5 rounded-full transition-all"
+                style={{
+                  width: activeIndex === index ? 18 : 6,
+                  backgroundColor:
+                    activeIndex === index
+                      ? 'var(--color-lime)'
+                      : 'rgba(255,255,255,0.38)',
+                  boxShadow:
+                    activeIndex === index ? '0 0 10px rgba(57,255,20,0.65)' : 'none',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function CaseCard({ data, position }: { data: Case; position: number }) {
   return (
     <motion.article
@@ -509,7 +627,7 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="relative overflow-hidden rounded-[20px] p-6"
+      className="relative min-w-[86vw] snap-center overflow-hidden rounded-[20px] p-5"
       style={{
         background:
           'linear-gradient(155deg, rgba(20,20,20,0.85) 0%, rgba(12,12,12,0.7) 100%)',
@@ -542,6 +660,8 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
       />
 
       <div className="relative z-10">
+        <CaseImageCarousel data={data} />
+
         {/* Pill: CASE DE SUCESSO · NN/03 */}
         <div
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
@@ -712,7 +832,7 @@ function CasesBlock() {
     >
       <CasesHeader />
 
-      <div className="px-4 space-y-5">
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {CASES.map((c, i) => (
           <CaseCard key={c.index} data={c} position={i + 1} />
         ))}
