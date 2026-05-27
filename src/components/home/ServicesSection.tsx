@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 type ServiceCard = {
   index: string;
@@ -262,6 +263,7 @@ function ServiceCardItem({ service }: { service: ServiceCard }) {
           href="https://calendly.com/guilherme-blackelephant/30min"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={reportReservarHorarioConversion}
           className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
           style={{
             backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
@@ -425,6 +427,7 @@ export function ServicesSection() {
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={reportReservarHorarioConversion}
             className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
             style={{
               backgroundColor: 'var(--color-lime)',
