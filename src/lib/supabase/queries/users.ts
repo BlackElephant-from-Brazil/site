@@ -22,6 +22,7 @@ export async function getCurrentUser(): Promise<User | null> {
     email: profile.email,
     name: profile.name,
     role: profile.role,
+    client_id: profile.client_id ?? null,
     avatar_url: profile.avatar_url ?? null,
     created_at: profile.created_at,
     updated_at: profile.updated_at,

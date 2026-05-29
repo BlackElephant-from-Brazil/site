@@ -8,6 +8,7 @@ export interface User {
   email: string
   name: string
   role: UserRole
+  client_id: string | null
   avatar_url: string | null
   created_at: string
   updated_at: string

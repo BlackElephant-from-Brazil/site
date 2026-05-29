@@ -103,7 +103,19 @@ const SERVICES: ServiceCard[] = [
   },
 ];
 
-function ServiceCardItem({ service }: { service: ServiceCard }) {
+function ServiceCardItem({
+  service,
+  mobileIndex,
+}: {
+  service: ServiceCard;
+  mobileIndex?: string;
+}) {
+  const indexBaseClass = 'text-[11px] font-bold tabular-nums tracking-[0.22em]';
+  const indexStyle = {
+    fontFamily: 'var(--font-title)',
+    color: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.4)',
+  };
+
   return (
     <motion.article
       whileHover={{ y: -4 }}
@@ -123,15 +135,20 @@ function ServiceCardItem({ service }: { service: ServiceCard }) {
     >
       {/* Header: index + ícone */}
       <div className="flex items-start justify-between mb-7">
-        <span
-          className="text-[11px] font-bold tabular-nums tracking-[0.22em]"
-          style={{
-            fontFamily: 'var(--font-title)',
-            color: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.4)',
-          }}
-        >
-          {service.index}
-        </span>
+        {mobileIndex ? (
+          <>
+            <span className={`${indexBaseClass} lg:hidden`} style={indexStyle}>
+              {mobileIndex}
+            </span>
+            <span className={`${indexBaseClass} hidden lg:inline`} style={indexStyle}>
+              {service.index}
+            </span>
+          </>
+        ) : (
+          <span className={indexBaseClass} style={indexStyle}>
+            {service.index}
+          </span>
+        )}
         <div
           className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors"
           style={{
@@ -360,7 +377,7 @@ export function ServicesSection() {
         </motion.div>
 
         {/* Cards de oferta fechada (preço definido) — 2 colunas em destaque */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 mb-5 lg:mb-6">
+        <div className="hidden lg:grid lg:grid-cols-2 gap-5 lg:gap-6 mb-5 lg:mb-6">
           {SERVICES.filter((s) => s.highlight).map((service, i) => (
             <motion.div
               key={service.index}
@@ -384,7 +401,10 @@ export function ServicesSection() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
-              <ServiceCardItem service={service} />
+              <ServiceCardItem
+                service={service}
+                mobileIndex={`/${String(i + 1).padStart(2, '0')}`}
+              />
             </motion.div>
           ))}
         </div>

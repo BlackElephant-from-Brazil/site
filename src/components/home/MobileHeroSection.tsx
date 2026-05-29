@@ -153,9 +153,18 @@ const HERO_MARQUEE_ITEMS = [
   'Sistemas Embarcados',
 ];
 
+const SYSTEM_BENEFITS = [
+  'Economize com sistemas caros de terceiros',
+  'Nunca mais use planilhas Excel para gerenciar seus processos',
+  'Relatórios personalizados focados no crescimento da sua empresa',
+  'Economize tempo com automações',
+  'Melhore a qualidade do seu atendimento',
+  'Tenha segurança nos dados dos seus clientes, fornecedores e de toda a empresa',
+];
+
 function HeroBlock() {
-  // "GRANDES" letra por letra para staggered reveal
-  const grandesLetters = ['G', 'R', 'A', 'N', 'D', 'E', 'S'];
+  // Palavra de impacto letra por letra para staggered reveal.
+  const programmingLetters = Array.from('PROGRAMAÇÃO');
   const marqueeItems = [...HERO_MARQUEE_ITEMS, ...HERO_MARQUEE_ITEMS];
 
   return (
@@ -271,38 +280,38 @@ function HeroBlock() {
 
       {/* ===== Title block ===== */}
       <div className="relative z-10 flex flex-1 flex-col justify-end px-7 pt-16 pb-6">
-        {/* Title — "gostamos de" (serif italic, low contrast) */}
+        {/* Title — linha introdutória */}
         <motion.span
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
-          className="block text-[1.55rem] leading-none mb-2"
+          className="block text-[1.28rem] leading-none mb-2"
           style={{
             fontFamily: "'Barlow', var(--font-primary)",
-            fontWeight: 100,
+            fontWeight: 300,
             letterSpacing: '0.02em',
             color: 'rgba(255,255,255,0.48)',
             marginLeft: '0.15em',
           }}
         >
-          gostamos de
+          a empresa de
         </motion.span>
 
-        {/* GRANDES — display tipográfico monumental, letra por letra.
+        {/* PROGRAMAÇÃO — display tipográfico monumental, letra por letra.
             font-size escala com viewport mas é limitado para evitar overflow
             em telas estreitas (320–430px). Tracking afrouxado de -0.06em para
             -0.04em — em Sora 900 ultra-bold, valores muito agressivos
             sobrepunham as letras. */}
         <h1
-          className="relative flex items-end leading-[0.85] tracking-[-0.04em]"
+          className="relative flex items-end leading-[0.88] tracking-[-0.035em]"
           style={{
             fontFamily: 'var(--font-title)',
             fontWeight: 900,
-            fontSize: 'clamp(2.75rem, 15.5vw, 5.25rem)',
+            fontSize: 'clamp(2.15rem, 10.5vw, 4rem)',
             color: 'var(--color-lime)',
           }}
         >
-          {grandesLetters.map((letter, i) => (
+          {programmingLetters.map((letter, i) => (
             <motion.span
               key={i}
               initial={{ y: '110%', opacity: 0 }}
@@ -322,12 +331,12 @@ function HeroBlock() {
           ))}
         </h1>
 
-        {/* desafios. — em estilo display normal, levemente recuado */}
+        {/* Fechamento do título */}
         <motion.span
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55, ease: EASE_OUT }}
-          className="block text-[2.35rem] leading-[0.95] tracking-[-0.02em] mt-2"
+          className="block text-[1.92rem] leading-[1.02] tracking-[-0.01em] mt-2"
           style={{
             fontFamily: 'var(--font-title)',
             fontWeight: 700,
@@ -335,7 +344,7 @@ function HeroBlock() {
             paddingLeft: '0.04em',
           }}
         >
-          desafios<span style={{ color: 'var(--color-lime)' }}>.</span>
+          que você procura<span style={{ color: 'var(--color-lime)' }}>.</span>
         </motion.span>
 
         {/* Hairline divider antes do deck */}
@@ -362,18 +371,17 @@ function HeroBlock() {
             fontFamily: 'var(--font-primary)',
           }}
         >
-          Estamos aqui para resolver os problemas mais complexos da sua empresa
-          e te dar{' '}
+          Substitua as planilhas de Excel e economize as{' '}
           <strong
             style={{
-              fontFamily: 'var(--font-primary)',
+              fontFamily: "'Barlow', var(--font-primary)",
               fontWeight: 700,
               color: 'var(--color-lime)',
             }}
           >
-            escala
+            licenças caras
           </strong>
-          .
+          {' '}de software criando um sistema exclusivo para sua empresa.
         </motion.p>
 
         {/* CTA + decoração */}
@@ -473,6 +481,149 @@ function HeroBlock() {
           </span>
         </div>
       </motion.footer>
+    </div>
+  );
+}
+
+// ============================================================================
+// Benefits block — seção mobile para reforçar sistemas exclusivos.
+// ============================================================================
+
+function SystemBenefitsBlock() {
+  return (
+    <div
+      className="relative overflow-hidden px-6 py-20"
+      style={{
+        background:
+          'linear-gradient(180deg, var(--background-secondary) 0%, var(--background) 34%, var(--background) 100%)',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+      }}
+    >
+      <AtmosphereBg variant="case" />
+      <div
+        aria-hidden
+        className="absolute inset-x-6 top-0 h-px"
+        style={{
+          background:
+            'linear-gradient(90deg, transparent, rgba(57,255,20,0.52), transparent)',
+        }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mx-auto max-w-[27rem]"
+      >
+        <div className="mb-6">
+          <div className="mb-4 flex items-center gap-3">
+            <span
+              aria-hidden
+              className="h-px w-8"
+              style={{ backgroundColor: 'var(--color-lime)' }}
+            />
+            <span
+              className="text-[10px] font-bold uppercase tracking-[0.28em]"
+              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+            >
+              Você merece o melhor
+            </span>
+          </div>
+
+          <h2
+            className="text-[2.08rem] leading-[1.02] tracking-[-0.025em]"
+            style={{
+              fontFamily: 'var(--font-title)',
+              color: 'var(--foreground)',
+              fontWeight: 800,
+            }}
+          >
+            Benefícios de ter um sistema exclusivo para sua empresa
+          </h2>
+        </div>
+
+        <p
+          className="max-w-[24rem] text-[14.5px] leading-[1.55]"
+          style={{
+            fontFamily: 'var(--font-primary)',
+            color: 'rgba(255,255,255,0.62)',
+          }}
+        >
+          Um sistema feito para a sua operação reduz desperdício, organiza processos e
+          deixa sua equipe trabalhar com mais precisão.
+        </p>
+
+        <div
+          className="relative mt-10 overflow-hidden rounded-[24px]"
+          style={{
+            background:
+              'linear-gradient(155deg, rgba(22,22,22,0.82), rgba(8,8,8,0.64))',
+            border: '1px solid rgba(255,255,255,0.10)',
+            boxShadow:
+              '0 24px 58px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08)',
+          }}
+        >
+          <div
+            aria-hidden
+            className="absolute left-[1.85rem] top-8 bottom-8 w-px"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(57,255,20,0.7), rgba(57,255,20,0.16), transparent)',
+            }}
+          />
+          {SYSTEM_BENEFITS.map((benefit, index) => (
+            <motion.div
+              key={benefit}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.45, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+              className="relative flex items-start gap-4 px-4 py-4"
+              style={{
+                borderBottom:
+                  index === SYSTEM_BENEFITS.length - 1
+                    ? 'none'
+                    : '1px solid rgba(255,255,255,0.075)',
+              }}
+            >
+              <span
+                className="relative z-10 mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                style={{
+                  color: 'var(--color-lime)',
+                  backgroundColor: '#0b0b0b',
+                  border: '1px solid rgba(57,255,20,0.42)',
+                  boxShadow: '0 0 18px rgba(57,255,20,0.16)',
+                }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8">
+                  <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <div className="min-w-0">
+                <span
+                  className="mb-1 block text-[9px] font-bold uppercase tracking-[0.18em]"
+                  style={{
+                    fontFamily: 'var(--font-title)',
+                    color: 'rgba(57,255,20,0.7)',
+                  }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p
+                  className="text-[14px] leading-[1.45]"
+                  style={{
+                    fontFamily: 'var(--font-primary)',
+                    color: 'rgba(255,255,255,0.78)',
+                  }}
+                >
+                  {benefit}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 }
@@ -851,6 +1002,18 @@ export function MobileHeroSection() {
   return (
     <section style={{ backgroundColor: 'var(--background)' }}>
       <HeroBlock />
+    </section>
+  );
+}
+
+export function MobileSystemBenefitsSection() {
+  // Default false no SSR — seção exclusiva do fluxo mobile da home.
+  const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
+  if (!isMobile) return null;
+
+  return (
+    <section style={{ backgroundColor: 'var(--background)' }}>
+      <SystemBenefitsBlock />
     </section>
   );
 }

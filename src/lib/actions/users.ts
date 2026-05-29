@@ -19,9 +19,11 @@ export async function createUser(payload: {
   name: string
   email: string
   role: 'admin' | 'customer'
+  client_id?: string | null
   avatar_url?: string | null
 }): Promise<User> {
   const supabase = createAdminClient()
+  const clientId = payload.role === 'customer' ? payload.client_id ?? null : null
 
   const { data: authData, error: authError } = await supabase.auth.admin.inviteUserByEmail(
     payload.email,
@@ -29,6 +31,7 @@ export async function createUser(payload: {
       data: {
         name: payload.name,
         role: payload.role,
+        client_id: clientId,
         avatar_url: payload.avatar_url ?? null,
       },
     }
@@ -42,6 +45,7 @@ export async function createUser(payload: {
       email: authData.user.email!,
       name: payload.name,
       role: payload.role,
+      client_id: clientId,
       avatar_url: payload.avatar_url ?? null,
     })
     .select()
@@ -49,6 +53,7 @@ export async function createUser(payload: {
   if (error) throw new Error(error.message)
 
   revalidatePath('/dashboard/admin/usuarios')
+  revalidatePath('/dashboard/admin/clientes')
   return data
 }
 
@@ -57,18 +62,21 @@ export async function updateUser(
   payload: Partial<{
     name: string
     role: 'admin' | 'customer'
+    client_id: string | null
     avatar_url: string | null
   }>
 ): Promise<User> {
   const supabase = createAdminClient()
+  const updatePayload = payload.role === 'admin' ? { ...payload, client_id: null } : payload
   const { data, error } = await supabase
     .from('users')
-    .update(payload)
+    .update(updatePayload)
     .eq('id', id)
     .select()
     .single()
   if (error) throw new Error(error.message)
   revalidatePath('/dashboard/admin/usuarios')
+  revalidatePath('/dashboard/admin/clientes')
   return data
 }
 

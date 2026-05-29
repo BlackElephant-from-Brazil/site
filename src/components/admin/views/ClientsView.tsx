@@ -5,11 +5,13 @@ import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { createClient, updateClient, deleteClient } from '@/lib/actions/clients'
+import { createUser } from '@/lib/actions/users'
 import type { Client } from '@/types'
 
 type ViewMode = 'list' | 'grid'
 
 const EMPTY_FORM = { trade_name: '', cnpj: '', company_name: '', logo_url: '' }
+const EMPTY_USER_FORM = { name: '', email: '', avatar_url: '' }
 
 export function ClientsView({ initialClients }: { initialClients: Client[] }) {
   const router = useRouter()
@@ -20,6 +22,11 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
   const [form, setForm] = useState(EMPTY_FORM)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
+  const [userDrawerOpen, setUserDrawerOpen] = useState(false)
+  const [selectedClient, setSelectedClient] = useState<Client | null>(null)
+  const [userForm, setUserForm] = useState(EMPTY_USER_FORM)
+  const [userError, setUserError] = useState('')
+  const [userSaving, setUserSaving] = useState(false)
 
   function openNew() {
     setEditing(null)
@@ -38,6 +45,13 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
     })
     setError('')
     setDrawerOpen(true)
+  }
+
+  function openNewUser(client: Client) {
+    setSelectedClient(client)
+    setUserForm(EMPTY_USER_FORM)
+    setUserError('')
+    setUserDrawerOpen(true)
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -73,6 +87,30 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
       startTransition(() => router.refresh())
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Erro ao excluir.')
+    }
+  }
+
+  async function handleUserSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!selectedClient) { setUserError('Cliente não encontrado.'); return }
+    if (!userForm.name.trim()) { setUserError('Nome é obrigatório.'); return }
+    if (!userForm.email.trim()) { setUserError('E-mail é obrigatório.'); return }
+    setUserSaving(true)
+    setUserError('')
+    try {
+      await createUser({
+        name: userForm.name.trim(),
+        email: userForm.email.trim(),
+        role: 'customer',
+        client_id: selectedClient.id,
+        avatar_url: userForm.avatar_url.trim() || null,
+      })
+      setUserDrawerOpen(false)
+      startTransition(() => router.refresh())
+    } catch (err: unknown) {
+      setUserError(err instanceof Error ? err.message : 'Erro ao criar usuário.')
+    } finally {
+      setUserSaving(false)
     }
   }
 
@@ -197,7 +235,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.company_name ?? '—'}</td>
                   <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj ?? '—'}</td>
                   <td className="px-4 py-3 text-right">
-                    <RowActions onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
+                    <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
                   </td>
                 </tr>
               ))}
@@ -226,7 +264,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
                 <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj}</p>
               )}
               <div className="mt-auto flex justify-end gap-2 pt-2">
-                <RowActions onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
+                <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
               </div>
             </div>
           ))}
@@ -313,23 +351,129 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
           </div>
         </form>
       </Drawer>
+
+      <Drawer
+        open={userDrawerOpen}
+        onClose={() => setUserDrawerOpen(false)}
+        title="Novo Usuário"
+      >
+        <form onSubmit={handleUserSubmit} className="flex flex-col gap-5">
+          <div>
+            <label style={labelStyle}>Empresa</label>
+            <input
+              style={{
+                ...inputStyle,
+                opacity: 0.65,
+                cursor: 'not-allowed',
+              }}
+              value={selectedClient?.trade_name ?? ''}
+              disabled
+              readOnly
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Foto de Perfil (URL)</label>
+            <input
+              style={inputStyle}
+              value={userForm.avatar_url}
+              onChange={e => setUserForm(f => ({ ...f, avatar_url: e.target.value }))}
+              placeholder="https://..."
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Nome *</label>
+            <input
+              style={inputStyle}
+              value={userForm.name}
+              onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))}
+              placeholder="Nome completo"
+              required
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>E-mail *</label>
+            <input
+              style={inputStyle}
+              type="email"
+              value={userForm.email}
+              onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))}
+              placeholder="usuario@email.com"
+              required
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle}>Função</label>
+            <input
+              style={{
+                ...inputStyle,
+                opacity: 0.65,
+                cursor: 'not-allowed',
+              }}
+              value="Customer"
+              disabled
+              readOnly
+            />
+          </div>
+
+          {userError && (
+            <p className="text-xs" style={{ color: '#ff4d4f' }}>{userError}</p>
+          )}
+
+          <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>
+            Um e-mail de convite será enviado para o usuário definir sua senha.
+          </p>
+
+          <div className="flex gap-3 pt-2">
+            <button
+              type="submit"
+              disabled={userSaving}
+              className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
+              style={{
+                background: userSaving ? 'var(--card-border)' : 'var(--primary)',
+                color: '#000',
+              }}
+            >
+              {userSaving ? 'Salvando…' : 'Salvar'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setUserDrawerOpen(false)}
+              className="rounded-lg border px-4 py-2.5 text-sm transition-colors"
+              style={{ borderColor: 'var(--card-border)', color: 'var(--foreground-muted)' }}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </Drawer>
     </div>
   )
 }
 
-function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => void }) {
+function RowActions({ onAddUser, onEdit, onDelete }: { onAddUser: () => void; onEdit: () => void; onDelete: () => void }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center justify-end gap-2">
+      <button
+        onClick={onAddUser}
+        className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors"
+        style={{ color: 'var(--primary)' }}
+      >
+        Adicionar usuário
+      </button>
       <button
         onClick={onEdit}
-        className="rounded px-2 py-1 text-xs transition-colors"
+        className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors"
         style={{ color: 'var(--foreground-muted)' }}
       >
         Editar
       </button>
       <button
         onClick={onDelete}
-        className="rounded px-2 py-1 text-xs transition-colors"
+        className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors"
         style={{ color: '#ff4d4f' }}
       >
         Excluir
