@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 import { Link } from '@/i18n/navigation';
@@ -184,6 +184,13 @@ const COPY = {
 } as const;
 
 type HeroCopy = (typeof COPY)[LocaleKey];
+const CONTACT_FORM_FIELDS = ['nome', 'email', 'mensagem'] as const;
+type ContactFormField = (typeof CONTACT_FORM_FIELDS)[number];
+type ContactFormData = Record<ContactFormField, string>;
+
+function isContactFormField(name: string): name is ContactFormField {
+  return CONTACT_FORM_FIELDS.includes(name as ContactFormField);
+}
 
 const PROOF_CARDS = {
   pt: [
@@ -226,17 +233,27 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
   const activeLocale = getLocale(locale);
   const copy = COPY[activeLocale];
   const reduceMotion = useReducedMotion();
-  const [formData, setFormData] = useState({ nome: '', email: '', mensagem: '' });
+  const [formData, setFormData] = useState<ContactFormData>({ nome: '', email: '', mensagem: '' });
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
+    if (!isContactFormField(name)) {
+      return;
+    }
+
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmittingRef.current) {
+      return;
+    }
+
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -261,6 +278,7 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
     } catch {
       setSubmitStatus('error');
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -884,7 +902,7 @@ function ContactSection({
   onSubmit,
 }: {
   copy: HeroCopy;
-  formData: { nome: string; email: string; mensagem: string };
+  formData: ContactFormData;
   submitStatus: 'idle' | 'success' | 'error';
   isSubmitting: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -903,12 +921,16 @@ function ContactSection({
           </h2>
           <p className="mt-3 max-w-2xl text-white/60">{copy.formText}</p>
           {submitStatus === 'success' && (
-            <p className="mt-5 rounded-xl border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/10 p-4 text-sm text-[var(--color-lime)]">
+            <p
+              role="status"
+              aria-live="polite"
+              className="mt-5 rounded-xl border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/10 p-4 text-sm text-[var(--color-lime)]"
+            >
               {copy.success}
             </p>
           )}
           {submitStatus === 'error' && (
-            <p className="mt-5 rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-300">
+            <p role="alert" className="mt-5 rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-300">
               {copy.error}
             </p>
           )}
@@ -918,6 +940,7 @@ function ContactSection({
               <input
                 name="nome"
                 required
+                autoComplete="name"
                 value={formData.nome}
                 onChange={onChange}
                 className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-[var(--color-lime)]"
@@ -929,6 +952,7 @@ function ContactSection({
                 name="email"
                 type="email"
                 required
+                autoComplete="email"
                 value={formData.email}
                 onChange={onChange}
                 className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-[var(--color-lime)]"
