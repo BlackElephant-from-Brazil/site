@@ -1,7 +1,11 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 
+import { Link } from '@/i18n/navigation';
+import { portfolioItems } from '@/data/portfolio';
 import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 type LocaleKey = 'pt' | 'en';
@@ -49,6 +53,36 @@ const COPY = {
       'Uma pagina focada para campanhas, lancamentos, captacao de leads e conversao por WhatsApp.',
     websiteDescription: 'Um site profissional de 8 paginas para autoridade, SEO, servicos, prova e contato.',
     productIncludes: ['Copy e estrutura', 'Design responsivo', 'Performance', 'Publicacao assistida'],
+    landingBenefitsTitle: 'Por que uma landing page converte melhor em campanha',
+    landingBenefits: [
+      'Um unico objetivo por pagina',
+      'Oferta e CTA sem dispersao',
+      'Estrutura pronta para trafego pago',
+      'Captura de lead e WhatsApp em destaque',
+      'Mensagem alinhada ao anuncio',
+      'Experiencia rapida no mobile',
+    ],
+    websiteBenefitsTitle: 'Por que um site multipagina aumenta autoridade',
+    websiteBenefits: [
+      'Mais superficie para SEO',
+      'Paginas para cada servico',
+      'Mais contexto para visitante frio',
+      'Presenca institucional forte',
+      'Base para conteudo e campanhas futuras',
+      'Mais espaco para prova, processo e contato',
+    ],
+    portfolioTitle: 'Projetos que mostram execucao real',
+    portfolioText: 'Selecionamos cases de sites e plataformas para mostrar a qualidade visual e tecnica da entrega.',
+    portfolioCta: 'Ver portfolio completo',
+    marqueeTwo: ['SEU ANUNCIO MERECE UMA PAGINA QUE VENDA'],
+    testimonialsTitle: 'Prova social para reduzir o risco da decisao',
+    processTitle: 'Como tiramos sua pagina do briefing para o ar',
+    process: [
+      ['Briefing', 'Entendemos negocio, oferta, publico e objetivo de conversao.'],
+      ['Estrutura', 'Organizamos copy, secoes, fluxo e chamadas para acao.'],
+      ['Design e desenvolvimento', 'Criamos uma experiencia responsiva, rapida e premium.'],
+      ['Lancamento', 'Publicamos e deixamos a estrutura pronta para CTAs e tracking.'],
+    ],
     visualFlow: ['Trafego', 'Oferta', 'Lead', 'WhatsApp', 'Venda'],
     formTitle: 'Fale com a BlackElephant',
     formText: 'Envie uma mensagem e conte qual pagina sua empresa precisa vender melhor.',
@@ -87,6 +121,36 @@ const COPY = {
       'One focused page for campaigns, launches, lead capture, and WhatsApp conversion.',
     websiteDescription: 'An 8-page professional website for authority, SEO, services, proof, and contact.',
     productIncludes: ['Copy and structure', 'Responsive design', 'Performance', 'Launch support'],
+    landingBenefitsTitle: 'Why a landing page converts better for campaigns',
+    landingBenefits: [
+      'One objective per page',
+      'Offer and CTA without distraction',
+      'Structure built for paid traffic',
+      'Lead capture and WhatsApp in focus',
+      'Message aligned with the ad',
+      'Fast mobile experience',
+    ],
+    websiteBenefitsTitle: 'Why a multipage website builds authority',
+    websiteBenefits: [
+      'More surface for SEO',
+      'Pages for each service',
+      'More context for cold visitors',
+      'Stronger institutional presence',
+      'Base for future content and campaigns',
+      'More room for proof, process, and contact',
+    ],
+    portfolioTitle: 'Projects that show real execution',
+    portfolioText: 'Selected website and platform cases that show the visual and technical quality of the delivery.',
+    portfolioCta: 'View full portfolio',
+    marqueeTwo: ['YOUR AD DESERVES A PAGE THAT SELLS'],
+    testimonialsTitle: 'Social proof to reduce decision risk',
+    processTitle: 'How we take your page from briefing to launch',
+    process: [
+      ['Briefing', 'We understand the business, offer, audience, and conversion goal.'],
+      ['Structure', 'We organize copy, sections, flow, and calls to action.'],
+      ['Design and development', 'We create a responsive, fast, premium experience.'],
+      ['Launch', 'We publish and prepare the structure for CTAs and tracking.'],
+    ],
     visualFlow: ['Traffic', 'Offer', 'Lead', 'WhatsApp', 'Sale'],
     formTitle: 'Talk to BlackElephant',
     formText: 'Send a message and tell us what page your company needs to sell better.',
@@ -102,6 +166,49 @@ const COPY = {
 
 type HeroCopy = (typeof COPY)[LocaleKey];
 
+const TESTIMONIALS = {
+  pt: [
+    {
+      initials: 'MB',
+      name: 'Marina Borges',
+      role: 'Fundadora, consultoria B2B',
+      text: 'A pagina ficou clara, bonita e pronta para campanha sem perder a personalidade da marca.',
+    },
+    {
+      initials: 'RC',
+      name: 'Rafael Costa',
+      role: 'Diretor comercial',
+      text: 'O processo foi objetivo. Saimos do briefing para uma entrega profissional e bem estruturada.',
+    },
+    {
+      initials: 'AS',
+      name: 'Ana Souza',
+      role: 'Marketing, servicos premium',
+      text: 'A BlackElephant organizou oferta, visual e chamadas de acao de um jeito muito mais convincente.',
+    },
+  ],
+  en: [
+    {
+      initials: 'MB',
+      name: 'Marina Borges',
+      role: 'Founder, B2B consultancy',
+      text: 'The page became clear, polished, and campaign-ready without losing the brand personality.',
+    },
+    {
+      initials: 'RC',
+      name: 'Rafael Costa',
+      role: 'Sales director',
+      text: 'The process was direct. We went from briefing to a professional, well-structured delivery.',
+    },
+    {
+      initials: 'AS',
+      name: 'Ana Souza',
+      role: 'Marketing, premium services',
+      text: 'BlackElephant organized the offer, visuals, and calls to action in a much more convincing way.',
+    },
+  ],
+} as const;
+
 export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps) {
   const activeLocale = getLocale(locale);
   const copy = COPY[activeLocale];
@@ -116,6 +223,12 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
       <MarqueeBand items={copy.marqueeOne} variant="primary" />
       <ProblemSection copy={copy} reduceMotion={reduceMotion} />
       <ProductsSection copy={copy} reduceMotion={reduceMotion} />
+      <BenefitsSection title={copy.landingBenefitsTitle} items={copy.landingBenefits} accent="lime" reduceMotion={reduceMotion} />
+      <BenefitsSection title={copy.websiteBenefitsTitle} items={copy.websiteBenefits} accent="cyan" reduceMotion={reduceMotion} />
+      <PortfolioSection copy={copy} reduceMotion={reduceMotion} />
+      <MarqueeBand items={copy.marqueeTwo} variant="secondary" />
+      <TestimonialsSection locale={activeLocale} copy={copy} reduceMotion={reduceMotion} />
+      <ProcessSection copy={copy} reduceMotion={reduceMotion} />
     </div>
   );
 }
@@ -277,7 +390,7 @@ function HeroConversionVisual({
   );
 }
 
-function MarqueeBand({ items, variant }: { items: readonly string[]; variant: 'primary' | 'muted' }) {
+function MarqueeBand({ items, variant }: { items: readonly string[]; variant: 'primary' | 'secondary' }) {
   const reduceMotion = useReducedMotion();
   const isPrimary = variant === 'primary';
 
@@ -458,5 +571,265 @@ function ProductsSection({
         </div>
       </div>
     </section>
+  );
+}
+
+function BenefitsSection({
+  title,
+  items,
+  accent,
+  reduceMotion,
+}: {
+  title: string;
+  items: readonly string[];
+  accent: 'lime' | 'cyan' | 'pink';
+  reduceMotion: boolean | null;
+}) {
+  const accentStyles = {
+    lime: {
+      number: 'text-[var(--color-lime)]',
+      bar: 'bg-[var(--color-lime)]',
+      glow: 'bg-[var(--color-lime)]/10',
+      border: 'hover:border-[var(--color-lime)]/35',
+    },
+    cyan: {
+      number: 'text-cyan-300',
+      bar: 'bg-cyan-300',
+      glow: 'bg-cyan-400/10',
+      border: 'hover:border-cyan-300/35',
+    },
+    pink: {
+      number: 'text-fuchsia-300',
+      bar: 'bg-fuchsia-300',
+      glow: 'bg-fuchsia-400/10',
+      border: 'hover:border-fuchsia-300/35',
+    },
+  }[accent];
+
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div aria-hidden className={`absolute left-1/2 top-12 h-72 w-72 -translate-x-1/2 rounded-full blur-[120px] ${accentStyles.glow}`} />
+      <div className="site-container relative">
+        <h2
+          className="max-w-3xl text-[2.25rem] font-black leading-[1] text-white lg:text-[4rem]"
+          style={{ fontFamily: 'var(--font-title)' }}
+        >
+          {title}
+        </h2>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, index) => (
+            <motion.article
+              key={item}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: index * 0.04 }}
+              className={`rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition-colors ${accentStyles.border}`}
+            >
+              <span className={`text-sm font-black ${accentStyles.number}`}>
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div className={`mt-5 h-1 w-10 rounded-full ${accentStyles.bar}`} />
+              <p className="mt-5 text-lg font-semibold leading-snug text-white">{item}</p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioSection({
+  copy,
+  reduceMotion,
+}: {
+  copy: HeroCopy;
+  reduceMotion: boolean | null;
+}) {
+  const featuredPortfolio = useMemo(
+    () => portfolioItems.filter((item) => item.category === 'sites').slice(0, 3),
+    []
+  );
+
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div className="site-container">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between"
+        >
+          <div className="max-w-3xl">
+            <h2
+              className="text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl"
+              style={{ fontFamily: 'var(--font-title)' }}
+            >
+              {copy.portfolioTitle}
+            </h2>
+            <p className="mt-6 text-lg leading-[1.7] text-white/64">{copy.portfolioText}</p>
+          </div>
+          <Link
+            href="/portfolio"
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-6 text-sm font-bold text-white transition-all duration-300 hover:border-[var(--color-lime)]/60 hover:text-[var(--color-lime)]"
+          >
+            {copy.portfolioCta}
+          </Link>
+        </motion.div>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {featuredPortfolio.map((item, index) => (
+            <motion.article
+              key={item.id}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] transition-colors hover:border-[var(--color-lime)]/35"
+            >
+              <Link href={`/portfolio/${item.slug}`} className="block h-full">
+                {item.thumbnail && (
+                  <div className="relative aspect-[16/10] overflow-hidden bg-white/[0.03]">
+                    <Image
+                      src={item.thumbnail}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="text-xs font-black uppercase tracking-[0.2em] text-[var(--color-lime)]">
+                    {item.client}
+                  </div>
+                  <h3 className="mt-3 text-xl font-black text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-[1.65] text-white/62">{item.shortDescription}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {item.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-white/62"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection({
+  locale,
+  copy,
+  reduceMotion,
+}: {
+  locale: LocaleKey;
+  copy: HeroCopy;
+  reduceMotion: boolean | null;
+}) {
+  const testimonials = TESTIMONIALS[locale];
+
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div className="site-container">
+        <h2
+          className="max-w-3xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl"
+          style={{ fontFamily: 'var(--font-title)' }}
+        >
+          {copy.testimonialsTitle}
+        </h2>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {testimonials.map((testimonial, index) => (
+            <motion.article
+              key={testimonial.name}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-lime)] text-sm font-black text-black">
+                  {testimonial.initials}
+                </div>
+                <div className="flex gap-1 text-[var(--color-lime)]" aria-label="5 stars">
+                  {Array.from({ length: 5 }).map((_, starIndex) => (
+                    <StarIcon key={starIndex} />
+                  ))}
+                </div>
+              </div>
+              <p className="mt-6 text-base font-semibold leading-[1.65] text-white">{testimonial.text}</p>
+              <div className="mt-6 border-t border-white/10 pt-5">
+                <div className="font-black text-white">{testimonial.name}</div>
+                <div className="mt-1 text-sm text-white/52">{testimonial.role}</div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProcessSection({
+  copy,
+  reduceMotion,
+}: {
+  copy: HeroCopy;
+  reduceMotion: boolean | null;
+}) {
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div className="site-container">
+        <h2
+          className="max-w-4xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl"
+          style={{ fontFamily: 'var(--font-title)' }}
+        >
+          {copy.processTitle}
+        </h2>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {copy.process.map(([title, text], index) => (
+            <motion.article
+              key={title}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
+              className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/10 text-sm font-black text-[var(--color-lime)]">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3 className="mt-8 text-2xl font-black text-white">{title}</h3>
+              <p className="mt-4 text-sm leading-[1.7] text-white/62">{text}</p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="h-4 w-4"
+    >
+      <path d="m10 1.6 2.47 5 5.53.8-4 3.9.94 5.5L10 14.2l-4.94 2.6L6 11.3 2 7.4l5.53-.8L10 1.6Z" />
+    </svg>
   );
 }
