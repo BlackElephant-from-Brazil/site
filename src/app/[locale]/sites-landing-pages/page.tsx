@@ -26,6 +26,7 @@ function getMetadataCopy(locale: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const copy = getMetadataCopy(locale);
+  const canonicalLocale = locale === 'pt' ? 'pt' : 'en';
 
   return {
     title: copy.title,
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: copy.description,
     },
     alternates: {
-      canonical: `/${locale}/sites-landing-pages`,
+      canonical: `/${canonicalLocale}/sites-landing-pages`,
       languages: {
         'pt-BR': '/pt/sites-landing-pages',
         en: '/en/sites-landing-pages',
