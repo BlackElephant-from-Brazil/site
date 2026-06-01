@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import Image from 'next/image';
 
 import { Link } from '@/i18n/navigation';
 import { portfolioItems } from '@/data/portfolio';
@@ -166,45 +165,39 @@ const COPY = {
 
 type HeroCopy = (typeof COPY)[LocaleKey];
 
-const TESTIMONIALS = {
+const PROOF_CARDS = {
   pt: [
     {
-      initials: 'MB',
-      name: 'Marina Borges',
-      role: 'Fundadora, consultoria B2B',
-      text: 'A pagina ficou clara, bonita e pronta para campanha sem perder a personalidade da marca.',
+      label: 'Sinal de entrega',
+      title: 'Clareza antes da campanha',
+      text: 'A pagina organiza oferta, argumentos e chamada principal para que o visitante entenda rapido o proximo passo.',
     },
     {
-      initials: 'RC',
-      name: 'Rafael Costa',
-      role: 'Diretor comercial',
-      text: 'O processo foi objetivo. Saimos do briefing para uma entrega profissional e bem estruturada.',
+      label: 'Criterio de decisao',
+      title: 'Experiencia confiavel',
+      text: 'Design, responsividade e velocidade ajudam a reduzir atrito quando o clique vem de anuncio, busca ou indicacao.',
     },
     {
-      initials: 'AS',
-      name: 'Ana Souza',
-      role: 'Marketing, servicos premium',
-      text: 'A BlackElephant organizou oferta, visual e chamadas de acao de um jeito muito mais convincente.',
+      label: 'Base comercial',
+      title: 'Caminho claro para contato',
+      text: 'A estrutura destaca CTAs, WhatsApp e pontos de prova sem depender de promessas de resultado ou metricas nao verificadas.',
     },
   ],
   en: [
     {
-      initials: 'MB',
-      name: 'Marina Borges',
-      role: 'Founder, B2B consultancy',
-      text: 'The page became clear, polished, and campaign-ready without losing the brand personality.',
+      label: 'Delivery signal',
+      title: 'Clarity before the campaign',
+      text: 'The page organizes the offer, arguments, and primary call to action so visitors quickly understand the next step.',
     },
     {
-      initials: 'RC',
-      name: 'Rafael Costa',
-      role: 'Sales director',
-      text: 'The process was direct. We went from briefing to a professional, well-structured delivery.',
+      label: 'Decision criteria',
+      title: 'Trustworthy experience',
+      text: 'Design, responsiveness, and speed help reduce friction when the click comes from an ad, search, or referral.',
     },
     {
-      initials: 'AS',
-      name: 'Ana Souza',
-      role: 'Marketing, premium services',
-      text: 'BlackElephant organized the offer, visuals, and calls to action in a much more convincing way.',
+      label: 'Sales foundation',
+      title: 'Clear path to contact',
+      text: 'The structure highlights CTAs, WhatsApp, and proof points without relying on unverified outcome promises or metrics.',
     },
   ],
 } as const;
@@ -582,7 +575,7 @@ function BenefitsSection({
 }: {
   title: string;
   items: readonly string[];
-  accent: 'lime' | 'cyan' | 'pink';
+  accent: 'lime' | 'cyan';
   reduceMotion: boolean | null;
 }) {
   const accentStyles = {
@@ -597,12 +590,6 @@ function BenefitsSection({
       bar: 'bg-cyan-300',
       glow: 'bg-cyan-400/10',
       border: 'hover:border-cyan-300/35',
-    },
-    pink: {
-      number: 'text-fuchsia-300',
-      bar: 'bg-fuchsia-300',
-      glow: 'bg-fuchsia-400/10',
-      border: 'hover:border-fuchsia-300/35',
     },
   }[accent];
 
@@ -689,18 +676,28 @@ function PortfolioSection({
               className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] transition-colors hover:border-[var(--color-lime)]/35"
             >
               <Link href={`/portfolio/${item.slug}`} className="block h-full">
-                {item.thumbnail && (
-                  <div className="relative aspect-[16/10] overflow-hidden bg-white/[0.03]">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                <div className="relative aspect-[16/10] overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(57,255,20,0.18),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.09),rgba(255,255,255,0.02))]">
+                  <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:28px_28px]" />
+                  <div className="absolute inset-x-5 top-5 rounded-2xl border border-white/10 bg-black/30 p-4 backdrop-blur-sm">
+                    <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-3">
+                      <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-lime)]">
+                        {item.category}
+                      </span>
+                      <span className="text-xs font-bold text-white/52">{item.year}</span>
+                    </div>
+                    <div className="mt-4 h-3 w-2/3 rounded-full bg-white/20" />
+                    <div className="mt-3 h-3 w-1/2 rounded-full bg-[var(--color-lime)]/35" />
+                    <div className="mt-5 grid grid-cols-3 gap-2">
+                      {item.technologies.slice(0, 3).map((tech) => (
+                        <span key={tech} className="h-8 rounded-lg border border-white/10 bg-white/[0.06]" />
+                      ))}
+                    </div>
                   </div>
-                )}
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <div className="text-xs font-black uppercase tracking-[0.2em] text-white/46">{item.client}</div>
+                    <div className="mt-2 text-2xl font-black leading-none text-white">{item.title}</div>
+                  </div>
+                </div>
                 <div className="p-6">
                   <div className="text-xs font-black uppercase tracking-[0.2em] text-[var(--color-lime)]">
                     {item.client}
@@ -736,7 +733,7 @@ function TestimonialsSection({
   copy: HeroCopy;
   reduceMotion: boolean | null;
 }) {
-  const testimonials = TESTIMONIALS[locale];
+  const proofCards = PROOF_CARDS[locale];
 
   return (
     <section className="relative py-20 lg:py-28">
@@ -749,30 +746,20 @@ function TestimonialsSection({
         </h2>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
+          {proofCards.map((proofCard, index) => (
             <motion.article
-              key={testimonial.name}
+              key={proofCard.title}
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
               className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-lime)] text-sm font-black text-black">
-                  {testimonial.initials}
-                </div>
-                <div className="flex gap-1 text-[var(--color-lime)]" aria-label="5 stars">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <StarIcon key={starIndex} />
-                  ))}
-                </div>
+              <div className="text-xs font-black uppercase tracking-[0.2em] text-[var(--color-lime)]">
+                {proofCard.label}
               </div>
-              <p className="mt-6 text-base font-semibold leading-[1.65] text-white">{testimonial.text}</p>
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="font-black text-white">{testimonial.name}</div>
-                <div className="mt-1 text-sm text-white/52">{testimonial.role}</div>
-              </div>
+              <h3 className="mt-6 text-2xl font-black leading-tight text-white">{proofCard.title}</h3>
+              <p className="mt-5 text-base leading-[1.7] text-white/64">{proofCard.text}</p>
             </motion.article>
           ))}
         </div>
@@ -818,18 +805,5 @@ function ProcessSection({
         </div>
       </div>
     </section>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="h-4 w-4"
-    >
-      <path d="m10 1.6 2.47 5 5.53.8-4 3.9.94 5.5L10 14.2l-4.94 2.6L6 11.3 2 7.4l5.53-.8L10 1.6Z" />
-    </svg>
   );
 }
