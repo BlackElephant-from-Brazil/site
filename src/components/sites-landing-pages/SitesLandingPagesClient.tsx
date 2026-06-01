@@ -279,25 +279,34 @@ function HeroConversionVisual({
 
 function MarqueeBand({ items, variant }: { items: readonly string[]; variant: 'primary' | 'muted' }) {
   const reduceMotion = useReducedMotion();
-  const repeatedItems = [...items, ...items];
   const isPrimary = variant === 'primary';
 
   return (
     <section
       className={`relative overflow-hidden border-y ${isPrimary ? 'border-[var(--color-lime)]/20 bg-[var(--color-lime)]/8' : 'border-white/10 bg-white/[0.03]'}`}
     >
+      <ul className="sr-only">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
       <motion.div
+        aria-hidden="true"
         animate={reduceMotion ? undefined : { x: ['0%', '-50%'] }}
         transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-        className="flex w-max gap-8 py-5"
+        className="flex w-max py-5"
       >
-        {repeatedItems.map((item, index) => (
-          <span
-            key={`${item}-${index}`}
-            className="whitespace-nowrap text-sm font-black uppercase tracking-[0.24em] text-white/72"
-          >
-            {item}
-          </span>
+        {[0, 1].map((track) => (
+          <div key={track} className="flex gap-8 pr-8">
+            {items.map((item) => (
+              <span
+                key={`${track}-${item}`}
+                className="whitespace-nowrap text-sm font-black uppercase tracking-[0.24em] text-white/72"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         ))}
       </motion.div>
     </section>
