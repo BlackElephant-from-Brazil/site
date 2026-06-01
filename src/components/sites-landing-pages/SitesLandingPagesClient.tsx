@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 import { Link } from '@/i18n/navigation';
@@ -92,6 +92,16 @@ const COPY = {
     sending: 'Enviando...',
     success: 'Mensagem enviada. Vamos responder em breve.',
     error: 'Nao foi possivel enviar agora. Tente novamente ou chame no WhatsApp.',
+    faqTitle: 'Duvidas antes de comprar',
+    faqs: [
+      ['Qual a diferenca entre landing page e site multipagina?', 'A landing page foca em uma oferta e uma conversao. O site multipagina cria autoridade, SEO e paginas para diferentes servicos.'],
+      ['Posso comprar direto?', 'Sim. Use os botoes de compra direta. Se quiser validar o melhor formato antes, chame no WhatsApp ou agende uma call.'],
+      ['O que preciso enviar?', 'Oferta, referencias, identidade visual se existir, textos ou informacoes do negocio e acesso aos canais que serao usados nos CTAs.'],
+      ['Funciona no celular?', 'Sim. A pagina sera responsiva e pensada para a experiencia mobile.'],
+      ['Da para usar WhatsApp e Calendly?', 'Sim. Os CTAs podem direcionar para WhatsApp, Calendly, formulario ou checkout, conforme a estrategia.'],
+    ],
+    contactPanelTitle: 'Prefere falar antes?',
+    contactPanelText: 'Use WhatsApp, call ou mensagem. O caminho mais rapido e escolher como voce quer vender.',
   },
   en: {
     eyebrow: 'Landing pages and websites for campaigns that need to sell',
@@ -160,6 +170,16 @@ const COPY = {
     sending: 'Sending...',
     success: 'Message sent. We will reply soon.',
     error: 'We could not send it now. Try again or message us on WhatsApp.',
+    faqTitle: 'Questions before buying',
+    faqs: [
+      ['What is the difference between a landing page and a multipage website?', 'A landing page focuses on one offer and one conversion. A multipage website builds authority, SEO, and pages for different services.'],
+      ['Can I buy directly?', 'Yes. Use the direct purchase buttons. If you want to validate the best format first, message us on WhatsApp or schedule a call.'],
+      ['What do I need to send?', 'Offer details, references, visual identity if available, business information, and access to the channels used in the CTAs.'],
+      ['Does it work on mobile?', 'Yes. The page will be responsive and designed for the mobile experience.'],
+      ['Can we use WhatsApp and Calendly?', 'Yes. CTAs can point to WhatsApp, Calendly, a form, or checkout depending on the strategy.'],
+    ],
+    contactPanelTitle: 'Prefer to talk first?',
+    contactPanelText: 'Use WhatsApp, a call, or a message. The fastest path is choosing how you want to sell.',
   },
 } as const;
 
@@ -206,6 +226,44 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
   const activeLocale = getLocale(locale);
   const copy = COPY[activeLocale];
   const reduceMotion = useReducedMotion();
+  const [formData, setFormData] = useState({ nome: '', email: '', mensagem: '' });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch(LINKS.contactWebhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          origem: 'sites-landing-pages',
+          locale: activeLocale,
+        }),
+      });
+
+      if (!response.ok) {
+        setSubmitStatus('error');
+        return;
+      }
+
+      setSubmitStatus('success');
+      setFormData({ nome: '', email: '', mensagem: '' });
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div
@@ -222,6 +280,15 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
       <MarqueeBand items={copy.marqueeTwo} variant="secondary" />
       <TestimonialsSection locale={activeLocale} copy={copy} reduceMotion={reduceMotion} />
       <ProcessSection copy={copy} reduceMotion={reduceMotion} />
+      <ContactSection
+        copy={copy}
+        formData={formData}
+        submitStatus={submitStatus}
+        isSubmitting={isSubmitting}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+      <FaqSection copy={copy} reduceMotion={reduceMotion} />
     </div>
   );
 }
@@ -800,6 +867,182 @@ function ProcessSection({
               </div>
               <h3 className="mt-8 text-2xl font-black text-white">{title}</h3>
               <p className="mt-4 text-sm leading-[1.7] text-white/62">{text}</p>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection({
+  copy,
+  formData,
+  submitStatus,
+  isSubmitting,
+  onChange,
+  onSubmit,
+}: {
+  copy: HeroCopy;
+  formData: { nome: string; email: string; mensagem: string };
+  submitStatus: 'idle' | 'success' | 'error';
+  isSubmitting: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}) {
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-[var(--color-lime)]/20 to-transparent" />
+      <div className="site-container relative grid gap-8 lg:grid-cols-[1fr_0.72fr]">
+        <form onSubmit={onSubmit} className="rounded-3xl border border-white/10 bg-white/[0.035] p-6 lg:p-8">
+          <h2
+            className="text-3xl font-black text-white sm:text-4xl lg:text-5xl"
+            style={{ fontFamily: 'var(--font-title)' }}
+          >
+            {copy.formTitle}
+          </h2>
+          <p className="mt-3 max-w-2xl text-white/60">{copy.formText}</p>
+          {submitStatus === 'success' && (
+            <p className="mt-5 rounded-xl border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/10 p-4 text-sm text-[var(--color-lime)]">
+              {copy.success}
+            </p>
+          )}
+          {submitStatus === 'error' && (
+            <p className="mt-5 rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-300">
+              {copy.error}
+            </p>
+          )}
+          <div className="mt-7 grid gap-5">
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              {copy.name}
+              <input
+                name="nome"
+                required
+                value={formData.nome}
+                onChange={onChange}
+                className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-[var(--color-lime)]"
+              />
+            </label>
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              {copy.email}
+              <input
+                name="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={onChange}
+                className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-[var(--color-lime)]"
+              />
+            </label>
+            <label className="grid gap-2 text-sm font-semibold text-white">
+              {copy.message}
+              <textarea
+                name="mensagem"
+                required
+                rows={5}
+                value={formData.mensagem}
+                onChange={onChange}
+                className="resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition-colors focus:border-[var(--color-lime)]"
+              />
+            </label>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-full bg-[var(--color-lime)] px-7 py-4 font-black text-black transition-colors hover:bg-[var(--color-lime-light)] disabled:opacity-60"
+            >
+              {isSubmitting ? copy.sending : copy.submit}
+            </button>
+          </div>
+        </form>
+
+        <aside className="rounded-3xl border border-white/10 bg-black/30 p-6 lg:p-8">
+          <div className="mb-6 h-1 w-14 rounded-full bg-[var(--color-lime)]" />
+          <h3
+            className="text-2xl font-black leading-tight text-white sm:text-3xl"
+            style={{ fontFamily: 'var(--font-title)' }}
+          >
+            {copy.contactPanelTitle}
+          </h3>
+          <p className="mt-4 text-sm leading-[1.7] text-white/62">{copy.contactPanelText}</p>
+
+          <div className="mt-8 grid gap-3">
+            <a
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-6 text-sm font-bold text-white transition-all duration-300 hover:border-white/30"
+            >
+              {copy.whatsapp}
+            </a>
+            <a
+              href={LINKS.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={reportReservarHorarioConversion}
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-fuchsia-400/35 bg-fuchsia-500/10 px-6 text-sm font-bold text-fuchsia-100 transition-all duration-300 hover:bg-fuchsia-500/20"
+            >
+              {copy.calendly}
+            </a>
+            <a
+              href={LINKS.landingCheckout}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-lime)] px-6 text-sm font-bold text-black transition-all duration-300 hover:bg-[var(--color-lime-light)]"
+            >
+              {copy.buyLanding}
+            </a>
+            <a
+              href={LINKS.websiteCheckout}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-6 text-sm font-bold text-white transition-all duration-300 hover:border-[var(--color-lime)]/60 hover:text-[var(--color-lime)]"
+            >
+              {copy.buyWebsite}
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function FaqSection({
+  copy,
+  reduceMotion,
+}: {
+  copy: HeroCopy;
+  reduceMotion: boolean | null;
+}) {
+  return (
+    <section className="relative pb-20 lg:pb-28">
+      <div className="site-container">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10 max-w-3xl"
+        >
+          <h2
+            className="text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl"
+            style={{ fontFamily: 'var(--font-title)' }}
+          >
+            {copy.faqTitle}
+          </h2>
+        </motion.div>
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          {copy.faqs.map(([question, answer], index) => (
+            <motion.article
+              key={question}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.45, delay: index * 0.04 }}
+              className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6"
+            >
+              <h3 className="text-xl font-black leading-tight text-white">{question}</h3>
+              <p className="mt-4 text-sm leading-[1.7] text-white/62">{answer}</p>
             </motion.article>
           ))}
         </div>
