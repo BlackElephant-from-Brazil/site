@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getKanbanBoard } from '@/lib/actions/kanban-cards'
+import { getKanbanBoard, createKanbanCard, moveKanbanCard, updateKanbanCard, deleteKanbanCard } from '@/lib/actions/kanban-cards'
 import { getProjects } from '@/lib/actions/projects'
 import { getAdminUsers, getCurrentUserPublicId } from '@/lib/actions/users'
 import { getClients } from '@/lib/actions/clients'
@@ -21,11 +21,17 @@ export default async function KanbanPage({ params }: { params: Params }) {
   ])
   return (
     <KanbanBoard
+      title="Softwares"
+      subtitle="Quadro de atividades de desenvolvimento"
       initialBoard={board}
       projects={projectsWithRefs}
       adminUsers={adminUsers}
       clients={clients}
       currentUserId={currentUserId}
+      createCard={createKanbanCard}
+      moveCard={moveKanbanCard}
+      updateCard={updateKanbanCard}
+      deleteCard={deleteKanbanCard}
     />
   )
 }

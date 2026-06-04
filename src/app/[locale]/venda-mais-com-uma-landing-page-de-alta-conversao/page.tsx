@@ -44,10 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: copy.description,
     },
     alternates: {
-      canonical: `/${canonicalLocale}/sites-landing-pages`,
+      canonical: `/${canonicalLocale}/venda-mais-com-uma-landing-page-de-alta-conversao`,
       languages: {
-        'pt-BR': '/pt/sites-landing-pages',
-        en: '/en/sites-landing-pages',
+        'pt-BR': '/pt/venda-mais-com-uma-landing-page-de-alta-conversao',
+        en: '/en/venda-mais-com-uma-landing-page-de-alta-conversao',
       },
     },
   };

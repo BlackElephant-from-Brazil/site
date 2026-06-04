@@ -50,11 +50,30 @@ const NAV = [
     ),
     children: [
       {
-        label: 'Kanban',
+        label: 'Softwares',
         href: `${ADMIN_BASE}/kanban`,
         icon: (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="5" height="18" rx="1" /><rect x="10" y="3" width="5" height="12" rx="1" /><rect x="17" y="3" width="5" height="8" rx="1" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Landing Pages',
+        href: `${ADMIN_BASE}/landing-pages`,
+        icon: (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Sites',
+        href: `${ADMIN_BASE}/sites`,
+        icon: (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
           </svg>
         ),
       },
@@ -151,7 +170,13 @@ function NavLink({ href, label, icon, exact, indent }: NavLinkProps) {
 
 export function AdminSidebar({ user }: { user: User }) {
   const pathname = usePathname()
-  const devRoutes = [`${ADMIN_BASE}/kanban`, `${ADMIN_BASE}/projetos`, `${ADMIN_BASE}/configuracoes`]
+  const devRoutes = [
+    `${ADMIN_BASE}/kanban`,
+    `${ADMIN_BASE}/landing-pages`,
+    `${ADMIN_BASE}/sites`,
+    `${ADMIN_BASE}/projetos`,
+    `${ADMIN_BASE}/configuracoes`,
+  ]
   const devActive = devRoutes.some(r => pathname.startsWith(r))
   const [devOpen, setDevOpen] = useState(devActive)
 

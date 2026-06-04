@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 012 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 016 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -128,6 +128,7 @@ Cards do Kanban vinculados a colunas e projetos.
 | `assignee_id` | UUID | FK → public.users(id) ON DELETE SET NULL, nullable |
 | `name` | TEXT | NOT NULL |
 | `description` | TEXT | nullable |
+| `hours_worked` | NUMERIC(8,2) | nullable |
 | `card_number` | INTEGER | NOT NULL DEFAULT 1 |
 | `position` | INTEGER | NOT NULL DEFAULT 0 |
 | `created_at` | TIMESTAMPTZ | DEFAULT utc now |
@@ -291,6 +292,82 @@ Registros de horas dos administradores. Vinculado a cliente, projeto ou card do 
 **Policies:** `agenda_entries_admin` — FOR ALL, apenas role='admin'  
 **Trigger:** `trg_agenda_entries_updated`  
 **Indexes:** `idx_agenda_entries_user`, `idx_agenda_entries_client`, `idx_agenda_entries_project`, `idx_agenda_entries_date`
+
+---
+
+---
+
+## Tabela: `public.users` — campo adicional (migration 013)
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `client_id` | UUID | FK → public.clients(id) ON DELETE SET NULL, nullable |
+
+**Index:** `idx_users_client`
+
+---
+
+## Tabela: `public.sites_projects`
+
+Projetos do módulo Sites (sem project_types).
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK |
+| `client_id` | UUID | nullable, FK → public.clients(id) ON DELETE SET NULL |
+| `name` | TEXT | NOT NULL |
+| `acronym` | TEXT | NOT NULL |
+| `is_internal` | BOOLEAN | NOT NULL DEFAULT FALSE |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado  
+**Policies:** `sites_projects_admin` — FOR ALL, apenas role='admin'  
+**Trigger:** `trg_sites_projects_updated`  
+**Index:** `idx_sites_projects_client`
+
+---
+
+## Tabela: `public.sites_kanban_columns`
+
+Colunas do Kanban de Sites. Mesma estrutura de `kanban_columns`.
+
+**RLS:** habilitado | **Policies:** `sites_kanban_columns_admin` | **Trigger:** `trg_sites_kanban_columns_updated`
+
+---
+
+## Tabela: `public.sites_kanban_cards`
+
+Cards do Kanban de Sites. Mesma estrutura de `kanban_cards` (com `hours_worked`), mas referencia `sites_kanban_columns` e `sites_projects`.
+
+**RLS:** habilitado | **Policies:** `sites_kanban_cards_admin` | **Trigger:** `trg_sites_kanban_cards_updated`  
+**Indexes:** `idx_sites_kanban_cards_column`, `idx_sites_kanban_cards_project`, `idx_sites_kanban_cards_assignee`
+
+---
+
+## Tabela: `public.landing_pages_projects`
+
+Projetos do módulo Landing Pages (sem project_types). Mesma estrutura de `sites_projects`.
+
+**RLS:** habilitado | **Policies:** `landing_pages_projects_admin` | **Trigger:** `trg_landing_pages_projects_updated`  
+**Index:** `idx_landing_pages_projects_client`
+
+---
+
+## Tabela: `public.landing_pages_kanban_columns`
+
+Colunas do Kanban de Landing Pages. Mesma estrutura de `kanban_columns`.
+
+**RLS:** habilitado | **Policies:** `landing_pages_kanban_columns_admin` | **Trigger:** `trg_landing_pages_kanban_columns_updated`
+
+---
+
+## Tabela: `public.landing_pages_kanban_cards`
+
+Cards do Kanban de Landing Pages. Mesma estrutura de `sites_kanban_cards`, mas referencia `landing_pages_kanban_columns` e `landing_pages_projects`.
+
+**RLS:** habilitado | **Policies:** `landing_pages_kanban_cards_admin` | **Trigger:** `trg_landing_pages_kanban_cards_updated`  
+**Indexes:** `idx_lp_kanban_cards_column`, `idx_lp_kanban_cards_project`, `idx_lp_kanban_cards_assignee`
 
 ---
 
