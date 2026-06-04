@@ -70,6 +70,7 @@ export interface KanbanCard {
   assignee_id: string | null
   name: string
   description: string | null
+  hours_worked: number | null
   card_number: number
   position: number
   created_at: string
@@ -83,6 +84,72 @@ export interface KanbanCardWithProject extends KanbanCard {
 
 export interface KanbanColumnWithCards extends KanbanColumn {
   cards: KanbanCardWithProject[]
+}
+
+// ─── Generic Board types (used by KanbanBoard and CardDetailModal) ────────────
+export interface KanbanBoardProject {
+  id: string
+  name: string
+  acronym: string
+  client_id: string | null
+  client?: Pick<Client, 'id' | 'trade_name'> | null
+}
+
+export interface KanbanBoardCard extends KanbanCard {
+  project: KanbanBoardProject | null
+  assignee: Pick<User, 'id' | 'name' | 'avatar_url'> | null
+}
+
+export interface KanbanBoardColumn extends KanbanColumn {
+  cards: KanbanBoardCard[]
+}
+
+// ─── Sites ───────────────────────────────────────────────────────────────────
+export interface SitesProject {
+  id: string
+  client_id: string | null
+  name: string
+  acronym: string
+  is_internal: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface SitesProjectWithClient extends SitesProject {
+  client: Client | null
+}
+
+export interface SitesKanbanCardWithProject extends KanbanCard {
+  project: SitesProjectWithClient | null
+  assignee: Pick<User, 'id' | 'name' | 'avatar_url'> | null
+}
+
+export interface SitesKanbanColumnWithCards extends KanbanColumn {
+  cards: SitesKanbanCardWithProject[]
+}
+
+// ─── Landing Pages ────────────────────────────────────────────────────────────
+export interface LandingPageProject {
+  id: string
+  client_id: string | null
+  name: string
+  acronym: string
+  is_internal: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface LandingPageProjectWithClient extends LandingPageProject {
+  client: Client | null
+}
+
+export interface LandingPageKanbanCardWithProject extends KanbanCard {
+  project: LandingPageProjectWithClient | null
+  assignee: Pick<User, 'id' | 'name' | 'avatar_url'> | null
+}
+
+export interface LandingPageKanbanColumnWithCards extends KanbanColumn {
+  cards: LandingPageKanbanCardWithProject[]
 }
 
 // ─── Goals ───────────────────────────────────────────────────

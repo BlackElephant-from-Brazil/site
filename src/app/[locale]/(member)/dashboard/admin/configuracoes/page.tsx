@@ -7,11 +7,32 @@ type Params = Promise<{ locale: string }>
 const CONFIG_CARDS = [
   {
     href: 'configuracoes/kanban',
-    title: 'Colunas do Kanban',
-    description: 'Adicione, renomeie, reordene e exclua colunas do quadro.',
+    title: 'Colunas do Kanban - Software',
+    description: 'Configure as colunas do quadro de atividades de software.',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="5" height="18" rx="1" /><rect x="10" y="3" width="5" height="12" rx="1" /><rect x="17" y="3" width="5" height="8" rx="1" />
+      </svg>
+    ),
+  },
+  {
+    href: 'configuracoes/landing-pages',
+    title: 'Colunas do Kanban - Landing Pages',
+    description: 'Configure as colunas do quadro de atividades de landing pages.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+  },
+  {
+    href: 'configuracoes/sites',
+    title: 'Colunas do Kanban - Sites',
+    description: 'Configure as colunas do quadro de atividades de sites.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
     ),
   },

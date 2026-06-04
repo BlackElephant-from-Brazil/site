@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { CardDetailModal } from '@/components/admin/kanban/CardDetailModal'
-import { createKanbanCard, moveKanbanCard } from '@/lib/actions/kanban-cards'
-import type { KanbanColumnWithCards, KanbanCardWithProject, ProjectWithRefs, Client, User } from '@/types'
+import { uploadKanbanImage } from '@/lib/actions/uploads'
+import type { KanbanCard, KanbanBoardProject, KanbanBoardCard, KanbanBoardColumn, Client, User } from '@/types'
 
 function getInitials(name: string): string {
   const parts = name.trim().split(' ').filter(p => p.length > 0)
@@ -16,29 +16,69 @@ function getInitials(name: string): string {
 }
 
 interface Props {
-  initialBoard: KanbanColumnWithCards[]
-  projects: ProjectWithRefs[]
+  title: string
+  subtitle: string
+  initialBoard: KanbanBoardColumn[]
+  projects: KanbanBoardProject[]
   adminUsers: Pick<User, 'id' | 'name' | 'avatar_url'>[]
   clients: Client[]
   currentUserId: string | null
+  createCard: (payload: {
+    column_id: string
+    name: string
+    description?: string | null
+    project_id?: string | null
+    assignee_id?: string | null
+  }) => Promise<KanbanCard>
+  moveCard: (
+    cardId: string,
+    targetColumnId: string,
+    targetPosition: number,
+    sourceColumnId: string,
+    sourceIndex: number
+  ) => Promise<void>
+  updateCard: (
+    id: string,
+    payload: Partial<{
+      name: string
+      description: string | null
+      project_id: string | null
+      assignee_id: string | null
+      hours_worked: number | null
+    }>
+  ) => Promise<KanbanCard>
+  deleteCard: (id: string) => Promise<void>
 }
 
-export function KanbanBoard({ initialBoard, projects, adminUsers, clients, currentUserId }: Props) {
+export function KanbanBoard({
+  title,
+  subtitle,
+  initialBoard,
+  projects,
+  adminUsers,
+  clients,
+  currentUserId,
+  createCard,
+  moveCard,
+  updateCard,
+  deleteCard,
+}: Props) {
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [board, setBoard] = useState(initialBoard)
-  const [selectedCard, setSelectedCard] = useState<KanbanCardWithProject | null>(null)
+  const [selectedCard, setSelectedCard] = useState<KanbanBoardCard | null>(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [newCardForm, setNewCardForm] = useState({ name: '', description: '', project_id: '', assignee_id: '' })
   const [saving, setSaving] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
   const [filterClientId, setFilterClientId] = useState('')
   const [filterProjectId, setFilterProjectId] = useState('')
   const [filterUserIds, setFilterUserIds] = useState<string[]>([])
   const [userDropdownOpen, setUserDropdownOpen] = useState(false)
   const userDropdownRef = useRef<HTMLDivElement>(null)
+  const imageInputRef = useRef<HTMLInputElement>(null)
 
-  // DnD state
   const dragCard = useRef<{ cardId: string; sourceColumnId: string; sourceIndex: number } | null>(null)
 
   const firstColumnId = board[0]?.id
@@ -99,7 +139,6 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     const targetCol = board.find(c => c.id === targetColumnId)!
     const targetPosition = targetCol.cards.length
 
-    // optimistic update
     const movingCard = sourceCol.cards.find(c => c.id === drag.cardId)!
     setBoard(prev => prev.map(col => {
       if (col.id === drag.sourceColumnId) {
@@ -114,7 +153,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     dragCard.current = null
 
     try {
-      await moveKanbanCard(drag.cardId, targetColumnId, targetPosition, drag.sourceColumnId, drag.sourceIndex)
+      await moveCard(drag.cardId, targetColumnId, targetPosition, drag.sourceColumnId, drag.sourceIndex)
       startTransition(() => router.refresh())
     } catch {
       setBoard(initialBoard)
@@ -130,7 +169,6 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     const sourceCol = board.find(c => c.id === drag.sourceColumnId)!
     const movingCard = sourceCol.cards.find(c => c.id === drag.cardId)!
 
-    // optimistic update
     setBoard(prev => {
       const next = prev.map(col => ({
         ...col,
@@ -147,7 +185,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     dragCard.current = null
 
     try {
-      await moveKanbanCard(drag.cardId, targetColumnId, targetIndex, drag.sourceColumnId, drag.sourceIndex)
+      await moveCard(drag.cardId, targetColumnId, targetIndex, drag.sourceColumnId, drag.sourceIndex)
       startTransition(() => router.refresh())
     } catch {
       setBoard(initialBoard)
@@ -160,13 +198,28 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     setSaving(true)
     setError('')
     try {
-      await createKanbanCard({
+      const created = await createCard({
         column_id: firstColumnId,
         name: newCardForm.name.trim(),
         description: newCardForm.description.trim() || null,
         project_id: newCardForm.project_id || null,
         assignee_id: newCardForm.assignee_id || null,
       })
+
+      const project = newCardForm.project_id
+        ? (projects.find(p => p.id === newCardForm.project_id) ?? null)
+        : null
+      const assignee = newCardForm.assignee_id
+        ? (adminUsers.find(u => u.id === newCardForm.assignee_id) ?? null)
+        : null
+
+      const newBoardCard: KanbanBoardCard = { ...created, project: project ?? null, assignee: assignee ?? null }
+
+      setBoard(prev => prev.map(col =>
+        col.id === firstColumnId
+          ? { ...col, cards: [...col.cards, newBoardCard] }
+          : col
+      ))
       setDrawerOpen(false)
       setNewCardForm({ name: '', description: '', project_id: '', assignee_id: '' })
       startTransition(() => router.refresh())
@@ -177,7 +230,27 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
     }
   }
 
-  function handleCardUpdate(updated: KanbanCardWithProject) {
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const url = await uploadKanbanImage(formData)
+      setNewCardForm(f => ({
+        ...f,
+        description: f.description + (f.description ? '\n' : '') + `![](${url})`,
+      }))
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Erro ao fazer upload da imagem.')
+    } finally {
+      setUploading(false)
+      if (imageInputRef.current) imageInputRef.current.value = ''
+    }
+  }
+
+  function handleCardUpdate(updated: KanbanBoardCard) {
     setBoard(prev =>
       prev.map(col => ({
         ...col,
@@ -227,7 +300,7 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
 
   return (
     <div className="flex flex-col" style={{ height: 'calc(100vh - 8rem)' }}>
-      <AdminPageHeader title="Kanban" subtitle="Quadro de atividades do time" />
+      <AdminPageHeader title={title} subtitle={subtitle} />
 
       {board.length === 0 ? (
         <p className="text-sm italic" style={{ color: 'var(--foreground-muted)' }}>
@@ -449,26 +522,33 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
                         className="mt-1 line-clamp-2 text-xs"
                         style={{ color: 'var(--foreground-muted)' }}
                       >
-                        {card.description}
+                        {card.description.replace(/!\[.*?\]\(.*?\)/g, '[imagem]')}
                       </p>
                     )}
-                    {card.assignee && (
-                      <div className="mt-2 flex justify-end">
-                        <div
-                          className="flex items-center justify-center rounded-full text-xs font-semibold"
-                          style={{
-                            width: 28,
-                            height: 28,
-                            background: 'rgba(57,255,20,0.15)',
-                            color: 'var(--color-lime)',
-                            flexShrink: 0,
-                          }}
-                          title={card.assignee.name}
-                        >
-                          {getInitials(card.assignee.name)}
+                    <div className="mt-2 flex items-center justify-between">
+                      {card.hours_worked != null && (
+                        <span className="text-xs" style={{ color: 'var(--foreground-muted)' }}>
+                          {card.hours_worked}h
+                        </span>
+                      )}
+                      {card.assignee && (
+                        <div className="ml-auto">
+                          <div
+                            className="flex items-center justify-center rounded-full text-xs font-semibold"
+                            style={{
+                              width: 28,
+                              height: 28,
+                              background: 'rgba(57,255,20,0.15)',
+                              color: 'var(--color-lime)',
+                              flexShrink: 0,
+                            }}
+                            title={card.assignee.name}
+                          >
+                            {getInitials(card.assignee.name)}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -544,12 +624,36 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
           </div>
 
           <div>
-            <label style={labelStyle}>Descrição</label>
+            <div className="mb-1.5 flex items-center justify-between">
+              <label style={{ ...labelStyle, marginBottom: 0 }}>Descrição</label>
+              <button
+                type="button"
+                onClick={() => imageInputRef.current?.click()}
+                disabled={uploading}
+                style={{
+                  fontSize: '0.7rem',
+                  color: uploading ? 'var(--foreground-muted)' : 'var(--color-lime)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: uploading ? 'default' : 'pointer',
+                  padding: '0 0.25rem',
+                }}
+              >
+                {uploading ? 'Enviando…' : '+ Imagem'}
+              </button>
+            </div>
             <textarea
               style={{ ...inputStyle, minHeight: '100px', resize: 'vertical' }}
               value={newCardForm.description}
               onChange={e => setNewCardForm(f => ({ ...f, description: e.target.value }))}
               placeholder="Descreva a atividade…"
+            />
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageUpload}
             />
           </div>
 
@@ -582,6 +686,8 @@ export function KanbanBoard({ initialBoard, projects, adminUsers, clients, curre
         onClose={() => setSelectedCard(null)}
         onUpdate={handleCardUpdate}
         onDelete={handleCardDelete}
+        updateCard={updateCard}
+        deleteCard={deleteCard}
       />
     </div>
   )

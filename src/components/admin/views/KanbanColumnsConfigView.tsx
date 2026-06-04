@@ -3,15 +3,27 @@
 import { useState, useRef, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
-import {
-  createKanbanColumn,
-  updateKanbanColumn,
-  reorderKanbanColumns,
-  deleteKanbanColumn,
-} from '@/lib/actions/kanban-columns'
 import type { KanbanColumn } from '@/types'
 
-export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: KanbanColumn[] }) {
+interface Props {
+  title: string
+  subtitle: string
+  initialColumns: KanbanColumn[]
+  createColumn: (name: string) => Promise<KanbanColumn>
+  updateColumn: (id: string, name: string) => Promise<KanbanColumn>
+  reorderColumns: (orderedIds: string[]) => Promise<void>
+  deleteColumn: (id: string) => Promise<void>
+}
+
+export function KanbanColumnsConfigView({
+  title,
+  subtitle,
+  initialColumns,
+  createColumn,
+  updateColumn,
+  reorderColumns,
+  deleteColumn,
+}: Props) {
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [columns, setColumns] = useState(initialColumns)
@@ -29,7 +41,7 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
     setSaving(true)
     setError('')
     try {
-      const created = await createKanbanColumn(newName.trim())
+      const created = await createColumn(newName.trim())
       setColumns(prev => [...prev, created])
       setNewName('')
       setAddingNew(false)
@@ -44,7 +56,7 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
   async function handleRename(id: string) {
     if (!editName.trim()) { setEditingId(null); return }
     try {
-      const updated = await updateKanbanColumn(id, editName.trim())
+      const updated = await updateColumn(id, editName.trim())
       setColumns(prev => prev.map(c => c.id === id ? updated : c))
       setEditingId(null)
       startTransition(() => router.refresh())
@@ -71,7 +83,7 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
     dragItem.current = null
     dragOverItem.current = null
     try {
-      await reorderKanbanColumns(reordered.map(c => c.id))
+      await reorderColumns(reordered.map(c => c.id))
       startTransition(() => router.refresh())
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erro ao reordenar.')
@@ -83,7 +95,7 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
     if (!confirm('Excluir esta coluna?')) return
     setError('')
     try {
-      await deleteKanbanColumn(id)
+      await deleteColumn(id)
       setColumns(prev => prev.filter(c => c.id !== id))
       startTransition(() => router.refresh())
     } catch (err: unknown) {
@@ -105,8 +117,8 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
   return (
     <div>
       <AdminPageHeader
-        title="Colunas do Kanban"
-        subtitle="Configure as colunas do quadro de atividades"
+        title={title}
+        subtitle={subtitle}
         action={
           <button
             onClick={() => setAddingNew(true)}
@@ -173,7 +185,6 @@ export function KanbanColumnsConfigView({ initialColumns }: { initialColumns: Ka
                 cursor: 'grab',
               }}
             >
-              {/* drag handle */}
               <span style={{ color: 'var(--foreground-muted)', cursor: 'grab' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="9" y1="6" x2="15" y2="6" /><line x1="9" y1="12" x2="15" y2="12" /><line x1="9" y1="18" x2="15" y2="18" />
