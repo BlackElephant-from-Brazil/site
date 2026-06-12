@@ -325,7 +325,9 @@
     "solutionAI": "Automation & AI",
     "company": "Company",
     "copyright": "© 2025 BlackElephant Technology. All rights reserved.",
-    "madeWith": "Developed by BlackElephant"
+    "madeWith": "Developed by BlackElephant",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use"
   },
   "member": {
     "dashboard": "Member Dashboard",
