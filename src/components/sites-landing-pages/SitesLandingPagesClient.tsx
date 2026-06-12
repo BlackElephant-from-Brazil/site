@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
-import { useRouter } from '@/i18n/navigation';
 import { reportContatoWhatsappConversion } from '@/lib/analytics/google-ads';
 
 type LocaleKey = 'pt' | 'en';
@@ -13,6 +12,7 @@ type SitesLandingPagesClientProps = {
 
 export const LINKS = {
   whatsapp: 'https://wa.me/5519978055531',
+  whatsappHero: 'https://wa.me/5519978055531?text=Ol%C3%A1%2C%20vim%20pelo%20site%20de%20voc%C3%AA%20e%20preciso%20de%20uma%20Landing%20Page',
   calendly: 'https://calendly.com/guilherme-blackelephant/30min',
   landingCheckout: 'https://buy.stripe.com/test_7sYfZh5ZJ0Hn4TacuoenS01',
   contactWebhook: 'https://black-elephant.app.n8n.cloud/webhook/blackelephant-contact-form',
@@ -24,9 +24,9 @@ function getLocale(locale: string): LocaleKey {
 
 const COPY = {
   pt: {
-    eyebrow: 'Venda mais',
-    heroTitle: 'Sua página não está convertendo acessos em dinheiro?',
-    heroText: 'Ter uma Landing Page de alta conversão é fundamental para melhorar a saúde do seu negócio.',
+    eyebrow: 'Faça sua Landing Page de Alta Conversão',
+    heroTitle: 'Tenha uma\npágina que converte\nacessos em vendas.',
+    heroText: 'Imagine ter uma vitrine tão boa que te traz clientes até quando você está dormindo.',
     heroCtaLabel: 'Ver como funciona',
     heroAvgDelivery: 'Média de entrega: 36h',
     heroCounter: 'Landing Pages entregues',
@@ -42,7 +42,7 @@ const COPY = {
       'Garantia real de 15 dias: se a entrega não atender o briefing ou você simplesmente não gostar, refaremos do zero ou devolvemos o valor. Sem negociação. A palavra é nossa.',
     marqueeOne: ['ALTA CONVERSÃO', 'SEO', 'PERFORMANCE', 'DESIGN PREMIUM', 'WHATSAPP', 'TRÁFEGO PAGO', 'COPY ESTRATÉGICA'],
     problemTitle: 'Você não está perdendo vendas por causa do anúncio.',
-    problemText: 'Você ajustou o criativo. Testou audiência. Otimizou o orçamento. O anúncio está performando.\n\nMas a conversão não sai.\n\nNa maioria dos casos, o problema não é o tráfego. É a página. Lenta no celular. Com texto genérico. Com um CTA escondido. Sem mensagem alinhada ao anúncio.\n\nE enquanto isso, cada clique continua custando.',
+    problemText: 'Você ajustou o criativo. Testou audiência. Otimizou orçamento. O anúncio está performando. Mas a conversão não sai. Na maioria dos casos, o problema não é o tráfego. É a página. Lenta no celular, com texto genérico, CTA escondido e mensagem desalinhada do anúncio. E enquanto isso, cada clique continua custando.',
     outcomes: [
       ['Página genérica sem conexão com o anúncio', 'Mensagem alinhada ao criativo da campanha'],
       ['CTA enterrado no meio da página', 'Oferta clara e CTA visível em todos os pontos'],
@@ -69,16 +69,16 @@ const COPY = {
       ['Velocidade que não perde o visitante', '3 segundos de carregamento e 50% dos visitantes já foram embora. A página é leve, rápida e não pune o clique que você pagou.'],
       ['Pronta em 48h, não em 3 semanas', 'Sua campanha não pode esperar. A página fica no ar em 48 horas após o briefing, com tracking configurado.'],
     ],
-    whyTitle: 'Desenvolvemos páginas como se fôssemos gestores de tráfego. Não como designers.',
-    whyText: 'A diferença entre uma landing page bonita e uma que converte é que a segunda foi construída pensando no clique que chegou nela.\n\nNão fazemos sites. Fazemos páginas que fecham o que o anúncio abre.',
-    testimonialsTitle: 'O antes e o depois de quem trocou a página',
-    processTitle: 'Da conversa ao ar em 48h.',
-    processSubtitle: 'Simples para você. Sem reuniões intermináveis. Sem atraso.',
+    whyTitle: 'Páginas feitas por especialistas em conversão.',
+    whyText: 'A diferença entre uma página bonita e uma que vende é que a segunda foi construída pensando no clique que chegou nela. Não fazemos sites. Fazemos páginas que fecham o que o anúncio abre.',
+    testimonialsTitle: 'O antes e o depois de quem trocou a página.',
+    processTitle: 'Da primeira mensagem ao ar em até 4 dias.',
+    processSubtitle: 'Simples pra você. Sem reunião interminável, sem orçamento que demora uma semana pra chegar.',
     process: [
-      ['Você conta, a gente entende', 'Você responde um briefing direto sobre a oferta, o público e o objetivo. Sem reuniões longas. Em menos de 1 hora você já entregou tudo o que precisamos.'],
-      ['Copy e estrutura no mesmo dia', 'Montamos a estrutura da página: copy estratégica, seções em ordem de conversão e CTAs nos lugares certos. Você aprova antes de entrar no design.'],
-      ['Uma rodada de revisão, não dez', 'Fazemos a página responsiva, rápida no mobile e com identidade visual alinhada à sua marca. Sem surpresas no resultado.'],
-      ['Lançamento em 48h', 'A página vai ao ar com tracking configurado, URL definida e pronta para receber campanha. A maioria das entregas acontece antes das 48h.'],
+      ['Você chama no WhatsApp', 'Conta sua oferta, seu público e seu objetivo. É um diagnóstico gratuito, direto na conversa. Sem call obrigatória.'],
+      ['Você recebe a proposta exata', 'Com base no que seu negócio precisa, enviamos a proposta sob medida. Aprovou? Começamos no mesmo dia.'],
+      ['Copy, design e desenvolvimento', 'Montamos estrutura, texto estratégico e design alinhado à sua marca. Você acompanha e aprova antes de ir ao ar.'],
+      ['Tudo no ar em até 4 dias', 'Página publicada com hospedagem, SSL, SEO, formulário e métricas configurados. Pronta pra receber campanha.'],
     ],
     formTitle: 'Ainda tem dúvidas? Conta para a gente.',
     formText: 'Sem compromisso. Entendemos a sua situação e mostramos se faz sentido.',
@@ -90,20 +90,21 @@ const COPY = {
     formErrorMessage: 'Algo deu errado. Tente de novo ou nos chame no WhatsApp.',
     faqTitle: 'As perguntas que aparecem toda vez, respondidas com honestidade.',
     faqs: [
-      ['Em quanto tempo a página fica pronta?', 'Em até 48 horas após a aprovação do briefing. Na prática, a maioria das entregas acontece em 36 a 40 horas. Você recebe a URL com a página no ar, pronta para receber tráfego.'],
-      ['Qual é a garantia?', '15 dias de garantia total. Se a entrega não atendeu o briefing ou você simplesmente não gostou, você escolhe: refazemos do zero ou devolvemos o valor integralmente. Sem processo, sem argumentação. A responsabilidade é nossa.'],
-      ['Já contratei agência antes e me decepcionei. Por que seria diferente?', 'Porque a maioria das agências faz sites. A gente faz páginas para campanhas de tráfego. Quem vai lidar com a sua entrega entende de copy, de CTA e de como o tráfego chega na página. Não é designer generalista. É especialista em conversão. E se não gostar, você tem 15 dias para pedir o dinheiro de volta. Sem argumentação.'],
-      ['Posso comprar direto?', 'Sim, e é o caminho mais rápido. Após a compra, enviamos o briefing e começamos em até 2 horas. Se preferir falar antes, tem WhatsApp e call disponíveis.'],
-      ['O que preciso enviar?', 'Oferta, público-alvo, identidade visual (se tiver) e os canais de CTA (WhatsApp, formulário, link de checkout). Não precisa ter tudo pronto. A gente ajuda a organizar no briefing.'],
-      ['Funciona no celular?', 'Sim. A página é mobile-first, construída primeiro para o celular e depois para desktop. Porque é onde mais de 80% dos cliques de tráfego pago chegam.'],
-      ['Vocês garantem que a landing vai converter?', 'Não garantimos conversão. Isso dependeria da sua oferta, do seu tráfego e do seu preço. Nenhuma agência séria garante isso. O que garantimos é a entrega: uma página construída com as melhores práticas de conversão. Se não atender, devolvemos o valor. O que está no nosso controle, está garantido.'],
+      ['Em quanto tempo fica pronta?', 'Em até 4 dias após a aprovação do briefing, com tudo configurado: hospedagem, SSL, SEO, formulário e métricas. Você recebe a URL pronta pra receber tráfego.'],
+      ['Quanto custa?', 'Depende do escopo do seu projeto. Em uma conversa rápida no WhatsApp você recebe a proposta exata, sem compromisso. Não trabalhamos com pacote genérico porque negócio genérico não existe.'],
+      ['A hospedagem é grátis mesmo?', 'Sim. Servidor, configuração, SSL e Cloudflare são por nossa conta, sem mensalidade. Você não paga nada além do projeto.'],
+      ['Preciso ter logo, domínio ou material pronto?', 'Não. A gente ajuda a organizar tudo no briefing. Se você tiver identidade visual, usamos. Se não tiver, resolvemos junto.'],
+      ['Funciona bem no celular?', 'Sim. A página é mobile-first: construída primeiro pro celular, onde chegam mais de 80% dos cliques de tráfego pago.'],
+      ['Vocês garantem que vai converter?', 'Não garantimos conversão, porque isso depende da sua oferta, do seu tráfego e do seu preço. Nenhuma agência séria garante isso. O que garantimos é a entrega: uma página construída com as melhores práticas de conversão. Se não atender, devolvemos o valor.'],
+      ['Já me decepcionei com agência antes. Por que seria diferente?', 'Porque a maioria das agências faz sites. A gente faz páginas pra campanha. Quem cuida da sua entrega entende de copy, CTA e tráfego. E você tem 15 dias de garantia pra comprovar.'],
+      ['Vocês atendem a minha cidade?', 'Atendemos todo o Brasil, 100% online. A maioria dos nossos clientes está no Sul e Sudeste, e todo o processo acontece pelo WhatsApp, sem precisar de reunião presencial.'],
     ],
     finalCtaEyebrow: 'Última chamada',
-    finalCtaTitle: 'Cada dia com a página errada é mais dinheiro gasto em tráfego que não converte.',
-    finalCtaText: 'Se você continuar com a página que tem agora, o resultado vai ser o mesmo. O anúncio vai continuar pagando cliques que a página não fecha.',
-    finalCtaPs: 'A entrega é em até 48h após o briefing. A garantia é de 15 dias. Se não atender, devolvemos tudo. A única coisa que você arrisca é continuar com a página que já tem.',
-    finalCtaBuyLabel: 'Quero minha landing page agora',
-    finalCtaWhatsappLabel: 'Falar no WhatsApp antes',
+    finalCtaTitle: 'Cada dia com a página errada é dinheiro de anúncio indo embora.',
+    finalCtaText: 'Se você continuar com a página que tem agora, o resultado vai ser o mesmo: o anúncio vai continuar pagando cliques que a página não fecha. A conversa é gratuita, leva 10 minutos e você sai sabendo exatamente o que precisa.',
+    finalCtaPs: 'A proposta é sob medida, a entrega leva até 4 dias e a garantia é de 15 dias. A única coisa que você arrisca é continuar com a página que já tem.',
+    finalCtaBuyLabel: 'Chamar no WhatsApp agora',
+    finalCtaWhatsappLabel: 'Agendar uma call',
   },
   en: {
     eyebrow: 'For those who invest in paid traffic',
@@ -263,14 +264,14 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
     >
       <HeroSection copy={copy} reduceMotion={reduceMotion} />
       <ProblemSection copy={copy} reduceMotion={reduceMotion} />
-      <OfferSection copy={copy} reduceMotion={reduceMotion} calendlyUrl={calendlyUrl} />
+      <StatsSection reduceMotion={reduceMotion} />
+      <IncludedSection reduceMotion={reduceMotion} />
       <WhySection copy={copy} reduceMotion={reduceMotion} />
-      <BenefitsSection copy={copy} reduceMotion={reduceMotion} />
+      <AudienceSection reduceMotion={reduceMotion} />
       <TestimonialsSection locale={activeLocale} copy={copy} reduceMotion={reduceMotion} />
       <ProcessSection copy={copy} reduceMotion={reduceMotion} />
-      <ContactSection copy={copy} reduceMotion={reduceMotion} calendlyUrl={calendlyUrl} />
       <FaqSection copy={copy} reduceMotion={reduceMotion} />
-      <FinalCtaSection copy={copy} reduceMotion={reduceMotion} />
+      <FinalCtaSection copy={copy} reduceMotion={reduceMotion} calendlyUrl={calendlyUrl} />
     </div>
   );
 }
@@ -416,10 +417,6 @@ function HeroCounter({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
 // ─── Hero Section ────────────────────────────────────────────────────────────
 
 function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
-  const handleScrollToOffer = () => {
-    document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -445,21 +442,48 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
                 )}
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-lime)]" />
               </span>
-              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--color-lime)]/75">
-                {copy.eyebrow}
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-lime)]/75">
+                <span className="font-medium">Faça sua Landing Page de </span>
+                <span className="font-black">Alta Conversão</span>
               </p>
             </div>
 
-            {/* Título — última linha em lime */}
+            {/* Título */}
             <h1
-              className="text-[1.875rem] font-black leading-[1.08] sm:text-[2.75rem] lg:text-[3.75rem]"
+              className="text-[1.875rem] leading-[1.12] sm:text-[2.75rem] lg:text-[3.75rem]"
               style={{ fontFamily: 'var(--font-title)' }}
             >
-              {copy.heroTitle.split('\n').map((line, i, arr) => (
-                <span key={i} className={`block ${i === arr.length - 1 ? 'text-[var(--color-lime)]' : ''}`}>
-                  {line}
-                </span>
-              ))}
+              {copy.heroTitle.split('\n').map((line, i, arr) => {
+                if (arr.length === 3) {
+                  if (i === 0) return (
+                    <span key={i} className="block text-white" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
+                      {line}
+                    </span>
+                  );
+                  if (i === arr.length - 1) {
+                    const lastSpace = line.lastIndexOf(' ');
+                    const before = line.slice(0, lastSpace + 1);
+                    const rawWord = line.slice(lastSpace + 1);
+                    const hasPeriod = rawWord.endsWith('.');
+                    const lastWord = hasPeriod ? rawWord.slice(0, -1) : rawWord;
+                    return (
+                      <span key={i} className="block font-black text-white">
+                        {before}<span className="text-[var(--color-lime)]">{lastWord}</span>{hasPeriod && '.'}
+                      </span>
+                    );
+                  }
+                  return (
+                    <span key={i} className="block font-black text-white">
+                      {line}
+                    </span>
+                  );
+                }
+                return (
+                  <span key={i} className={`block font-black ${i === arr.length - 1 ? 'text-[var(--color-lime)]' : ''}`}>
+                    {line}
+                  </span>
+                );
+              })}
             </h1>
 
             {/* Slider mobile */}
@@ -475,19 +499,12 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
             {/* CTAs + contador */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-3 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={handleScrollToOffer}
-                  className="inline-flex min-h-[52px] w-full cursor-pointer items-center justify-center rounded-full bg-[var(--color-lime)] px-8 text-sm font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_36px_rgba(57,255,20,0.28)] active:scale-[0.97] sm:w-auto sm:text-base"
-                >
-                  {copy.heroCtaLabel}
-                </button>
                 <a
-                  href={LINKS.whatsapp}
+                  href={LINKS.whatsappHero}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={reportContatoWhatsappConversion}
-                  className="inline-flex min-h-[52px] w-full items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-8 text-sm font-black text-white transition-all duration-300 hover:border-white/30 active:scale-[0.97] sm:w-auto sm:text-base"
+                  className="inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-8 text-sm font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_36px_rgba(57,255,20,0.28)] active:scale-[0.97] sm:w-auto sm:text-base"
                 >
                   {copy.whatsapp}
                 </a>
@@ -539,38 +556,61 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
             </span>
           </div>
 
-          <h2 className="text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            {copy.problemTitle}
+          <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Você não está</span>
+            <span className="font-black text-white">perdendo vendas por causa do </span>
+            <span className="font-black text-[var(--color-lime)]">anúncio</span>
+            <span className="font-black text-white">.</span>
           </h2>
 
-          {/* Multi-parágrafo com agitação */}
-          <div className="mt-6 space-y-4">
-            {copy.problemText.split('\n\n').map((para, i) => (
-              <p key={i} className="text-base leading-[1.75] text-white/58 lg:text-lg">{para}</p>
-            ))}
+          <div className="mt-6">
+            <p className="text-base leading-[1.75] text-white/58 lg:text-lg">
+              Você ajustou o anúncio. O tráfego chega. Mas a conversão não sai. Na maioria dos casos,
+              o problema não é o tráfego, é a{' '}
+              <strong className="font-black text-white">página</strong>: lenta no celular, texto genérico
+              e CTA escondido. E cada clique continua{' '}
+              <em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', fontWeight: 300, color: 'rgba(255,255,255,0.85)' }}>custando</em>.
+            </p>
           </div>
         </motion.div>
 
-        {/* Cards Antes / Depois */}
-        <div className="grid gap-3 sm:grid-cols-2">
+        {/* Cards Antes / Depois — vertical, ícone colorido */}
+        <div className="grid gap-4 sm:grid-cols-2">
           {copy.outcomes.map(([before, after], index) => (
             <motion.div
               key={index}
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.42, delay: index * 0.06 }}
-              className="overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03]"
+              className="overflow-hidden rounded-2xl border border-white/[0.08]"
+            style={{ backgroundColor: 'var(--glass-background)' }}
             >
-              {/* Antes */}
-              <div className="flex items-start gap-3 border-b border-white/6 px-5 py-4">
-                <span className="mt-0.5 shrink-0 text-[9px] font-black uppercase tracking-[0.2em] text-red-400/70">Antes</span>
-                <p className="text-sm leading-snug text-white/45">{before}</p>
+              {/* ANTES */}
+              <div className="flex flex-col gap-3 p-5">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-500/30 bg-red-500/15">
+                    <svg className="h-3.5 w-3.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-red-400/80">Sua página feita por outros</span>
+                </div>
+                <p className="text-sm leading-[1.65] text-white/50">{before}</p>
               </div>
-              {/* Depois */}
-              <div className="flex items-start gap-3 px-5 py-4">
-                <span className="mt-0.5 shrink-0 text-[9px] font-black uppercase tracking-[0.2em] text-[var(--color-lime)]/80">Depois</span>
-                <p className="text-sm font-semibold leading-snug text-white">{after}</p>
+              {/* Divisor */}
+              <div className="mx-5 border-t border-white/[0.07]" />
+              {/* DEPOIS */}
+              <div className="flex flex-col gap-3 p-5">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/15">
+                    <svg className="h-3.5 w-3.5 text-[var(--color-lime)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-lime)]/80">Sua página feita por nós</span>
+                </div>
+                <p className="text-sm font-semibold leading-[1.65] text-white/85">{after}</p>
               </div>
             </motion.div>
           ))}
@@ -580,7 +620,7 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
   );
 }
 
-// ─── Offer Section ───────────────────────────────────────────────────────────
+// ─── Offer Section (kept for scroll-to anchor, no content) ───────────────────
 
 function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; reduceMotion: boolean | null; calendlyUrl: string }) {
   return (
@@ -677,80 +717,155 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
   );
 }
 
-// ─── Why Section (nova — quebra de desconfiança) ──────────────────────────────
+// ─── Stats Section ───────────────────────────────────────────────────────────
 
-function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
+const STATS = [
+  { countTo: 100, prefix: '', suffix: '+', label: 'páginas entregues' },
+  { countTo: 4, prefix: 'até ', suffix: '', label: 'dias para tudo no ar' },
+  { countTo: null, static: '5,0', label: 'de avaliação média' },
+  { countTo: null, static: 'R$ 0', label: 'de mensalidade de hospedagem' },
+] as const;
+
+function StatCounter({
+  countTo, prefix = '', suffix = '', staticValue, index, reduceMotion,
+}: {
+  countTo: number | null; prefix?: string; suffix?: string; staticValue?: string;
+  index: number; reduceMotion: boolean | null;
+}) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+
+  useEffect(() => {
+    if (!isInView || countTo === null) return;
+    if (reduceMotion) { setCount(countTo); return; }
+    let rafId: number;
+    let startTime: number | null = null;
+    const duration = 1600;
+    const step = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * countTo));
+      if (progress < 1) rafId = requestAnimationFrame(step);
+    };
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [isInView, reduceMotion, countTo]);
+
+  const displayed = staticValue ?? `${prefix}${count}${suffix}`;
+
   return (
-    <section className="relative py-20 lg:py-28">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-[var(--color-lime)]/5 blur-[140px]" />
-      </div>
+    <div ref={ref} className="flex flex-col gap-2 px-6 py-8 lg:px-10 lg:py-10" style={{ backgroundColor: 'var(--background-secondary)' }}>
+      <div aria-hidden className="mb-1 h-px w-8" style={{ backgroundColor: index === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.15)' }} />
+      <span
+        className="text-[2.5rem] font-black leading-none lg:text-[3.5rem]"
+        style={{ fontFamily: 'var(--font-title)', color: index === 0 ? 'var(--color-lime)' : 'white' }}
+      >
+        {displayed}
+      </span>
+      <span className="text-sm leading-snug text-white/52">{STATS[index].label}</span>
+    </div>
+  );
+}
 
+function StatsSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+  return (
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-lime)]/6 blur-[160px]" />
+      </div>
       <div className="site-container relative">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="grid gap-10 lg:grid-cols-12 lg:gap-16"
+          className="mb-12 max-w-2xl"
         >
-          {/* Coluna título */}
-          <div className="lg:col-span-6">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-              <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-                Nossa diferença
-              </span>
-            </div>
-
-            <h2
-              className="text-[2.25rem] font-black leading-[1.02] text-white lg:text-[3.25rem]"
-              style={{ fontFamily: 'var(--font-title)' }}
-            >
-              {/* Mix tipográfico inspirado na home: bold + thin italic */}
-              {copy.whyTitle.split('. ').map((sentence, i, arr) => (
-                <span key={i}>
-                  {i === arr.length - 1 ? (
-                    <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'normal', fontWeight: 100, color: 'var(--color-lime)' }}>
-                      {sentence}
-                    </em>
-                  ) : (
-                    <>{sentence}. </>
-                  )}
-                </span>
-              ))}
-            </h2>
+          <div className="mb-6 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+              Resultados que falam
+            </span>
           </div>
-
-          {/* Coluna texto */}
-          <div className="lg:col-span-6 lg:pt-2">
-            {/* Hairline decorativo */}
-            <div className="mb-6 h-px w-16" style={{ background: 'linear-gradient(90deg, var(--color-lime) 0%, transparent 100%)' }} aria-hidden />
-
-            <div className="space-y-5">
-              {copy.whyText.split('\n\n').map((para, i) => (
-                <p
-                  key={i}
-                  className="text-[1.05rem] leading-[1.65]"
-                  style={{ color: 'rgba(255,255,255,0.72)', fontFamily: 'var(--font-primary)' }}
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-          </div>
+          <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Números</span>
+            <span className="font-black text-white">de quem faz isso todos os </span>
+            <span className="font-black text-[var(--color-lime)]">dias</span>
+            <span className="font-black text-white">.</span>
+          </h2>
         </motion.div>
+
+        <div className="grid grid-cols-2 gap-px border border-white/8 lg:grid-cols-4" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+          {STATS.map((stat, i) => (
+            <StatCounter
+              key={stat.label}
+              countTo={stat.countTo}
+              prefix={'prefix' in stat ? stat.prefix : ''}
+              suffix={'suffix' in stat ? stat.suffix : ''}
+              staticValue={'static' in stat ? stat.static : undefined}
+              index={i}
+              reduceMotion={reduceMotion}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-// ─── Benefits Section ────────────────────────────────────────────────────────
+// ─── Included Section ────────────────────────────────────────────────────────
 
-function BenefitsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
+const INCLUDED_CARDS = [
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
+    title: 'Hospedagem gratuita',
+    text: 'Sua página no ar sem nenhuma mensalidade de servidor. A configuração é por nossa conta.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
+    title: 'SSL e Cloudflare grátis',
+    text: 'Cadeado de segurança e proteção contra instabilidade, já configurados. Página segura converte mais.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
+    title: 'SEO configurado',
+    text: 'Sua página preparada para ser encontrada no Google, não só para receber tráfego pago.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M18 20V10M12 20V4M6 20v-6"/></svg>,
+    title: 'Google Tag e Analytics',
+    text: 'Você sabe exatamente quantas pessoas visitam, de onde vêm e o que fazem na sua página.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
+    title: 'Formulário de contato',
+    text: 'Leads preenchem na página e caem direto pra você. Sem ferramenta extra, sem custo extra.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>,
+    title: 'WhatsApp e agendamento',
+    text: 'Botão de WhatsApp em todos os pontos da página e agendamento por Calendly, se fizer sentido.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>,
+    title: '100% responsiva',
+    text: 'Construída primeiro pro celular, onde chegam mais de 80% dos cliques de campanha.',
+  },
+  {
+    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
+    title: 'Tudo no ar em até 4 dias',
+    text: 'Da conversa inicial à página publicada com domínio, segurança e métricas funcionando.',
+  },
+] as const;
+
+function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
   return (
     <section className="relative py-20 lg:py-28">
-      <div aria-hidden className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[var(--color-lime)]/8 blur-[130px]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-20 top-1/3 h-[400px] w-[400px] rounded-full bg-[var(--color-lime)]/5 blur-[150px]" />
+      </div>
       <div className="site-container relative">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -762,52 +877,197 @@ function BenefitsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              O que você recebe
+              Tudo incluído
             </span>
           </div>
-          <h2 className="text-[2.25rem] font-black leading-[1.02] text-white lg:text-[3.5rem]" style={{ fontFamily: 'var(--font-title)' }}>
-            {copy.benefitsTitle}
+          <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Você recebe</span>
+            <span className="font-black text-white">a página pronta. E tudo o que ela precisa para </span>
+            <span className="font-black text-[var(--color-lime)]">funcionar</span>
+            <span className="font-black text-white">.</span>
           </h2>
-          <p className="mt-4 text-base leading-[1.7] text-white/52 lg:text-lg">{copy.benefitsSubtitle}</p>
+          <p className="mt-5 max-w-xl text-base leading-[1.7] text-white/56">
+            Nada de surpresa depois da entrega: &quot;a hospedagem é à parte&quot;, &quot;o SSL você contrata&quot;, &quot;o Analytics é outro serviço&quot;. Na BlackElephant, está tudo dentro. Configurado, testado e funcionando.
+          </p>
         </motion.div>
 
-        {/* Grade editorial com índice + hairline + título + descrição (padrão StatsSection home) */}
-        <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-3">
-          {copy.benefits.map(([title, description], index) => (
-            <motion.article
-              key={title}
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.42, delay: index * 0.05 }}
-              className={`group relative py-8 px-6 lg:px-8 transition-colors hover:bg-white/[0.02] ${
-                index < 3 ? 'border-b border-white/7' : ''
-              } ${
-                index % 3 !== 2 ? 'lg:border-r lg:border-white/7' : ''
-              } ${
-                index % 2 === 0 ? 'sm:border-r sm:border-white/7 lg:border-r-0' : 'sm:border-r-0'
-              } ${
-                index % 3 !== 2 ? 'lg:border-r lg:border-white/7' : ''
-              }`}
-            >
-              {/* Hairline topo com lime no primeiro (padrão StatsSection) */}
-              <div
-                aria-hidden
-                className="absolute left-6 top-0 h-px w-10 lg:left-8"
-                style={{ backgroundColor: index === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.15)' }}
-              />
-
-              {/* Índice editorial */}
-              <div
-                className="mb-5 text-[11px] font-bold tabular-nums tracking-[0.22em]"
-                style={{ fontFamily: 'var(--font-title)', color: index === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.3)' }}
+        {/* Scroll horizontal no mobile, grade no desktop */}
+        <div className="-mx-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 sm:pb-0">
+          <div className="flex gap-4 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-4" style={{ minWidth: 'max-content' }}>
+            {INCLUDED_CARDS.map(({ icon, title, text }, i) => (
+              <motion.div
+                key={title}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="flex w-[260px] shrink-0 flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-5 sm:w-auto"
               >
-                /{String(index + 1).padStart(2, '0')}
-              </div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-lime)]/25 bg-[var(--color-lime)]/10 text-[var(--color-lime)]">
+                  {icon}
+                </div>
+                <h3 className="text-sm font-black text-white">{title}</h3>
+                <p className="text-xs leading-[1.7] text-white/52">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-              <h3 className="text-base font-black leading-snug text-white lg:text-lg">{title}</h3>
-              <p className="mt-3 text-sm leading-[1.7] text-white/52">{description}</p>
-            </motion.article>
+// ─── Why Section ─────────────────────────────────────────────────────────────
+
+const WHY_ITEMS = [
+  { label: 'Um único objetivo', text: 'Sem menu, sem distração, sem link pra fora. O visitante tem um caminho só: a sua oferta.' },
+  { label: 'Copy alinhada ao anúncio', text: 'O argumento da página é o mesmo do anúncio. Isso elimina fricção e aumenta confiança.' },
+  { label: 'CTA sempre visível', text: 'Não importa onde o visitante pare de rolar, tem um botão de ação na tela.' },
+  { label: 'Velocidade que não pune o clique', text: '3 segundos de carregamento e metade dos visitantes já foi embora. Sua página é leve e rápida.' },
+] as const;
+
+function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
+  return (
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[var(--color-lime)]/5 blur-[140px]" />
+      </div>
+
+      <div className="site-container relative">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="mb-6 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+              Nossa diferença
+            </span>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+            {/* Coluna esquerda: título + texto */}
+            <div>
+              <h2
+                className="text-[2.25rem] leading-[1.02] lg:text-[3.25rem]"
+                style={{ fontFamily: 'var(--font-title)' }}
+              >
+                <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Páginas feitas</span>
+                <span className="font-black text-white">por especialistas em </span>
+                <span className="font-black text-[var(--color-lime)]">conversão</span>
+                <span className="font-black text-white">.</span>
+              </h2>
+              <div className="mt-5 h-px w-12" style={{ background: 'linear-gradient(90deg, var(--color-lime), transparent)' }} aria-hidden />
+              <p className="mt-5 text-base leading-[1.7] text-white/60">{copy.whyText}</p>
+            </div>
+
+            {/* Coluna direita: lista numerada /01–/04 */}
+            <div className="flex flex-col gap-0 divide-y divide-white/8">
+              {WHY_ITEMS.map(({ label, text }, i) => (
+                <motion.div
+                  key={label}
+                  initial={reduceMotion ? false : { opacity: 0, x: 12 }}
+                  whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.38, delay: i * 0.07 }}
+                  className="flex gap-5 py-5"
+                >
+                  <span
+                    className="mt-0.5 shrink-0 text-[11px] font-black tabular-nums tracking-[0.2em]"
+                    style={{ fontFamily: 'var(--font-title)', color: i === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.28)' }}
+                  >
+                    /{String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="text-sm font-black text-white">{label}</p>
+                    <p className="mt-1 text-sm leading-[1.65] text-white/52">{text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Audience Section ─────────────────────────────────────────────────────────
+
+const AUDIENCE_CARDS = [
+  {
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>,
+    title: 'Profissionais liberais',
+    text: 'Médicos, dentistas, advogados, arquitetos. Página focada em gerar agendamentos qualificados.',
+  },
+  {
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+    title: 'Negócios locais',
+    text: 'Clínicas, estéticas, academias, restaurantes. Transforme o anúncio em cliente na porta.',
+  },
+  {
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>,
+    title: 'Prestadores de serviço',
+    text: 'Consultores, agências, técnicos. Página que gera pedidos de orçamento prontos pra fechar.',
+  },
+  {
+    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-7.43H6"/></svg>,
+    title: 'Quem vende produto',
+    text: 'Lançamentos, infoprodutos e e-commerce. Página de oferta que conduz direto pro checkout ou WhatsApp.',
+  },
+] as const;
+
+function AudienceSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+  return (
+    <section className="relative py-20 lg:py-28">
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -right-20 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-fuchsia-500/5 blur-[150px]" />
+      </div>
+      <div className="site-container relative">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 max-w-3xl"
+        >
+          <div className="mb-6 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+              Para quem é
+            </span>
+          </div>
+          <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Se você</span>
+            <span className="font-black text-white">anuncia online, essa página é pra </span>
+            <span className="font-black text-[var(--color-lime)]">você</span>
+            <span className="font-black text-white">.</span>
+          </h2>
+          <p className="mt-5 text-base leading-[1.7] text-white/52">
+            Atendemos negócios de todos os tamanhos no Sul e Sudeste (e no Brasil inteiro, porque é tudo online).
+          </p>
+        </motion.div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {AUDIENCE_CARDS.map(({ icon, title, text }, i) => (
+            <motion.div
+              key={title}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              className="flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition-colors hover:border-[var(--color-lime)]/20 hover:bg-[var(--color-lime)]/[0.03]"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/70">
+                {icon}
+              </div>
+              <div>
+                <h3 className="text-base font-black text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-[1.65] text-white/52">{text}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -839,8 +1099,11 @@ function TestimonialsSection({
             Quem contratou
           </span>
         </div>
-        <h2 className="max-w-3xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-          {copy.testimonialsTitle}
+        <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+          <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>O antes</span>
+          <span className="font-black text-white">e o depois de quem trocou a </span>
+          <span className="font-black text-[var(--color-lime)]">página</span>
+          <span className="font-black text-white">.</span>
         </h2>
       </div>
 
@@ -897,6 +1160,136 @@ const PROCESS_ICONS = [
 
 function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
+    <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[var(--color-lime)]/5 blur-[180px]" />
+      </div>
+      <div className="site-container relative">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14"
+        >
+          <div className="mb-6 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+              Como funciona
+            </span>
+          </div>
+          <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Da primeira</span>
+            <span className="font-black text-white">mensagem ao ar em até </span>
+            <span className="font-black text-[var(--color-lime)]">4 dias</span>
+            <span className="font-black text-white">.</span>
+          </h2>
+          <p className="mt-4 text-base text-white/50" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
+            {copy.processSubtitle}
+          </p>
+        </motion.div>
+
+        {/* Timeline vertical mobile / horizontal desktop */}
+        <div className="flex flex-col gap-0 lg:grid lg:grid-cols-4">
+          {copy.process.map(([title, text], index) => {
+            const isLast = index === copy.process.length - 1;
+            return (
+              <motion.article
+                key={title}
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="relative"
+              >
+                {/* Conector horizontal desktop */}
+                {!isLast && (
+                  <div aria-hidden className="absolute left-[calc(50%+28px)] top-[26px] hidden h-px lg:block" style={{ right: 0, background: 'linear-gradient(90deg, rgba(57,255,20,0.35), rgba(57,255,20,0.08))' }} />
+                )}
+
+                <div className="flex gap-5 border-b border-white/7 py-7 lg:flex-col lg:border-b-0 lg:border-r lg:px-8 lg:py-0 lg:first:pl-0 lg:last:border-r-0">
+                  {/* Número + ícone */}
+                  <div className="flex shrink-0 flex-col items-center gap-2 lg:flex-row lg:items-center">
+                    <div
+                      className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-sm font-black"
+                      style={{
+                        borderColor: isLast ? 'rgba(57,255,20,0.5)' : 'rgba(255,255,255,0.12)',
+                        backgroundColor: isLast ? 'rgba(57,255,20,0.12)' : 'rgba(255,255,255,0.04)',
+                        color: isLast ? 'var(--color-lime)' : 'rgba(255,255,255,0.5)',
+                        fontFamily: 'var(--font-title)',
+                      }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    {/* Conector vertical mobile */}
+                    {!isLast && (
+                      <div aria-hidden className="h-full w-px lg:hidden" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.3), rgba(57,255,20,0.05))' }} />
+                    )}
+                  </div>
+
+                  <div className="pt-0.5 lg:mt-6 lg:pt-0">
+                    <div className="mb-3">
+                      {PROCESS_ICONS[index]}
+                    </div>
+                    <h3 className="text-base font-black leading-snug text-white lg:text-lg">{title}</h3>
+                    <p className="mt-2 text-sm leading-[1.7] text-white/52">{text}</p>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FAQ Section ─────────────────────────────────────────────────────────────
+
+function FaqItem({ question, answer, index, reduceMotion }: { question: string; answer: string; index: number; reduceMotion: boolean | null }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.35, delay: index * 0.04 }}
+      className="border-b border-white/8"
+    >
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
+      >
+        <h3 className="text-sm font-black leading-snug text-white sm:text-base">{question}</h3>
+        <span
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
+          style={{
+            borderColor: open ? 'rgba(57,255,20,0.4)' : 'rgba(255,255,255,0.12)',
+            backgroundColor: open ? 'rgba(57,255,20,0.1)' : 'rgba(255,255,255,0.04)',
+            color: open ? 'var(--color-lime)' : 'rgba(255,255,255,0.4)',
+          }}
+          aria-hidden
+        >
+          <svg className="h-3.5 w-3.5 transition-transform duration-300" style={{ transform: open ? 'rotate(45deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m-8-8h16" />
+          </svg>
+        </span>
+      </button>
+      <div
+        className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: open ? '400px' : '0px', opacity: open ? 1 : 0 }}
+      >
+        <p className="pb-5 text-sm leading-[1.75] text-white/55 lg:text-base">{answer}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
+  return (
     <section className="relative py-20 lg:py-28">
       <div className="site-container">
         <motion.div
@@ -909,236 +1302,26 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Como funciona
+              Perguntas frequentes
             </span>
           </div>
-
-          <h2 className="max-w-4xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            {copy.processTitle}
-          </h2>
-
-          {/* Subtítulo com hairline */}
-          <div className="mt-5 flex items-center gap-4">
-            <div className="h-px w-12" style={{ background: 'linear-gradient(90deg, var(--color-lime) 0%, transparent 100%)' }} aria-hidden />
-            <p
-              className="text-base leading-[1.6]"
-              style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-serif)', fontWeight: 100 }}
-            >
-              {copy.processSubtitle}
-            </p>
-          </div>
-        </motion.div>
-
-        <div className="mt-12 grid gap-0 md:grid-cols-2 lg:grid-cols-4">
-          {copy.process.map(([title, text], index) => {
-            const isLast = index === copy.process.length - 1;
-            return (
-              <motion.article
-                key={title}
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.42, delay: index * 0.07 }}
-                className="relative flex flex-col gap-5 border-b border-white/8 px-0 py-8 first:pt-0 last:border-b-0 md:border-b-0 md:border-r md:px-8 md:py-0 md:first:pl-0 md:last:border-r-0 lg:px-8"
-              >
-                {/* Hairline topo com índice (editorial) */}
-                <div
-                  aria-hidden
-                  className="absolute left-0 top-0 h-px w-10 md:left-8 md:first:left-0"
-                  style={{ backgroundColor: index === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.15)' }}
-                />
-
-                {!isLast && (
-                  <div aria-hidden className="absolute -right-px top-6 hidden h-2 w-2 translate-x-1/2 rounded-full bg-[var(--color-lime)]/40 ring-4 ring-[var(--background)] md:block" />
-                )}
-
-                <div className={`flex h-11 w-11 items-center justify-center rounded-xl border ${isLast ? 'border-[var(--color-lime)]/50 bg-[var(--color-lime)]/12 text-[var(--color-lime)]' : 'border-white/12 bg-white/[0.04] text-white/70'}`}>
-                  {PROCESS_ICONS[index]}
-                </div>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white/30">{String(index + 1).padStart(2, '0')}</p>
-                  <h3 className="mt-2 text-lg font-black text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-[1.7] text-white/55">{text}</p>
-                </div>
-              </motion.article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Contact Section ──────────────────────────────────────────────────────────
-
-function ContactSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; reduceMotion: boolean | null; calendlyUrl: string }) {
-  const router = useRouter();
-  const [formData, setFormData] = useState({ nome: '', email: '', telefone: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasError, setHasError] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    if (hasError) setHasError(false);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setHasError(false);
-
-    try {
-      const response = await fetch(LINKS.contactWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, origem: 'landing-page-alta-conversao' }),
-      });
-
-      if (response.ok) {
-        router.push('/venda-mais-com-uma-landing-page-de-alta-conversao/obrigado');
-      } else {
-        setHasError(true);
-        setIsSubmitting(false);
-      }
-    } catch {
-      setHasError(true);
-      setIsSubmitting(false);
-    }
-  };
-
-  const inputClass =
-    'w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3.5 text-sm text-white placeholder-white/30 outline-none transition-all duration-200 focus:border-[var(--color-lime)]/40 focus:bg-white/[0.07] focus:ring-1 focus:ring-[var(--color-lime)]/20';
-
-  return (
-    <section className="relative py-20 lg:py-28">
-      <div aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-[var(--color-lime)]/15 to-transparent" />
-      <div className="site-container relative">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-lg"
-        >
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-black text-white sm:text-4xl lg:text-5xl" style={{ fontFamily: 'var(--font-title)' }}>
-              {copy.formTitle}
-            </h2>
-            <p className="mt-4 text-sm text-white/52 lg:text-base">{copy.formText}</p>
-          </div>
-
-          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
-            <input
-              type="text"
-              name="nome"
-              required
-              value={formData.nome}
-              onChange={handleChange}
-              placeholder={copy.formNamePlaceholder}
-              className={inputClass}
-              autoComplete="name"
-            />
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              placeholder={copy.formEmailPlaceholder}
-              className={inputClass}
-              autoComplete="email"
-            />
-            <input
-              type="tel"
-              name="telefone"
-              value={formData.telefone}
-              onChange={handleChange}
-              placeholder={copy.formPhonePlaceholder}
-              className={inputClass}
-              autoComplete="tel"
-            />
-
-            {hasError && (
-              <p className="text-xs text-red-400/80">{copy.formErrorMessage}</p>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting || !formData.nome || !formData.email}
-              className="mt-1 inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-8 text-sm font-black text-black transition-all duration-300 hover:shadow-[0_0_36px_rgba(57,255,20,0.28)] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isSubmitting ? copy.formSubmitting : copy.formSubmitLabel}
-            </button>
-          </form>
-
-          <div className="mt-6 flex items-center gap-3">
-            <div className="h-px flex-1 bg-white/8" />
-            <span className="text-xs text-white/25">ou</span>
-            <div className="h-px flex-1 bg-white/8" />
-          </div>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={LINKS.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={reportContatoWhatsappConversion}
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-6 text-sm font-bold text-white/70 transition-all duration-300 hover:border-white/25 hover:text-white active:scale-[0.97]"
-            >
-              {copy.whatsapp}
-            </a>
-            <a
-              href={calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-6 text-sm font-bold text-white/70 transition-all duration-300 hover:border-white/25 hover:text-white active:scale-[0.97]"
-            >
-              {copy.calendly}
-            </a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ─── FAQ Section ─────────────────────────────────────────────────────────────
-
-function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
-  return (
-    <section className="relative py-20 lg:py-28">
-      <div className="site-container">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10"
-        >
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              FAQ
-            </span>
-          </div>
-          <h2 className="max-w-2xl text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            {copy.faqTitle}
+          <h2 className="max-w-2xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>As perguntas</span>
+            <span className="font-black text-white">que aparecem toda vez, respondidas com </span>
+            <span className="font-black text-[var(--color-lime)]">honestidade</span>
+            <span className="font-black text-white">.</span>
           </h2>
         </motion.div>
 
-        <div className="divide-y divide-white/8">
+        <div className="max-w-3xl">
           {copy.faqs.map(([question, answer], index) => (
-            <motion.div
+            <FaqItem
               key={question}
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.38, delay: index * 0.04 }}
-              className="grid gap-2 py-6 lg:grid-cols-[1fr_1.4fr] lg:gap-12"
-            >
-              <h3 className="text-base font-black leading-snug text-white lg:text-lg">{question}</h3>
-              <p className="text-sm leading-[1.75] text-white/55 lg:text-base">{answer}</p>
-            </motion.div>
+              question={question}
+              answer={answer}
+              index={index}
+              reduceMotion={reduceMotion}
+            />
           ))}
         </div>
       </div>
@@ -1148,7 +1331,7 @@ function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
 
 // ─── Final CTA Section ───────────────────────────────────────────────────────
 
-function FinalCtaSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
+function FinalCtaSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; reduceMotion: boolean | null; calendlyUrl: string }) {
   return (
     <section className="relative py-16 lg:py-24">
       <div className="site-container">
@@ -1190,31 +1373,23 @@ function FinalCtaSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
             {/* Hairline divisor */}
             <div className="mx-auto mt-8 h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(57,255,20,0.4), transparent)' }} aria-hidden />
 
-            {/* CTAs */}
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            {/* CTA */}
+            <div className="mt-8 flex justify-center">
               <a
-                href={LINKS.landingCheckout}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[56px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-10 text-base font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_48px_rgba(57,255,20,0.4)] active:scale-[0.97] sm:w-auto"
-              >
-                {copy.finalCtaBuyLabel}
-              </a>
-              <a
-                href={LINKS.whatsapp}
+                href={LINKS.whatsappHero}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={reportContatoWhatsappConversion}
-                className="inline-flex min-h-[56px] w-full items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-10 text-base font-black text-white transition-all duration-300 hover:border-white/30 active:scale-[0.97] sm:w-auto"
+                className="inline-flex min-h-[56px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-10 text-base font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_48px_rgba(57,255,20,0.4)] active:scale-[0.97] sm:w-auto"
               >
-                {copy.finalCtaWhatsappLabel}
+                {copy.finalCtaBuyLabel}
               </a>
             </div>
 
             {/* PS — aviso final (passo 12 da carta de vendas) */}
             <p
-              className="mx-auto mt-10 max-w-md text-xs leading-[1.8] text-white/32"
-              style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}
+              className="mx-auto mt-10 max-w-md text-sm leading-[1.8] text-white/58"
+              style={{ fontFamily: 'var(--font-serif)', fontWeight: 300 }}
             >
               P.S. {copy.finalCtaPs}
             </p>
