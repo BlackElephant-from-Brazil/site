@@ -256,7 +256,7 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
   useEffect(() => {
     if (reduceMotion) { setPosition(50); return; }
 
-    const SLIDE_MS = 2000;
+    const SLIDE_MS = 800;
     const PAUSE_MS = 1000;
     let cancelled = false;
     const ids: ReturnType<typeof setTimeout>[] = [];
@@ -279,7 +279,7 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
     return () => { cancelled = true; ids.forEach(clearTimeout); };
   }, [reduceMotion]);
 
-  const transition = reduceMotion ? undefined : 'clip-path 2s ease-in-out, left 2s ease-in-out';
+  const transition = reduceMotion ? undefined : 'clip-path 0.8s ease-in-out, left 0.8s ease-in-out';
 
   return (
     <motion.div
