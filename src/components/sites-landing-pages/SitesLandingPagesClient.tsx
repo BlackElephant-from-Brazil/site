@@ -296,13 +296,13 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
       onTouchMove={(e) => updatePosition(e.touches[0].clientX)}
     >
       <Image src="/images/site-new.png" alt="Depois" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" priority draggable={false} />
-      <div className="pointer-events-none absolute right-3 top-3 z-10">
-        <span className="rounded-lg bg-[var(--color-lime)] px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-black">Depois</span>
+      <div className="pointer-events-none absolute right-4 top-4 z-10">
+        <span className="rounded-xl bg-[var(--color-lime)] px-4 py-2 text-sm font-black uppercase tracking-widest text-black">Depois</span>
       </div>
       <div className="absolute inset-0 z-20" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
         <Image src="/images/site-past.png" alt="Antes" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" draggable={false} />
-        <div className="pointer-events-none absolute left-3 top-3">
-          <span className="rounded-lg bg-black/65 px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-white/90 backdrop-blur-sm">Antes</span>
+        <div className="pointer-events-none absolute left-4 top-4">
+          <span className="rounded-xl bg-red-600 px-4 py-2 text-sm font-black uppercase tracking-widest text-white">Antes</span>
         </div>
       </div>
       <div className="pointer-events-none absolute inset-y-0 z-30 flex w-10 -translate-x-1/2 flex-col items-center" style={{ left: `${position}%` }}>
