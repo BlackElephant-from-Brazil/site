@@ -2,9 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
-import type { Project, ProjectWithRefs } from '@/types'
+import type { Project, ProjectWithRefs, DeliveryFormat } from '@/types'
 
-export async function getProjects(): Promise<ProjectWithRefs[]> {
+export async function getProjects(deliveryFormat?: DeliveryFormat): Promise<ProjectWithRefs[]> {
   const supabase = createAdminClient()
   const { data, error } = await supabase
     .from('projects')
@@ -15,7 +15,13 @@ export async function getProjects(): Promise<ProjectWithRefs[]> {
     `)
     .order('name', { ascending: true })
   if (error) throw new Error(error.message)
-  return (data ?? []) as ProjectWithRefs[]
+
+  const all = (data ?? []) as ProjectWithRefs[]
+  if (!deliveryFormat) return all
+  if (deliveryFormat === 'software') {
+    return all.filter(p => !p.project_type || p.project_type.delivery_format === 'software')
+  }
+  return all.filter(p => p.project_type?.delivery_format === deliveryFormat)
 }
 
 export async function createProject(payload: {

@@ -13,8 +13,8 @@ export default async function KanbanPage({ params }: { params: Params }) {
   const { locale } = await params
   setRequestLocale(locale)
   const [board, projectsWithRefs, adminUsers, clients, currentUserId] = await Promise.all([
-    getKanbanBoard(),
-    getProjects(),
+    getKanbanBoard('software'),
+    getProjects('software'),
     getAdminUsers(),
     getClients(),
     getCurrentUserPublicId(),

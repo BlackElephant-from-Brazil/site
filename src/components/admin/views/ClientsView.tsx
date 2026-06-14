@@ -6,12 +6,24 @@ import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { createClient, updateClient, deleteClient } from '@/lib/actions/clients'
 import { createUser } from '@/lib/actions/users'
-import type { Client } from '@/types'
+import type { Client, ClientType } from '@/types'
 
 type ViewMode = 'list' | 'grid'
 
-const EMPTY_FORM = { trade_name: '', cnpj: '', company_name: '', logo_url: '' }
+const EMPTY_FORM = {
+  trade_name: '',
+  cnpj: '',
+  company_name: '',
+  logo_url: '',
+  client_type: 'cliente' as ClientType,
+}
 const EMPTY_USER_FORM = { name: '', email: '', avatar_url: '' }
+
+const TYPE_LABELS: Record<ClientType, string> = { cliente: 'Cliente', parceiro: 'Parceiro' }
+const TYPE_COLORS: Record<ClientType, { bg: string; color: string; border: string }> = {
+  cliente: { bg: 'rgba(57,255,20,0.08)', color: 'var(--color-lime)', border: 'rgba(57,255,20,0.2)' },
+  parceiro: { bg: 'rgba(99,102,241,0.1)', color: '#818cf8', border: 'rgba(99,102,241,0.3)' },
+}
 
 export function ClientsView({ initialClients }: { initialClients: Client[] }) {
   const router = useRouter()
@@ -42,6 +54,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
       cnpj: client.cnpj ?? '',
       company_name: client.company_name ?? '',
       logo_url: client.logo_url ?? '',
+      client_type: client.client_type,
     })
     setError('')
     setDrawerOpen(true)
@@ -65,6 +78,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
         cnpj: form.cnpj.trim() || null,
         company_name: form.company_name.trim() || null,
         logo_url: form.logo_url.trim() || null,
+        client_type: form.client_type,
       }
       if (editing) {
         await updateClient(editing.id, payload)
@@ -81,7 +95,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Excluir este cliente?')) return
+    if (!confirm('Excluir este cliente ou parceiro?')) return
     try {
       await deleteClient(id)
       startTransition(() => router.refresh())
@@ -136,8 +150,8 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
   return (
     <div>
       <AdminPageHeader
-        title="Clientes"
-        subtitle="Gerencie sua carteira de clientes"
+        title="Clientes e Parceiros"
+        subtitle="Gerencie sua carteira de clientes e parceiros"
         action={
           <button
             onClick={openNew}
@@ -148,7 +162,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
               boxShadow: '0 0 16px rgba(57,255,20,0.4)',
             }}
           >
-            + Novo Cliente
+            + Novo Cliente ou Parceiro
           </button>
         }
       />
@@ -184,14 +198,14 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
 
       {initialClients.length === 0 ? (
         <p className="text-sm italic" style={{ color: 'var(--foreground-muted)' }}>
-          Nenhum cliente cadastrado ainda.
+          Nenhum cliente ou parceiro cadastrado ainda.
         </p>
       ) : viewMode === 'list' ? (
         <div className="overflow-hidden rounded-xl border" style={{ borderColor: 'var(--card-border)' }}>
           <table className="w-full text-sm">
             <thead>
               <tr style={{ borderBottom: '1px solid var(--card-border)', background: 'var(--background-secondary)' }}>
-                {['Nome Fantasia', 'Razão Social', 'CNPJ', ''].map(h => (
+                {['Nome Fantasia', 'Razão Social', 'CNPJ', 'Tipo', ''].map(h => (
                   <th
                     key={h}
                     className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
@@ -203,80 +217,124 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
               </tr>
             </thead>
             <tbody>
-              {initialClients.map((c, i) => (
-                <tr
-                  key={c.id}
-                  style={{
-                    borderBottom: i < initialClients.length - 1 ? '1px solid var(--card-border)' : undefined,
-                  }}
-                >
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2.5">
-                      <div
-                        style={{
-                          width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
-                          overflow: 'hidden', border: '1px solid var(--card-border)',
-                          background: 'var(--background-secondary)',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        }}
-                      >
-                        {c.logo_url ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={c.logo_url} alt={c.trade_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : (
-                          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--foreground-muted)' }}>
-                            {c.trade_name[0]?.toUpperCase() ?? '?'}
-                          </span>
-                        )}
+              {initialClients.map((c, i) => {
+                const tc = TYPE_COLORS[c.client_type]
+                return (
+                  <tr
+                    key={c.id}
+                    style={{
+                      borderBottom: i < initialClients.length - 1 ? '1px solid var(--card-border)' : undefined,
+                    }}
+                  >
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <div
+                          style={{
+                            width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
+                            overflow: 'hidden', border: '1px solid var(--card-border)',
+                            background: 'var(--background-secondary)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}
+                        >
+                          {c.logo_url ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={c.logo_url} alt={c.trade_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          ) : (
+                            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--foreground-muted)' }}>
+                              {c.trade_name[0]?.toUpperCase() ?? '?'}
+                            </span>
+                          )}
+                        </div>
+                        <span className="font-medium" style={{ color: 'var(--foreground)' }}>{c.trade_name}</span>
                       </div>
-                      <span className="font-medium" style={{ color: 'var(--foreground)' }}>{c.trade_name}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.company_name ?? '—'}</td>
-                  <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj ?? '—'}</td>
-                  <td className="px-4 py-3 text-right">
-                    <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.company_name ?? '—'}</td>
+                    <td className="px-4 py-3" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj ?? '—'}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className="rounded px-2 py-0.5 text-xs font-semibold"
+                        style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}
+                      >
+                        {TYPE_LABELS[c.client_type]}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {initialClients.map(c => (
-            <div
-              key={c.id}
-              className="flex flex-col gap-2 rounded-xl border p-5"
-              style={{ borderColor: 'var(--card-border)', background: 'var(--background-secondary)' }}
-            >
-              {c.logo_url && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={c.logo_url} alt={c.trade_name} className="mb-1 h-8 w-auto object-contain" />
-              )}
-              <p className="font-semibold" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-title)' }}>
-                {c.trade_name}
-              </p>
-              {c.company_name && (
-                <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>{c.company_name}</p>
-              )}
-              {c.cnpj && (
-                <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj}</p>
-              )}
-              <div className="mt-auto flex justify-end gap-2 pt-2">
-                <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
+          {initialClients.map(c => {
+            const tc = TYPE_COLORS[c.client_type]
+            return (
+              <div
+                key={c.id}
+                className="flex flex-col gap-2 rounded-xl border p-5"
+                style={{ borderColor: 'var(--card-border)', background: 'var(--background-secondary)' }}
+              >
+                <div className="flex items-start justify-between">
+                  <span
+                    className="rounded px-2 py-0.5 text-xs font-semibold"
+                    style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}
+                  >
+                    {TYPE_LABELS[c.client_type]}
+                  </span>
+                </div>
+                {c.logo_url && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={c.logo_url} alt={c.trade_name} className="mb-1 h-8 w-auto object-contain" />
+                )}
+                <p className="font-semibold" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-title)' }}>
+                  {c.trade_name}
+                </p>
+                {c.company_name && (
+                  <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>{c.company_name}</p>
+                )}
+                {c.cnpj && (
+                  <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>{c.cnpj}</p>
+                )}
+                <div className="mt-auto flex justify-end gap-2 pt-2">
+                  <RowActions onAddUser={() => openNewUser(c)} onEdit={() => openEdit(c)} onDelete={() => handleDelete(c.id)} />
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
 
       <Drawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        title={editing ? 'Editar Cliente' : 'Novo Cliente'}
+        title={editing ? 'Editar Cliente ou Parceiro' : 'Novo Cliente ou Parceiro'}
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          {/* Tipo */}
+          <div>
+            <label style={labelStyle}>Tipo</label>
+            <div className="flex gap-2">
+              {(['cliente', 'parceiro'] as ClientType[]).map(t => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setForm(f => ({ ...f, client_type: t }))}
+                  className="flex-1 rounded-lg py-2 text-sm font-semibold transition-all"
+                  style={{
+                    background: form.client_type === t ? TYPE_COLORS[t].bg : 'transparent',
+                    color: form.client_type === t ? TYPE_COLORS[t].color : 'var(--foreground-muted)',
+                    border: `1px solid ${form.client_type === t ? TYPE_COLORS[t].border : 'var(--card-border)'}`,
+                  }}
+                >
+                  {TYPE_LABELS[t]}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div>
             <label style={labelStyle}>Nome Fantasia *</label>
             <input
@@ -361,11 +419,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
           <div>
             <label style={labelStyle}>Empresa</label>
             <input
-              style={{
-                ...inputStyle,
-                opacity: 0.65,
-                cursor: 'not-allowed',
-              }}
+              style={{ ...inputStyle, opacity: 0.65, cursor: 'not-allowed' }}
               value={selectedClient?.trade_name ?? ''}
               disabled
               readOnly
@@ -408,11 +462,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
           <div>
             <label style={labelStyle}>Função</label>
             <input
-              style={{
-                ...inputStyle,
-                opacity: 0.65,
-                cursor: 'not-allowed',
-              }}
+              style={{ ...inputStyle, opacity: 0.65, cursor: 'not-allowed' }}
               value="Customer"
               disabled
               readOnly

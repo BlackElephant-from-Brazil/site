@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getLandingPagesKanbanBoard, createLandingPagesKanbanCard, moveLandingPagesKanbanCard, updateLandingPagesKanbanCard, deleteLandingPagesKanbanCard } from '@/lib/actions/landing-pages-kanban-cards'
-import { getLandingPagesProjects } from '@/lib/actions/landing-pages-projects'
+import { getKanbanBoard, createKanbanCard, moveKanbanCard, updateKanbanCard, deleteKanbanCard } from '@/lib/actions/kanban-cards'
+import { getProjects } from '@/lib/actions/projects'
 import { getAdminUsers, getCurrentUserPublicId } from '@/lib/actions/users'
 import { getClients } from '@/lib/actions/clients'
 import { KanbanBoard } from '@/components/admin/kanban/KanbanBoard'
@@ -13,8 +13,8 @@ export default async function LandingPagesPage({ params }: { params: Params }) {
   const { locale } = await params
   setRequestLocale(locale)
   const [board, projects, adminUsers, clients, currentUserId] = await Promise.all([
-    getLandingPagesKanbanBoard(),
-    getLandingPagesProjects(),
+    getKanbanBoard('landing_page'),
+    getProjects('landing_page'),
     getAdminUsers(),
     getClients(),
     getCurrentUserPublicId(),
@@ -28,10 +28,10 @@ export default async function LandingPagesPage({ params }: { params: Params }) {
       adminUsers={adminUsers}
       clients={clients}
       currentUserId={currentUserId}
-      createCard={createLandingPagesKanbanCard}
-      moveCard={moveLandingPagesKanbanCard}
-      updateCard={updateLandingPagesKanbanCard}
-      deleteCard={deleteLandingPagesKanbanCard}
+      createCard={createKanbanCard}
+      moveCard={moveKanbanCard}
+      updateCard={updateKanbanCard}
+      deleteCard={deleteKanbanCard}
     />
   )
 }

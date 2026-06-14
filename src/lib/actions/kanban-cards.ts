@@ -2,9 +2,11 @@
 
 import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
-import type { KanbanCard, KanbanColumnWithCards } from '@/types'
+import type { KanbanCard, KanbanColumnWithCards, DeliveryFormat } from '@/types'
 
-export async function getKanbanBoard(): Promise<KanbanColumnWithCards[]> {
+export async function getKanbanBoard(
+  deliveryFormat: DeliveryFormat = 'software'
+): Promise<KanbanColumnWithCards[]> {
   const supabase = createAdminClient()
   const { data: columns, error: colErr } = await supabase
     .from('kanban_columns')
@@ -26,9 +28,15 @@ export async function getKanbanBoard(): Promise<KanbanColumnWithCards[]> {
     .order('position', { ascending: true })
   if (cardErr) throw new Error(cardErr.message)
 
+  const filtered = (cards ?? []).filter(c => {
+    const fmt = (c as any).project?.project_type?.delivery_format as DeliveryFormat | undefined
+    if (deliveryFormat === 'software') return !fmt || fmt === 'software'
+    return fmt === deliveryFormat
+  })
+
   return (columns ?? []).map(col => ({
     ...col,
-    cards: (cards ?? []).filter(c => c.column_id === col.id),
+    cards: filtered.filter(c => c.column_id === col.id),
   })) as KanbanColumnWithCards[]
 }
 
@@ -65,6 +73,8 @@ export async function createKanbanCard(payload: {
     .single()
   if (error) throw new Error(error.message)
   revalidatePath('/dashboard/admin/kanban')
+  revalidatePath('/dashboard/admin/sites')
+  revalidatePath('/dashboard/admin/landing-pages')
   return data
 }
 
@@ -129,6 +139,8 @@ export async function moveKanbanCard(
   }
 
   revalidatePath('/dashboard/admin/kanban')
+  revalidatePath('/dashboard/admin/sites')
+  revalidatePath('/dashboard/admin/landing-pages')
 }
 
 export async function updateKanbanCard(
@@ -144,6 +156,8 @@ export async function updateKanbanCard(
     .single()
   if (error) throw new Error(error.message)
   revalidatePath('/dashboard/admin/kanban')
+  revalidatePath('/dashboard/admin/sites')
+  revalidatePath('/dashboard/admin/landing-pages')
   return data
 }
 
@@ -152,4 +166,6 @@ export async function deleteKanbanCard(id: string): Promise<void> {
   const { error } = await supabase.from('kanban_cards').delete().eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/dashboard/admin/kanban')
+  revalidatePath('/dashboard/admin/sites')
+  revalidatePath('/dashboard/admin/landing-pages')
 }

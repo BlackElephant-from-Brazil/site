@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 016 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 018 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -64,6 +64,7 @@ Tipos de projeto (ex: site, app, manutenção).
 | `recurring_value` | NUMERIC(12,2) | nullable |
 | `monthly_hours` | NUMERIC(8,2) | nullable — horas disponíveis/mês (banco de horas) |
 | `has_monthly_bank` | BOOLEAN | NOT NULL DEFAULT false — ativa banco de horas mensal |
+| `delivery_format` | TEXT | NOT NULL DEFAULT 'software', CHECK IN ('software','site','landing_page') — kanban de destino |
 | `created_at` | TIMESTAMPTZ | DEFAULT utc now |
 | `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
 
@@ -84,6 +85,7 @@ Clientes da agência.
 | `cnpj` | TEXT | nullable |
 | `company_name` | TEXT | nullable |
 | `logo_url` | TEXT | nullable |
+| `client_type` | TEXT | NOT NULL DEFAULT 'cliente', CHECK IN ('cliente','parceiro') |
 | `created_at` | TIMESTAMPTZ | DEFAULT utc now |
 | `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
 
