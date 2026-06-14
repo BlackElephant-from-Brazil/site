@@ -251,69 +251,60 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
 // ─── Before/After Slider ────────────────────────────────────────────────────
 
 function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
-  const [position, setPosition] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
-
-  const clamp = (v: number) => Math.max(4, Math.min(96, v));
+  const [position, setPosition] = useState(10);
 
   useEffect(() => {
     if (reduceMotion) { setPosition(50); return; }
-    let rafId: number;
-    let startTime: number | null = null;
-    const duration = 1400;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(2, -10 * progress);
-      setPosition(Math.max(4, Math.min(96, eased * 50)));
-      if (progress < 1) { rafId = requestAnimationFrame(step); }
+
+    const SLIDE_MS = 2000;
+    const PAUSE_MS = 1000;
+    let cancelled = false;
+    const ids: ReturnType<typeof setTimeout>[] = [];
+    const later = (fn: () => void, ms: number) => {
+      const id = setTimeout(() => { if (!cancelled) fn(); }, ms);
+      ids.push(id);
     };
-    rafId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafId);
+
+    const cycle = () => {
+      later(() => {
+        setPosition(90);
+        later(() => {
+          setPosition(10);
+          later(cycle, SLIDE_MS + PAUSE_MS);
+        }, SLIDE_MS + PAUSE_MS);
+      }, PAUSE_MS);
+    };
+
+    cycle();
+    return () => { cancelled = true; ids.forEach(clearTimeout); };
   }, [reduceMotion]);
 
-  const updatePosition = (clientX: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    setPosition(clamp(((clientX - rect.left) / rect.width) * 100));
-  };
+  const transition = reduceMotion ? undefined : 'clip-path 2s ease-in-out, left 2s ease-in-out';
 
   return (
     <motion.div
-      ref={containerRef as React.RefObject<HTMLDivElement>}
       initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
       animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative aspect-[4/3] cursor-col-resize select-none overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
-      onMouseDown={(e) => { dragging.current = true; updatePosition(e.clientX); }}
-      onMouseMove={(e) => { if (dragging.current) updatePosition(e.clientX); }}
-      onMouseUp={() => { dragging.current = false; }}
-      onMouseLeave={() => { dragging.current = false; }}
-      onTouchStart={(e) => updatePosition(e.touches[0].clientX)}
-      onTouchMove={(e) => updatePosition(e.touches[0].clientX)}
+      className="relative aspect-[4/3] select-none overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
     >
       <Image src="/images/site-new.png" alt="Depois" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" priority draggable={false} />
       <div className="pointer-events-none absolute right-4 top-4 z-10">
         <span className="rounded-xl bg-[var(--color-lime)] px-4 py-2 text-sm font-black uppercase tracking-widest text-black">Depois</span>
       </div>
-      <div className="absolute inset-0 z-20" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+      <div
+        className="absolute inset-0 z-20"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)`, transition }}
+      >
         <Image src="/images/site-past.png" alt="Antes" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" draggable={false} />
         <div className="pointer-events-none absolute left-4 top-4">
           <span className="rounded-xl bg-red-600 px-4 py-2 text-sm font-black uppercase tracking-widest text-white">Antes</span>
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-y-0 z-30 flex w-10 -translate-x-1/2 flex-col items-center" style={{ left: `${position}%` }}>
-        <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-          <svg className="h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l-3 3 3 3M16 9l3 3-3 3" />
-          </svg>
-        </div>
-        <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
-      </div>
+      <div
+        className="pointer-events-none absolute inset-y-0 z-30 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+        style={{ left: `${position}%`, transition }}
+      />
     </motion.div>
   );
 }
