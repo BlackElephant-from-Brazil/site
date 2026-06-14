@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
-import type { ProjectType } from '@/types'
+import type { ProjectType, DeliveryFormat } from '@/types'
 
 export async function getProjectTypes(): Promise<ProjectType[]> {
   const supabase = createAdminClient()
@@ -22,6 +22,7 @@ export async function createProjectType(payload: {
   recurring_value?: number | null
   monthly_hours?: number | null
   has_monthly_bank?: boolean
+  delivery_format?: DeliveryFormat
 }): Promise<ProjectType> {
   const supabase = createAdminClient()
   const { data, error } = await supabase
@@ -44,6 +45,7 @@ export async function updateProjectType(
     recurring_value: number | null
     monthly_hours: number | null
     has_monthly_bank: boolean
+    delivery_format: DeliveryFormat
   }>
 ): Promise<ProjectType> {
   const supabase = createAdminClient()

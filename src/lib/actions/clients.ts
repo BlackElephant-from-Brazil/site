@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
-import type { Client } from '@/types'
+import type { Client, ClientType } from '@/types'
 
 export async function getClients(): Promise<Client[]> {
   const supabase = createAdminClient()
@@ -19,6 +19,7 @@ export async function createClient(payload: {
   cnpj?: string | null
   company_name?: string | null
   logo_url?: string | null
+  client_type?: ClientType
 }): Promise<Client> {
   const supabase = createAdminClient()
   const { data, error } = await supabase
@@ -38,6 +39,7 @@ export async function updateClient(
     cnpj: string | null
     company_name: string | null
     logo_url: string | null
+    client_type: ClientType
   }>
 ): Promise<Client> {
   const supabase = createAdminClient()

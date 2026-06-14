@@ -5,9 +5,15 @@ import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { createProjectType, updateProjectType, deleteProjectType } from '@/lib/actions/project-types'
-import type { ProjectType } from '@/types'
+import type { ProjectType, DeliveryFormat } from '@/types'
 
-const EMPTY_FORM = { name: '', is_internal: false, is_recurring: false, one_time_value: '', recurring_value: '', monthly_hours: '', has_monthly_bank: false }
+const DELIVERY_FORMAT_LABELS: Record<DeliveryFormat, string> = {
+  software: 'Software',
+  site: 'Site',
+  landing_page: 'Landing Page',
+}
+
+const EMPTY_FORM = { name: '', is_internal: false, is_recurring: false, one_time_value: '', recurring_value: '', monthly_hours: '', has_monthly_bank: false, delivery_format: 'software' as DeliveryFormat }
 
 function Switch({
   checked,
@@ -82,6 +88,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       recurring_value: pt.recurring_value?.toString() ?? '',
       monthly_hours: pt.monthly_hours?.toString() ?? '',
       has_monthly_bank: pt.has_monthly_bank,
+      delivery_format: pt.delivery_format ?? 'software',
     })
     setDrawerTitle('Editar Tipo')
     setError('')
@@ -98,6 +105,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
       recurring_value: pt.recurring_value?.toString() ?? '',
       monthly_hours: pt.monthly_hours?.toString() ?? '',
       has_monthly_bank: pt.has_monthly_bank,
+      delivery_format: pt.delivery_format ?? 'software',
     })
     setDrawerTitle('Duplicar Tipo')
     setError('')
@@ -119,6 +127,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
         recurring_value: form.is_internal ? null : (form.recurring_value ? parseFloat(form.recurring_value) : null),
         has_monthly_bank: isRecurring ? form.has_monthly_bank : false,
         monthly_hours: isRecurring && form.has_monthly_bank ? (form.monthly_hours ? parseFloat(form.monthly_hours) : null) : null,
+        delivery_format: form.delivery_format,
       }
       if (editing) {
         await updateProjectType(editing.id, payload)
@@ -188,7 +197,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           <table className="w-full text-sm">
             <thead>
               <tr style={{ borderBottom: '1px solid var(--card-border)', background: 'var(--background-secondary)' }}>
-                {['Nome', 'Recorrente', 'Valor Avulso', 'Mensalidade', 'Ações'].map(h => (
+                {['Nome', 'Formato', 'Recorrente', 'Valor Avulso', 'Mensalidade', 'Ações'].map(h => (
                   <th
                     key={h}
                     className={`px-4 py-3 text-xs font-semibold uppercase tracking-wider ${h === 'Ações' ? 'text-center' : 'text-left'}`}
@@ -203,6 +212,17 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
               {initialTypes.map((t, i) => (
                 <tr key={t.id} style={{ borderBottom: i < initialTypes.length - 1 ? '1px solid var(--card-border)' : undefined }}>
                   <td className="px-4 py-3 font-medium" style={{ color: 'var(--foreground)' }}>{t.name}</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className="rounded-full px-2 py-0.5 text-xs font-medium"
+                      style={{
+                        background: t.delivery_format === 'software' ? 'rgba(57,255,20,0.08)' : t.delivery_format === 'site' ? 'rgba(99,102,241,0.12)' : 'rgba(245,158,11,0.12)',
+                        color: t.delivery_format === 'software' ? 'var(--primary)' : t.delivery_format === 'site' ? '#818cf8' : '#fbbf24',
+                      }}
+                    >
+                      {DELIVERY_FORMAT_LABELS[t.delivery_format]}
+                    </span>
+                  </td>
                   <td className="px-4 py-3">
                     {t.is_internal ? (
                       <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--foreground-muted)' }}>
@@ -251,6 +271,34 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
               placeholder="Ex: Site Institucional"
               required
             />
+          </div>
+
+          {/* formato da entrega */}
+          <div>
+            <label style={labelStyle}>Formato da entrega *</label>
+            <div className="flex gap-2">
+              {(['software', 'site', 'landing_page'] as DeliveryFormat[]).map(fmt => (
+                <button
+                  key={fmt}
+                  type="button"
+                  onClick={() => setForm(f => ({ ...f, delivery_format: fmt }))}
+                  className="flex-1 rounded-lg py-2 text-xs font-semibold transition-all duration-150"
+                  style={{
+                    border: form.delivery_format === fmt
+                      ? `1px solid ${fmt === 'software' ? 'rgba(57,255,20,0.5)' : fmt === 'site' ? 'rgba(99,102,241,0.5)' : 'rgba(245,158,11,0.5)'}`
+                      : '1px solid var(--card-border)',
+                    background: form.delivery_format === fmt
+                      ? fmt === 'software' ? 'rgba(57,255,20,0.08)' : fmt === 'site' ? 'rgba(99,102,241,0.1)' : 'rgba(245,158,11,0.08)'
+                      : 'rgba(255,255,255,0.03)',
+                    color: form.delivery_format === fmt
+                      ? fmt === 'software' ? 'var(--primary)' : fmt === 'site' ? '#818cf8' : '#fbbf24'
+                      : 'var(--foreground-muted)',
+                  }}
+                >
+                  {DELIVERY_FORMAT_LABELS[fmt]}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* interno switch */}

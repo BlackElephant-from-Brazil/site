@@ -5,8 +5,15 @@ import { useRouter } from 'next/navigation'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { Drawer } from '@/components/admin/Drawer'
 import { createProject, updateProject, deleteProject } from '@/lib/actions/projects'
+import { createClient } from '@/lib/actions/clients'
 import { deriveAcronym } from '@/lib/utils/acronym'
-import type { Client, ProjectType, ProjectWithRefs } from '@/types'
+import type { Client, ClientType, ProjectType, ProjectWithRefs } from '@/types'
+
+const CLIENT_TYPE_LABELS: Record<ClientType, string> = { cliente: 'Cliente', parceiro: 'Parceiro' }
+const CLIENT_TYPE_COLORS: Record<ClientType, { bg: string; color: string; border: string }> = {
+  cliente: { bg: 'rgba(57,255,20,0.08)', color: 'var(--color-lime)', border: 'rgba(57,255,20,0.2)' },
+  parceiro: { bg: 'rgba(99,102,241,0.1)', color: '#818cf8', border: 'rgba(99,102,241,0.3)' },
+}
 
 type ViewMode = 'list' | 'grid'
 
@@ -63,7 +70,15 @@ interface Props {
   projectTypes: ProjectType[]
 }
 
-export function ProjectsView({ initialProjects, clients, projectTypes }: Props) {
+const EMPTY_CLIENT_FORM = {
+  trade_name: '',
+  cnpj: '',
+  company_name: '',
+  logo_url: '',
+  client_type: 'cliente' as ClientType,
+}
+
+export function ProjectsView({ initialProjects, clients: initialClients, projectTypes }: Props) {
   const router = useRouter()
   const [, startTransition] = useTransition()
   const [viewMode, setViewMode] = useState<ViewMode>('list')
@@ -73,6 +88,40 @@ export function ProjectsView({ initialProjects, clients, projectTypes }: Props) 
   const [acronymTouched, setAcronymTouched] = useState(false)
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
+
+  // clients list — local copy so new clients appear immediately without page refresh
+  const [clients, setClients] = useState<Client[]>(initialClients)
+
+  // inline modal to create a new client from inside the project drawer
+  const [clientModalOpen, setClientModalOpen] = useState(false)
+  const [clientForm, setClientForm] = useState(EMPTY_CLIENT_FORM)
+  const [clientError, setClientError] = useState('')
+  const [clientSaving, setClientSaving] = useState(false)
+
+  async function handleCreateClient(e: React.FormEvent) {
+    e.preventDefault()
+    if (!clientForm.trade_name.trim()) { setClientError('Nome fantasia é obrigatório.'); return }
+    setClientSaving(true)
+    setClientError('')
+    try {
+      const payload = {
+        trade_name: clientForm.trade_name.trim(),
+        cnpj: clientForm.cnpj.trim() || null,
+        company_name: clientForm.company_name.trim() || null,
+        logo_url: clientForm.logo_url.trim() || null,
+        client_type: clientForm.client_type,
+      }
+      const newClient = await createClient(payload)
+      setClients(prev => [...prev, newClient].sort((a, b) => a.trade_name.localeCompare(b.trade_name)))
+      setForm(f => ({ ...f, client_id: newClient.id }))
+      setClientModalOpen(false)
+      setClientForm(EMPTY_CLIENT_FORM)
+    } catch (err: unknown) {
+      setClientError(err instanceof Error ? err.message : 'Erro ao salvar.')
+    } finally {
+      setClientSaving(false)
+    }
+  }
 
   const selectedType = projectTypes.find(t => t.id === form.project_type_id)
   const isRecurring = selectedType?.is_recurring ?? false
@@ -360,7 +409,17 @@ export function ProjectsView({ initialProjects, clients, projectTypes }: Props) 
 
           {!form.is_internal && (
             <div>
-              <label style={labelStyle}>Cliente</label>
+              <div className="flex items-center justify-between" style={{ marginBottom: '0.375rem' }}>
+                <label style={{ ...labelStyle, marginBottom: 0 }}>Cliente ou parceiro</label>
+                <button
+                  type="button"
+                  onClick={() => { setClientForm(EMPTY_CLIENT_FORM); setClientError(''); setClientModalOpen(true) }}
+                  className="text-xs font-semibold transition-colors"
+                  style={{ color: 'var(--primary)' }}
+                >
+                  novo +
+                </button>
+              </div>
               <select
                 style={inputStyle}
                 value={form.client_id}
@@ -445,6 +504,131 @@ export function ProjectsView({ initialProjects, clients, projectTypes }: Props) 
           </div>
         </form>
       </Drawer>
+
+      {/* Modal — Novo Cliente (aberto de dentro do drawer de projeto) */}
+      {clientModalOpen && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
+          onClick={e => { if (e.target === e.currentTarget) setClientModalOpen(false) }}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border p-6"
+            style={{ backgroundColor: 'var(--background)', borderColor: 'var(--card-border)' }}
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-base font-black" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-title)' }}>
+                Novo Cliente ou Parceiro
+              </h2>
+              <button
+                type="button"
+                onClick={() => setClientModalOpen(false)}
+                className="flex h-7 w-7 items-center justify-center rounded-full text-lg leading-none transition-colors hover:bg-white/10"
+                style={{ color: 'var(--foreground-muted)' }}
+                aria-label="Fechar"
+              >
+                ×
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateClient} className="flex flex-col gap-4">
+              {/* Tipo */}
+              <div>
+                <label style={labelStyle}>Tipo</label>
+                <div className="flex gap-2">
+                  {(['cliente', 'parceiro'] as ClientType[]).map(t => {
+                    const tc = CLIENT_TYPE_COLORS[t]
+                    return (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setClientForm(f => ({ ...f, client_type: t }))}
+                        className="flex-1 rounded-lg py-2 text-sm font-semibold transition-all"
+                        style={{
+                          background: clientForm.client_type === t ? tc.bg : 'transparent',
+                          color: clientForm.client_type === t ? tc.color : 'var(--foreground-muted)',
+                          border: `1px solid ${clientForm.client_type === t ? tc.border : 'var(--card-border)'}`,
+                        }}
+                      >
+                        {CLIENT_TYPE_LABELS[t]}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <label style={labelStyle}>Nome Fantasia *</label>
+                <input
+                  style={inputStyle}
+                  value={clientForm.trade_name}
+                  onChange={e => setClientForm(f => ({ ...f, trade_name: e.target.value }))}
+                  placeholder="Ex: BlackElephant"
+                  required
+                  autoFocus
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Razão Social</label>
+                <input
+                  style={inputStyle}
+                  value={clientForm.company_name}
+                  onChange={e => setClientForm(f => ({ ...f, company_name: e.target.value }))}
+                  placeholder="Razão social completa"
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>CNPJ</label>
+                <input
+                  style={inputStyle}
+                  value={clientForm.cnpj}
+                  onChange={e => {
+                    const digits = e.target.value.replace(/\D/g, '').slice(0, 14)
+                    let masked = digits
+                    if (digits.length > 12) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5,8)}/${digits.slice(8,12)}-${digits.slice(12)}`
+                    else if (digits.length > 8) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5,8)}/${digits.slice(8)}`
+                    else if (digits.length > 5) masked = `${digits.slice(0,2)}.${digits.slice(2,5)}.${digits.slice(5)}`
+                    else if (digits.length > 2) masked = `${digits.slice(0,2)}.${digits.slice(2)}`
+                    setClientForm(f => ({ ...f, cnpj: masked }))
+                  }}
+                  placeholder="00.000.000/0000-00"
+                  inputMode="numeric"
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Logo (URL)</label>
+                <input
+                  style={inputStyle}
+                  value={clientForm.logo_url}
+                  onChange={e => setClientForm(f => ({ ...f, logo_url: e.target.value }))}
+                  placeholder="https://..."
+                />
+              </div>
+
+              {clientError && <p className="text-xs" style={{ color: '#ff4d4f' }}>{clientError}</p>}
+
+              <div className="flex gap-3 pt-1">
+                <button
+                  type="submit"
+                  disabled={clientSaving}
+                  className="flex-1 rounded-lg py-2.5 text-sm font-semibold"
+                  style={{ background: clientSaving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+                >
+                  {clientSaving ? 'Salvando…' : 'Salvar'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setClientModalOpen(false)}
+                  className="rounded-lg border px-4 py-2.5 text-sm"
+                  style={{ borderColor: 'var(--card-border)', color: 'var(--foreground-muted)' }}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

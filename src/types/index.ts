@@ -23,6 +23,8 @@ export interface KanbanColumn {
   updated_at: string
 }
 
+export type DeliveryFormat = 'software' | 'site' | 'landing_page'
+
 export interface ProjectType {
   id: string
   name: string
@@ -32,9 +34,12 @@ export interface ProjectType {
   recurring_value: number | null
   monthly_hours: number | null
   has_monthly_bank: boolean
+  delivery_format: DeliveryFormat
   created_at: string
   updated_at: string
 }
+
+export type ClientType = 'cliente' | 'parceiro'
 
 export interface Client {
   id: string
@@ -42,6 +47,7 @@ export interface Client {
   cnpj: string | null
   company_name: string | null
   logo_url: string | null
+  client_type: ClientType
   created_at: string
   updated_at: string
 }
