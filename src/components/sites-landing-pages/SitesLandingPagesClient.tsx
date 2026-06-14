@@ -296,10 +296,16 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
       onTouchMove={(e) => updatePosition(e.touches[0].clientX)}
     >
       <Image src="/images/site-new.png" alt="Depois" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" priority draggable={false} />
-      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
-        <Image src="/images/site-past.png" alt="Antes" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" draggable={false} />
+      <div className="pointer-events-none absolute right-3 top-3 z-10">
+        <span className="rounded-lg bg-[var(--color-lime)] px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-black">Depois</span>
       </div>
-      <div className="pointer-events-none absolute inset-y-0 z-20 flex w-10 -translate-x-1/2 flex-col items-center" style={{ left: `${position}%` }}>
+      <div className="absolute inset-0 z-20" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+        <Image src="/images/site-past.png" alt="Antes" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" draggable={false} />
+        <div className="pointer-events-none absolute left-3 top-3">
+          <span className="rounded-lg bg-black/65 px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-white/90 backdrop-blur-sm">Antes</span>
+        </div>
+      </div>
+      <div className="pointer-events-none absolute inset-y-0 z-30 flex w-10 -translate-x-1/2 flex-col items-center" style={{ left: `${position}%` }}>
         <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
           <svg className="h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -307,12 +313,6 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
           </svg>
         </div>
         <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
-      </div>
-      <div className="pointer-events-none absolute left-3 top-3 z-30">
-        <span className="rounded-lg bg-black/65 px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-white/90 backdrop-blur-sm">Antes</span>
-      </div>
-      <div className="pointer-events-none absolute right-3 top-3 z-30">
-        <span className="rounded-lg bg-[var(--color-lime)] px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-black">Depois</span>
       </div>
     </motion.div>
   );
@@ -1083,7 +1083,7 @@ function TestimonialsSection({
         <ul className="sr-only">{testimonials.map((t) => <li key={t.name}>&ldquo;{t.quote}&rdquo; {t.name}</li>)}</ul>
         <motion.div
           aria-hidden
-          animate={reduceMotion ? undefined : { x: ['-50%', '0%'] }}
+          animate={reduceMotion ? undefined : { x: ['0%', '-50%'] }}
           transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
           className="flex w-max gap-5 px-4"
         >
