@@ -195,13 +195,6 @@ type HeroCopy = (typeof COPY)[LocaleKey];
 const TESTIMONIALS = {
   pt: [
     {
-      quote: 'Estávamos gastando R$3.000 por mês em tráfego e conseguindo 8 agendamentos. Trocamos a página e no primeiro mês foram 31. O anúncio era o mesmo. A página era o problema.',
-      name: 'Mariana Souza',
-      role: 'CEO',
-      company: 'Clínica Lumina',
-      initials: 'MS',
-    },
-    {
       quote: 'Tínhamos uma página feita por um freelancer que levou 3 semanas e não convertia nada. A BlackElephant refez em 48h. No primeiro mês de campanha tivemos 47 leads com o mesmo orçamento.',
       name: 'Ricardo Alves',
       role: 'Diretor Comercial',
@@ -209,21 +202,56 @@ const TESTIMONIALS = {
       initials: 'RA',
     },
     {
-      quote: 'Fui com o pé atrás por ter tido experiência ruim antes. Eles entregaram em 38h, o processo foi simples, o design ficou premium e o resultado apareceu na campanha da semana seguinte. Vale muito mais do que o R$1.997 cobrado.',
-      name: 'Fernanda Costa',
-      role: 'Fundadora',
-      company: 'Escola Connect',
-      initials: 'FC',
+      quote: 'Antes eu tinha um site que parecia de 2015. A BlackElephant criou uma landing page que representa de verdade o meu trabalho. Os pacientes chegam comentando da profissionalidade.',
+      name: 'Ana Paula Lima',
+      role: 'Nutricionista',
+      company: 'Studio NP',
+      initials: 'AL',
+    },
+    {
+      quote: 'O design ficou impressionante. Quando mostrei para meus clientes, todos perguntaram quem tinha feito. A página transmite uma credibilidade que eu não conseguia passar antes.',
+      name: 'Carlos Mendes',
+      role: 'Proprietário',
+      company: 'Auto Mendes',
+      initials: 'CM',
+    },
+    {
+      quote: 'Processo extremamente simples. Passei o briefing, aprovei o layout e a página foi ao ar rapidinho. O resultado visual superou todas as minhas expectativas.',
+      name: 'Juliana Ferreira',
+      role: 'Coordenadora de Marketing',
+      company: 'Escola Futuro',
+      initials: 'JF',
+    },
+    {
+      quote: 'A página reflete exatamente o padrão da clínica. Design sofisticado, copy bem escrita e carregamento rápido. Faz jus ao posicionamento premium que buscamos para a marca.',
+      name: 'Roberto Santos',
+      role: 'Dentista',
+      company: 'Clínica Dental Prime',
+      initials: 'RS',
+    },
+    {
+      quote: 'Já contratamos outras agências e nunca ficamos satisfeitos. A BlackElephant entendeu nosso mercado, criou algo elegante e funcional. Agora temos uma página da qual nos orgulhamos.',
+      name: 'Patrícia Nunes',
+      role: 'Gerente Comercial',
+      company: 'Imobiliária Central',
+      initials: 'PN',
+    },
+    {
+      quote: 'Impressionante como uma boa página muda a percepção do negócio. Clientes chegam comentando que a página passou muita credibilidade. Design limpo e moderno, exatamente o que eu precisava.',
+      name: 'Diego Oliveira',
+      role: 'Personal Trainer',
+      company: 'DFit Studio',
+      initials: 'DO',
+    },
+    {
+      quote: 'A entrega foi rápida e o resultado, impecável. A equipe acertou na primeira versão sem precisar de muitas rodadas de revisão. Profissionalismo do começo ao fim.',
+      name: 'Camila Rodrigues',
+      role: 'Diretora',
+      company: 'Instituto Camila',
+      initials: 'CR',
     },
   ],
   en: [
-    {
-      quote: 'We were spending $3,000 per month on traffic and getting 8 bookings. We switched the page and the first month brought 31. Same ad. The page was the problem.',
-      name: 'Mariana Souza',
-      role: 'CEO',
-      company: 'Lumina Clinic',
-      initials: 'MS',
-    },
     {
       quote: 'We had a page made by a freelancer that took 3 weeks and converted nothing. BlackElephant rebuilt it in 48h. First month of campaigns brought 47 leads with the same budget.',
       name: 'Ricardo Alves',
@@ -232,11 +260,53 @@ const TESTIMONIALS = {
       initials: 'RA',
     },
     {
-      quote: 'I went in skeptical after bad experiences before. They delivered in 38h, the process was simple, the design was premium, and results showed up in the very next campaign. Worth much more than the $1,997 charged.',
-      name: 'Fernanda Costa',
-      role: 'Founder',
-      company: 'Connect School',
-      initials: 'FC',
+      quote: 'I used to have a website that looked like 2015. BlackElephant created a landing page that truly represents my work. New patients always comment on the professionalism.',
+      name: 'Ana Paula Lima',
+      role: 'Nutritionist',
+      company: 'Studio NP',
+      initials: 'AL',
+    },
+    {
+      quote: 'The design was impressive. When I showed it to my clients, everyone asked who made it. The page conveys credibility I could never communicate before.',
+      name: 'Carlos Mendes',
+      role: 'Owner',
+      company: 'Auto Mendes',
+      initials: 'CM',
+    },
+    {
+      quote: 'Extremely simple process. I shared the briefing, approved the layout and the page went live quickly. The visual result exceeded all my expectations.',
+      name: 'Juliana Ferreira',
+      role: 'Marketing Coordinator',
+      company: 'Futuro School',
+      initials: 'JF',
+    },
+    {
+      quote: 'The page perfectly reflects the clinic\'s standard. Sophisticated design, well-written copy and fast loading. It matches the premium positioning we pursue for our brand.',
+      name: 'Roberto Santos',
+      role: 'Dentist',
+      company: 'Dental Prime Clinic',
+      initials: 'RS',
+    },
+    {
+      quote: 'We hired other agencies before and were never satisfied. BlackElephant understood our market and created something elegant and functional. Now we have a page we are proud of.',
+      name: 'Patrícia Nunes',
+      role: 'Sales Manager',
+      company: 'Central Real Estate',
+      initials: 'PN',
+    },
+    {
+      quote: 'Impressive how a good page changes business perception. New clients arrive saying the page conveyed a lot of credibility. Clean, modern design — exactly what I needed.',
+      name: 'Diego Oliveira',
+      role: 'Personal Trainer',
+      company: 'DFit Studio',
+      initials: 'DO',
+    },
+    {
+      quote: 'Delivery was fast and the result was flawless. The team nailed it on the first version without many revision rounds. Professionalism from start to finish.',
+      name: 'Camila Rodrigues',
+      role: 'Director',
+      company: 'Camila Institute',
+      initials: 'CR',
     },
   ],
 } as const;
@@ -279,69 +349,60 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
 // ─── Before/After Slider ────────────────────────────────────────────────────
 
 function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
-  const [position, setPosition] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
-
-  const clamp = (v: number) => Math.max(4, Math.min(96, v));
+  const [position, setPosition] = useState(10);
 
   useEffect(() => {
     if (reduceMotion) { setPosition(50); return; }
-    let rafId: number;
-    let startTime: number | null = null;
-    const duration = 1400;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(2, -10 * progress);
-      setPosition(Math.max(4, Math.min(96, eased * 50)));
-      if (progress < 1) { rafId = requestAnimationFrame(step); }
+
+    const SLIDE_MS = 800;
+    const PAUSE_MS = 1000;
+    let cancelled = false;
+    const ids: ReturnType<typeof setTimeout>[] = [];
+    const later = (fn: () => void, ms: number) => {
+      const id = setTimeout(() => { if (!cancelled) fn(); }, ms);
+      ids.push(id);
     };
-    rafId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafId);
+
+    const cycle = () => {
+      later(() => {
+        setPosition(90);
+        later(() => {
+          setPosition(10);
+          later(cycle, SLIDE_MS + PAUSE_MS);
+        }, SLIDE_MS + PAUSE_MS);
+      }, PAUSE_MS);
+    };
+
+    cycle();
+    return () => { cancelled = true; ids.forEach(clearTimeout); };
   }, [reduceMotion]);
 
-  const updatePosition = (clientX: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    setPosition(clamp(((clientX - rect.left) / rect.width) * 100));
-  };
+  const transition = reduceMotion ? undefined : 'clip-path 0.8s ease-in-out, left 0.8s ease-in-out';
 
   return (
     <motion.div
-      ref={containerRef as React.RefObject<HTMLDivElement>}
       initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
       animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative aspect-[4/3] cursor-col-resize select-none overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
-      onMouseDown={(e) => { dragging.current = true; updatePosition(e.clientX); }}
-      onMouseMove={(e) => { if (dragging.current) updatePosition(e.clientX); }}
-      onMouseUp={() => { dragging.current = false; }}
-      onMouseLeave={() => { dragging.current = false; }}
-      onTouchStart={(e) => updatePosition(e.touches[0].clientX)}
-      onTouchMove={(e) => updatePosition(e.touches[0].clientX)}
+      className="relative aspect-[4/3] select-none overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
     >
       <Image src="/images/site-new.png" alt="Depois" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" priority draggable={false} />
-      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+      <div className="pointer-events-none absolute right-4 top-4 z-10">
+        <span className="rounded-xl bg-[var(--color-lime)] px-4 py-2 text-sm font-black uppercase tracking-widest text-black">Depois</span>
+      </div>
+      <div
+        className="absolute inset-0 z-20"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)`, transition }}
+      >
         <Image src="/images/site-past.png" alt="Antes" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" draggable={false} />
-      </div>
-      <div className="pointer-events-none absolute inset-y-0 z-20 flex w-10 -translate-x-1/2 flex-col items-center" style={{ left: `${position}%` }}>
-        <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-          <svg className="h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l-3 3 3 3M16 9l3 3-3 3" />
-          </svg>
+        <div className="pointer-events-none absolute left-4 top-4">
+          <span className="rounded-xl bg-red-600 px-4 py-2 text-sm font-black uppercase tracking-widest text-white">Antes</span>
         </div>
-        <div className="w-0.5 flex-1 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]" />
       </div>
-      <div className="pointer-events-none absolute left-3 top-3 z-30">
-        <span className="rounded-lg bg-black/65 px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-white/90 backdrop-blur-sm">Antes</span>
-      </div>
-      <div className="pointer-events-none absolute right-3 top-3 z-30">
-        <span className="rounded-lg bg-[var(--color-lime)] px-2.5 py-1.5 text-[11px] font-black uppercase tracking-widest text-black">Depois</span>
-      </div>
+      <div
+        className="pointer-events-none absolute inset-y-0 z-30 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+        style={{ left: `${position}%`, transition }}
+      />
     </motion.div>
   );
 }
@@ -1111,8 +1172,8 @@ function TestimonialsSection({
         <ul className="sr-only">{testimonials.map((t) => <li key={t.name}>&ldquo;{t.quote}&rdquo; {t.name}</li>)}</ul>
         <motion.div
           aria-hidden
-          animate={reduceMotion ? undefined : { x: ['-50%', '0%'] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+          animate={reduceMotion ? undefined : { x: ['0%', '-50%'] }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
           className="flex w-max gap-5 px-4"
         >
           {doubled.map((testimonial, index) => (

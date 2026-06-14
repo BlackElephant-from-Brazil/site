@@ -57,6 +57,8 @@ export function Header({ className }: HeaderProps) {
     setIsLangOpen(false)
   }
 
+  const isLandingPage = pathname.includes('venda-mais-com-uma-landing-page-de-alta-conversao')
+
   const navLinks = [
     { href: '/', label: t('home') },
     { href: '/portfolio', label: t('portfolio') },
@@ -202,7 +204,8 @@ export function Header({ className }: HeaderProps) {
             className={cn(
               'lg:hidden p-2.5 rounded-xl transition-all duration-300',
               'hover:bg-white/10 active:scale-95',
-              isMenuOpen && 'bg-white/10'
+              isMenuOpen && 'bg-white/10',
+              isLandingPage && 'invisible pointer-events-none'
             )}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -236,7 +239,7 @@ export function Header({ className }: HeaderProps) {
       <div
         className={cn(
           'lg:hidden overflow-hidden transition-all duration-500 ease-out',
-          isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+          isMenuOpen && !isLandingPage ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
         <div className="px-4 py-4 border-t border-white/5">
