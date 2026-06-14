@@ -195,48 +195,20 @@ type HeroCopy = (typeof COPY)[LocaleKey];
 const TESTIMONIALS = {
   pt: [
     {
-      quote: 'Estávamos gastando R$3.000 por mês em tráfego e conseguindo 8 agendamentos. Trocamos a página e no primeiro mês foram 31. O anúncio era o mesmo. A página era o problema.',
-      name: 'Mariana Souza',
-      role: 'CEO',
-      company: 'Clínica Lumina',
-      initials: 'MS',
-    },
-    {
       quote: 'Tínhamos uma página feita por um freelancer que levou 3 semanas e não convertia nada. A BlackElephant refez em 48h. No primeiro mês de campanha tivemos 47 leads com o mesmo orçamento.',
       name: 'Ricardo Alves',
       role: 'Diretor Comercial',
       company: 'Construtora RAE',
       initials: 'RA',
     },
-    {
-      quote: 'Fui com o pé atrás por ter tido experiência ruim antes. Eles entregaram em 38h, o processo foi simples, o design ficou premium e o resultado apareceu na campanha da semana seguinte. Vale muito mais do que o R$1.997 cobrado.',
-      name: 'Fernanda Costa',
-      role: 'Fundadora',
-      company: 'Escola Connect',
-      initials: 'FC',
-    },
   ],
   en: [
-    {
-      quote: 'We were spending $3,000 per month on traffic and getting 8 bookings. We switched the page and the first month brought 31. Same ad. The page was the problem.',
-      name: 'Mariana Souza',
-      role: 'CEO',
-      company: 'Lumina Clinic',
-      initials: 'MS',
-    },
     {
       quote: 'We had a page made by a freelancer that took 3 weeks and converted nothing. BlackElephant rebuilt it in 48h. First month of campaigns brought 47 leads with the same budget.',
       name: 'Ricardo Alves',
       role: 'Sales Director',
       company: 'RAE Construction',
       initials: 'RA',
-    },
-    {
-      quote: 'I went in skeptical after bad experiences before. They delivered in 38h, the process was simple, the design was premium, and results showed up in the very next campaign. Worth much more than the $1,997 charged.',
-      name: 'Fernanda Costa',
-      role: 'Founder',
-      company: 'Connect School',
-      initials: 'FC',
     },
   ],
 } as const;
