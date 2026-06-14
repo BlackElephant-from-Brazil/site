@@ -1173,7 +1173,7 @@ function TestimonialsSection({
         <motion.div
           aria-hidden
           animate={reduceMotion ? undefined : { x: ['0%', '-50%'] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
           className="flex w-max gap-5 px-4"
         >
           {doubled.map((testimonial, index) => (
