@@ -9,6 +9,7 @@ type LocaleKey = 'pt' | 'en'
 const NAV_LINKS: Record<LocaleKey, { label: string; href: string }[]> = {
   pt: [
     { label: 'Início', href: '#inicio' },
+    { label: 'Portfólio', href: '#trabalhos-recentes' },
     { label: 'Quem Somos', href: '#quem-somos' },
     { label: 'Benefícios', href: '#beneficios' },
     { label: 'Diferenciais', href: '#diferenciais' },
@@ -17,6 +18,7 @@ const NAV_LINKS: Record<LocaleKey, { label: string; href: string }[]> = {
   ],
   en: [
     { label: 'Home', href: '#inicio' },
+    { label: 'Portfolio', href: '#trabalhos-recentes' },
     { label: 'About Us', href: '#quem-somos' },
     { label: 'Benefits', href: '#beneficios' },
     { label: 'Differentials', href: '#diferenciais' },

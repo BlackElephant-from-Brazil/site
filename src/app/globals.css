@@ -194,6 +194,13 @@ p {
   padding-right: var(--container-padding-x);
 }
 
+/* Padding full-bleed que alinha com a borda interna do .site-container,
+   para carrosséis/scrolls horizontais que ocupam a largura toda da viewport */
+.site-edge-pad {
+  padding-left: max(var(--container-padding-x), calc((100% - var(--container-max-width)) / 2 + var(--container-padding-x)));
+  padding-right: max(var(--container-padding-x), calc((100% - var(--container-max-width)) / 2 + var(--container-padding-x)));
+}
+
 /* Sobrescreve o container do Tailwind para consistência */
 .container {
   max-width: var(--container-max-width) !important;

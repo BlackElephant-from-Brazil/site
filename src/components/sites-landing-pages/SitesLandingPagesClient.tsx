@@ -336,6 +336,7 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
       <LandingPageHeader locale={activeLocale} />
       <HeroSection copy={copy} reduceMotion={reduceMotion} />
       <ProblemSection copy={copy} reduceMotion={reduceMotion} />
+      <RecentWorkSection reduceMotion={reduceMotion} />
       <StatsSection reduceMotion={reduceMotion} />
       <IncludedSection reduceMotion={reduceMotion} />
       <WhySection copy={copy} reduceMotion={reduceMotion} />
@@ -1130,6 +1131,84 @@ function AudienceSection({ reduceMotion }: { reduceMotion: boolean | null }) {
                 <h3 className="text-base font-black text-white">{title}</h3>
                 <p className="mt-2 text-sm leading-[1.65] text-white/52">{text}</p>
               </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Recent Work Section ─────────────────────────────────────────────────────
+
+const RECENT_WORK_IMAGES = [
+  'hubfive.png',
+  'alttavia-2.png',
+  'bbc.png',
+  'sabas.png',
+  'urgecon.png',
+  'alttavia-1.png',
+  'consulado-da-bahia.png',
+  'visas.png',
+  'bar-espirito-santo.png',
+  'prodb.png',
+  'viana-consultancy.png',
+  'alttavia-3.png',
+  'hec.png',
+  'serpcraz.png',
+  'abruzzi.png',
+  'visa.png',
+  'catedral-do-chopp.png',
+  'anamace.png',
+  'tsc-advogados.png',
+  'verite.png',
+  'pizzaria-speranza.png',
+  'senecon.png',
+] as const;
+
+function RecentWorkSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+  return (
+    <section id="trabalhos-recentes" className="relative scroll-mt-24 py-20 lg:py-28">
+      <div className="site-container relative mb-10">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="mb-6 flex items-center gap-3">
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+              Trabalhos recentes
+            </span>
+          </div>
+          <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Páginas que</span>
+            <span className="font-black text-white">a gente já entregou para quem precisava </span>
+            <span className="font-black text-[var(--color-lime)]">vender</span>
+            <span className="font-black text-white">.</span>
+          </h2>
+        </motion.div>
+      </div>
+
+      <div className="overflow-x-auto pb-2">
+        <div className="site-edge-pad flex w-max snap-x snap-mandatory gap-4">
+          {RECENT_WORK_IMAGES.map((file, i) => (
+            <motion.div
+              key={file}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: Math.min(i, 8) * 0.05 }}
+              className="relative aspect-[1837/960] w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 sm:w-[340px] lg:w-[400px]"
+            >
+              <Image
+                src={`/portfolio/lps/${file}`}
+                alt="Landing page desenvolvida pela BlackElephant"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 400px, (min-width: 640px) 340px, 260px"
+              />
             </motion.div>
           ))}
         </div>
