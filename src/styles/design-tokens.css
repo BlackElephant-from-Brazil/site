@@ -38,6 +38,7 @@
 
   /* Verde Limão - Cor Principal */
   --color-lime: #39FF14;
+  --color-lime-light: #7FFF00;
   --color-lime-glow: rgba(57, 255, 20, 0.4);
   --color-lime-soft: rgba(57, 255, 20, 0.15);
   --color-lime-dark: #2ecc10;
