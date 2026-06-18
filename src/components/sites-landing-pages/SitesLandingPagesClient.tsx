@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { reportContatoWhatsappConversion } from '@/lib/analytics/google-ads';
+import { LandingPageHeader } from './LandingPageHeader';
 
 type LocaleKey = 'pt' | 'en';
 type SitesLandingPagesClientProps = {
@@ -332,6 +333,7 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
       className="min-h-screen overflow-hidden pt-16 lg:pt-20"
       style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
     >
+      <LandingPageHeader locale={activeLocale} />
       <HeroSection copy={copy} reduceMotion={reduceMotion} />
       <ProblemSection copy={copy} reduceMotion={reduceMotion} />
       <StatsSection reduceMotion={reduceMotion} />
@@ -479,7 +481,7 @@ function HeroCounter({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
 
 function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
-    <section className="relative overflow-hidden">
+    <section id="inicio" className="relative scroll-mt-24 overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -right-24 -top-10 h-[500px] w-[500px] rounded-full opacity-[0.07] blur-[160px]" style={{ backgroundColor: 'var(--color-lime)' }} />
         <div className="absolute -left-20 bottom-0 h-[380px] w-[380px] rounded-full bg-fuchsia-500/8 blur-[160px]" />
@@ -832,7 +834,7 @@ function StatCounter({
 
 function StatsSection({ reduceMotion }: { reduceMotion: boolean | null }) {
   return (
-    <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
+    <section id="quem-somos" className="relative scroll-mt-24 py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-lime)]/6 blur-[160px]" />
       </div>
@@ -923,7 +925,7 @@ const INCLUDED_CARDS = [
 
 function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
   return (
-    <section className="relative py-20 lg:py-28">
+    <section id="beneficios" className="relative scroll-mt-24 py-20 lg:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-20 top-1/3 h-[400px] w-[400px] rounded-full bg-[var(--color-lime)]/5 blur-[150px]" />
       </div>
@@ -952,9 +954,9 @@ function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
           </p>
         </motion.div>
 
-        {/* Scroll horizontal no mobile, grade no desktop */}
-        <div className="-mx-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 sm:pb-0">
-          <div className="flex gap-4 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-4" style={{ minWidth: 'max-content' }}>
+        {/* Scroll horizontal no mobile, grade fixa de 3 colunas no desktop (sem scroll) */}
+        <div className="-mx-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 sm:pb-0 lg:overflow-visible">
+          <div className="flex min-w-max gap-4 sm:grid sm:min-w-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {INCLUDED_CARDS.map(({ icon, title, text }, i) => (
               <motion.div
                 key={title}
@@ -989,7 +991,7 @@ const WHY_ITEMS = [
 
 function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
-    <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
+    <section id="diferenciais" className="relative scroll-mt-24 py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[var(--color-lime)]/5 blur-[140px]" />
       </div>
@@ -1151,7 +1153,7 @@ function TestimonialsSection({
   const doubled = [...testimonials, ...testimonials];
 
   return (
-    <section className="relative py-20 lg:py-28">
+    <section id="avaliacoes" className="relative scroll-mt-24 py-20 lg:py-28">
       <div aria-hidden className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-fuchsia-500/6 blur-[140px]" />
       <div className="site-container mb-10">
         <div className="mb-6 flex items-center gap-3">
@@ -1394,7 +1396,7 @@ function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
 
 function FinalCtaSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; reduceMotion: boolean | null; calendlyUrl: string }) {
   return (
-    <section className="relative py-16 lg:py-24">
+    <section id="contato" className="relative scroll-mt-24 py-16 lg:py-24">
       <div className="site-container">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}

@@ -10,6 +10,7 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 
 const HIDE_CHROME = ['/login', '/signup', '/forgot-password', '/dashboard', '/reset-password']
+const HIDE_HEADER = ['/venda-mais-com-uma-landing-page-de-alta-conversao']
 const GTM_ID = 'GTM-TL3KWXFR'
 const UMAMI_WEBSITE_ID = 'cef9a48e-8eea-4d3a-bba8-6a2f8db03723'
 const CLARITY_PROJECT_ID = 'wxsoe8gkq7'
@@ -78,6 +79,7 @@ function PublicClarityAnalytics() {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const hideChrome = HIDE_CHROME.some(p => pathname.startsWith(p))
+  const hideHeader = HIDE_HEADER.some(p => pathname.includes(p))
 
   if (hideChrome) {
     return <>{children}</>
@@ -88,7 +90,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <PublicGoogleTagManager />
       <PublicUmamiAnalytics />
       <PublicClarityAnalytics />
-      <Header />
+      {!hideHeader && <Header />}
       <div className="flex flex-col min-h-screen">
         <main className="flex-1">{children}</main>
         <Footer />
