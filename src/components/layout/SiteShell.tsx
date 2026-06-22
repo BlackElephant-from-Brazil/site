@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import Clarity from '@microsoft/clarity'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { usePathname } from '@/i18n/navigation'
+import { reportContatoWhatsappConversion } from '@/lib/analytics/google-ads'
 import { Header } from './Header'
 import { Footer } from './Footer'
 
@@ -31,12 +32,13 @@ function PublicGoogleTagManager() {
   )
 }
 
-function FloatingWhatsAppButton() {
+function FloatingWhatsAppButton({ isLandingPage }: { isLandingPage: boolean }) {
   return (
     <a
       href="https://wa.me/5519978055531"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={isLandingPage ? reportContatoWhatsappConversion : undefined}
       aria-label="Tirar dúvidas no WhatsApp"
       className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full lg:hidden"
       style={{
@@ -80,6 +82,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const hideChrome = HIDE_CHROME.some(p => pathname.startsWith(p))
   const hideHeader = HIDE_HEADER.some(p => pathname.includes(p))
+  const isLandingPage = pathname.includes('venda-mais-com-uma-landing-page-de-alta-conversao')
 
   if (hideChrome) {
     return <>{children}</>
@@ -95,7 +98,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
-      <FloatingWhatsAppButton />
+      <FloatingWhatsAppButton isLandingPage={isLandingPage} />
     </>
   )
 }
