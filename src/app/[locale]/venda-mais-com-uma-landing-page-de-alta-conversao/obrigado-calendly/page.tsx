@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { reportContatoWhatsappConversion } from '@/lib/analytics/google-ads';
 
 const COPY = {
   pt: {
@@ -182,6 +183,7 @@ export default function ObrigadoCalendlyPage() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={reportContatoWhatsappConversion}
               className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-[var(--color-lime)] px-8 text-sm font-black text-black transition-all duration-300 hover:shadow-[0_0_32px_rgba(57,255,20,0.28)] active:scale-[0.97]"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>

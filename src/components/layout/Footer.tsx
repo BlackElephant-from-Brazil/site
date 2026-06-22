@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/navigation'
 import { Logo, BrandName } from '@/components/ui'
 import { cn } from '@/lib/utils'
+import { reportContatoWhatsappConversion } from '@/lib/analytics/google-ads'
 
 export interface FooterProps {
   className?: string
@@ -66,6 +67,7 @@ export function Footer({ className }: FooterProps) {
               href="https://wa.me/5519978055531"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={isLandingPage ? reportContatoWhatsappConversion : undefined}
               className="inline-flex w-fit items-center gap-2.5 rounded-full border px-5 py-2.5 text-xs font-bold transition-colors duration-200 hover:border-[var(--color-lime)]/50 hover:text-[var(--color-lime)]"
               style={{
                 borderColor: 'rgba(255,255,255,0.12)',
@@ -169,6 +171,7 @@ export function Footer({ className }: FooterProps) {
                   href="https://wa.me/5519978055531"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={isLandingPage ? reportContatoWhatsappConversion : undefined}
                   className="group flex items-start gap-3 text-sm transition-colors duration-200 hover:text-[var(--color-lime)]"
                   style={{ color: 'var(--foreground-muted)' }}
                 >
