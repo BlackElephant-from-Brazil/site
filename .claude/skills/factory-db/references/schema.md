@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 018 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 020 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -370,6 +370,45 @@ Cards do Kanban de Landing Pages. Mesma estrutura de `sites_kanban_cards`, mas r
 
 **RLS:** habilitado | **Policies:** `landing_pages_kanban_cards_admin` | **Trigger:** `trg_landing_pages_kanban_cards_updated`  
 **Indexes:** `idx_lp_kanban_cards_column`, `idx_lp_kanban_cards_project`, `idx_lp_kanban_cards_assignee`
+
+---
+
+## Tabela: `public.project_stages`
+
+Etapas dos projetos do módulo Software (mesma estrutura de `kanban_columns`).
+
+**RLS:** habilitado | **Policies:** `project_stages_admin` | **Trigger:** `trg_project_stages_updated`
+**Index:** `idx_project_stages_position`
+
+---
+
+## Tabela: `public.sites_project_stages`
+
+Etapas dos projetos do módulo Sites (mesma estrutura de `kanban_columns`).
+
+**RLS:** habilitado | **Policies:** `sites_project_stages_admin` | **Trigger:** `trg_sites_project_stages_updated`
+**Index:** `idx_sites_project_stages_position`
+
+---
+
+## Tabela: `public.landing_pages_project_stages`
+
+Etapas dos projetos do módulo Landing Pages (mesma estrutura de `kanban_columns`).
+
+**RLS:** habilitado | **Policies:** `landing_pages_project_stages_admin` | **Trigger:** `trg_landing_pages_project_stages_updated`
+**Index:** `idx_landing_pages_project_stages_position`
+
+---
+
+## Campos adicionais (migration 020) — etapa atual de cada projeto
+
+| Tabela | Coluna | Constraints |
+|--------|--------|-------------|
+| `public.projects` | `software_stage_id` | UUID, FK → public.project_stages(id) ON DELETE SET NULL, nullable |
+| `public.sites_projects` | `site_stage_id` | UUID, FK → public.sites_project_stages(id) ON DELETE SET NULL, nullable |
+| `public.landing_pages_projects` | `landing_page_stage_id` | UUID, FK → public.landing_pages_project_stages(id) ON DELETE SET NULL, nullable |
+
+**Indexes:** `idx_projects_software_stage`, `idx_sites_projects_stage`, `idx_landing_pages_projects_stage`
 
 ---
 
