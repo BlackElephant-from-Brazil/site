@@ -56,6 +56,7 @@ export interface Project {
   id: string
   client_id: string | null
   project_type_id: string | null
+  software_stage_id: string | null
   name: string
   acronym: string
   is_internal: boolean
@@ -114,6 +115,7 @@ export interface KanbanBoardColumn extends KanbanColumn {
 export interface SitesProject {
   id: string
   client_id: string | null
+  site_stage_id: string | null
   name: string
   acronym: string
   is_internal: boolean
@@ -138,6 +140,7 @@ export interface SitesKanbanColumnWithCards extends KanbanColumn {
 export interface LandingPageProject {
   id: string
   client_id: string | null
+  landing_page_stage_id: string | null
   name: string
   acronym: string
   is_internal: boolean

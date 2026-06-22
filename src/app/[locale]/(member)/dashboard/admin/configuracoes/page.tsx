@@ -37,6 +37,36 @@ const CONFIG_CARDS = [
     ),
   },
   {
+    href: 'configuracoes/etapas-software',
+    title: 'Etapas do Projeto - Software',
+    description: 'Configure as etapas dos projetos de software.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    href: 'configuracoes/etapas-landing-pages',
+    title: 'Etapas do Projeto - Landing Pages',
+    description: 'Configure as etapas dos projetos de landing pages.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    href: 'configuracoes/etapas-sites',
+    title: 'Etapas do Projeto - Sites',
+    description: 'Configure as etapas dos projetos de sites.',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
     href: 'configuracoes/tipos-projeto',
     title: 'Tipos de Projeto',
     description: 'Gerencie os tipos de projeto, recorrência e valores.',
