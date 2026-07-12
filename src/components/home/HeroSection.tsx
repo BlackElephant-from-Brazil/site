@@ -7,7 +7,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 // ============================================================================
-// Conteúdo dos cases (espelho ao desktop scrollytelling, sem range/snap).
+// Conteúdo dos cases.
 // ============================================================================
 
 type Case = {
@@ -135,9 +135,10 @@ function AtmosphereBg({ variant = 'hero' }: { variant?: 'hero' | 'case' }) {
 // ============================================================================
 // Hero block — Editorial Magazine Cover + Cyberpunk Cold
 // ----------------------------------------------------------------------------
-// Direção: capa de revista editorial em modo dark, com "GRANDES" como peça
-// dominante (display gigante, quase rompendo a margem direita por design),
-// hairlines de 1px e timestamp/créditos no rodapé.
+// Direção: capa de revista editorial em modo dark, com "GRANDES/PROGRAMAÇÃO"
+// como peça dominante. Layout único para todas as telas — em telas largas o
+// conteúdo ganha mais respiro (padding, tipografia e largura máxima maiores
+// via variantes `lg:`), mas a composição é a mesma do mobile.
 // ============================================================================
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -181,7 +182,7 @@ function HeroBlock() {
       {/* Linha vertical lime — fio condutor do lado esquerdo do conteúdo */}
       <div
         aria-hidden
-        className="absolute left-3 top-0 bottom-0 w-px z-0"
+        className="absolute left-3 lg:left-8 top-0 bottom-0 w-px z-0"
         style={{
           background:
             'linear-gradient(180deg, transparent 0%, rgba(57,255,20,0.45) 20%, rgba(57,255,20,0.45) 80%, transparent 100%)',
@@ -190,7 +191,7 @@ function HeroBlock() {
       />
 
       {/* Cantos editoriais (corner brackets) — top left + top right */}
-      <div aria-hidden className="absolute top-24 left-5 z-10 pointer-events-none">
+      <div aria-hidden className="absolute top-24 left-5 lg:left-10 z-10 pointer-events-none">
         <div
           className="h-3 w-3"
           style={{
@@ -199,7 +200,7 @@ function HeroBlock() {
           }}
         />
       </div>
-      <div aria-hidden className="absolute top-24 right-5 z-10 pointer-events-none">
+      <div aria-hidden className="absolute top-24 right-5 lg:right-10 z-10 pointer-events-none">
         <div
           className="h-3 w-3"
           style={{
@@ -216,7 +217,7 @@ function HeroBlock() {
         transition={{ duration: 0.5, ease: EASE_OUT }}
         className="relative z-10 pt-28"
       >
-        <div className="relative overflow-hidden mx-4 rounded-full marquee-fade">
+        <div className="relative overflow-hidden mx-4 lg:mx-auto lg:max-w-2xl rounded-full marquee-fade">
           <div
             aria-hidden
             className="absolute inset-0"
@@ -279,13 +280,13 @@ function HeroBlock() {
       </motion.header>
 
       {/* ===== Title block ===== */}
-      <div className="relative z-10 flex flex-1 flex-col justify-end px-7 pt-16 pb-6">
+      <div className="relative z-10 flex flex-1 flex-col justify-end lg:justify-center px-7 lg:px-20 xl:px-28 pt-16 pb-6 lg:mx-auto lg:max-w-5xl lg:w-full">
         {/* Title — linha introdutória */}
         <motion.span
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
-          className="block text-[1.28rem] leading-none mb-2"
+          className="block text-[1.28rem] lg:text-[1.6rem] leading-none mb-2"
           style={{
             fontFamily: "'Barlow', var(--font-primary)",
             fontWeight: 300,
@@ -298,16 +299,13 @@ function HeroBlock() {
         </motion.span>
 
         {/* PROGRAMAÇÃO — display tipográfico monumental, letra por letra.
-            font-size escala com viewport mas é limitado para evitar overflow
-            em telas estreitas (320–430px). Tracking afrouxado de -0.06em para
-            -0.04em — em Sora 900 ultra-bold, valores muito agressivos
-            sobrepunham as letras. */}
+            Tamanho via classe Tailwind (não inline style) para que lg:/xl:
+            consigam sobrepor o clamp() do mobile. */}
         <h1
-          className="relative flex items-end leading-[0.88] tracking-[-0.035em]"
+          className="relative flex items-end leading-[0.88] lg:leading-[0.85] tracking-[-0.035em] lg:tracking-[-0.03em] text-[clamp(2.15rem,10.5vw,4rem)] lg:text-[6rem] xl:text-[7.5rem]"
           style={{
             fontFamily: 'var(--font-title)',
             fontWeight: 900,
-            fontSize: 'clamp(2.15rem, 10.5vw, 4rem)',
             color: 'var(--color-lime)',
           }}
         >
@@ -322,9 +320,7 @@ function HeroBlock() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="inline-block"
-              style={{
-                textShadow: '0 0 24px rgba(57,255,20,0.18)',
-              }}
+              style={{ textShadow: '0 0 24px rgba(57,255,20,0.18)' }}
             >
               {letter}
             </motion.span>
@@ -336,7 +332,7 @@ function HeroBlock() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55, ease: EASE_OUT }}
-          className="block text-[1.92rem] leading-[1.02] tracking-[-0.01em] mt-2"
+          className="block text-[1.92rem] lg:text-[3rem] xl:text-[3.5rem] leading-[1.02] tracking-[-0.01em] mt-2"
           style={{
             fontFamily: 'var(--font-title)',
             fontWeight: 700,
@@ -353,7 +349,7 @@ function HeroBlock() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.65, ease: EASE_OUT }}
-          className="origin-left mt-8 h-px w-20"
+          className="origin-left mt-8 h-px w-20 lg:w-28"
           style={{
             background:
               'linear-gradient(90deg, var(--color-lime), transparent)',
@@ -365,7 +361,7 @@ function HeroBlock() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7, ease: EASE_OUT }}
-          className="mt-5 text-[15px] leading-[1.55] max-w-[26rem]"
+          className="mt-5 text-[15px] lg:text-[19px] leading-[1.55] max-w-[26rem] lg:max-w-[34rem]"
           style={{
             color: 'rgba(255,255,255,0.72)',
             fontFamily: 'var(--font-primary)',
@@ -389,14 +385,14 @@ function HeroBlock() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.85, ease: EASE_OUT }}
-          className="mt-8 flex flex-col items-stretch gap-3"
+          className="mt-8 flex flex-col lg:flex-row items-stretch lg:items-center gap-3"
         >
           <a
             href="https://calendly.com/guilherme-blackelephant/30min"
             target="_blank"
             rel="noopener noreferrer"
             onClick={reportReservarHorarioConversion}
-            className="group inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
+            className="group inline-flex items-center justify-center gap-2.5 px-5 lg:px-7 py-3.5 lg:py-4 rounded-full font-semibold text-[14px] lg:text-[15px] transition-all duration-300 active:scale-95 hover:scale-[1.02]"
             style={{
               backgroundColor: 'var(--color-lime)',
               color: '#0a0a0a',
@@ -423,7 +419,7 @@ function HeroBlock() {
             href="https://wa.me/5519978055531"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-3.5 rounded-full font-semibold text-[13px] transition-all duration-300 active:scale-95"
+            className="inline-flex items-center justify-center px-5 lg:px-7 py-3.5 lg:py-4 rounded-full font-semibold text-[13px] lg:text-[14px] transition-all duration-300 active:scale-95 hover:scale-[1.02]"
             style={{
               backgroundColor: 'rgba(17,17,17,0.72)',
               border: '1px solid rgba(255,255,255,0.14)',
@@ -442,7 +438,7 @@ function HeroBlock() {
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.0, ease: EASE_OUT }}
-        className="relative z-10 px-7 pb-10"
+        className="relative z-10 px-7 lg:px-20 xl:px-28 pb-10"
       >
         <div
           aria-hidden
@@ -486,7 +482,7 @@ function HeroBlock() {
 }
 
 // ============================================================================
-// Benefits block — seção mobile para reforçar sistemas exclusivos.
+// Benefits block — reforço sobre sistemas exclusivos (fluxo mobile).
 // ============================================================================
 
 function SystemBenefitsBlock() {
@@ -546,8 +542,8 @@ function SystemBenefitsBlock() {
         <p
           className="max-w-[24rem] text-[14.5px] leading-[1.55]"
           style={{
-            fontFamily: 'var(--font-primary)',
             color: 'rgba(255,255,255,0.62)',
+            fontFamily: 'var(--font-primary)',
           }}
         >
           Um sistema feito para a sua operação reduz desperdício, organiza processos e
@@ -639,7 +635,7 @@ function CasesHeader() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.6 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="px-6 mb-10"
+      className="px-6 lg:px-10 lg:max-w-7xl lg:mx-auto mb-10 lg:mb-14"
     >
       <div className="flex items-center gap-3 mb-4">
         <span
@@ -655,7 +651,7 @@ function CasesHeader() {
         </span>
       </div>
       <h2
-        className="leading-[1] tracking-[-0.025em] text-[2.25rem]"
+        className="leading-[1] tracking-[-0.025em] text-[2.25rem] lg:text-[3.25rem]"
         style={{ fontFamily: 'var(--font-title)', color: 'var(--foreground)', fontWeight: 700 }}
       >
         Nossos 3 principais cases de sucesso
@@ -699,7 +695,7 @@ function CaseImageCarousel({ data }: { data: Case }) {
           src={image.src}
           alt={image.alt}
           fill
-          sizes="86vw"
+          sizes="(min-width: 1024px) 30vw, 86vw"
           className={image.portrait ? 'object-contain p-2' : 'object-cover'}
           priority={data.index === '01' && activeIndex === 0}
         />
@@ -776,7 +772,7 @@ function CaseImageCarousel({ data }: { data: Case }) {
 function CaseCard({ data, position }: { data: Case; position: number }) {
   return (
     <article
-      className="relative min-w-[86vw] snap-center overflow-hidden rounded-[20px] p-5"
+      className="relative min-w-[86vw] lg:min-w-0 lg:w-full snap-center overflow-hidden rounded-[20px] p-5 lg:p-6"
       style={{
         background:
           'linear-gradient(155deg, rgba(20,20,20,0.85) 0%, rgba(12,12,12,0.7) 100%)',
@@ -976,12 +972,12 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
 function CasesBlock() {
   return (
     <div
-      className="relative pt-16 pb-20"
+      className="relative pt-16 pb-20 lg:pt-24 lg:pb-28"
       style={{ backgroundColor: 'var(--background)' }}
     >
       <CasesHeader />
 
-      <div className="flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex snap-x snap-proximity gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:snap-none lg:px-10 lg:max-w-7xl lg:mx-auto">
         {CASES.map((c, i) => (
           <CaseCard key={c.index} data={c} position={i + 1} />
         ))}
@@ -991,14 +987,11 @@ function CasesBlock() {
 }
 
 // ============================================================================
-// Outer wrapper — só renderiza no mobile.
+// Wrappers exportados
 // ============================================================================
 
-export function MobileHeroSection() {
-  // Default false no SSR — não duplica conteúdo do desktop scrollytelling.
-  const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
-  if (!isMobile) return null;
-
+/** Hero — renderiza em todas as telas (editorial, sem Lottie/scroll-jacking). */
+export function HeroSection() {
   return (
     <section style={{ backgroundColor: 'var(--background)' }}>
       <HeroBlock />
@@ -1006,8 +999,8 @@ export function MobileHeroSection() {
   );
 }
 
+/** Bloco de benefícios — exclusivo do fluxo mobile (<1024px). */
 export function MobileSystemBenefitsSection() {
-  // Default false no SSR — seção exclusiva do fluxo mobile da home.
   const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
   if (!isMobile) return null;
 
@@ -1018,11 +1011,8 @@ export function MobileSystemBenefitsSection() {
   );
 }
 
-export function MobileCasesSection() {
-  // Default false no SSR — não duplica conteúdo do desktop scrollytelling.
-  const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
-  if (!isMobile) return null;
-
+/** Cases/portfólio — renderiza em todas as telas (carrossel no mobile, grid no desktop). */
+export function CasesSection() {
   return (
     <section style={{ backgroundColor: 'var(--background)' }}>
       <CasesBlock />

@@ -41,7 +41,7 @@ const SERVICES: ServiceCard[] = [
     title: 'Landing page completa',
     description:
       'Página de conversão focada em campanha, produto ou captação de leads.',
-    price: 'R$ 1.889',
+    price: 'R$ 1.997',
     priceNote: 'valor fechado',
     delivery: '3 dias úteis',
     highlight: true,
