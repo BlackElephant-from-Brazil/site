@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { usePathname } from '@/i18n/navigation'
 import { LoadingScreen } from '@/components/ui/LoadingScreen'
 
-const NO_SPLASH_ROUTES = ['/venda-mais-com-uma-landing-page-de-alta-conversao']
+const NO_SPLASH_ROUTES = ['/venda-mais-com-uma-landing-page-de-alta-conversao', '/somos-uma-agencia-de-marketing-digital-e-web-design-que-cria-sites-em-lisboa-porto-braga-e-toda-portugal']
 
 interface LoadingContextType {
   isLoading: boolean
