@@ -23,9 +23,34 @@ function getLocale(locale: string): LocaleKey {
   return locale === 'pt' ? 'pt' : 'en';
 }
 
+// Segmento de título editorial: "serif" = linha introdutória leve, "bold" = texto
+// branco em negrito, "lime" = palavra de destaque na cor primária.
+type TitleSegment = { text: string; variant: 'serif' | 'bold' | 'lime' };
+
+function SectionTitle({ segments }: { segments: readonly TitleSegment[] }) {
+  return (
+    <>
+      {segments.map((seg, i) => {
+        if (seg.variant === 'serif') {
+          return (
+            <span key={i} className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
+              {seg.text}
+            </span>
+          );
+        }
+        if (seg.variant === 'lime') {
+          return <span key={i} className="font-black text-[var(--color-lime)]">{seg.text}</span>;
+        }
+        return <span key={i} className="font-black text-white">{seg.text}</span>;
+      })}
+    </>
+  );
+}
+
 const COPY = {
   pt: {
-    eyebrow: 'Faça sua Landing Page de Alta Conversão',
+    eyebrowLead: 'Faça sua Landing Page de ',
+    eyebrowStrong: 'Alta Conversão',
     heroTitle: 'Tenha uma\npágina que converte\nacessos em vendas.',
     heroText: 'Imagine ter uma vitrine tão boa que te traz clientes até quando você está dormindo.',
     heroCtaLabel: 'Ver como funciona',
@@ -42,6 +67,24 @@ const COPY = {
     guaranteeText:
       'Garantia real de 15 dias: se a entrega não atender o briefing ou você simplesmente não gostar, refaremos do zero ou devolvemos o valor. Sem negociação. A palavra é nossa.',
     marqueeOne: ['ALTA CONVERSÃO', 'SEO', 'PERFORMANCE', 'DESIGN PREMIUM', 'WHATSAPP', 'TRÁFEGO PAGO', 'COPY ESTRATÉGICA'],
+
+    problemEyebrow: 'O problema real',
+    problemTitleParts: [
+      { text: 'Você não está', variant: 'serif' },
+      { text: 'perdendo vendas por causa do ', variant: 'bold' },
+      { text: 'anúncio', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    problemParagraph: {
+      pre: 'Você ajustou o anúncio. O tráfego chega. Mas a conversão não sai. Na maioria dos casos, o problema não é o tráfego, é a ',
+      strong: 'página',
+      mid: ': lenta no celular, texto genérico e CTA escondido. E cada clique continua ',
+      em: 'custando',
+      end: '.',
+    },
+    problemBeforeLabel: 'Sua página feita por outros',
+    problemAfterLabel: 'Sua página feita por nós',
+
     problemTitle: 'Você não está perdendo vendas por causa do anúncio.',
     problemText: 'Você ajustou o criativo. Testou audiência. Otimizou orçamento. O anúncio está performando. Mas a conversão não sai. Na maioria dos casos, o problema não é o tráfego. É a página. Lenta no celular, com texto genérico, CTA escondido e mensagem desalinhada do anúncio. E enquanto isso, cada clique continua custando.',
     outcomes: [
@@ -70,9 +113,97 @@ const COPY = {
       ['Velocidade que não perde o visitante', '3 segundos de carregamento e 50% dos visitantes já foram embora. A página é leve, rápida e não pune o clique que você pagou.'],
       ['Pronta em 48h, não em 3 semanas', 'Sua campanha não pode esperar. A página fica no ar em 48 horas após o briefing, com tracking configurado.'],
     ],
+
+    statsEyebrow: 'Resultados que falam',
+    statsTitleParts: [
+      { text: 'Números', variant: 'serif' },
+      { text: 'de quem faz isso todos os ', variant: 'bold' },
+      { text: 'dias', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    stats: [
+      { countTo: 100, prefix: '', suffix: '+', static: undefined as string | undefined, label: 'páginas entregues' },
+      { countTo: 4, prefix: 'até ', suffix: '', static: undefined as string | undefined, label: 'dias para tudo no ar' },
+      { countTo: null, prefix: '', suffix: '', static: '5,0', label: 'de avaliação média' },
+      { countTo: null, prefix: '', suffix: '', static: 'R$ 0', label: 'de mensalidade de hospedagem' },
+    ],
+
+    includedEyebrow: 'Tudo incluído',
+    includedTitleParts: [
+      { text: 'Você recebe', variant: 'serif' },
+      { text: 'a página pronta. E tudo o que ela precisa para ', variant: 'bold' },
+      { text: 'funcionar', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    includedParagraph:
+      'Nada de surpresa depois da entrega: "a hospedagem é à parte", "o SSL você contrata", "o Analytics é outro serviço". Na BlackElephant, está tudo dentro. Configurado, testado e funcionando.',
+    includedCards: [
+      ['Hospedagem gratuita', 'Sua página no ar sem nenhuma mensalidade de servidor. A configuração é por nossa conta.'],
+      ['SSL e Cloudflare grátis', 'Cadeado de segurança e proteção contra instabilidade, já configurados. Página segura converte mais.'],
+      ['SEO configurado', 'Sua página preparada para ser encontrada no Google, não só para receber tráfego pago.'],
+      ['Google Tag e Analytics', 'Você sabe exatamente quantas pessoas visitam, de onde vêm e o que fazem na sua página.'],
+      ['Formulário de contato', 'Leads preenchem na página e caem direto pra você. Sem ferramenta extra, sem custo extra.'],
+      ['WhatsApp e agendamento', 'Botão de WhatsApp em todos os pontos da página e agendamento por Calendly, se fizer sentido.'],
+      ['100% responsiva', 'Construída primeiro pro celular, onde chegam mais de 80% dos cliques de campanha.'],
+      ['Tudo no ar em até 4 dias', 'Da conversa inicial à página publicada com domínio, segurança e métricas funcionando.'],
+    ],
+
+    whyEyebrow: 'Nossa diferença',
+    whyTitleParts: [
+      { text: 'Páginas feitas', variant: 'serif' },
+      { text: 'por especialistas em ', variant: 'bold' },
+      { text: 'conversão', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
     whyTitle: 'Páginas feitas por especialistas em conversão.',
     whyText: 'A diferença entre uma página bonita e uma que vende é que a segunda foi construída pensando no clique que chegou nela. Não fazemos sites. Fazemos páginas que fecham o que o anúncio abre.',
+    whyItems: [
+      ['Um único objetivo', 'Sem menu, sem distração, sem link pra fora. O visitante tem um caminho só: a sua oferta.'],
+      ['Copy alinhada ao anúncio', 'O argumento da página é o mesmo do anúncio. Isso elimina fricção e aumenta confiança.'],
+      ['CTA sempre visível', 'Não importa onde o visitante pare de rolar, tem um botão de ação na tela.'],
+      ['Velocidade que não pune o clique', '3 segundos de carregamento e metade dos visitantes já foi embora. Sua página é leve e rápida.'],
+    ],
+
+    audienceEyebrow: 'Para quem é',
+    audienceTitleParts: [
+      { text: 'Se você', variant: 'serif' },
+      { text: 'anuncia online, essa página é pra ', variant: 'bold' },
+      { text: 'você', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    audienceParagraph: 'Atendemos negócios de todos os tamanhos no Sul e Sudeste (e no Brasil inteiro, porque é tudo online).',
+    audienceCards: [
+      ['Profissionais liberais', 'Médicos, dentistas, advogados, arquitetos. Página focada em gerar agendamentos qualificados.'],
+      ['Negócios locais', 'Clínicas, estéticas, academias, restaurantes. Transforme o anúncio em cliente na porta.'],
+      ['Prestadores de serviço', 'Consultores, agências, técnicos. Página que gera pedidos de orçamento prontos pra fechar.'],
+      ['Quem vende produto', 'Lançamentos, infoprodutos e e-commerce. Página de oferta que conduz direto pro checkout ou WhatsApp.'],
+    ],
+
+    recentWorkEyebrow: 'Trabalhos recentes',
+    recentWorkTitleParts: [
+      { text: 'Páginas que', variant: 'serif' },
+      { text: 'a gente já entregou para quem precisava ', variant: 'bold' },
+      { text: 'vender', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    recentWorkAlt: 'Landing page desenvolvida pela BlackElephant',
+
+    testimonialsEyebrow: 'Quem contratou',
+    testimonialsTitleParts: [
+      { text: 'O antes', variant: 'serif' },
+      { text: 'e o depois de quem trocou a ', variant: 'bold' },
+      { text: 'página', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
     testimonialsTitle: 'O antes e o depois de quem trocou a página.',
+
+    processEyebrow: 'Como funciona',
+    processTitleParts: [
+      { text: 'Da primeira', variant: 'serif' },
+      { text: 'mensagem ao ar em até ', variant: 'bold' },
+      { text: '4 dias', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
     processTitle: 'Da primeira mensagem ao ar em até 4 dias.',
     processSubtitle: 'Simples pra você. Sem reunião interminável, sem orçamento que demora uma semana pra chegar.',
     process: [
@@ -89,6 +220,14 @@ const COPY = {
     formSubmitLabel: 'Quero tirar minhas dúvidas',
     formSubmitting: 'Enviando...',
     formErrorMessage: 'Algo deu errado. Tente de novo ou nos chame no WhatsApp.',
+
+    faqEyebrow: 'Perguntas frequentes',
+    faqTitleParts: [
+      { text: 'As perguntas', variant: 'serif' },
+      { text: 'que aparecem toda vez, respondidas com ', variant: 'bold' },
+      { text: 'honestidade', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
     faqTitle: 'As perguntas que aparecem toda vez, respondidas com honestidade.',
     faqs: [
       ['Em quanto tempo fica pronta?', 'Em até 4 dias após a aprovação do briefing, com tudo configurado: hospedagem, SSL, SEO, formulário e métricas. Você recebe a URL pronta pra receber tráfego.'],
@@ -108,9 +247,10 @@ const COPY = {
     finalCtaWhatsappLabel: 'Agendar uma call',
   },
   en: {
-    eyebrow: 'For those who invest in paid traffic',
-    heroTitle: 'Low CPC, but poor conversions?\nThe problem is your page.',
-    heroText: 'Sell more with a brand-new Landing Page ready in up to 48 hours with strategic copy and high-converting design.',
+    eyebrowLead: 'Build your ',
+    eyebrowStrong: 'High-Converting Landing Page',
+    heroTitle: 'Get a\npage that turns\nclicks into sales.',
+    heroText: 'Imagine having a storefront so good it brings you customers even while you sleep.',
     heroCtaLabel: 'See how it works',
     heroAvgDelivery: 'Average delivery: 36h',
     heroCounter: 'Landing Pages delivered',
@@ -125,8 +265,26 @@ const COPY = {
     guaranteeText:
       'Real 15-day guarantee: if the delivery does not meet the briefing or you simply do not like it, we redo it from scratch or refund the full amount. No negotiation. Our word.',
     marqueeOne: ['HIGH CONVERSION', 'SEO', 'PERFORMANCE', 'PREMIUM DESIGN', 'WHATSAPP', 'PAID TRAFFIC', 'STRATEGIC COPY'],
+
+    problemEyebrow: 'The real problem',
+    problemTitleParts: [
+      { text: "You're not", variant: 'serif' },
+      { text: 'losing sales because of the ', variant: 'bold' },
+      { text: 'ad', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    problemParagraph: {
+      pre: "You tweaked the ad. Traffic arrives. But conversions aren't coming. In most cases, the problem isn't the traffic — it's the ",
+      strong: 'page',
+      mid: ': slow on mobile, generic copy, and a hidden CTA. And every click keeps ',
+      em: 'costing you',
+      end: '.',
+    },
+    problemBeforeLabel: 'Your page made by others',
+    problemAfterLabel: 'Your page made by us',
+
     problemTitle: 'You are not losing sales because of the ad.',
-    problemText: 'You adjusted the creative. Tested audiences. Optimized the budget. The ad is performing.\n\nBut conversions are not coming.\n\nIn most cases, the problem is not the traffic. It is the page. Slow on mobile. Generic text. Hidden CTA. No message match.\n\nMeanwhile, every click keeps costing money.',
+    problemText: 'You adjusted the creative. Tested audiences. Optimized the budget. The ad is performing. But conversions are not coming. In most cases, the problem is not the traffic. It is the page. Slow on mobile, with generic text, a hidden CTA and a message that does not match the ad. And meanwhile, every click keeps costing money.',
     outcomes: [
       ['Generic page with no connection to the ad', 'Message aligned with the campaign creative'],
       ['CTA buried in the middle of the page', 'Clear offer and CTA visible at every point'],
@@ -153,16 +311,104 @@ const COPY = {
       ['Speed that does not lose the visitor', '3 seconds of loading and 50% of visitors are already gone. The page is light, fast and does not punish the click you paid for.'],
       ['Ready in 48h, not 3 weeks', 'Your campaign cannot wait. The page goes live in 48 hours after the briefing, with tracking configured.'],
     ],
-    whyTitle: 'We build pages like traffic managers. Not like designers.',
-    whyText: 'The difference between a beautiful landing page and one that converts is that the second was built thinking about the click that arrived on it.\n\nWe do not make websites. We make pages that close what the ad opens.',
-    testimonialsTitle: 'The before and after of those who switched the page',
-    processTitle: 'From conversation to live in 48h.',
-    processSubtitle: 'Simple for you. No endless meetings. No delays.',
+
+    statsEyebrow: 'Results that speak for themselves',
+    statsTitleParts: [
+      { text: 'Numbers', variant: 'serif' },
+      { text: 'from those who do this every ', variant: 'bold' },
+      { text: 'day', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    stats: [
+      { countTo: 100, prefix: '', suffix: '+', static: undefined as string | undefined, label: 'pages delivered' },
+      { countTo: 4, prefix: 'up to ', suffix: '', static: undefined as string | undefined, label: 'days to go live' },
+      { countTo: null, prefix: '', suffix: '', static: '5.0', label: 'average rating' },
+      { countTo: null, prefix: '', suffix: '', static: 'US$ 0', label: 'monthly hosting fee' },
+    ],
+
+    includedEyebrow: 'Everything included',
+    includedTitleParts: [
+      { text: 'You get', variant: 'serif' },
+      { text: 'the finished page. And everything it needs to ', variant: 'bold' },
+      { text: 'work', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    includedParagraph:
+      'No surprises after delivery: "hosting is extra," "you need to buy SSL yourself," "Analytics is a separate service." At BlackElephant, everything is included — configured, tested, and working.',
+    includedCards: [
+      ['Free hosting', 'Your page live with zero server monthly fees. Setup is on us.'],
+      ['Free SSL and Cloudflare', 'Security padlock and protection against downtime, already configured. A secure page converts better.'],
+      ['SEO configured', 'Your page ready to be found on Google, not just to receive paid traffic.'],
+      ['Google Tag and Analytics', 'You know exactly how many people visit, where they come from, and what they do on your page.'],
+      ['Contact form', 'Leads fill it out on the page and land straight in your inbox. No extra tool, no extra cost.'],
+      ['WhatsApp and scheduling', 'WhatsApp button at every point on the page, plus Calendly scheduling if it makes sense for your business.'],
+      ['100% responsive', 'Built mobile-first, since over 80% of campaign clicks arrive from mobile.'],
+      ['Live in up to 4 days', 'From the first conversation to a published page with domain, security, and tracking all working.'],
+    ],
+
+    whyEyebrow: 'What sets us apart',
+    whyTitleParts: [
+      { text: 'Pages built', variant: 'serif' },
+      { text: 'by specialists in ', variant: 'bold' },
+      { text: 'conversion', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    whyTitle: 'Pages built by conversion specialists.',
+    whyText: "The difference between a beautiful page and one that sells is that the second was built with the click that landed on it in mind. We don't build websites. We build pages that close what the ad opens.",
+    whyItems: [
+      ['A single objective', 'No menu, no distractions, no outbound links. The visitor has only one path: your offer.'],
+      ['Copy aligned with the ad', "The page's argument is the same as the ad's. This removes friction and builds trust."],
+      ['CTA always visible', 'No matter where the visitor stops scrolling, there is always an action button on screen.'],
+      ['Speed that respects your click', '3 seconds of load time and half your visitors are already gone. Your page is light and fast.'],
+    ],
+
+    audienceEyebrow: "Who it's for",
+    audienceTitleParts: [
+      { text: 'If you', variant: 'serif' },
+      { text: 'advertise online, this page is for ', variant: 'bold' },
+      { text: 'you', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    audienceParagraph: 'We serve businesses of all sizes in the South and Southeast of Brazil (and across the whole country, since everything happens online).',
+    audienceCards: [
+      ['Independent professionals', 'Doctors, dentists, lawyers, architects. A page focused on generating qualified appointments.'],
+      ['Local businesses', 'Clinics, aesthetics studios, gyms, restaurants. Turn your ad into customers walking through the door.'],
+      ['Service providers', 'Consultants, agencies, technicians. A page that generates quote requests ready to close.'],
+      ['Product sellers', 'Launches, digital products and e-commerce. An offer page that leads straight to checkout or WhatsApp.'],
+    ],
+
+    recentWorkEyebrow: 'Recent work',
+    recentWorkTitleParts: [
+      { text: "Pages we've", variant: 'serif' },
+      { text: 'already delivered for those who needed to ', variant: 'bold' },
+      { text: 'sell', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    recentWorkAlt: 'Landing page built by BlackElephant',
+
+    testimonialsEyebrow: 'Our clients',
+    testimonialsTitleParts: [
+      { text: 'The before', variant: 'serif' },
+      { text: 'and after of those who switched their ', variant: 'bold' },
+      { text: 'page', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    testimonialsTitle: 'The before and after of those who switched the page.',
+
+    processEyebrow: 'How it works',
+    processTitleParts: [
+      { text: 'From first', variant: 'serif' },
+      { text: 'message to live in up to ', variant: 'bold' },
+      { text: '4 days', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
+    processTitle: 'From the first message to live in up to 4 days.',
+    processSubtitle: 'Simple for you. No endless meetings, no proposal that takes a week to arrive.',
     process: [
-      ['You tell us, we understand', 'You fill out a direct briefing about the offer, audience, and objective. No long meetings. In under 1 hour you have delivered everything we need.'],
-      ['Copy and structure, same day', 'We build the page structure: strategic copy, sections in conversion order, and CTAs in the right places. You approve before we enter design.'],
-      ['One revision round, not ten', 'We make the page responsive, fast on mobile, and with your brand identity. No surprises in the result.'],
-      ['Launch in 48h', 'The page goes live with tracking configured, URL defined, and ready to receive campaigns. Most deliveries happen before the 48h mark.'],
+      ['You message us on WhatsApp', "Tell us your offer, your audience and your goal. It's a free diagnosis, straight in the chat. No mandatory call."],
+      ['You get the exact proposal', 'Based on what your business needs, we send a custom-made proposal. Approved? We start the same day.'],
+      ['Copy, design and development', 'We build the structure, strategic copy and design aligned with your brand. You follow along and approve before it goes live.'],
+      ['Live in up to 4 days', 'Page published with hosting, SSL, SEO, form and tracking all configured. Ready to receive your campaign.'],
     ],
     formTitle: 'Still have questions? Tell us.',
     formText: 'No commitment. We understand your situation and show you if it makes sense.',
@@ -172,22 +418,31 @@ const COPY = {
     formSubmitLabel: 'Get in touch',
     formSubmitting: 'Sending...',
     formErrorMessage: 'Something went wrong. Try again or reach us on WhatsApp.',
+
+    faqEyebrow: 'Frequently asked questions',
+    faqTitleParts: [
+      { text: 'The questions', variant: 'serif' },
+      { text: 'that always come up, answered with ', variant: 'bold' },
+      { text: 'honesty', variant: 'lime' },
+      { text: '.', variant: 'bold' },
+    ] as TitleSegment[],
     faqTitle: 'The questions that always come up, answered honestly.',
     faqs: [
-      ['How fast is the delivery?', 'Within 48 hours after briefing approval. In practice, most deliveries happen in 36 to 40 hours. You receive the URL with the page live, ready to receive traffic.'],
-      ['What is the guarantee?', '15-day total guarantee. If the delivery did not meet the briefing or you simply did not like it, you choose: we redo it from scratch or refund the full amount. No process, no arguing. The responsibility is ours.'],
-      ['I hired an agency before and was disappointed. Why would this be different?', 'Because most agencies build websites. We build pages for traffic campaigns. Whoever handles your delivery understands copy, CTA, and how traffic arrives on the page. Not a generalist designer. A conversion specialist. And if you do not like it, you have 15 days to ask for your money back. No arguing.'],
-      ['Can I buy directly?', 'Yes, and it is the fastest path. After the purchase, we send the briefing and start within 2 hours. If you prefer to talk first, WhatsApp and call are available.'],
-      ['What do I need to send?', 'Offer, target audience, visual identity (if you have it), and the CTA channels (WhatsApp, form, checkout link). Does not need to be all ready. We help organize during the briefing.'],
-      ['Does it work on mobile?', 'Yes. The page is mobile-first, built for mobile first and then desktop. Because that is where more than 80% of paid traffic clicks arrive.'],
-      ['Do you guarantee the landing will convert?', 'We do not guarantee conversions. That would depend on your offer, your traffic, and your price. No serious agency guarantees that. What we guarantee is the delivery: a page built with the best conversion practices. If it does not meet expectations, we refund. What is within our control is guaranteed.'],
+      ['How long does it take to be ready?', 'Up to 4 days after briefing approval, with everything configured: hosting, SSL, SEO, form and tracking. You receive the URL ready to receive traffic.'],
+      ['How much does it cost?', "It depends on your project's scope. In a quick WhatsApp chat you get the exact proposal, no strings attached. We do not work with generic packages, because there is no such thing as a generic business."],
+      ['Is hosting really free?', 'Yes. Server, setup, SSL and Cloudflare are on us, with no monthly fee. You pay nothing beyond the project itself.'],
+      ['Do I need a logo, domain or materials ready?', 'No. We help organize everything during the briefing. If you have a visual identity, we use it. If not, we figure it out together.'],
+      ['Does it work well on mobile?', 'Yes. The page is mobile-first: built for mobile first, where more than 80% of paid traffic clicks come from.'],
+      ['Do you guarantee it will convert?', "We do not guarantee conversion, because that depends on your offer, your traffic and your price. No serious agency guarantees that. What we do guarantee is the delivery: a page built with the best conversion practices. If it does not meet that, we refund your money."],
+      ["I've been disappointed by an agency before. Why would this be different?", 'Because most agencies build websites. We build pages for campaigns. Whoever handles your delivery understands copy, CTAs and traffic. And you have a 15-day guarantee to prove it.'],
+      ['Do you serve my city?', 'We serve all of Brazil, 100% online. Most of our clients are in the South and Southeast, and the whole process happens over WhatsApp, no in-person meeting needed.'],
     ],
     finalCtaEyebrow: 'Last call',
-    finalCtaTitle: 'Every day with the wrong page is more money spent on traffic that does not convert.',
-    finalCtaText: 'If you keep the page you have now, the result will be the same. The ad will keep paying for clicks that the page does not close.',
-    finalCtaPs: 'Delivery is within 48h after the briefing. The guarantee is 15 days. If it does not meet expectations, we refund everything. The only thing you risk is keeping the page you already have.',
-    finalCtaBuyLabel: 'I want my landing page now',
-    finalCtaWhatsappLabel: 'Talk on WhatsApp first',
+    finalCtaTitle: 'Every day with the wrong page is ad money going down the drain.',
+    finalCtaText: "If you stick with the page you have now, the result will be the same: your ad keeps paying for clicks the page can't close. The conversation is free, takes 10 minutes, and you'll walk away knowing exactly what you need.",
+    finalCtaPs: 'The proposal is custom-made, delivery takes up to 4 days, and the guarantee is 15 days. The only thing you risk is sticking with the page you already have.',
+    finalCtaBuyLabel: 'Message on WhatsApp now',
+    finalCtaWhatsappLabel: 'Schedule a call',
   },
 } as const;
 
@@ -336,11 +591,11 @@ export function SitesLandingPagesClient({ locale }: SitesLandingPagesClientProps
       <LandingPageHeader locale={activeLocale} />
       <HeroSection copy={copy} reduceMotion={reduceMotion} />
       <ProblemSection copy={copy} reduceMotion={reduceMotion} />
-      <RecentWorkSection reduceMotion={reduceMotion} />
-      <StatsSection reduceMotion={reduceMotion} />
-      <IncludedSection reduceMotion={reduceMotion} />
+      <RecentWorkSection copy={copy} reduceMotion={reduceMotion} />
+      <StatsSection copy={copy} reduceMotion={reduceMotion} />
+      <IncludedSection copy={copy} reduceMotion={reduceMotion} />
       <WhySection copy={copy} reduceMotion={reduceMotion} />
-      <AudienceSection reduceMotion={reduceMotion} />
+      <AudienceSection copy={copy} reduceMotion={reduceMotion} />
       <TestimonialsSection locale={activeLocale} copy={copy} reduceMotion={reduceMotion} />
       <ProcessSection copy={copy} reduceMotion={reduceMotion} />
       <FaqSection copy={copy} reduceMotion={reduceMotion} />
@@ -507,8 +762,8 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-lime)]" />
               </span>
               <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-lime)]/75">
-                <span className="font-medium">Faça sua Landing Page de </span>
-                <span className="font-black">Alta Conversão</span>
+                <span className="font-medium">{copy.eyebrowLead}</span>
+                <span className="font-black">{copy.eyebrowStrong}</span>
               </p>
             </div>
 
@@ -616,24 +871,21 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              O problema real
+              {copy.problemEyebrow}
             </span>
           </div>
 
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Você não está</span>
-            <span className="font-black text-white">perdendo vendas por causa do </span>
-            <span className="font-black text-[var(--color-lime)]">anúncio</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.problemTitleParts} />
           </h2>
 
           <div className="mt-6">
             <p className="text-base leading-[1.75] text-white/58 lg:text-lg">
-              Você ajustou o anúncio. O tráfego chega. Mas a conversão não sai. Na maioria dos casos,
-              o problema não é o tráfego, é a{' '}
-              <strong className="font-black text-white">página</strong>: lenta no celular, texto genérico
-              e CTA escondido. E cada clique continua{' '}
-              <em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', fontWeight: 300, color: 'rgba(255,255,255,0.85)' }}>custando</em>.
+              {copy.problemParagraph.pre}
+              <strong className="font-black text-white">{copy.problemParagraph.strong}</strong>
+              {copy.problemParagraph.mid}
+              <em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', fontWeight: 300, color: 'rgba(255,255,255,0.85)' }}>{copy.problemParagraph.em}</em>
+              {copy.problemParagraph.end}
             </p>
           </div>
         </motion.div>
@@ -658,7 +910,7 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-red-400/80">Sua página feita por outros</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-red-400/80">{copy.problemBeforeLabel}</span>
                 </div>
                 <p className="text-sm leading-[1.65] text-white/50">{before}</p>
               </div>
@@ -672,7 +924,7 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-lime)]/80">Sua página feita por nós</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-lime)]/80">{copy.problemAfterLabel}</span>
                 </div>
                 <p className="text-sm font-semibold leading-[1.65] text-white/85">{after}</p>
               </div>
@@ -783,17 +1035,10 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
 
 // ─── Stats Section ───────────────────────────────────────────────────────────
 
-const STATS = [
-  { countTo: 100, prefix: '', suffix: '+', label: 'páginas entregues' },
-  { countTo: 4, prefix: 'até ', suffix: '', label: 'dias para tudo no ar' },
-  { countTo: null, static: '5,0', label: 'de avaliação média' },
-  { countTo: null, static: 'R$ 0', label: 'de mensalidade de hospedagem' },
-] as const;
-
 function StatCounter({
-  countTo, prefix = '', suffix = '', staticValue, index, reduceMotion,
+  countTo, prefix = '', suffix = '', staticValue, label, index, reduceMotion,
 }: {
-  countTo: number | null; prefix?: string; suffix?: string; staticValue?: string;
+  countTo: number | null; prefix?: string; suffix?: string; staticValue?: string; label: string;
   index: number; reduceMotion: boolean | null;
 }) {
   const [count, setCount] = useState(0);
@@ -828,12 +1073,12 @@ function StatCounter({
       >
         {displayed}
       </span>
-      <span className="text-sm leading-snug text-white/52">{STATS[index].label}</span>
+      <span className="text-sm leading-snug text-white/52">{label}</span>
     </div>
   );
 }
 
-function StatsSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+function StatsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
     <section id="quem-somos" className="relative scroll-mt-24 py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -850,25 +1095,23 @@ function StatsSection({ reduceMotion }: { reduceMotion: boolean | null }) {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Resultados que falam
+              {copy.statsEyebrow}
             </span>
           </div>
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Números</span>
-            <span className="font-black text-white">de quem faz isso todos os </span>
-            <span className="font-black text-[var(--color-lime)]">dias</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.statsTitleParts} />
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-2 gap-px border border-white/8 lg:grid-cols-4" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
-          {STATS.map((stat, i) => (
+          {copy.stats.map((stat, i) => (
             <StatCounter
               key={stat.label}
               countTo={stat.countTo}
-              prefix={'prefix' in stat ? stat.prefix : ''}
-              suffix={'suffix' in stat ? stat.suffix : ''}
-              staticValue={'static' in stat ? stat.static : undefined}
+              prefix={stat.prefix}
+              suffix={stat.suffix}
+              staticValue={stat.static}
+              label={stat.label}
               index={i}
               reduceMotion={reduceMotion}
             />
@@ -881,50 +1124,18 @@ function StatsSection({ reduceMotion }: { reduceMotion: boolean | null }) {
 
 // ─── Included Section ────────────────────────────────────────────────────────
 
-const INCLUDED_CARDS = [
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
-    title: 'Hospedagem gratuita',
-    text: 'Sua página no ar sem nenhuma mensalidade de servidor. A configuração é por nossa conta.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
-    title: 'SSL e Cloudflare grátis',
-    text: 'Cadeado de segurança e proteção contra instabilidade, já configurados. Página segura converte mais.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
-    title: 'SEO configurado',
-    text: 'Sua página preparada para ser encontrada no Google, não só para receber tráfego pago.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M18 20V10M12 20V4M6 20v-6"/></svg>,
-    title: 'Google Tag e Analytics',
-    text: 'Você sabe exatamente quantas pessoas visitam, de onde vêm e o que fazem na sua página.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
-    title: 'Formulário de contato',
-    text: 'Leads preenchem na página e caem direto pra você. Sem ferramenta extra, sem custo extra.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>,
-    title: 'WhatsApp e agendamento',
-    text: 'Botão de WhatsApp em todos os pontos da página e agendamento por Calendly, se fizer sentido.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>,
-    title: '100% responsiva',
-    text: 'Construída primeiro pro celular, onde chegam mais de 80% dos cliques de campanha.',
-  },
-  {
-    icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
-    title: 'Tudo no ar em até 4 dias',
-    text: 'Da conversa inicial à página publicada com domínio, segurança e métricas funcionando.',
-  },
-] as const;
+const INCLUDED_ICONS = [
+  <svg key="hosting" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
+  <svg key="ssl" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
+  <svg key="seo" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>,
+  <svg key="analytics" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M18 20V10M12 20V4M6 20v-6"/></svg>,
+  <svg key="form" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
+  <svg key="whatsapp" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>,
+  <svg key="responsive" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>,
+  <svg key="launch" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
+];
 
-function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+function IncludedSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
     <section id="beneficios" className="relative scroll-mt-24 py-20 lg:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -941,24 +1152,21 @@ function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Tudo incluído
+              {copy.includedEyebrow}
             </span>
           </div>
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Você recebe</span>
-            <span className="font-black text-white">a página pronta. E tudo o que ela precisa para </span>
-            <span className="font-black text-[var(--color-lime)]">funcionar</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.includedTitleParts} />
           </h2>
           <p className="mt-5 max-w-xl text-base leading-[1.7] text-white/56">
-            Nada de surpresa depois da entrega: &quot;a hospedagem é à parte&quot;, &quot;o SSL você contrata&quot;, &quot;o Analytics é outro serviço&quot;. Na BlackElephant, está tudo dentro. Configurado, testado e funcionando.
+            {copy.includedParagraph}
           </p>
         </motion.div>
 
         {/* Scroll horizontal no mobile, grade fixa de 3 colunas no desktop (sem scroll) */}
         <div className="-mx-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0 sm:pb-0 lg:overflow-visible">
           <div className="flex min-w-max gap-4 sm:grid sm:min-w-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-            {INCLUDED_CARDS.map(({ icon, title, text }, i) => (
+            {copy.includedCards.map(([title, text], i) => (
               <motion.div
                 key={title}
                 initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -968,7 +1176,7 @@ function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
                 className="flex w-[260px] shrink-0 flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-5 sm:w-auto"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-lime)]/25 bg-[var(--color-lime)]/10 text-[var(--color-lime)]">
-                  {icon}
+                  {INCLUDED_ICONS[i]}
                 </div>
                 <h3 className="text-sm font-black text-white">{title}</h3>
                 <p className="text-xs leading-[1.7] text-white/52">{text}</p>
@@ -982,13 +1190,6 @@ function IncludedSection({ reduceMotion }: { reduceMotion: boolean | null }) {
 }
 
 // ─── Why Section ─────────────────────────────────────────────────────────────
-
-const WHY_ITEMS = [
-  { label: 'Um único objetivo', text: 'Sem menu, sem distração, sem link pra fora. O visitante tem um caminho só: a sua oferta.' },
-  { label: 'Copy alinhada ao anúncio', text: 'O argumento da página é o mesmo do anúncio. Isso elimina fricção e aumenta confiança.' },
-  { label: 'CTA sempre visível', text: 'Não importa onde o visitante pare de rolar, tem um botão de ação na tela.' },
-  { label: 'Velocidade que não pune o clique', text: '3 segundos de carregamento e metade dos visitantes já foi embora. Sua página é leve e rápida.' },
-] as const;
 
 function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
@@ -1007,7 +1208,7 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Nossa diferença
+              {copy.whyEyebrow}
             </span>
           </div>
 
@@ -1018,10 +1219,7 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
                 className="text-[2.25rem] leading-[1.02] lg:text-[3.25rem]"
                 style={{ fontFamily: 'var(--font-title)' }}
               >
-                <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Páginas feitas</span>
-                <span className="font-black text-white">por especialistas em </span>
-                <span className="font-black text-[var(--color-lime)]">conversão</span>
-                <span className="font-black text-white">.</span>
+                <SectionTitle segments={copy.whyTitleParts} />
               </h2>
               <div className="mt-5 h-px w-12" style={{ background: 'linear-gradient(90deg, var(--color-lime), transparent)' }} aria-hidden />
               <p className="mt-5 text-base leading-[1.7] text-white/60">{copy.whyText}</p>
@@ -1029,7 +1227,7 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
 
             {/* Coluna direita: lista numerada /01–/04 */}
             <div className="flex flex-col gap-0 divide-y divide-white/8">
-              {WHY_ITEMS.map(({ label, text }, i) => (
+              {copy.whyItems.map(([label, text], i) => (
                 <motion.div
                   key={label}
                   initial={reduceMotion ? false : { opacity: 0, x: 12 }}
@@ -1060,30 +1258,14 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
 
 // ─── Audience Section ─────────────────────────────────────────────────────────
 
-const AUDIENCE_CARDS = [
-  {
-    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>,
-    title: 'Profissionais liberais',
-    text: 'Médicos, dentistas, advogados, arquitetos. Página focada em gerar agendamentos qualificados.',
-  },
-  {
-    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
-    title: 'Negócios locais',
-    text: 'Clínicas, estéticas, academias, restaurantes. Transforme o anúncio em cliente na porta.',
-  },
-  {
-    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>,
-    title: 'Prestadores de serviço',
-    text: 'Consultores, agências, técnicos. Página que gera pedidos de orçamento prontos pra fechar.',
-  },
-  {
-    icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-7.43H6"/></svg>,
-    title: 'Quem vende produto',
-    text: 'Lançamentos, infoprodutos e e-commerce. Página de oferta que conduz direto pro checkout ou WhatsApp.',
-  },
-] as const;
+const AUDIENCE_ICONS = [
+  <svg key="pros" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>,
+  <svg key="local" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  <svg key="service" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>,
+  <svg key="product" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-7.43H6"/></svg>,
+];
 
-function AudienceSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+function AudienceSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
     <section className="relative py-20 lg:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -1100,22 +1282,19 @@ function AudienceSection({ reduceMotion }: { reduceMotion: boolean | null }) {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Para quem é
+              {copy.audienceEyebrow}
             </span>
           </div>
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Se você</span>
-            <span className="font-black text-white">anuncia online, essa página é pra </span>
-            <span className="font-black text-[var(--color-lime)]">você</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.audienceTitleParts} />
           </h2>
           <p className="mt-5 text-base leading-[1.7] text-white/52">
-            Atendemos negócios de todos os tamanhos no Sul e Sudeste (e no Brasil inteiro, porque é tudo online).
+            {copy.audienceParagraph}
           </p>
         </motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {AUDIENCE_CARDS.map(({ icon, title, text }, i) => (
+          {copy.audienceCards.map(([title, text], i) => (
             <motion.div
               key={title}
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -1125,7 +1304,7 @@ function AudienceSection({ reduceMotion }: { reduceMotion: boolean | null }) {
               className="flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition-colors hover:border-[var(--color-lime)]/20 hover:bg-[var(--color-lime)]/[0.03]"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/70">
-                {icon}
+                {AUDIENCE_ICONS[i]}
               </div>
               <div>
                 <h3 className="text-base font-black text-white">{title}</h3>
@@ -1166,7 +1345,7 @@ const RECENT_WORK_IMAGES = [
   'senecon.png',
 ] as const;
 
-function RecentWorkSection({ reduceMotion }: { reduceMotion: boolean | null }) {
+function RecentWorkSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boolean | null }) {
   return (
     <section id="trabalhos-recentes" className="relative scroll-mt-24 py-20 lg:py-28">
       <div className="site-container relative mb-10">
@@ -1179,14 +1358,11 @@ function RecentWorkSection({ reduceMotion }: { reduceMotion: boolean | null }) {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Trabalhos recentes
+              {copy.recentWorkEyebrow}
             </span>
           </div>
           <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Páginas que</span>
-            <span className="font-black text-white">a gente já entregou para quem precisava </span>
-            <span className="font-black text-[var(--color-lime)]">vender</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.recentWorkTitleParts} />
           </h2>
         </motion.div>
       </div>
@@ -1204,7 +1380,7 @@ function RecentWorkSection({ reduceMotion }: { reduceMotion: boolean | null }) {
             >
               <Image
                 src={`/portfolio/lps/${file}`}
-                alt="Landing page desenvolvida pela BlackElephant"
+                alt={copy.recentWorkAlt}
                 fill
                 className="object-cover"
                 sizes="(min-width: 1024px) 400px, (min-width: 640px) 340px, 260px"
@@ -1238,14 +1414,11 @@ function TestimonialsSection({
         <div className="mb-6 flex items-center gap-3">
           <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
           <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-            Quem contratou
+            {copy.testimonialsEyebrow}
           </span>
         </div>
         <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-          <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>O antes</span>
-          <span className="font-black text-white">e o depois de quem trocou a </span>
-          <span className="font-black text-[var(--color-lime)]">página</span>
-          <span className="font-black text-white">.</span>
+          <SectionTitle segments={copy.testimonialsTitleParts} />
         </h2>
       </div>
 
@@ -1317,14 +1490,11 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Como funciona
+              {copy.processEyebrow}
             </span>
           </div>
           <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>Da primeira</span>
-            <span className="font-black text-white">mensagem ao ar em até </span>
-            <span className="font-black text-[var(--color-lime)]">4 dias</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.processTitleParts} />
           </h2>
           <p className="mt-4 text-base text-white/50" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
             {copy.processSubtitle}
@@ -1444,14 +1614,11 @@ function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
-              Perguntas frequentes
+              {copy.faqEyebrow}
             </span>
           </div>
           <h2 className="max-w-2xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
-            <span className="block" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>As perguntas</span>
-            <span className="font-black text-white">que aparecem toda vez, respondidas com </span>
-            <span className="font-black text-[var(--color-lime)]">honestidade</span>
-            <span className="font-black text-white">.</span>
+            <SectionTitle segments={copy.faqTitleParts} />
           </h2>
         </motion.div>
 
