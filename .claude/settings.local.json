@@ -27,7 +27,8 @@
       "Bash(npx eslint *)",
       "Bash(Select-String -Pattern \"KanbanBoard|src/\")",
       "Bash(Select-Object -First 30)",
-      "Bash(grep -E \"^C:\\\\\\\\\\\\\\\\.*KanbanBoard|^C:\\\\\\\\\\\\\\\\.*users\\\\.ts|^C:\\\\\\\\\\\\\\\\.*kanban/page\")"
+      "Bash(grep -E \"^C:\\\\\\\\\\\\\\\\.*KanbanBoard|^C:\\\\\\\\\\\\\\\\.*users\\\\.ts|^C:\\\\\\\\\\\\\\\\.*kanban/page\")",
+      "Bash(break)"
     ]
   }
 }
