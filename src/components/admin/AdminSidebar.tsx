@@ -99,6 +99,44 @@ const NAV = [
     ],
   },
   {
+    label: 'Site',
+    accordion: true,
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
+    children: [
+      {
+        label: 'Blog',
+        href: `${ADMIN_BASE}/site/blog`,
+        icon: (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Portfólio',
+        href: `${ADMIN_BASE}/site/portfolio`,
+        icon: (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" />
+          </svg>
+        ),
+      },
+      {
+        label: 'Planos e Preços',
+        href: `${ADMIN_BASE}/site/planos`,
+        icon: (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 1v22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
     label: 'Financeiro',
     href: `${ADMIN_BASE}/financeiro`,
     icon: (
@@ -170,19 +208,27 @@ function NavLink({ href, label, icon, exact, indent }: NavLinkProps) {
 
 export function AdminSidebar({ user }: { user: User }) {
   const pathname = usePathname()
-  const devRoutes = [
-    `${ADMIN_BASE}/kanban`,
-    `${ADMIN_BASE}/landing-pages`,
-    `${ADMIN_BASE}/sites`,
-    `${ADMIN_BASE}/projetos`,
-    `${ADMIN_BASE}/configuracoes`,
-  ]
-  const devActive = devRoutes.some(r => pathname.startsWith(r))
-  const [devOpen, setDevOpen] = useState(devActive)
+
+  // for each accordion item, whether the current path matches one of its children
+  const accordionActive: Record<string, boolean> = {}
+  for (const item of NAV) {
+    if (item.accordion && item.children) {
+      accordionActive[item.label] = item.children.some(c => pathname.startsWith(c.href))
+    }
+  }
+
+  const [openAccordions, setOpenAccordions] = useState<Record<string, boolean>>(accordionActive)
 
   useEffect(() => {
-    if (devActive) setDevOpen(true)
-  }, [devActive])
+    setOpenAccordions(prev => {
+      const next = { ...prev }
+      for (const label of Object.keys(accordionActive)) {
+        if (accordionActive[label]) next[label] = true
+      }
+      return next
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   return (
     <aside
@@ -212,13 +258,14 @@ export function AdminSidebar({ user }: { user: User }) {
         <ul className="flex flex-col gap-0.5">
           {NAV.map(item => {
             if (item.accordion && item.children) {
-              const open = devOpen
+              const open = openAccordions[item.label] ?? false
+              const active = accordionActive[item.label] ?? false
               return (
                 <li key={item.label}>
                   <button
-                    onClick={() => setDevOpen(v => !v)}
+                    onClick={() => setOpenAccordions(prev => ({ ...prev, [item.label]: !prev[item.label] }))}
                     className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors"
-                    style={{ color: devActive ? 'var(--primary)' : 'var(--foreground-muted)' }}
+                    style={{ color: active ? 'var(--primary)' : 'var(--foreground-muted)' }}
                   >
                     <span className="flex items-center gap-3">
                       <span>{item.icon}</span>

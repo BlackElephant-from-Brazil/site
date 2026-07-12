@@ -166,7 +166,7 @@ export async function get<Entidades>WithRefs(): Promise<<EntidadeWithRefs>[]> {
     .from('<tabela>')
     .select(`
       *,
-      <relacao>:public.<tabela_relacionada>(*)
+      <relacao>:<tabela_relacionada>(*)
     `)
     .order('<coluna>', { ascending: true })
   if (error) throw new Error(error.message)

@@ -1,5 +1,5 @@
 # Schema do Banco de Dados — Factory
-<!-- ÚLTIMA MIGRATION APLICADA: 020 -->
+<!-- ÚLTIMA MIGRATION APLICADA: 023 -->
 <!-- Atualize este arquivo ao detectar novas migrations. Sempre incremente o número acima. -->
 
 Banco: PostgreSQL via Supabase  
@@ -409,6 +409,109 @@ Etapas dos projetos do módulo Landing Pages (mesma estrutura de `kanban_columns
 | `public.landing_pages_projects` | `landing_page_stage_id` | UUID, FK → public.landing_pages_project_stages(id) ON DELETE SET NULL, nullable |
 
 **Indexes:** `idx_projects_software_stage`, `idx_sites_projects_stage`, `idx_landing_pages_projects_stage`
+
+---
+
+## Tabela: `public.blog_posts`
+
+Posts do blog — módulo interno de conteúdo do site (não reflete automaticamente no site público).
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `slug` | TEXT | NOT NULL, UNIQUE |
+| `title` | TEXT | NOT NULL |
+| `excerpt` | TEXT | NOT NULL |
+| `keywords` | TEXT[] | NOT NULL DEFAULT '{}' |
+| `author_id` | UUID | FK → public.users(id) ON DELETE SET NULL, nullable |
+| `cover_image_url` | TEXT | nullable |
+| `content_html` | TEXT | NOT NULL DEFAULT '' — HTML gerado pelo editor rico (Tiptap), inclui `<img>` inline |
+| `published_at` | TIMESTAMPTZ | NOT NULL DEFAULT utc now |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado | **Policies:** `blog_posts_admin` — FOR ALL, apenas role='admin'
+**Trigger:** `trg_blog_posts_updated`
+**Indexes:** `idx_blog_posts_author`, `idx_blog_posts_slug`
+**Storage:** imagens (capa e inline) sobem para o bucket público `blog-images`
+
+---
+
+## Tabela: `public.portfolio_items`
+
+Itens do portfólio — módulo interno de conteúdo do site.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `slug` | TEXT | NOT NULL, UNIQUE |
+| `title` | TEXT | NOT NULL |
+| `description` | TEXT | NOT NULL |
+| `keywords` | TEXT[] | NOT NULL DEFAULT '{}' |
+| `project_type_id` | UUID | FK → public.project_types(id) ON DELETE SET NULL, nullable |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado | **Policies:** `portfolio_items_admin` — FOR ALL, apenas role='admin'
+**Trigger:** `trg_portfolio_items_updated`
+**Index:** `idx_portfolio_items_type`
+
+---
+
+## Tabela: `public.portfolio_images`
+
+Imagens de um item de portfólio (até 20 por item, sendo exatamente 4 marcadas como capa).
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `portfolio_item_id` | UUID | NOT NULL, FK → public.portfolio_items(id) ON DELETE CASCADE |
+| `image_url` | TEXT | NOT NULL |
+| `is_cover` | BOOLEAN | NOT NULL DEFAULT false |
+| `position` | INTEGER | NOT NULL DEFAULT 0 |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado | **Policies:** `portfolio_images_admin` — FOR ALL, apenas role='admin'
+**Index:** `idx_portfolio_images_item`
+**Storage:** bucket público `portfolio-images`
+**Regra de aplicação (não é constraint de banco):** exatamente 4 imagens com `is_cover = true` por item, validado na action/UI.
+
+---
+
+## Tabela: `public.pricing_plans`
+
+Planos e preços exibidos no módulo interno — módulo interno de conteúdo do site.
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `name` | TEXT | NOT NULL |
+| `price` | NUMERIC(12,2) | NOT NULL |
+| `project_type_id` | UUID | FK → public.project_types(id) ON DELETE SET NULL, nullable |
+| `position` | INTEGER | NOT NULL DEFAULT 0 |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+| `updated_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado | **Policies:** `pricing_plans_admin` — FOR ALL, apenas role='admin'
+**Trigger:** `trg_pricing_plans_updated`
+**Index:** `idx_pricing_plans_type`
+
+---
+
+## Tabela: `public.pricing_plan_benefits`
+
+Itens de benefício de um plano (o que está incluso na contratação).
+
+| Coluna | Tipo | Constraints |
+|--------|------|-------------|
+| `id` | UUID | PK, DEFAULT gen_random_uuid() |
+| `pricing_plan_id` | UUID | NOT NULL, FK → public.pricing_plans(id) ON DELETE CASCADE |
+| `label` | TEXT | NOT NULL |
+| `position` | INTEGER | NOT NULL DEFAULT 0 |
+| `created_at` | TIMESTAMPTZ | DEFAULT utc now |
+
+**RLS:** habilitado | **Policies:** `pricing_plan_benefits_admin` — FOR ALL, apenas role='admin'
+**Index:** `idx_pricing_plan_benefits_plan`
 
 ---
 

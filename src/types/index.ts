@@ -259,6 +259,73 @@ export interface ProjectBankSummary {
   available_hours: number | null
 }
 
+// ─── Site (Blog / Portfólio / Planos) ─────────────────────────
+export interface BlogPost {
+  id: string
+  slug: string
+  title: string
+  excerpt: string
+  keywords: string[]
+  author_id: string | null
+  cover_image_url: string | null
+  content_html: string
+  published_at: string
+  created_at: string
+  updated_at: string
+}
+
+export interface BlogPostWithAuthor extends BlogPost {
+  author: Pick<User, 'id' | 'name'> | null
+}
+
+export interface PortfolioItem {
+  id: string
+  slug: string
+  title: string
+  description: string
+  keywords: string[]
+  project_type_id: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface PortfolioImage {
+  id: string
+  portfolio_item_id: string
+  image_url: string
+  is_cover: boolean
+  position: number
+  created_at: string
+}
+
+export interface PortfolioItemWithRefs extends PortfolioItem {
+  project_type: ProjectType | null
+  images: PortfolioImage[]
+}
+
+export interface PricingPlan {
+  id: string
+  name: string
+  price: number
+  project_type_id: string | null
+  position: number
+  created_at: string
+  updated_at: string
+}
+
+export interface PricingPlanBenefit {
+  id: string
+  pricing_plan_id: string
+  label: string
+  position: number
+  created_at: string
+}
+
+export interface PricingPlanWithRefs extends PricingPlan {
+  project_type: ProjectType | null
+  benefits: PricingPlanBenefit[]
+}
+
 // ─── Shared ──────────────────────────────────────────────────
 export interface ApiResponse<T> {
   data: T | null
