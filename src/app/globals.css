@@ -66,12 +66,62 @@ p {
   font-weight: 700;
 }
 
-/* Glassmorphism Utilities */
+/* ============================================================================
+ * Glass — primitiva de glassmorphism reutilizável, aplicável a QUALQUER elemento
+ * (card, modal, navbar, botão, banner…). Controlada por CSS custom properties.
+ *
+ * Os defaults são declarados na PRÓPRIA classe (não no :root) de propósito:
+ * garante exatamente o look especificado e não colide com --glass-blur (20px) /
+ * --glass-border já definidos em design-tokens.css. Override por elemento
+ * (inline style, modificador, ou regra mais específica) usando as mesmas vars.
+ *
+ * ⚠️ Glassmorphism só é visível se houver conteúdo (imagem, gradiente ou cor)
+ *    passando POR TRÁS do elemento. Sobre um fundo branco chapado o efeito some.
+ *
+ * NÃO fixa cor de texto: o vidro é só o container; o contraste do texto é
+ * responsabilidade de quem usa.
+ * ========================================================================== */
 .glass {
-  background: rgba(17, 17, 17, 0.6);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* --- propriedades configuráveis --- */
+  /* primitiva reutilizável de glassmorphism (v2) */
+  --glass-tint: 255 255 255;        /* canais RGB da cor base do vidro (branco) */
+  --glass-alpha: 0.06;              /* opacidade do tint */
+  --glass-blur: 18px;
+  --glass-sat: 160%;
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-radius: 16px;
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 30px -12px rgba(0, 0, 0, 0.5);
+
+  background-color: rgb(var(--glass-tint) / var(--glass-alpha));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  transition:
+    background-color 0.3s ease, box-shadow 0.3s ease,
+    border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Modificador escuro: tint escuro p/ contraste quando o vidro fica sobre áreas claras */
+.glass--dark {
+  --glass-tint: 18 18 40;
+  --glass-alpha: 0.5;
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+/* Fallback: navegador sem backdrop-filter (nem -webkit-) → sobe a opacidade
+   do fundo para manter a legibilidade. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass       { --glass-alpha: 0.85; }  /* tema claro  → rgb(255 255 255 / .85) */
+  .glass--dark { --glass-alpha: 0.72; }  /* tema escuro → rgb(18 18 40 / .72)   */
+}
+
+/* Respeita prefers-reduced-motion em qualquer transição do vidro. */
+@media (prefers-reduced-motion: reduce) {
+  .glass { transition: none; }
 }
 
 .glass-subtle {
@@ -238,4 +288,54 @@ p {
 .auth-input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Rich Text Editor (Tiptap) content */
+.rich-text-content {
+  outline: none;
+}
+
+.rich-text-content h1 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.rich-text-content h2 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.rich-text-content h3 {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.rich-text-content p {
+  margin: 0.5rem 0;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.rich-text-content ul {
+  list-style: disc;
+}
+
+.rich-text-content ol {
+  list-style: decimal;
+}
+
+.rich-text-content img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: 0.75rem 0;
 }
