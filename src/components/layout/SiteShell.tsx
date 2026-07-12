@@ -11,7 +11,11 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 
 const HIDE_CHROME = ['/login', '/signup', '/forgot-password', '/dashboard', '/reset-password']
-const HIDE_HEADER = ['/venda-mais-com-uma-landing-page-de-alta-conversao']
+const HIDE_HEADER = ['/venda-mais-com-uma-landing-page-de-alta-conversao', '/somos-uma-agencia-de-marketing-digital-e-web-design-que-cria-sites-em-lisboa-porto-braga-e-toda-portugal']
+// LPs autossuficientes: têm o próprio rodapé + WhatsApp, e um design system
+// próprio (claro), por isso escondemos o rodapé escuro e o botão flutuante
+// global — mas mantemos GTM/Umami/Clarity para o tráfego pago.
+const HIDE_FOOTER = ['/somos-uma-agencia-de-marketing-digital-e-web-design-que-cria-sites-em-lisboa-porto-braga-e-toda-portugal']
 const GTM_ID = 'GTM-TL3KWXFR'
 const UMAMI_WEBSITE_ID = 'cef9a48e-8eea-4d3a-bba8-6a2f8db03723'
 const CLARITY_PROJECT_ID = 'wxsoe8gkq7'
@@ -83,6 +87,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const hideChrome = HIDE_CHROME.some(p => pathname.startsWith(p))
   const hideHeader = HIDE_HEADER.some(p => pathname.includes(p))
   const isLandingPage = pathname.includes('venda-mais-com-uma-landing-page-de-alta-conversao')
+  // LP autossuficiente (rodapé + WhatsApp próprios): esconde rodapé e botão flutuante globais.
+  const isSelfContainedLanding = HIDE_FOOTER.some(p => pathname.includes(p))
 
   if (hideChrome) {
     return <>{children}</>
@@ -96,9 +102,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       {!hideHeader && <Header />}
       <div className="flex flex-col min-h-screen">
         <main className="flex-1">{children}</main>
-        <Footer />
+        {!isSelfContainedLanding && <Footer />}
       </div>
-      <FloatingWhatsAppButton isLandingPage={isLandingPage} />
+      {!isSelfContainedLanding && <FloatingWhatsAppButton isLandingPage={isLandingPage} />}
     </>
   )
 }

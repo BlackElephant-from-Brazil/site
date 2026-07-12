@@ -1,11 +1,10 @@
 'use client';
 
-import { ScrollytellingSection } from '@/components/home/ScrollytellingSection';
 import {
-  MobileCasesSection,
-  MobileHeroSection,
+  CasesSection,
+  HeroSection,
   MobileSystemBenefitsSection,
-} from '@/components/home/MobileHeroSection';
+} from '@/components/home/HeroSection';
 import { StatsSection } from '@/components/home/StatsSection';
 import { ReviewsCarousel } from '@/components/home/ReviewsCarousel';
 import { SectorsMarquee } from '@/components/home/SectorsMarquee';
@@ -22,13 +21,10 @@ export function HomeClient({ locale }: HomeClientProps) {
       className="flex min-h-screen flex-col"
       style={{ backgroundColor: 'var(--background)' }}
     >
-      {/* Hero — cada um dos dois se auto-controla via media query:
-          - ScrollytellingSection: renderiza apenas ≥1024px (Lottie + snap).
-          - MobileHeroSection: renderiza apenas <1024px (layout vertical natural). */}
-      <ScrollytellingSection />
-      <MobileHeroSection />
+      {/* Hero e cases (portfólio) — layout editorial único para todas as telas. */}
+      <HeroSection />
       <MobileSystemBenefitsSection />
-      <MobileCasesSection />
+      <CasesSection />
       <div className="contents lg:hidden">
         <ReviewsCarousel />
         <StatsSection />
