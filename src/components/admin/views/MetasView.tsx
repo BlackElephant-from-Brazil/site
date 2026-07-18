@@ -9,10 +9,10 @@ import { cn } from '@/lib/utils'
 
 function ProgressBar({ value }: { value: number }) {
   return (
-    <div className="relative h-1.5 w-full overflow-hidden rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+    <div className="relative h-1.5 w-full overflow-hidden rounded-full" style={{ background: 'rgba(18,59,79,0.05)' }}>
       <motion.div
         className="absolute inset-y-0 left-0 rounded-full"
-        style={{ background: 'var(--color-lime)', boxShadow: '0 0 8px rgba(57,255,20,0.4)' }}
+        style={{ background: 'var(--primary)', boxShadow: '0 0 8px rgba(31,111,107,0.4)' }}
         initial={{ width: 0 }}
         animate={{ width: `${value}%` }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -42,7 +42,7 @@ function GoalCard({ goal, onDelete }: { goal: GoalWithProgress; onDelete: (id: s
       <button
         onClick={e => { e.stopPropagation(); onDelete(goal.id) }}
         className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-md opacity-0 transition-all group-hover:opacity-100"
-        style={{ color: 'var(--foreground-muted)', background: 'rgba(255,59,48,0.1)' }}
+        style={{ color: 'var(--foreground-muted)', background: 'rgba(214,69,69,0.1)' }}
         title="Excluir meta"
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -67,7 +67,7 @@ function GoalCard({ goal, onDelete }: { goal: GoalWithProgress; onDelete: (id: s
           </span>
           <span
             className="text-xs font-semibold"
-            style={{ color: pct === 100 ? 'var(--color-lime)' : 'var(--foreground-muted)' }}
+            style={{ color: pct === 100 ? 'var(--color-brand)' : 'var(--foreground-muted)' }}
           >
             {pct}%
           </span>
@@ -119,7 +119,7 @@ export function MetasView({ initialGoals }: Props) {
         <button
           onClick={() => setShowForm(v => !v)}
           className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all"
-          style={{ background: 'var(--color-lime)', color: '#000' }}
+          style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
@@ -139,7 +139,7 @@ export function MetasView({ initialGoals }: Props) {
           >
             <div
               className="flex flex-col gap-4 rounded-xl p-5"
-              style={{ background: 'var(--glass-background)', border: '1px solid rgba(57,255,20,0.2)' }}
+              style={{ background: 'var(--glass-background)', border: '1px solid rgba(31,111,107,0.2)' }}
             >
               <h2 className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>Nova Meta</h2>
               <div className="flex flex-col gap-3">
@@ -149,8 +149,8 @@ export function MetasView({ initialGoals }: Props) {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     placeholder="Ex: Aumentar receita recorrente"
-                    className="rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-lime)]"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
+                    className="rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-brand)]"
+                    style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
                     required
                   />
                 </div>
@@ -161,8 +161,8 @@ export function MetasView({ initialGoals }: Props) {
                     onChange={e => setObjective(e.target.value)}
                     placeholder="Descreva o objetivo principal desta meta..."
                     rows={3}
-                    className="resize-none rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-lime)]"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
+                    className="resize-none rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-brand)]"
+                    style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
                     required
                   />
                 </div>
@@ -172,7 +172,7 @@ export function MetasView({ initialGoals }: Props) {
                   type="submit"
                   disabled={isPending}
                   className="rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-50"
-                  style={{ background: 'var(--color-lime)', color: '#000' }}
+                  style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
                 >
                   {isPending ? 'Criando...' : 'Criar Meta'}
                 </button>

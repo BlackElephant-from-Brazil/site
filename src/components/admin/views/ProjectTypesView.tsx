@@ -33,8 +33,8 @@ function Switch({
         width: '40px',
         height: '22px',
         borderRadius: '11px',
-        background: checked ? 'var(--primary)' : 'rgba(255,255,255,0.12)',
-        boxShadow: checked ? '0 0 10px rgba(57,255,20,0.4)' : undefined,
+        background: checked ? 'var(--primary)' : 'rgba(18,59,79,0.10)',
+        boxShadow: checked ? '0 0 10px rgba(31,111,107,0.4)' : undefined,
         border: 'none',
         cursor: 'pointer',
         padding: 0,
@@ -48,7 +48,7 @@ function Switch({
           width: '18px',
           height: '18px',
           borderRadius: '50%',
-          background: checked ? '#000' : 'rgba(255,255,255,0.5)',
+          background: '#fff',
           transition: 'left 0.2s',
           display: 'block',
         }}
@@ -181,7 +181,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           <button
             onClick={openNew}
             className="rounded-lg px-4 py-2 text-sm font-semibold"
-            style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
           >
             + Novo Tipo
           </button>
@@ -216,7 +216,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                     <span
                       className="rounded-full px-2 py-0.5 text-xs font-medium"
                       style={{
-                        background: t.delivery_format === 'software' ? 'rgba(57,255,20,0.08)' : t.delivery_format === 'site' ? 'rgba(99,102,241,0.12)' : 'rgba(245,158,11,0.12)',
+                        background: t.delivery_format === 'software' ? 'rgba(31,111,107,0.08)' : t.delivery_format === 'site' ? 'rgba(99,102,241,0.12)' : 'rgba(245,158,11,0.12)',
                         color: t.delivery_format === 'software' ? 'var(--primary)' : t.delivery_format === 'site' ? '#818cf8' : '#fbbf24',
                       }}
                     >
@@ -225,14 +225,14 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                   </td>
                   <td className="px-4 py-3">
                     {t.is_internal ? (
-                      <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--foreground-muted)' }}>
+                      <span className="rounded-full px-2 py-0.5 text-xs font-medium" style={{ background: 'rgba(18,59,79,0.05)', color: 'var(--foreground-muted)' }}>
                         Interno
                       </span>
                     ) : (
                       <span
                         className="rounded-full px-2 py-0.5 text-xs font-medium"
                         style={{
-                          background: t.is_recurring ? 'rgba(57,255,20,0.1)' : 'rgba(255,255,255,0.05)',
+                          background: t.is_recurring ? 'rgba(31,111,107,0.1)' : 'rgba(18,59,79,0.05)',
                           color: t.is_recurring ? 'var(--primary)' : 'var(--foreground-muted)',
                         }}
                       >
@@ -246,7 +246,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => openEdit(t)} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
                       <button onClick={() => openDuplicate(t)} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--foreground-muted)' }}>Duplicar</button>
-                      <button onClick={() => handleDelete(t.id)} className="rounded px-2 py-1 text-xs" style={{ color: '#ff4d4f' }}>Excluir</button>
+                      <button onClick={() => handleDelete(t.id)} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--color-error)' }}>Excluir</button>
                     </div>
                   </td>
                 </tr>
@@ -285,11 +285,11 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                   className="flex-1 rounded-lg py-2 text-xs font-semibold transition-all duration-150"
                   style={{
                     border: form.delivery_format === fmt
-                      ? `1px solid ${fmt === 'software' ? 'rgba(57,255,20,0.5)' : fmt === 'site' ? 'rgba(99,102,241,0.5)' : 'rgba(245,158,11,0.5)'}`
+                      ? `1px solid ${fmt === 'software' ? 'rgba(31,111,107,0.5)' : fmt === 'site' ? 'rgba(99,102,241,0.5)' : 'rgba(245,158,11,0.5)'}`
                       : '1px solid var(--card-border)',
                     background: form.delivery_format === fmt
-                      ? fmt === 'software' ? 'rgba(57,255,20,0.08)' : fmt === 'site' ? 'rgba(99,102,241,0.1)' : 'rgba(245,158,11,0.08)'
-                      : 'rgba(255,255,255,0.03)',
+                      ? fmt === 'software' ? 'rgba(31,111,107,0.08)' : fmt === 'site' ? 'rgba(99,102,241,0.1)' : 'rgba(245,158,11,0.08)'
+                      : 'rgba(18,59,79,0.05)',
                     color: form.delivery_format === fmt
                       ? fmt === 'software' ? 'var(--primary)' : fmt === 'site' ? '#818cf8' : '#fbbf24'
                       : 'var(--foreground-muted)',
@@ -302,7 +302,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           </div>
 
           {/* interno switch */}
-          <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)' }}>
+          <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)' }}>
             <div>
               <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
                 Interno
@@ -321,7 +321,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           {!form.is_internal && (
             <>
           {/* recorrente switch */}
-          <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)' }}>
+          <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)' }}>
             <div>
               <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
                 Projeto recorrente
@@ -341,7 +341,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
             <div>
               <label style={{ ...labelStyle, color: 'var(--primary)' }}>Mensalidade (R$)</label>
               <input
-                style={{ ...inputStyle, borderColor: 'rgba(57,255,20,0.4)' }}
+                style={{ ...inputStyle, borderColor: 'rgba(31,111,107,0.4)' }}
                 type="number"
                 step="0.01"
                 min="0"
@@ -368,7 +368,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
           {/* banco de horas — só aparece em projetos recorrentes */}
           {form.is_recurring && (
             <>
-              <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(57,255,20,0.04)', border: '1px solid rgba(57,255,20,0.15)' }}>
+              <div className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: 'rgba(31,111,107,0.04)', border: '1px solid rgba(31,111,107,0.15)' }}>
                 <div>
                   <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
                     Banco de horas mensal
@@ -387,7 +387,7 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
                 <div>
                   <label style={{ ...labelStyle, color: 'var(--primary)' }}>Horas disponíveis / mês</label>
                   <input
-                    style={{ ...inputStyle, borderColor: 'rgba(57,255,20,0.4)' }}
+                    style={{ ...inputStyle, borderColor: 'rgba(31,111,107,0.4)' }}
                     type="number"
                     step="0.5"
                     min="0"
@@ -402,14 +402,14 @@ export function ProjectTypesView({ initialTypes }: { initialTypes: ProjectType[]
             </>
           )}
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-1">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
             </button>

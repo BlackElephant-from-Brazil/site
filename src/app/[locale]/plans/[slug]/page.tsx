@@ -49,11 +49,11 @@ export default async function PlanDetailPage({ params }: Props) {
     switch (plan.color) {
       case 'lime':
         return {
-          accent: 'bg-[var(--color-lime)]',
-          accentText: 'text-[var(--color-lime)]',
-          accentBg: 'bg-[var(--color-lime)]/10',
-          border: 'border-[var(--color-lime)]/30',
-          glow: 'shadow-[0_0_60px_rgba(57,255,20,0.2)]',
+          accent: 'bg-[var(--color-brand)]',
+          accentText: 'text-[var(--color-brand)]',
+          accentBg: 'bg-[var(--color-brand)]/10',
+          border: 'border-[var(--color-brand)]/30',
+          glow: 'shadow-[var(--shadow-soft-lg)]',
         };
       case 'blue':
         return {
@@ -80,7 +80,7 @@ export default async function PlanDetailPage({ params }: Props) {
     <main className="min-h-screen pt-24 pb-20">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className={`absolute top-1/4 left-1/4 w-1/2 h-1/2 ${plan.color === 'lime' ? 'bg-[var(--color-lime)]' : plan.color === 'blue' ? 'bg-blue-500' : 'bg-purple-500'}/5 rounded-full blur-[150px]`} />
+        <div className={`absolute top-1/4 left-1/4 w-1/2 h-1/2 ${plan.color === 'lime' ? 'bg-[var(--color-brand)]' : plan.color === 'blue' ? 'bg-blue-500' : 'bg-purple-500'}/5 rounded-full blur-[150px]`} />
       </div>
 
       <div className="site-container relative z-10">
@@ -256,7 +256,7 @@ export default async function PlanDetailPage({ params }: Props) {
         <ScrollReveal>
           <Link
             href={`/${locale}/plans`}
-            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-lime)] transition-colors"
+            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-brand)] transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

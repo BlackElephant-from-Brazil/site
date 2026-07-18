@@ -8,9 +8,8 @@ import { signInWithEmail, signUpWithEmail } from '@/lib/auth/actions'
 
 type FormMode = 'login' | 'register'
 
-const LIME = '#39FF14'
-const LIME_SOFT = 'rgba(57, 255, 20, 0.12)'
-const LIME_BORDER = 'rgba(57, 255, 20, 0.3)'
+const GRAIN =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>\")"
 
 const benefits = [
   'Visibilidade completa do seu projeto em tempo real',
@@ -60,35 +59,29 @@ export default function LoginContent() {
       {/* ─── Painel Esquerdo ─── */}
       <div
         className="relative hidden lg:flex lg:w-[56%] flex-col overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #0a0a0a 0%, #0b0b0b 55%, #070a07 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #123B4F 0%, #0e2f3f 55%, #0b2634 100%)' }}
       >
-        {/* Glow principal — canto superior direito */}
+        {/* Grão */}
         <div
-          className="pointer-events-none absolute right-0 top-0 h-[640px] w-[640px] opacity-[0.14]"
-          style={{ background: `radial-gradient(circle at 70% 10%, ${LIME}, transparent 58%)` }}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.09]"
+          style={{ backgroundImage: GRAIN, mixBlendMode: 'overlay' }}
         />
-        {/* Glow secundário — canto inferior esquerdo */}
+        {/* Orb teal — canto superior direito */}
         <div
-          className="pointer-events-none absolute bottom-0 left-0 h-[320px] w-[320px] opacity-[0.06]"
-          style={{ background: `radial-gradient(circle at 25% 90%, ${LIME}, transparent 58%)` }}
+          className="pointer-events-none absolute right-0 top-0 h-[640px] w-[640px] opacity-[0.18]"
+          style={{ background: 'radial-gradient(circle at 70% 10%, #4cc6b6, transparent 58%)' }}
         />
-
-        {/* Grid cyberpunk */}
+        {/* Orb âmbar — canto inferior esquerdo */}
         <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(57,255,20,0.035) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(57,255,20,0.035) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }}
+          className="pointer-events-none absolute bottom-0 left-0 h-[360px] w-[360px] opacity-[0.12]"
+          style={{ background: 'radial-gradient(circle at 25% 90%, #E8A93C, transparent 58%)' }}
         />
 
         <div className="relative z-10 flex h-full flex-col justify-between p-14">
 
           {/* Logo */}
-          <Logo variant="full" size={38} />
+          <Logo variant="full" size={38} tone="light" />
 
           {/* Copy */}
           <div className="max-w-[500px] space-y-10">
@@ -96,9 +89,9 @@ export default function LoginContent() {
               <div
                 className="mb-5 inline-flex items-center rounded-full px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em]"
                 style={{
-                  backgroundColor: LIME_SOFT,
-                  color: LIME,
-                  border: `1px solid ${LIME_BORDER}`,
+                  backgroundColor: 'rgba(255,255,255,0.06)',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255,255,255,0.22)',
                 }}
               >
                 Portal do Cliente
@@ -109,17 +102,26 @@ export default function LoginContent() {
                 style={{
                   fontFamily: 'var(--font-title)',
                   fontSize: '3.1rem',
-                  color: 'var(--foreground)',
+                  color: '#ffffff',
                 }}
               >
                 Para quem<br />
-                <span style={{ color: LIME }} className="glow-text">exige mais</span><br />
+                <span
+                  style={{
+                    background: 'linear-gradient(92deg, #4cc6b6 8%, #ffd98a 92%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  exige mais
+                </span><br />
                 do digital.
               </h1>
 
               <p
                 className="mt-6 text-[1rem] leading-[1.75]"
-                style={{ color: 'var(--foreground-muted)' }}
+                style={{ color: 'rgba(255,255,255,0.72)' }}
               >
                 Acompanhe cada etapa do seu projeto com clareza total.
                 Nada fica oculto, nada fica sem resposta.
@@ -132,12 +134,12 @@ export default function LoginContent() {
                 <div key={i} className="flex items-start gap-3.5">
                   <div
                     className="mt-[3px] flex h-5 w-5 flex-shrink-0 items-center justify-center rounded"
-                    style={{ backgroundColor: LIME_SOFT, border: `1px solid ${LIME_BORDER}` }}
+                    style={{ backgroundColor: 'rgba(232,169,60,0.16)', border: '1px solid rgba(232,169,60,0.42)' }}
                   >
                     <svg className="h-2.5 w-2.5" viewBox="0 0 12 12" fill="none">
                       <path
                         d="M2 6l3 3 5-5"
-                        stroke={LIME}
+                        stroke="#ffd98a"
                         strokeWidth="1.8"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -146,7 +148,7 @@ export default function LoginContent() {
                   </div>
                   <span
                     className="text-[0.92rem] leading-relaxed"
-                    style={{ color: 'var(--foreground-muted)' }}
+                    style={{ color: 'rgba(255,255,255,0.72)' }}
                   >
                     {benefit}
                   </span>
@@ -158,12 +160,12 @@ export default function LoginContent() {
           {/* Citação */}
           <div className="flex items-start gap-4">
             <div
-              className="mt-1 h-7 w-[2px] flex-shrink-0 rounded-full opacity-60"
-              style={{ backgroundColor: LIME }}
+              className="mt-1 h-7 w-[2px] flex-shrink-0 rounded-full"
+              style={{ backgroundColor: '#ffd98a' }}
             />
             <p
               className="text-[0.82rem] leading-relaxed"
-              style={{ color: 'var(--foreground-subtle)' }}
+              style={{ color: 'rgba(255,255,255,0.55)' }}
             >
               A BlackElephant não entrega sites. Entrega resultados que você pode
               medir, acompanhar e escalar.
@@ -322,11 +324,11 @@ function RegisterForm({ error, success, isPending, onSubmit, onSwitchMode }: Reg
           animate={{ opacity: 1, scale: 1 }}
           className="rounded-lg border px-5 py-4"
           style={{
-            borderColor: 'rgba(57,255,20,0.3)',
-            backgroundColor: 'rgba(57,255,20,0.07)',
+            borderColor: 'rgba(31,111,107,0.3)',
+            backgroundColor: 'rgba(31,111,107,0.08)',
           }}
         >
-          <p className="text-sm font-semibold" style={{ color: LIME }}>Cadastro realizado!</p>
+          <p className="text-sm font-semibold" style={{ color: 'var(--color-brand)' }}>Cadastro realizado!</p>
           <p className="mt-1 text-[0.82rem]" style={{ color: 'var(--foreground-muted)' }}>{success}</p>
         </motion.div>
       ) : (
@@ -406,8 +408,8 @@ function ErrorMessage({ message }: { message: string | null }) {
           exit={{ opacity: 0 }}
           className="rounded-lg border px-4 py-3 text-[0.82rem]"
           style={{
-            borderColor: 'rgba(255,51,51,0.3)',
-            backgroundColor: 'rgba(255,51,51,0.08)',
+            borderColor: 'rgba(214,69,69,0.3)',
+            backgroundColor: 'rgba(214,69,69,0.08)',
             color: 'var(--color-error)',
           }}
         >
@@ -428,7 +430,7 @@ function PrimaryButton({ isPending, label }: { isPending: boolean; label: string
         backgroundColor: 'var(--button-primary-bg)',
         color: 'var(--button-primary-text)',
         fontFamily: 'var(--font-title)',
-        boxShadow: isPending ? 'none' : 'var(--shadow-glow)',
+        boxShadow: isPending ? 'none' : 'var(--shadow-cta)',
       }}
     >
       <span className={isPending ? 'opacity-0' : 'opacity-100'}>{label}</span>

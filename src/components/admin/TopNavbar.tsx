@@ -64,12 +64,12 @@ export function TopNavbar({ activePanel, onToggle }: Props) {
             onClick={() => onToggle(btn.id)}
             className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all"
             style={{
-              color: active ? 'var(--color-lime)' : 'var(--foreground-muted)',
-              background: active ? 'rgba(57,255,20,0.1)' : 'transparent',
-              border: active ? '1px solid rgba(57,255,20,0.2)' : '1px solid transparent',
+              color: active ? 'var(--color-brand)' : 'var(--foreground-muted)',
+              background: active ? 'rgba(31,111,107,0.1)' : 'transparent',
+              border: active ? '1px solid rgba(31,111,107,0.2)' : '1px solid transparent',
             }}
           >
-            <span style={{ color: active ? 'var(--color-lime)' : 'var(--foreground-muted)' }}>{btn.icon}</span>
+            <span style={{ color: active ? 'var(--color-brand)' : 'var(--foreground-muted)' }}>{btn.icon}</span>
             {btn.label}
           </button>
         )

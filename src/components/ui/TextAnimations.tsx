@@ -16,7 +16,7 @@ export function TextReveal({
   className = '',
   delay = 0,
   highlightWords = [],
-  highlightClassName = 'text-[var(--color-lime)]',
+  highlightClassName = 'text-[var(--color-brand)]',
 }: TextRevealProps) {
   const words = text.split(' ');
 
@@ -193,7 +193,7 @@ export function GradientText({
 }: GradientTextProps) {
   return (
     <motion.span
-      className={`bg-gradient-to-r from-[var(--color-lime)] via-[var(--color-lime-light)] to-[var(--color-lime)] bg-clip-text text-transparent bg-[length:200%_auto] ${className}`}
+      className={`bg-gradient-to-r from-[var(--color-brand)] via-[var(--color-brand-mid)] to-[var(--color-accent)] bg-clip-text text-transparent bg-[length:200%_auto] ${className}`}
       animate={animate ? { backgroundPosition: ['0% center', '200% center'] } : undefined}
       transition={animate ? { duration: 3, repeat: Infinity, ease: 'linear' } : undefined}
     >

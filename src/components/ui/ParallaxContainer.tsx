@@ -117,7 +117,7 @@ interface GlowPulseProps {
 export function GlowPulse({
   children,
   className = '',
-  color = 'var(--color-lime)',
+  color = 'var(--color-brand)',
   duration = 2,
 }: GlowPulseProps) {
   return (

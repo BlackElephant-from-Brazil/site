@@ -104,25 +104,25 @@ function AtmosphereBg({ variant = 'hero' }: { variant?: 'hero' | 'case' }) {
     <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.5]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+            'linear-gradient(rgba(18,59,79,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(18,59,79,0.05) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
-      {/* Lime orb */}
+      {/* Teal orb */}
       <div
         className={
           variant === 'hero'
             ? 'absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full opacity-[0.10] blur-[140px]'
-            : 'absolute -bottom-20 -left-20 w-[340px] h-[340px] rounded-full opacity-[0.06] blur-[120px]'
+            : 'absolute -bottom-20 -left-20 w-[340px] h-[340px] rounded-full opacity-[0.08] blur-[120px]'
         }
-        style={{ backgroundColor: 'var(--color-lime)' }}
+        style={{ backgroundColor: 'var(--color-brand)' }}
       />
       {/* Noise overlay */}
       <div
-        className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
+        className="absolute inset-0 opacity-[0.04] mix-blend-multiply"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>\")",
@@ -185,7 +185,7 @@ function HeroBlock() {
         className="absolute left-3 lg:left-8 top-0 bottom-0 w-px z-0"
         style={{
           background:
-            'linear-gradient(180deg, transparent 0%, rgba(57,255,20,0.45) 20%, rgba(57,255,20,0.45) 80%, transparent 100%)',
+            'linear-gradient(180deg, transparent 0%, rgba(31,111,107,0.45) 20%, rgba(31,111,107,0.45) 80%, transparent 100%)',
           opacity: 0.55,
         }}
       />
@@ -195,8 +195,8 @@ function HeroBlock() {
         <div
           className="h-3 w-3"
           style={{
-            borderTop: '1px solid rgba(57,255,20,0.6)',
-            borderLeft: '1px solid rgba(57,255,20,0.6)',
+            borderTop: '1px solid rgba(31,111,107,0.6)',
+            borderLeft: '1px solid rgba(31,111,107,0.6)',
           }}
         />
       </div>
@@ -204,8 +204,8 @@ function HeroBlock() {
         <div
           className="h-3 w-3"
           style={{
-            borderTop: '1px solid rgba(57,255,20,0.6)',
-            borderRight: '1px solid rgba(57,255,20,0.6)',
+            borderTop: '1px solid rgba(31,111,107,0.6)',
+            borderRight: '1px solid rgba(31,111,107,0.6)',
           }}
         />
       </div>
@@ -223,10 +223,9 @@ function HeroBlock() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(90deg, rgba(57,255,20,0.08), rgba(255,255,255,0.045), rgba(57,255,20,0.08))',
-              border: '1px solid rgba(255,255,255,0.11)',
-              boxShadow:
-                '0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08)',
+                'linear-gradient(90deg, rgba(31,111,107,0.08), rgba(18,59,79,0.04), rgba(232,169,60,0.08))',
+              border: '1px solid rgba(18,59,79,0.10)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           />
           <motion.div
@@ -241,9 +240,9 @@ function HeroBlock() {
                   className="rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.16em] whitespace-nowrap"
                   style={{
                     fontFamily: 'var(--font-title)',
-                    color: 'rgba(255,255,255,0.7)',
-                    backgroundColor: 'rgba(10,10,10,0.42)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    color: 'var(--foreground-muted)',
+                    backgroundColor: 'rgba(255,255,255,0.7)',
+                    border: '1px solid rgba(18,59,79,0.08)',
                   }}
                 >
                   {item}
@@ -252,8 +251,7 @@ function HeroBlock() {
                   aria-hidden
                   className="relative h-1.5 w-1.5 rounded-full"
                   style={{
-                    backgroundColor: 'var(--color-lime)',
-                    boxShadow: '0 0 12px rgba(57,255,20,0.7)',
+                    backgroundColor: 'var(--color-brand)',
                   }}
                 />
               </span>
@@ -266,12 +264,11 @@ function HeroBlock() {
             className="relative inline-flex items-center justify-center rounded-full px-5 py-2 text-[10.5px] font-bold uppercase tracking-[0.24em] whitespace-nowrap"
             style={{
               fontFamily: 'var(--font-title)',
-              color: 'var(--color-lime)',
+              color: 'var(--color-brand)',
               background:
-                'linear-gradient(135deg, rgba(57,255,20,0.14), rgba(17,17,17,0.78))',
-              border: '1px solid rgba(57,255,20,0.28)',
-              boxShadow:
-                '0 0 24px rgba(57,255,20,0.10), inset 0 1px 0 rgba(255,255,255,0.09)',
+                'linear-gradient(135deg, rgba(31,111,107,0.12), rgba(255,255,255,0.9))',
+              border: '1px solid rgba(31,111,107,0.28)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           >
             Consultoria de TI
@@ -288,10 +285,11 @@ function HeroBlock() {
           transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
           className="block text-[1.28rem] lg:text-[1.6rem] leading-none mb-2"
           style={{
-            fontFamily: "'Barlow', var(--font-primary)",
-            fontWeight: 300,
-            letterSpacing: '0.02em',
-            color: 'rgba(255,255,255,0.48)',
+            fontFamily: 'var(--font-serif)',
+            fontStyle: 'italic',
+            fontWeight: 400,
+            letterSpacing: '0.01em',
+            color: 'var(--foreground-muted)',
             marginLeft: '0.15em',
           }}
         >
@@ -306,7 +304,7 @@ function HeroBlock() {
           style={{
             fontFamily: 'var(--font-title)',
             fontWeight: 900,
-            color: 'var(--color-lime)',
+            color: 'var(--color-brand)',
           }}
         >
           {programmingLetters.map((letter, i) => (
@@ -320,7 +318,6 @@ function HeroBlock() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="inline-block"
-              style={{ textShadow: '0 0 24px rgba(57,255,20,0.18)' }}
             >
               {letter}
             </motion.span>
@@ -340,7 +337,7 @@ function HeroBlock() {
             paddingLeft: '0.04em',
           }}
         >
-          que você procura<span style={{ color: 'var(--color-lime)' }}>.</span>
+          que você procura<span style={{ color: 'var(--color-accent)' }}>.</span>
         </motion.span>
 
         {/* Hairline divider antes do deck */}
@@ -352,7 +349,7 @@ function HeroBlock() {
           className="origin-left mt-8 h-px w-20 lg:w-28"
           style={{
             background:
-              'linear-gradient(90deg, var(--color-lime), transparent)',
+              'linear-gradient(90deg, var(--color-brand), transparent)',
           }}
         />
 
@@ -363,16 +360,15 @@ function HeroBlock() {
           transition={{ duration: 0.6, delay: 0.7, ease: EASE_OUT }}
           className="mt-5 text-[15px] lg:text-[19px] leading-[1.55] max-w-[26rem] lg:max-w-[34rem]"
           style={{
-            color: 'rgba(255,255,255,0.72)',
+            color: 'var(--foreground-muted)',
             fontFamily: 'var(--font-primary)',
           }}
         >
           Substitua as planilhas de Excel e economize as{' '}
           <strong
             style={{
-              fontFamily: "'Barlow', var(--font-primary)",
               fontWeight: 700,
-              color: 'var(--color-lime)',
+              color: 'var(--color-brand)',
             }}
           >
             licenças caras
@@ -394,10 +390,9 @@ function HeroBlock() {
             onClick={reportReservarHorarioConversion}
             className="group inline-flex items-center justify-center gap-2.5 px-5 lg:px-7 py-3.5 lg:py-4 rounded-full font-semibold text-[14px] lg:text-[15px] transition-all duration-300 active:scale-95 hover:scale-[1.02]"
             style={{
-              backgroundColor: 'var(--color-lime)',
-              color: '#0a0a0a',
-              boxShadow:
-                '0 0 0 1px rgba(57,255,20,0.35), 0 14px 28px rgba(57,255,20,0.22), inset 0 1px 0 rgba(255,255,255,0.35)',
+              backgroundColor: 'var(--color-accent)',
+              color: 'var(--color-accent-ink)',
+              boxShadow: 'var(--shadow-cta)',
               fontFamily: 'var(--font-title)',
             }}
           >
@@ -421,10 +416,10 @@ function HeroBlock() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-5 lg:px-7 py-3.5 lg:py-4 rounded-full font-semibold text-[13px] lg:text-[14px] transition-all duration-300 active:scale-95 hover:scale-[1.02]"
             style={{
-              backgroundColor: 'rgba(17,17,17,0.72)',
-              border: '1px solid rgba(255,255,255,0.14)',
-              color: 'rgba(255,255,255,0.86)',
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+              backgroundColor: 'var(--background-secondary)',
+              border: '1px solid var(--color-brand)',
+              color: 'var(--color-brand)',
+              boxShadow: 'var(--shadow-soft)',
               fontFamily: 'var(--font-title)',
             }}
           >
@@ -443,7 +438,7 @@ function HeroBlock() {
         <div
           aria-hidden
           className="h-px w-full mb-4"
-          style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+          style={{ backgroundColor: 'var(--color-line)' }}
         />
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
@@ -452,7 +447,7 @@ function HeroBlock() {
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               aria-hidden
               className="inline-block leading-none text-[14px]"
-              style={{ color: 'var(--color-lime)' }}
+              style={{ color: 'var(--color-brand)' }}
             >
               ↓
             </motion.span>
@@ -460,7 +455,7 @@ function HeroBlock() {
               className="text-[9.5px] font-semibold uppercase tracking-[0.3em]"
               style={{
                 fontFamily: 'var(--font-title)',
-                color: 'rgba(255,255,255,0.55)',
+                color: 'var(--foreground-muted)',
               }}
             >
               Em números abaixo
@@ -470,7 +465,7 @@ function HeroBlock() {
             className="text-[9.5px] tabular-nums tracking-[0.22em]"
             style={{
               fontFamily: 'var(--font-title)',
-              color: 'rgba(255,255,255,0.35)',
+              color: 'var(--foreground-subtle)',
             }}
           >
             SP · 2026
@@ -492,7 +487,7 @@ function SystemBenefitsBlock() {
       style={{
         background:
           'linear-gradient(180deg, var(--background-secondary) 0%, var(--background) 34%, var(--background) 100%)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid var(--color-line)',
       }}
     >
       <AtmosphereBg variant="case" />
@@ -501,7 +496,7 @@ function SystemBenefitsBlock() {
         className="absolute inset-x-6 top-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, rgba(57,255,20,0.52), transparent)',
+            'linear-gradient(90deg, transparent, rgba(31,111,107,0.4), transparent)',
         }}
       />
 
@@ -517,11 +512,11 @@ function SystemBenefitsBlock() {
             <span
               aria-hidden
               className="h-px w-8"
-              style={{ backgroundColor: 'var(--color-lime)' }}
+              style={{ backgroundColor: 'var(--color-brand)' }}
             />
             <span
               className="text-[10px] font-bold uppercase tracking-[0.28em]"
-              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
             >
               Você merece o melhor
             </span>
@@ -542,7 +537,7 @@ function SystemBenefitsBlock() {
         <p
           className="max-w-[24rem] text-[14.5px] leading-[1.55]"
           style={{
-            color: 'rgba(255,255,255,0.62)',
+            color: 'var(--foreground-muted)',
             fontFamily: 'var(--font-primary)',
           }}
         >
@@ -554,10 +549,9 @@ function SystemBenefitsBlock() {
           className="relative mt-10 overflow-hidden rounded-[24px]"
           style={{
             background:
-              'linear-gradient(155deg, rgba(22,22,22,0.82), rgba(8,8,8,0.64))',
-            border: '1px solid rgba(255,255,255,0.10)',
-            boxShadow:
-              '0 24px 58px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08)',
+              'linear-gradient(155deg, #17516a 0%, #0e2f3f 100%)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            boxShadow: 'var(--shadow-soft-lg)',
           }}
         >
           <div
@@ -565,7 +559,7 @@ function SystemBenefitsBlock() {
             className="absolute left-[1.85rem] top-8 bottom-8 w-px"
             style={{
               background:
-                'linear-gradient(180deg, rgba(57,255,20,0.7), rgba(57,255,20,0.16), transparent)',
+                'linear-gradient(180deg, rgba(232,169,60,0.7), rgba(232,169,60,0.16), transparent)',
             }}
           />
           {SYSTEM_BENEFITS.map((benefit, index) => (
@@ -586,10 +580,9 @@ function SystemBenefitsBlock() {
               <span
                 className="relative z-10 mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
                 style={{
-                  color: 'var(--color-lime)',
-                  backgroundColor: '#0b0b0b',
-                  border: '1px solid rgba(57,255,20,0.42)',
-                  boxShadow: '0 0 18px rgba(57,255,20,0.16)',
+                  color: 'var(--color-accent)',
+                  backgroundColor: 'rgba(0,0,0,0.2)',
+                  border: '1px solid rgba(232,169,60,0.42)',
                 }}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8">
@@ -601,7 +594,7 @@ function SystemBenefitsBlock() {
                   className="mb-1 block text-[9px] font-bold uppercase tracking-[0.18em]"
                   style={{
                     fontFamily: 'var(--font-title)',
-                    color: 'rgba(57,255,20,0.7)',
+                    color: 'rgba(255,217,138,0.85)',
                   }}
                 >
                   {String(index + 1).padStart(2, '0')}
@@ -610,7 +603,7 @@ function SystemBenefitsBlock() {
                   className="text-[14px] leading-[1.45]"
                   style={{
                     fontFamily: 'var(--font-primary)',
-                    color: 'rgba(255,255,255,0.78)',
+                    color: 'rgba(255,255,255,0.82)',
                   }}
                 >
                   {benefit}
@@ -641,11 +634,11 @@ function CasesHeader() {
         <span
           aria-hidden
           className="h-px w-8"
-          style={{ backgroundColor: 'var(--color-lime)' }}
+          style={{ backgroundColor: 'var(--color-brand)' }}
         />
         <span
           className="text-[10px] font-bold uppercase tracking-[0.28em]"
-          style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+          style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
         >
           Soluções que agregam
         </span>
@@ -755,10 +748,8 @@ function CaseImageCarousel({ data }: { data: Case }) {
                   width: activeIndex === index ? 18 : 6,
                   backgroundColor:
                     activeIndex === index
-                      ? 'var(--color-lime)'
+                      ? '#ffd98a'
                       : 'rgba(255,255,255,0.38)',
-                  boxShadow:
-                    activeIndex === index ? '0 0 10px rgba(57,255,20,0.65)' : 'none',
                 }}
               />
             ))}
@@ -775,21 +766,20 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
       className="relative min-w-[86vw] lg:min-w-0 lg:w-full snap-center overflow-hidden rounded-[20px] p-5 lg:p-6"
       style={{
         background:
-          'linear-gradient(155deg, rgba(20,20,20,0.85) 0%, rgba(12,12,12,0.7) 100%)',
-        border: '1px solid rgba(255,255,255,0.10)',
-        boxShadow:
-          '0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.10)',
+          'linear-gradient(155deg, #17516a 0%, #0e2f3f 100%)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: 'var(--shadow-soft-lg)',
       }}
     >
       <AtmosphereBg variant="case" />
 
-      {/* Lime accent thread vertical */}
+      {/* Accent thread vertical */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-0 top-0 h-full w-[2px]"
         style={{
           background:
-            'linear-gradient(180deg, transparent 0%, var(--color-lime) 50%, transparent 100%)',
+            'linear-gradient(180deg, transparent 0%, var(--color-accent) 50%, transparent 100%)',
           opacity: 0.55,
         }}
       />
@@ -811,31 +801,30 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
         <div
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5"
           style={{
-            backgroundColor: 'rgba(57,255,20,0.12)',
-            border: '1px solid rgba(57,255,20,0.35)',
+            backgroundColor: 'rgba(232,169,60,0.14)',
+            border: '1px solid rgba(232,169,60,0.35)',
           }}
         >
           <span
             className="w-1.5 h-1.5 rounded-full flex-shrink-0"
             style={{
-              backgroundColor: 'var(--color-lime)',
-              boxShadow: '0 0 8px rgba(57,255,20,0.7)',
+              backgroundColor: '#ffd98a',
             }}
           />
           <span
             className="text-[10px] font-bold uppercase tracking-[0.22em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+            style={{ fontFamily: 'var(--font-title)', color: '#ffd98a' }}
           >
             Case de Sucesso
           </span>
           <span
             aria-hidden
             className="w-px h-3"
-            style={{ backgroundColor: 'rgba(57,255,20,0.35)' }}
+            style={{ backgroundColor: 'rgba(232,169,60,0.35)' }}
           />
           <span
             className="text-[10px] font-bold tabular-nums tracking-[0.18em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+            style={{ fontFamily: 'var(--font-title)', color: '#ffd98a' }}
           >
             {data.index} / {data.total}
           </span>
@@ -845,14 +834,14 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
         <div className="mb-1">
           <span
             className="text-[10.5px] font-semibold uppercase tracking-[0.2em]"
-            style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.45)' }}
+            style={{ fontFamily: 'var(--font-title)', color: 'rgba(255,255,255,0.55)' }}
           >
             Setor · {data.sector}
           </span>
         </div>
         <h3
           className="text-[1.65rem] leading-[1.05] tracking-[-0.02em]"
-          style={{ fontFamily: 'var(--font-title)', color: 'var(--foreground)', fontWeight: 700 }}
+          style={{ fontFamily: 'var(--font-title)', color: '#ffffff', fontWeight: 700 }}
         >
           {data.name}
         </h3>
@@ -863,7 +852,7 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
           className="mt-5 h-px w-full"
           style={{
             background:
-              'linear-gradient(90deg, rgba(57,255,20,0.55) 0%, rgba(255,255,255,0.08) 60%, transparent 100%)',
+              'linear-gradient(90deg, rgba(232,169,60,0.55) 0%, rgba(255,255,255,0.08) 60%, transparent 100%)',
           }}
         />
 
@@ -874,9 +863,8 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
               className="text-[4rem] sm:text-[4.6rem] leading-none tabular-nums tracking-[-0.05em]"
               style={{
                 fontFamily: 'var(--font-title)',
-                color: 'var(--color-lime)',
+                color: '#ffd98a',
                 fontWeight: 800,
-                textShadow: '0 0 24px rgba(57,255,20,0.22)',
               }}
             >
               {data.metric}
@@ -885,9 +873,9 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
               className="text-[1.6rem] sm:text-[1.85rem] leading-none"
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontStyle: 'normal',
-                fontWeight: 100,
-                color: 'var(--color-lime)',
+                fontStyle: 'italic',
+                fontWeight: 400,
+                color: '#ffd98a',
                 opacity: 0.85,
               }}
             >
@@ -898,7 +886,7 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
             <span
               aria-hidden
               className="h-px w-5"
-              style={{ backgroundColor: 'var(--color-lime)', opacity: 0.7 }}
+              style={{ backgroundColor: '#ffd98a', opacity: 0.7 }}
             />
             <span
               className="text-[10.5px] font-semibold uppercase tracking-[0.2em]"
@@ -925,9 +913,9 @@ function CaseCard({ data, position }: { data: Case; position: number }) {
                 <em
                   style={{
                     fontFamily: 'var(--font-serif)',
-                    fontStyle: 'normal',
-                    fontWeight: 100,
-                    color: 'var(--color-lime)',
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    color: '#ffd98a',
                   }}
                 >
                   {part.text}

@@ -46,10 +46,10 @@ function FloatingWhatsAppButton({ isLandingPage }: { isLandingPage: boolean }) {
       aria-label="Tirar dúvidas no WhatsApp"
       className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full lg:hidden"
       style={{
-        backgroundColor: 'var(--color-lime)',
-        color: '#0a0a0a',
+        backgroundColor: '#25D366',
+        color: '#08331b',
         boxShadow:
-          '0 14px 34px rgba(57,255,20,0.30), 0 0 0 1px rgba(10,10,10,0.18)',
+          '0 14px 34px rgba(37,211,102,0.35), 0 0 0 1px rgba(18,59,79,0.10)',
       }}
     >
       <Image

@@ -123,7 +123,7 @@ export function KanbanColumnsConfigView({
           <button
             onClick={() => setAddingNew(true)}
             className="rounded-lg px-4 py-2 text-sm font-semibold"
-            style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
           >
             + Nova Coluna
           </button>
@@ -131,7 +131,7 @@ export function KanbanColumnsConfigView({
       />
 
       {error && (
-        <p className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs" style={{ color: '#ff4d4f' }}>
+        <p className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs" style={{ color: 'var(--color-error)' }}>
           {error}
         </p>
       )}
@@ -150,7 +150,7 @@ export function KanbanColumnsConfigView({
             onClick={handleAddColumn}
             disabled={saving || !newName.trim()}
             className="rounded-lg px-4 py-2 text-sm font-semibold"
-            style={{ background: 'var(--primary)', color: '#000' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
           >
             {saving ? '…' : 'Criar'}
           </button>
@@ -228,7 +228,7 @@ export function KanbanColumnsConfigView({
                 <button
                   onClick={() => handleDelete(col.id)}
                   className="rounded p-1.5 text-xs transition-colors"
-                  style={{ color: '#ff4d4f' }}
+                  style={{ color: 'var(--color-error)' }}
                   title="Excluir coluna"
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

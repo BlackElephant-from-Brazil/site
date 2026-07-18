@@ -167,8 +167,8 @@ function CardSelectorMulti({
                     onClick={() => onToggle(card.id)}
                     className="flex items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
                     style={{
-                      background: isSelected ? 'rgba(57,255,20,0.06)' : 'transparent',
-                      borderBottom: '1px solid rgba(255,255,255,0.04)',
+                      background: isSelected ? 'rgba(31,111,107,0.06)' : 'transparent',
+                      borderBottom: '1px solid rgba(18,59,79,0.05)',
                     }}
                   >
                     <div
@@ -176,7 +176,7 @@ function CardSelectorMulti({
                       style={{
                         width: '15px', height: '15px',
                         border: isSelected ? '1.5px solid var(--primary)' : '1.5px solid var(--card-border)',
-                        background: isSelected ? 'rgba(57,255,20,0.15)' : 'transparent',
+                        background: isSelected ? 'rgba(31,111,107,0.15)' : 'transparent',
                       }}
                     >
                       {isSelected && (
@@ -187,7 +187,7 @@ function CardSelectorMulti({
                     </div>
                     <span
                       className="shrink-0 rounded px-1.5 py-0.5 text-xs font-bold"
-                      style={{ background: 'rgba(57,255,20,0.12)', color: 'var(--primary)' }}
+                      style={{ background: 'rgba(31,111,107,0.12)', color: 'var(--primary)' }}
                     >
                       #{card.card_number}
                     </span>
@@ -269,13 +269,13 @@ function CardSelectorSingle({
                     onClick={() => onSelect(isSelected ? null : card.id)}
                     className="flex items-start gap-2.5 px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
                     style={{
-                      background: isSelected ? 'rgba(57,255,20,0.08)' : 'transparent',
-                      borderBottom: '1px solid rgba(255,255,255,0.04)',
+                      background: isSelected ? 'rgba(31,111,107,0.08)' : 'transparent',
+                      borderBottom: '1px solid rgba(18,59,79,0.05)',
                     }}
                   >
                     <span
                       className="mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-xs font-bold"
-                      style={{ background: 'rgba(57,255,20,0.12)', color: 'var(--primary)' }}
+                      style={{ background: 'rgba(31,111,107,0.12)', color: 'var(--primary)' }}
                     >
                       #{card.card_number}
                     </span>
@@ -431,10 +431,10 @@ function AddEntryModal({
           />
         </div>
 
-        {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+        {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
         <div className="flex gap-3 pt-1">
-          <button type="submit" disabled={saving} className="flex-1 rounded-lg py-2.5 text-sm font-semibold" style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}>
+          <button type="submit" disabled={saving} className="flex-1 rounded-lg py-2.5 text-sm font-semibold" style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}>
             {saving ? 'Salvando…' : selectedCardIds.length > 1 ? `Salvar ${selectedCardIds.length} registros` : 'Salvar registro'}
           </button>
           <button type="button" onClick={onClose} className="rounded-lg border px-4 py-2.5 text-sm" style={{ borderColor: 'var(--card-border)', color: 'var(--foreground-muted)' }}>
@@ -559,10 +559,10 @@ function EditEntryModal({
           />
         </div>
 
-        {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+        {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
         <div className="flex gap-3 pt-1">
-          <button type="submit" disabled={saving} className="flex-1 rounded-lg py-2.5 text-sm font-semibold" style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}>
+          <button type="submit" disabled={saving} className="flex-1 rounded-lg py-2.5 text-sm font-semibold" style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}>
             {saving ? 'Salvando…' : 'Salvar alterações'}
           </button>
           <button type="button" onClick={onClose} className="rounded-lg border px-4 py-2.5 text-sm" style={{ borderColor: 'var(--card-border)', color: 'var(--foreground-muted)' }}>
@@ -615,7 +615,7 @@ function EntryList({
                 <div
                   key={entry.id}
                   className="group flex items-start justify-between gap-3 rounded-lg px-3 py-2.5"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--card-border)' }}
+                  style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)' }}
                 >
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate" style={{ color: 'var(--foreground)' }}>{label}</p>
@@ -627,14 +627,14 @@ function EntryList({
                     )}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <span className="rounded-full px-2 py-0.5 text-xs font-bold" style={{ background: 'rgba(57,255,20,0.12)', color: 'var(--primary)' }}>
+                    <span className="rounded-full px-2 py-0.5 text-xs font-bold" style={{ background: 'rgba(31,111,107,0.12)', color: 'var(--primary)' }}>
                       {fmtMinutes(entry.minutes)}
                     </span>
                     {onEdit && (
                       <button
                         onClick={() => onEdit(entry)}
                         className="flex h-6 w-6 items-center justify-center rounded opacity-0 group-hover:opacity-100 transition-all"
-                        style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.06)' }}
+                        style={{ color: 'var(--foreground-muted)', background: 'rgba(18,59,79,0.05)' }}
                       >
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -645,7 +645,7 @@ function EntryList({
                     <button
                       onClick={() => onDelete(entry.id)}
                       className="flex h-6 w-6 items-center justify-center rounded opacity-0 group-hover:opacity-100 transition-all"
-                      style={{ color: 'rgba(255,59,48,0.7)', background: 'rgba(255,59,48,0.08)' }}
+                      style={{ color: 'rgba(214,69,69,0.7)', background: 'rgba(214,69,69,0.08)' }}
                     >
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -771,14 +771,14 @@ function MonthlyCalendarModal({
                   style={{
                     minHeight: '40px',
                     background: isSelected
-                      ? 'rgba(57,255,20,0.15)'
+                      ? 'rgba(31,111,107,0.15)'
                       : mins > 0
-                        ? 'rgba(57,255,20,0.05)'
+                        ? 'rgba(31,111,107,0.05)'
                         : 'transparent',
                     border: isSelected
-                      ? '1px solid rgba(57,255,20,0.4)'
+                      ? '1px solid rgba(31,111,107,0.4)'
                       : isToday
-                        ? '1px solid rgba(57,255,20,0.25)'
+                        ? '1px solid rgba(31,111,107,0.25)'
                         : '1px solid transparent',
                   }}
                 >
@@ -867,7 +867,7 @@ function UserCard({
         <div className="flex items-center gap-3">
           <div
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold"
-            style={{ background: 'rgba(57,255,20,0.12)', color: 'var(--primary)' }}
+            style={{ background: 'rgba(31,111,107,0.12)', color: 'var(--primary)' }}
           >
             {initials}
           </div>
@@ -880,7 +880,7 @@ function UserCard({
         <button
           onClick={openDetail}
           className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-white/[0.04]"
-          style={{ background: 'rgba(57,255,20,0.06)', border: '1px solid rgba(57,255,20,0.15)' }}
+          style={{ background: 'rgba(31,111,107,0.06)', border: '1px solid rgba(31,111,107,0.15)' }}
         >
           <span className="text-xs font-medium" style={{ color: 'var(--foreground-muted)' }}>Horas no mês</span>
           <span className="text-base font-bold" style={{ color: summary.total_minutes > 0 ? 'var(--primary)' : 'var(--foreground-muted)' }}>
@@ -996,11 +996,11 @@ function ProjectBankCard({
         <button
           onClick={openDetail}
           className="flex flex-col gap-2 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-white/[0.04]"
-          style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--card-border)' }}
+          style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)' }}
         >
           <div className="flex justify-between items-center w-full">
             <span className="text-xs" style={{ color: 'var(--foreground-muted)' }}>Horas usadas</span>
-            <span className="text-sm font-bold" style={{ color: overBudget ? '#ff4d4f' : 'var(--primary)' }}>
+            <span className="text-sm font-bold" style={{ color: overBudget ? 'var(--color-error)' : 'var(--primary)' }}>
               {fmtMinutes(summary.used_minutes)}
               {available !== null && (
                 <span className="text-xs font-normal ml-1" style={{ color: 'var(--foreground-muted)' }}>
@@ -1010,12 +1010,12 @@ function ProjectBankCard({
             </span>
           </div>
           {pct !== null && (
-            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
+            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(18,59,79,0.05)' }}>
               <div
                 className="h-full rounded-full transition-all"
                 style={{
                   width: `${pct}%`,
-                  background: overBudget ? '#ff4d4f' : 'var(--primary)',
+                  background: overBudget ? 'var(--color-error)' : 'var(--primary)',
                 }}
               />
             </div>
@@ -1135,7 +1135,7 @@ export function AgendaView({
             <button
               onClick={() => setShowAddModal(true)}
               className="rounded-lg px-4 py-2 text-sm font-semibold"
-              style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+              style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
             >
               + Adicionar registro
             </button>

@@ -198,17 +198,17 @@ function ContactForm({ t }: { t: ReturnType<typeof useTranslations> }) {
         <div 
           className="p-4 rounded-xl border flex items-center gap-3 mb-6 animate-in fade-in slide-in-from-top-2 duration-300"
           style={{
-            backgroundColor: 'rgba(57, 255, 20, 0.1)',
-            borderColor: 'rgba(57, 255, 20, 0.3)',
+            backgroundColor: 'rgba(31, 111, 107, 0.10)',
+            borderColor: 'rgba(31, 111, 107, 0.3)',
           }}
         >
-          <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-lime)]/20">
-            <svg className="w-5 h-5 text-[var(--color-lime)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand)]/20">
+            <svg className="w-5 h-5 text-[var(--color-brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <div>
-            <p className="font-semibold text-[var(--color-lime)]">Mensagem enviada!</p>
+            <p className="font-semibold text-[var(--color-brand)]">Mensagem enviada!</p>
             <p className="text-sm" style={{ color: 'var(--foreground-muted)' }}>Entraremos em contato em breve.</p>
           </div>
         </div>
@@ -502,17 +502,17 @@ function ConsultationForm({ t }: { t: ReturnType<typeof useTranslations> }) {
         <div 
           className="p-4 rounded-xl border flex items-center gap-3 mb-6 animate-in fade-in slide-in-from-top-2 duration-300"
           style={{
-            backgroundColor: 'rgba(57, 255, 20, 0.1)',
-            borderColor: 'rgba(57, 255, 20, 0.3)',
+            backgroundColor: 'rgba(31, 111, 107, 0.10)',
+            borderColor: 'rgba(31, 111, 107, 0.3)',
           }}
         >
-          <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-lime)]/20">
-            <svg className="w-5 h-5 text-[var(--color-lime)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-brand)]/20">
+            <svg className="w-5 h-5 text-[var(--color-brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <div>
-            <p className="font-semibold text-[var(--color-lime)]">Consultoria agendada!</p>
+            <p className="font-semibold text-[var(--color-brand)]">Consultoria agendada!</p>
             <p className="text-sm" style={{ color: 'var(--foreground-muted)' }}>Você receberá uma confirmação em breve.</p>
           </div>
         </div>

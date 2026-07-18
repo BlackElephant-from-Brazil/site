@@ -32,7 +32,7 @@ export default async function PlansPage({ params }: Props) {
     <main className="min-h-screen pt-24 pb-20">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[var(--color-lime)]/5 rounded-full blur-[150px]" />
+        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[var(--color-brand)]/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-[150px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 bg-purple-500/5 rounded-full blur-[150px]" />
       </div>
@@ -40,12 +40,12 @@ export default async function PlansPage({ params }: Props) {
       <div className="site-container relative z-10">
         {/* Header */}
         <ScrollReveal className="text-center mb-16">
-          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[var(--color-lime)] bg-[var(--color-lime)]/10 rounded-full border border-[var(--color-lime)]/20">
+          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[var(--color-brand)] bg-[var(--color-brand)]/10 rounded-full border border-[var(--color-brand)]/20">
             {t('badge')}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t('title.part1')}{' '}
-            <span className="text-[var(--color-lime)]">{t('title.part2')}</span>
+            <span className="text-[var(--color-brand)]">{t('title.part2')}</span>
           </h1>
           <p className="text-lg md:text-xl text-[var(--color-gray-400)] max-w-3xl mx-auto">
             {t('description')}
@@ -93,7 +93,7 @@ export default async function PlansPage({ params }: Props) {
                     {t(`faq.q${i}.question`)}
                   </span>
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--color-gray-800)] flex items-center justify-center group-open:rotate-45 transition-transform">
-                    <svg className="w-5 h-5 text-[var(--color-lime)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-[var(--color-brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
                   </span>
@@ -108,7 +108,7 @@ export default async function PlansPage({ params }: Props) {
 
         {/* CTA */}
         <ScrollReveal>
-          <div className="text-center p-12 rounded-3xl bg-gradient-to-br from-[var(--color-lime)]/10 via-[var(--color-gray-900)] to-purple-500/10 border border-[var(--color-gray-800)]">
+          <div className="text-center p-12 rounded-3xl bg-gradient-to-br from-[var(--color-brand)]/10 via-[var(--color-gray-900)] to-purple-500/10 border border-[var(--color-gray-800)]">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               {t('cta.title')}
             </h2>
@@ -118,7 +118,7 @@ export default async function PlansPage({ params }: Props) {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href={`/${locale}/contact`}
-                className="px-8 py-4 bg-[var(--color-lime)] text-[var(--color-black)] font-semibold rounded-xl hover:bg-[var(--color-lime-light)] transition-colors"
+                className="px-8 py-4 bg-[var(--color-accent)] text-[var(--color-accent-ink)] font-semibold rounded-xl hover:bg-[var(--color-accent-dark)] transition-colors"
               >
                 {t('cta.button')}
               </Link>
@@ -126,7 +126,7 @@ export default async function PlansPage({ params }: Props) {
                 href="https://wa.me/5519978055531"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 border border-[var(--color-gray-700)] text-white font-semibold rounded-xl hover:border-[var(--color-lime)] hover:text-[var(--color-lime)] transition-colors"
+                className="px-8 py-4 border border-[var(--color-gray-700)] text-white font-semibold rounded-xl hover:border-[var(--color-brand)] hover:text-[var(--color-brand)] transition-colors"
               >
                 {t('cta.whatsapp')}
               </a>

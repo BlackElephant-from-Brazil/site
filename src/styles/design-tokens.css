@@ -1,10 +1,11 @@
 /**
  * Design Tokens - BlackElephant Design System
- * 
+ *
  * Todas as variáveis CSS centralizadas para consistência visual.
  * Use estas variáveis em todos os componentes.
- * 
- * Estética: Cyberpunk, Futurista, Minimalista, Elegante
+ *
+ * Estética: Premium acessível — tema claro, teal petróleo + âmbar + navy.
+ * (Antes: cyberpunk verde-limão. Rebranding baseado na LP de referência.)
  */
 
 /* ========================================
@@ -18,12 +19,12 @@
    * ======================================== */
   
   /* Cores Base */
-  --color-black: #0a0a0a;
+  --color-black: #0a0a0a;         /* preto literal — superfícies realmente escuras (NÃO é o fundo do tema) */
   --color-black-light: #111111;
   --color-black-lighter: #1a1a1a;
   --color-white: #ffffff;
   --color-white-soft: #f0f0f0;
-  
+
   /* Cinzas */
   --color-gray-900: #171717;
   --color-gray-800: #262626;
@@ -36,47 +37,58 @@
   --color-gray-100: #e5e5e5;
   --color-gray-50: #fafafa;
 
-  /* Verde Limão - Cor Principal */
-  --color-lime: #39FF14;
-  --color-lime-light: #7FFF00;
-  --color-lime-glow: rgba(57, 255, 20, 0.4);
-  --color-lime-soft: rgba(57, 255, 20, 0.15);
-  --color-lime-dark: #2ecc10;
+  /* ── Marca (novos canônicos) ─────────────────────────── */
+  --color-brand: #1F6F6B;         /* teal petróleo — primária */
+  --color-brand-dark: #16544f;    /* hover teal */
+  --color-brand-mid: #2f9d8f;     /* stop intermediário de gradientes */
+  --color-accent: #E8A93C;        /* âmbar — CTA */
+  --color-accent-dark: #d4941f;   /* hover âmbar */
+  --color-accent-ink: #2B2F33;    /* texto sobre âmbar (AA) */
+  --color-deep: #123B4F;          /* navy — headings + seções escuras */
+  --color-line: #e4e9ec;          /* bordas hairline */
+  --primary-contrast: #FFFFFF;    /* texto sobre --primary (teal) */
+
+  /* Verde Limão — ALIASES LEGADO (apontam para a marca; remover no cleanup final) */
+  --color-lime: var(--color-brand);
+  --color-lime-light: var(--color-brand-mid);
+  --color-lime-glow: rgba(31, 111, 107, 0.28);
+  --color-lime-soft: rgba(31, 111, 107, 0.10);
+  --color-lime-dark: var(--color-brand-dark);
 
   /* Cores de Feedback */
-  --color-success: #22c55e;
-  --color-warning: #eab308;
-  --color-error: #ff3333;
-  --color-info: #3b82f6;
+  --color-success: #1e8e3e;
+  --color-warning: #E8A93C;
+  --color-error: #d64545;
+  --color-info: #1F6F6B;
 
   /* ========================================
-   * TEMA DARK (padrão)
+   * TEMA CLARO (padrão) — premium acessível
    * ======================================== */
-  --background: var(--color-black);
-  --background-secondary: var(--color-black-light);
-  --background-tertiary: var(--color-black-lighter);
-  --foreground: var(--color-white-soft);
-  --foreground-muted: var(--color-gray-400);
-  --foreground-subtle: var(--color-gray-500);
-  
-  --primary: var(--color-lime);
-  --primary-glow: var(--color-lime-glow);
-  --primary-soft: var(--color-lime-soft);
-  
-  --card-background: var(--color-black-light);
-  --card-border: var(--color-gray-700);
-  --card-hover: var(--color-black-lighter);
-  
-  --input-background: var(--color-black-light);
-  --input-border: var(--color-gray-700);
-  --input-border-focus: var(--color-lime);
-  
-  --button-primary-bg: var(--color-lime);
-  --button-primary-text: var(--color-black);
-  --button-primary-hover: var(--color-lime-dark);
-  
-  --nav-background: rgba(10, 10, 10, 0.8);
-  --nav-border: var(--color-gray-800);
+  --background: #F7F9FA;                    /* off-white frio */
+  --background-secondary: #FFFFFF;          /* superfícies */
+  --background-tertiary: #eef2f4;           /* hover / fundos alternados */
+  --foreground: var(--color-accent-ink);    /* ink #2B2F33 */
+  --foreground-muted: #55606a;
+  --foreground-subtle: #6d7780;
+
+  --primary: var(--color-brand);
+  --primary-glow: rgba(31, 111, 107, 0.25);
+  --primary-soft: rgba(31, 111, 107, 0.10);
+
+  --card-background: #FFFFFF;
+  --card-border: rgba(18, 59, 79, 0.08);
+  --card-hover: #f2f5f6;
+
+  --input-background: #FFFFFF;
+  --input-border: var(--color-line);
+  --input-border-focus: var(--color-brand);
+
+  --button-primary-bg: var(--color-accent);        /* CTA âmbar */
+  --button-primary-text: var(--color-accent-ink);  /* texto escuro sobre âmbar (AA) */
+  --button-primary-hover: var(--color-accent-dark);
+
+  --nav-background: rgba(255, 255, 255, 0.85);
+  --nav-border: var(--color-line);
 
   /* ========================================
    * TIPOGRAFIA
@@ -85,7 +97,7 @@
   /* Font Families */
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
   --font-title: 'Sora', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Barlow', system-ui, -apple-system, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;   /* itálico editorial (padrão da LP) */
 
   /* Font Sizes - Mobile First */
   --text-xs: 0.75rem;      /* 12px */
@@ -151,49 +163,49 @@
   --radius-2xl: 1.5rem;    /* 24px */
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
-  --shadow-glow: 0 0 20px var(--color-lime-glow);
-  --shadow-glow-lg: 0 0 40px var(--color-lime-glow);
-  --shadow-glow-xl: 0 0 60px var(--color-lime-glow), 0 0 100px rgba(57, 255, 20, 0.2);
+  /* Shadows — tint petróleo (rgba 18,59,79) em vez de preto puro */
+  --shadow-sm: 0 1px 2px 0 rgba(18, 59, 79, 0.06);
+  --shadow-md: 0 4px 10px -2px rgba(18, 59, 79, 0.10);
+  --shadow-soft: 0 1px 2px rgba(18, 59, 79, 0.04), 0 16px 34px -18px rgba(18, 59, 79, 0.20);
+  --shadow-soft-lg: 0 2px 6px rgba(18, 59, 79, 0.06), 0 30px 60px -24px rgba(18, 59, 79, 0.28);
+  --shadow-cta: 0 8px 20px -8px rgba(232, 169, 60, 0.75);
+  --shadow-cta-hover: 0 14px 28px -10px rgba(232, 169, 60, 0.85);
+  --shadow-lg: var(--shadow-soft);
+  --shadow-xl: var(--shadow-soft-lg);
+  --shadow-glow: 0 8px 24px -12px rgba(31, 111, 107, 0.45);
+  --shadow-glow-lg: 0 14px 34px -14px rgba(31, 111, 107, 0.50);
+  --shadow-glow-xl: var(--shadow-soft-lg);
 
   /* ========================================
    * GLASSMORPHISM & EFEITOS ESPECIAIS
    * ======================================== */
   
-  /* Glassmorphism */
-  --glass-background: rgba(17, 17, 17, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  /* Glassmorphism (claro) */
+  --glass-background: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(18, 59, 79, 0.10);
   --glass-blur: 20px;
-  
-  /* Gradientes Animados */
-  --gradient-primary: linear-gradient(135deg, var(--color-lime) 0%, #7fff00 50%, var(--color-lime-dark) 100%);
-  --gradient-dark: linear-gradient(135deg, var(--color-black) 0%, var(--color-black-lighter) 100%);
-  --gradient-glow: radial-gradient(ellipse at center, var(--color-lime-soft) 0%, transparent 70%);
-  --gradient-mesh: 
-    radial-gradient(at 40% 20%, rgba(57, 255, 20, 0.15) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(57, 255, 20, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(57, 255, 20, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, rgba(57, 255, 20, 0.05) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(57, 255, 20, 0.1) 0px, transparent 50%);
-  
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(92deg, #1F6F6B 8%, #2f9d8f 42%, #E8A93C 92%);
+  --gradient-dark: linear-gradient(135deg, #123B4F 0%, #0e2f40 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(31, 111, 107, 0.10) 0%, transparent 70%);
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, rgba(31, 111, 107, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(31, 111, 107, 0.06) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(31, 111, 107, 0.05) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(232, 169, 60, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(31, 111, 107, 0.06) 0px, transparent 50%);
+
   /* Grid & Pattern Backgrounds */
-  --grid-color: rgba(57, 255, 20, 0.05);
+  --grid-color: rgba(18, 59, 79, 0.05);
   --grid-size: 50px;
-  --dot-color: rgba(57, 255, 20, 0.15);
+  --dot-color: rgba(18, 59, 79, 0.12);
   --dot-size: 1px;
   --dot-spacing: 20px;
 
-  /* Neon & Glow Effects */
-  --neon-glow: 
-    0 0 5px var(--color-lime),
-    0 0 10px var(--color-lime),
-    0 0 20px var(--color-lime),
-    0 0 40px var(--color-lime-glow);
-  --text-glow: 0 0 10px var(--color-lime-glow), 0 0 20px var(--color-lime-glow);
+  /* Neon & Glow Effects — desativados no tema claro */
+  --neon-glow: none;
+  --text-glow: none;
 
   /* ========================================
    * TRANSIÇÕES
@@ -223,30 +235,4 @@
   --container-lg: 1024px;
   --container-xl: 1280px;
   --container-2xl: 1400px;
-}
-
-/* ========================================
- * TEMA LIGHT
- * ======================================== */
-[data-theme="light"] {
-  --background: var(--color-white);
-  --background-secondary: var(--color-gray-50);
-  --background-tertiary: var(--color-gray-100);
-  --foreground: var(--color-gray-900);
-  --foreground-muted: var(--color-gray-600);
-  --foreground-subtle: var(--color-gray-500);
-  
-  --card-background: var(--color-white);
-  --card-border: var(--color-gray-200);
-  --card-hover: var(--color-gray-50);
-  
-  --input-background: var(--color-white);
-  --input-border: var(--color-gray-300);
-  
-  --nav-background: rgba(255, 255, 255, 0.8);
-  --nav-border: var(--color-gray-200);
-  
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }

@@ -112,7 +112,7 @@ export function PricingComparison({ locale }: { locale: string }) {
             </th>
             {plans.map((plan) => (
               <th key={plan.id} className="py-6 px-4 text-center">
-                <span className={`text-lg font-bold ${plan.recommended ? 'text-[var(--color-lime)]' : 'text-white'}`}>
+                <span className={`text-lg font-bold ${plan.recommended ? 'text-[var(--color-brand)]' : 'text-white'}`}>
                   {plan.name}
                 </span>
               </th>
@@ -131,7 +131,7 @@ export function PricingComparison({ locale }: { locale: string }) {
               {plans.map((plan) => (
                 <td key={plan.id} className="py-4 px-4 text-center">
                   {planFeatureMap[plan.slug]?.includes(feature.name) ? (
-                    <svg className="w-6 h-6 mx-auto text-[var(--color-lime)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 mx-auto text-[var(--color-brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   ) : (

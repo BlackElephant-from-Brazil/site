@@ -139,7 +139,7 @@ function ChartPanel({ title, children }: { title: string; children: ReactNode })
   return (
     <div
       className="rounded-lg border p-4"
-      style={{ borderColor: 'var(--card-border)', background: 'rgba(255,255,255,0.025)' }}
+      style={{ borderColor: 'var(--card-border)', background: 'var(--card-background)' }}
     >
       <h3
         className="text-xs font-semibold uppercase tracking-wider"
@@ -172,7 +172,7 @@ function StatusPieChart({
             cy="21"
             r="15.915"
             fill="transparent"
-            stroke="rgba(255,255,255,0.08)"
+            stroke="rgba(18,59,79,0.05)"
             strokeWidth="6"
           />
           {segments.map(segment => (
@@ -265,15 +265,15 @@ function HoursProgressChart({ usage }: { usage: HoursUsage }) {
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label={tooltip}
-          style={{ borderColor: 'var(--card-border)', background: 'rgba(255,255,255,0.06)' }}
+          style={{ borderColor: 'var(--card-border)', background: 'rgba(18,59,79,0.05)' }}
         >
           <div
             className="h-full rounded-full"
             style={{
               width: `${usage.usagePercent}%`,
               background: usage.overageMinutes > 0
-                ? 'linear-gradient(90deg, #39FF14 0%, #fb7185 100%)'
-                : 'linear-gradient(90deg, #39FF14 0%, #7dd3fc 100%)',
+                ? 'linear-gradient(90deg, var(--color-brand) 0%, #fb7185 100%)'
+                : 'linear-gradient(90deg, var(--color-brand) 0%, #7dd3fc 100%)',
             }}
           />
         </div>
@@ -292,7 +292,7 @@ function Tooltip({ content, children }: { content: string; children: ReactNode }
       <div
         tabIndex={0}
         aria-label={content}
-        className="rounded-md outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#39FF14]"
+        className="rounded-md outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand)]"
       >
         {children}
       </div>
@@ -300,9 +300,9 @@ function Tooltip({ content, children }: { content: string; children: ReactNode }
         role="tooltip"
         className="pointer-events-none absolute inset-x-0 top-full z-[400] mx-auto mt-2 w-64 max-w-[min(16rem,calc(100vw-2rem))] whitespace-normal break-words rounded-md border px-2.5 py-1.5 text-xs opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
         style={{
-          borderColor: 'var(--card-border)',
-          background: 'rgba(10,10,10,0.96)',
-          color: 'var(--foreground-muted)',
+          borderColor: 'transparent',
+          background: 'var(--color-deep)',
+          color: 'rgba(255,255,255,0.9)',
         }}
       >
         {content}
@@ -333,7 +333,7 @@ function ActivityRow({ activity }: { activity: CustomerProjectActivity }) {
           <span
             className="rounded px-1.5 py-0.5 text-xs font-bold tracking-widest"
             style={{
-              background: 'rgba(57,255,20,0.1)',
+              background: 'rgba(31,111,107,0.1)',
               color: 'var(--primary)',
               fontFamily: 'var(--font-title)',
             }}
@@ -353,9 +353,9 @@ function ActivityRow({ activity }: { activity: CustomerProjectActivity }) {
       <span
         className="w-fit shrink-0 rounded-full border px-2.5 py-1 text-xs font-semibold"
         style={{
-          borderColor: 'rgba(57,255,20,0.25)',
+          borderColor: 'rgba(31,111,107,0.25)',
           color: 'var(--primary)',
-          background: 'rgba(57,255,20,0.08)',
+          background: 'rgba(31,111,107,0.08)',
         }}
       >
         {activity.status}
@@ -376,7 +376,7 @@ function Metric({
   return (
     <div
       className="min-w-44 rounded-lg border px-3 py-2"
-      style={{ borderColor: 'var(--card-border)', background: 'rgba(255,255,255,0.03)' }}
+      style={{ borderColor: 'var(--card-border)', background: 'rgba(18,59,79,0.05)' }}
     >
       <p className="text-[0.68rem] uppercase tracking-wider" style={{ color: 'var(--foreground-muted)' }}>
         {label}
@@ -400,12 +400,12 @@ function EmptyState({ message }: { message: string }) {
 }
 
 const STATUS_COLORS = [
-  '#39FF14',
-  '#7dd3fc',
-  '#facc15',
-  '#fb7185',
-  '#a78bfa',
-  '#f97316',
+  '#1F6F6B',
+  '#E8A93C',
+  '#123B4F',
+  '#2f9d8f',
+  '#8fb7c9',
+  '#b48ead',
 ]
 
 interface StatusSegment {

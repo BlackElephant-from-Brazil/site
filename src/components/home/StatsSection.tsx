@@ -82,20 +82,20 @@ export function StatsSection() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Single subtle lime orb — left */}
         <div className="absolute -top-32 -left-32 w-[460px] h-[460px] rounded-full opacity-[0.07] blur-[140px]"
-          style={{ backgroundColor: 'var(--color-lime)' }}
+          style={{ backgroundColor: 'var(--color-brand)' }}
         />
         {/* Grid lines — subtle */}
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+              'linear-gradient(rgba(18,59,79,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(18,59,79,0.05) 1px, transparent 1px)',
             backgroundSize: '80px 80px',
           }}
         />
         {/* Noise overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
+          className="absolute inset-0 opacity-[0.04] mix-blend-multiply"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>\")",
@@ -118,11 +118,11 @@ export function StatsSection() {
               <span
                 aria-hidden
                 className="h-px w-10"
-                style={{ backgroundColor: 'var(--color-lime)' }}
+                style={{ backgroundColor: 'var(--color-brand)' }}
               />
               <span
                 className="text-[11px] font-bold uppercase tracking-[0.32em]"
-                style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+                style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
               >
                 Em números
               </span>
@@ -143,7 +143,7 @@ export function StatsSection() {
                   fontFamily: 'var(--font-serif)',
                   fontStyle: 'normal',
                   fontWeight: 100,
-                  color: 'var(--color-lime)',
+                  color: 'var(--color-brand)',
                 }}
               >
                 nos define
@@ -164,7 +164,7 @@ export function StatsSection() {
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'normal',
-                color: 'rgba(255,255,255,0.7)',
+                color: 'var(--foreground-muted)',
                 fontWeight: 100,
               }}
             >
@@ -176,7 +176,7 @@ export function StatsSection() {
               className="mt-6 h-px w-24"
               style={{
                 background:
-                  'linear-gradient(90deg, var(--color-lime) 0%, transparent 100%)',
+                  'linear-gradient(90deg, var(--color-brand) 0%, transparent 100%)',
               }}
             />
           </motion.div>
@@ -199,7 +199,7 @@ export function StatsSection() {
                 i === 2 ? 'lg:border-r' : ''
               }`}
               style={{
-                borderColor: 'rgba(255,255,255,0.07)',
+                borderColor: 'var(--color-line)',
               }}
             >
               {/* Hairline top accent */}
@@ -207,7 +207,7 @@ export function StatsSection() {
                 aria-hidden
                 className="absolute left-4 lg:left-7 top-0 h-px w-12"
                 style={{
-                  backgroundColor: i === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.2)',
+                  backgroundColor: i === 0 ? 'var(--color-brand)' : 'var(--color-line)',
                 }}
               />
 
@@ -216,7 +216,7 @@ export function StatsSection() {
                 className="text-[12px] font-bold tabular-nums tracking-[0.2em] mb-6 lg:mb-8"
                 style={{
                   fontFamily: 'var(--font-title)',
-                  color: 'rgba(255,255,255,0.35)',
+                  color: 'var(--foreground-subtle)',
                 }}
               >
                 {stat.index}
@@ -239,7 +239,7 @@ export function StatsSection() {
                   style={{
                     fontFamily: 'var(--font-serif)',
                     fontStyle: 'normal',
-                    color: 'var(--color-lime)',
+                    color: 'var(--color-brand)',
                     fontWeight: 100,
                   }}
                 >
@@ -264,7 +264,7 @@ export function StatsSection() {
                 style={{
                   fontFamily: 'var(--font-serif)',
                   fontStyle: 'normal',
-                  color: 'rgba(255,255,255,0.5)',
+                  color: 'var(--foreground-subtle)',
                   fontWeight: 100,
                 }}
               >
@@ -278,7 +278,7 @@ export function StatsSection() {
         <div
           aria-hidden
           className="mt-0 h-px w-full"
-          style={{ backgroundColor: 'rgba(255,255,255,0.07)' }}
+          style={{ backgroundColor: 'var(--color-line)' }}
         />
       </div>
     </section>

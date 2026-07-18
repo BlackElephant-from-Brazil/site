@@ -101,7 +101,7 @@ function MissionVisionSection() {
                 className="w-16 h-16 rounded-xl flex items-center justify-center mb-6"
                 style={{ 
                   backgroundColor: 'var(--primary)',
-                  color: 'var(--color-black)',
+                  color: 'var(--primary-contrast)',
                 }}
               >
                 {card.icon}
@@ -199,7 +199,7 @@ function ValuesSection() {
               }}
             >
               <div 
-                className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 transition-colors duration-300 group-hover:bg-[var(--primary)] group-hover:text-[var(--color-black)]"
+                className="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 transition-colors duration-300 group-hover:bg-[var(--primary)] group-hover:text-[var(--primary-contrast)]"
                 style={{ 
                   backgroundColor: 'var(--primary-soft)',
                   color: 'var(--primary)',

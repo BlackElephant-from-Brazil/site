@@ -22,12 +22,12 @@ function TodoItem({ todo, onToggle, onDelete }: { todo: UserTodo; onToggle: (id:
         onClick={() => onToggle(todo.id, !todo.is_completed)}
         className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all"
         style={{
-          borderColor: todo.is_completed ? 'var(--color-lime)' : 'rgba(255,255,255,0.2)',
-          background: todo.is_completed ? 'rgba(57,255,20,0.15)' : 'transparent',
+          borderColor: todo.is_completed ? 'var(--color-brand)' : 'var(--card-border)',
+          background: todo.is_completed ? 'rgba(31,111,107,0.15)' : 'transparent',
         }}
       >
         {todo.is_completed && (
-          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-lime)' }}>
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-brand)' }}>
             <polyline points="20 6 9 17 4 12" />
           </svg>
         )}
@@ -52,7 +52,7 @@ function TodoItem({ todo, onToggle, onDelete }: { todo: UserTodo; onToggle: (id:
         {due && (
           <p
             className="mt-1 text-[0.6rem] font-medium"
-            style={{ color: due.overdue && !todo.is_completed ? '#ff3b30' : 'var(--foreground-muted)' }}
+            style={{ color: due.overdue && !todo.is_completed ? 'var(--color-error)' : 'var(--foreground-muted)' }}
           >
             {due.overdue && !todo.is_completed ? '⚠ ' : ''}{due.label}
           </p>
@@ -62,7 +62,7 @@ function TodoItem({ todo, onToggle, onDelete }: { todo: UserTodo; onToggle: (id:
       <button
         onClick={() => onDelete(todo.id)}
         className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded opacity-0 transition-all group-hover:opacity-100"
-        style={{ color: 'rgba(255,59,48,0.7)', background: 'rgba(255,59,48,0.08)' }}
+        style={{ color: 'rgba(214,69,69,0.7)', background: 'rgba(214,69,69,0.08)' }}
       >
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -122,7 +122,7 @@ export function TodoPanel({ userId, onClose }: Props) {
     <div className="flex h-full flex-col" style={{ width: 320, borderLeft: '1px solid var(--card-border)', background: 'var(--nav-background)' }}>
       <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid var(--card-border)' }}>
         <div className="flex items-center gap-2">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-lime)' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-brand)' }}>
             <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
             <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
           </svg>
@@ -132,7 +132,7 @@ export function TodoPanel({ userId, onClose }: Props) {
           <button
             onClick={() => setShowForm(v => !v)}
             className="flex h-7 w-7 items-center justify-center rounded-md transition-colors"
-            style={{ color: 'var(--color-lime)', background: 'rgba(57,255,20,0.1)' }}
+            style={{ color: 'var(--color-brand)', background: 'rgba(31,111,107,0.1)' }}
             title="Nova tarefa"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -159,7 +159,7 @@ export function TodoPanel({ userId, onClose }: Props) {
               onChange={e => setTitle(e.target.value)}
               placeholder="Título da tarefa *"
               className="w-full rounded-md border px-2.5 py-1.5 text-xs outline-none"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
+              style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
               required
               autoFocus
             />
@@ -169,21 +169,21 @@ export function TodoPanel({ userId, onClose }: Props) {
               placeholder="Descrição (opcional)"
               rows={2}
               className="w-full resize-none rounded-md border px-2.5 py-1.5 text-xs outline-none"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
+              style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
             />
             <input
               type="datetime-local"
               value={dueDate}
               onChange={e => setDueDate(e.target.value)}
               className="w-full rounded-md border px-2.5 py-1.5 text-xs outline-none"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)', colorScheme: 'dark' }}
+              style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)', colorScheme: 'light' }}
             />
             <div className="flex gap-2">
               <button
                 type="submit"
                 disabled={isPending}
                 className="flex-1 rounded-md py-1.5 text-xs font-semibold transition-all disabled:opacity-50"
-                style={{ background: 'var(--color-lime)', color: '#000' }}
+                style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
               >
                 Salvar
               </button>
@@ -201,7 +201,7 @@ export function TodoPanel({ userId, onClose }: Props) {
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/10" style={{ borderTopColor: 'var(--color-lime)' }} />
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/10" style={{ borderTopColor: 'var(--color-brand)' }} />
           </div>
         ) : (
           <div className="p-3">
@@ -222,7 +222,7 @@ export function TodoPanel({ userId, onClose }: Props) {
                 <button
                   onClick={() => setShowDone(v => !v)}
                   className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors"
-                  style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.03)' }}
+                  style={{ color: 'var(--foreground-muted)', background: 'rgba(18,59,79,0.05)' }}
                 >
                   <svg
                     width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"

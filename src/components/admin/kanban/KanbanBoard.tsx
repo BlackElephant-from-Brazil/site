@@ -396,7 +396,7 @@ export function KanbanBoard({
                             e.target.checked ? [...prev, u.id] : prev.filter(id => id !== u.id)
                           )
                         }}
-                        style={{ accentColor: 'var(--color-lime)' }}
+                        style={{ accentColor: 'var(--color-brand)' }}
                       />
                       {u.name}
                     </label>
@@ -419,13 +419,13 @@ export function KanbanBoard({
                   border: '1px solid',
                   cursor: 'pointer',
                   borderColor: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
-                    ? 'var(--color-lime)'
+                    ? 'var(--color-brand)'
                     : 'var(--card-border)',
                   color: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
-                    ? 'var(--color-lime)'
+                    ? 'var(--color-brand)'
                     : 'var(--foreground-muted)',
                   background: filterUserIds.length === 1 && filterUserIds[0] === currentUserId
-                    ? 'rgba(57,255,20,0.05)'
+                    ? 'rgba(31,111,107,0.05)'
                     : 'transparent',
                 }}
               >
@@ -479,7 +479,7 @@ export function KanbanBoard({
                 </span>
                 <span
                   className="rounded-full px-2 py-0.5 text-xs font-medium"
-                  style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--foreground-muted)' }}
+                  style={{ background: 'rgba(18,59,79,0.05)', color: 'var(--foreground-muted)' }}
                 >
                   {col.cards.length}
                 </span>
@@ -506,7 +506,7 @@ export function KanbanBoard({
                       <span
                         className="mb-1.5 inline-block rounded px-1.5 py-0.5 text-xs font-bold tracking-widest"
                         style={{
-                          background: 'rgba(57,255,20,0.1)',
+                          background: 'rgba(31,111,107,0.1)',
                           color: 'var(--primary)',
                           fontFamily: 'var(--font-title)',
                         }}
@@ -538,8 +538,8 @@ export function KanbanBoard({
                             style={{
                               width: 28,
                               height: 28,
-                              background: 'rgba(57,255,20,0.15)',
-                              color: 'var(--color-lime)',
+                              background: 'rgba(31,111,107,0.15)',
+                              color: 'var(--color-brand)',
                               flexShrink: 0,
                             }}
                             title={card.assignee.name}
@@ -632,7 +632,7 @@ export function KanbanBoard({
                 disabled={uploading}
                 style={{
                   fontSize: '0.7rem',
-                  color: uploading ? 'var(--foreground-muted)' : 'var(--color-lime)',
+                  color: uploading ? 'var(--foreground-muted)' : 'var(--color-brand)',
                   background: 'none',
                   border: 'none',
                   cursor: uploading ? 'default' : 'pointer',
@@ -657,14 +657,14 @@ export function KanbanBoard({
             />
           </div>
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Criando…' : 'Criar'}
             </button>

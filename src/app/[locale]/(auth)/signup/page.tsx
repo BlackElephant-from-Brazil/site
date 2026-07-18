@@ -24,7 +24,7 @@ function SignupContent() {
       <form action="/api/auth/google" method="POST">
         <button
           type="submit"
-          className="flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-3 font-medium transition-colors hover:bg-gray-50"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border px-4 py-3 font-medium transition-colors hover:bg-[var(--background-tertiary)]"
           style={{
             borderColor: 'var(--input-border)',
           }}
@@ -56,7 +56,7 @@ function SignupContent() {
           <div className="w-full border-t" style={{ borderColor: 'var(--input-border)' }} />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 text-gray-500" style={{ backgroundColor: 'var(--background)' }}>
+          <span className="px-2 text-[var(--foreground-muted)]" style={{ backgroundColor: 'var(--background)' }}>
             {t('orContinueWith')}
           </span>
         </div>
@@ -73,7 +73,7 @@ function SignupContent() {
             name="email"
             type="email"
             required
-            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-blue-500"
+            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-[var(--color-brand)]"
             style={{
               borderColor: 'var(--input-border)',
               backgroundColor: 'var(--input-background)',
@@ -91,7 +91,7 @@ function SignupContent() {
             type="password"
             required
             minLength={8}
-            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-blue-500"
+            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-[var(--color-brand)]"
             style={{
               borderColor: 'var(--input-border)',
               backgroundColor: 'var(--input-background)',
@@ -109,7 +109,7 @@ function SignupContent() {
             type="password"
             required
             minLength={8}
-            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-blue-500"
+            className="mt-1 block w-full rounded-lg border px-4 py-3 outline-none transition-colors focus:border-[var(--color-brand)]"
             style={{
               borderColor: 'var(--input-border)',
               backgroundColor: 'var(--input-background)',
@@ -119,18 +119,20 @@ function SignupContent() {
 
         <button
           type="submit"
-          className="w-full rounded-lg px-4 py-3 font-medium text-white transition-colors"
+          className="w-full rounded-lg px-4 py-3 font-medium transition-colors"
           style={{
             backgroundColor: 'var(--button-primary-bg)',
+            color: 'var(--button-primary-text)',
+            boxShadow: 'var(--shadow-cta)',
           }}
         >
           {t('signup')}
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-500">
+      <p className="text-center text-sm text-[var(--foreground-muted)]">
         {t('alreadyHaveAccount')}{' '}
-        <Link href="/login" className="text-blue-600 hover:underline">
+        <Link href="/login" className="text-[var(--color-brand)] hover:underline">
           {t('login')}
         </Link>
       </p>

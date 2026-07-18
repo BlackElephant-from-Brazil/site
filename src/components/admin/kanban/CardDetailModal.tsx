@@ -275,7 +275,7 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete,
                           disabled={uploading}
                           style={{
                             fontSize: '0.7rem',
-                            color: uploading ? 'var(--foreground-muted)' : 'var(--color-lime)',
+                            color: uploading ? 'var(--foreground-muted)' : 'var(--color-brand)',
                             background: 'none',
                             border: 'none',
                             cursor: uploading ? 'default' : 'pointer',
@@ -365,7 +365,7 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete,
                 <span
                   className="rounded px-2.5 py-1 text-sm font-bold tracking-widest"
                   style={{
-                    background: 'rgba(57,255,20,0.1)',
+                    background: 'rgba(31,111,107,0.1)',
                     color: 'var(--primary)',
                     fontFamily: 'var(--font-title)',
                   }}
@@ -431,7 +431,7 @@ export function CardDetailModal({ card, adminUsers, onClose, onUpdate, onDelete,
                 <button
                   onClick={handleDelete}
                   className="w-full rounded-lg border px-3 py-2 text-xs font-medium transition-colors"
-                  style={{ borderColor: 'rgba(255,77,79,0.4)', color: '#ff4d4f' }}
+                  style={{ borderColor: 'rgba(214,69,69,0.4)', color: 'var(--color-error)' }}
                 >
                   Excluir card
                 </button>

@@ -34,8 +34,8 @@ function ToolbarButton({
       className="rounded px-2 py-1 text-xs font-semibold transition-colors"
       style={{
         color: active ? 'var(--primary)' : 'var(--foreground-muted)',
-        background: active ? 'rgba(57,255,20,0.1)' : 'transparent',
-        border: `1px solid ${active ? 'rgba(57,255,20,0.3)' : 'var(--card-border)'}`,
+        background: active ? 'rgba(31,111,107,0.1)' : 'transparent',
+        border: `1px solid ${active ? 'rgba(31,111,107,0.3)' : 'var(--card-border)'}`,
         opacity: disabled ? 0.4 : 1,
         cursor: disabled ? 'not-allowed' : 'pointer',
       }}

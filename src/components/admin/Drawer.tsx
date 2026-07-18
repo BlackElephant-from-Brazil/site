@@ -52,7 +52,7 @@ export function Drawer({ open, onClose, title, children }: DrawerProps) {
               background: 'var(--background-secondary)',
               border: '1px solid var(--card-border)',
               borderRadius: '1.25rem',
-              boxShadow: '-16px 0 60px rgba(0,0,0,0.5), 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04)',
+              boxShadow: 'var(--shadow-soft-lg)',
             }}
           >
             {/* header */}
@@ -69,7 +69,7 @@ export function Drawer({ open, onClose, title, children }: DrawerProps) {
               <button
                 onClick={onClose}
                 className="flex h-7 w-7 items-center justify-center rounded-full text-base transition-colors"
-                style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.06)' }}
+                style={{ color: 'var(--foreground-muted)', background: 'rgba(18,59,79,0.05)' }}
                 aria-label="Fechar"
               >
                 ×

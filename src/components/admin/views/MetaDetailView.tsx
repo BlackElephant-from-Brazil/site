@@ -33,10 +33,10 @@ function collectIds(activity: GoalActivityWithChildren): string[] {
 
 function ProgressBar({ value }: { value: number }) {
   return (
-    <div className="relative h-2 w-full overflow-hidden rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+    <div className="relative h-2 w-full overflow-hidden rounded-full" style={{ background: 'rgba(18,59,79,0.05)' }}>
       <motion.div
         className="absolute inset-y-0 left-0 rounded-full"
-        style={{ background: 'var(--color-lime)', boxShadow: '0 0 10px rgba(57,255,20,0.4)' }}
+        style={{ background: 'var(--primary)', boxShadow: '0 0 10px rgba(31,111,107,0.4)' }}
         initial={{ width: 0 }}
         animate={{ width: `${value}%` }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -79,8 +79,8 @@ function InlineAddForm({
         placeholder={placeholder}
         className="flex-1 rounded-lg px-3 py-1.5 text-sm outline-none transition-colors"
         style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(57,255,20,0.3)',
+          background: 'rgba(18,59,79,0.05)',
+          border: '1px solid rgba(31,111,107,0.3)',
           color: 'var(--foreground)',
         }}
       />
@@ -88,7 +88,7 @@ function InlineAddForm({
         type="submit"
         disabled={!title.trim()}
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition-all disabled:opacity-30"
-        style={{ background: 'var(--color-lime)', color: '#000' }}
+        style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
@@ -98,7 +98,7 @@ function InlineAddForm({
         type="button"
         onClick={onCancel}
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition-all"
-        style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.06)' }}
+        style={{ color: 'var(--foreground-muted)', background: 'rgba(18,59,79,0.05)' }}
       >
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -147,12 +147,12 @@ function ActivityItem({
           onClick={() => onToggle(activity.id, !activity.is_completed)}
           className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-all"
           style={{
-            borderColor: activity.is_completed ? 'var(--color-lime)' : 'rgba(255,255,255,0.2)',
-            background: activity.is_completed ? 'rgba(57,255,20,0.15)' : 'transparent',
+            borderColor: activity.is_completed ? 'var(--color-brand)' : 'var(--card-border)',
+            background: activity.is_completed ? 'rgba(31,111,107,0.15)' : 'transparent',
           }}
         >
           {activity.is_completed && (
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-lime)' }}>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-brand)' }}>
               <polyline points="20 6 9 17 4 12" />
             </svg>
           )}
@@ -176,7 +176,7 @@ function ActivityItem({
             onClick={() => setAddingChild(v => !v)}
             title="Adicionar sub-atividade"
             className="flex h-5 w-5 items-center justify-center rounded transition-colors"
-            style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.06)' }}
+            style={{ color: 'var(--foreground-muted)', background: 'rgba(18,59,79,0.05)' }}
           >
             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
@@ -185,7 +185,7 @@ function ActivityItem({
           <button
             onClick={() => onDelete(activity.id, descendantIds)}
             className="flex h-5 w-5 items-center justify-center rounded transition-colors"
-            style={{ color: 'rgba(255,59,48,0.7)', background: 'rgba(255,59,48,0.08)' }}
+            style={{ color: 'rgba(214,69,69,0.7)', background: 'rgba(214,69,69,0.08)' }}
           >
             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -200,7 +200,7 @@ function ActivityItem({
           style={{
             marginLeft: `${Math.min(depth + 1, 6) * 20}px`,
             paddingLeft: '12px',
-            borderLeft: '1px solid rgba(255,255,255,0.07)',
+            borderLeft: '1px solid rgba(18,59,79,0.05)',
             marginBottom: '4px',
           }}
         >
@@ -308,7 +308,7 @@ export function MetaDetailView({ goal: initialGoal }: Props) {
       >
         <div className="mb-3 flex items-center justify-between">
           <span className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>Progresso geral</span>
-          <span className="text-sm font-semibold" style={{ color: pct === 100 ? 'var(--color-lime)' : 'var(--foreground-muted)' }}>
+          <span className="text-sm font-semibold" style={{ color: pct === 100 ? 'var(--color-brand)' : 'var(--foreground-muted)' }}>
             {pct}%
           </span>
         </div>
@@ -360,14 +360,14 @@ export function MetaDetailView({ goal: initialGoal }: Props) {
             value={newTitle}
             onChange={e => setNewTitle(e.target.value)}
             placeholder="Nova atividade..."
-            className="flex-1 rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-lime)]"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
+            className="flex-1 rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-[var(--color-brand)]"
+            style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)', color: 'var(--foreground)' }}
           />
           <button
             type="submit"
             disabled={isPending || !newTitle.trim()}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-all disabled:opacity-40"
-            style={{ background: 'var(--color-lime)', color: '#000' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />

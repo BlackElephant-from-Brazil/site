@@ -35,7 +35,7 @@ export function Button({
 }: ButtonProps) {
   const baseStyles = `
     inline-flex items-center justify-center gap-2
-    font-semibold rounded-lg
+    font-semibold rounded-full
     transition-all duration-200
     focus:outline-none focus:ring-2 focus:ring-offset-2
     disabled:opacity-50 disabled:cursor-not-allowed
@@ -44,9 +44,9 @@ export function Button({
   const variants = {
     primary: `
       bg-[var(--button-primary-bg)] text-[var(--button-primary-text)]
-      hover:bg-[var(--button-primary-hover)]
+      hover:bg-[var(--button-primary-hover)] hover:-translate-y-0.5
       focus:ring-[var(--primary)]
-      shadow-md hover:shadow-glow
+      shadow-[var(--shadow-cta)] hover:shadow-[var(--shadow-cta-hover)]
     `,
     secondary: `
       bg-[var(--background-secondary)] text-[var(--foreground)]

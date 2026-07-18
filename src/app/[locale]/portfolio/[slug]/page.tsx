@@ -56,7 +56,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
     <main className="min-h-screen pt-24 pb-20">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/3 -left-1/4 w-1/2 h-1/2 bg-[var(--color-lime)]/5 rounded-full blur-[150px]" />
+        <div className="absolute top-1/3 -left-1/4 w-1/2 h-1/2 bg-[var(--color-brand)]/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/3 -right-1/4 w-1/2 h-1/2 bg-purple-500/5 rounded-full blur-[150px]" />
       </div>
 
@@ -72,7 +72,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
               {t('breadcrumb')}
             </Link>
             <span>/</span>
-            <span className="text-[var(--color-lime)]">{project.title}</span>
+            <span className="text-[var(--color-brand)]">{project.title}</span>
           </nav>
         </ScrollReveal>
 
@@ -80,7 +80,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <ScrollReveal delay={0.1}>
           <div className="mb-12">
             <div className="flex flex-wrap items-center gap-4 mb-4">
-              <span className="px-3 py-1 text-sm font-medium bg-[var(--color-lime)]/10 text-[var(--color-lime)] rounded-full border border-[var(--color-lime)]/30">
+              <span className="px-3 py-1 text-sm font-medium bg-[var(--color-brand)]/10 text-[var(--color-brand)] rounded-full border border-[var(--color-brand)]/30">
                 {getCategoryLabel(project.category)}
               </span>
               <span className="text-[var(--color-gray-500)] font-mono">
@@ -119,7 +119,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 text-sm font-mono text-[var(--color-lime)] bg-[var(--color-lime)]/10 rounded-lg border border-[var(--color-lime)]/20"
+                      className="px-3 py-1.5 text-sm font-mono text-[var(--color-brand)] bg-[var(--color-brand)]/10 rounded-lg border border-[var(--color-brand)]/20"
                     >
                       {tech}
                     </span>
@@ -128,12 +128,12 @@ export default async function PortfolioDetailPage({ params }: Props) {
               </div>
 
               {/* CTA */}
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-[var(--color-lime)]/10 to-transparent border border-[var(--color-lime)]/20">
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-[var(--color-brand)]/10 to-transparent border border-[var(--color-brand)]/20">
                 <h3 className="text-lg font-semibold text-white mb-2">{t('detail.cta.title')}</h3>
                 <p className="text-sm text-[var(--color-gray-400)] mb-4">{t('detail.cta.description')}</p>
                 <Link
                   href={`/${locale}/contact`}
-                  className="inline-block w-full py-3 px-6 text-center font-semibold bg-[var(--color-lime)] text-[var(--color-black)] rounded-xl hover:bg-[var(--color-lime-light)] transition-colors"
+                  className="inline-block w-full py-3 px-6 text-center font-semibold bg-[var(--color-accent)] text-[var(--color-accent-ink)] rounded-xl hover:bg-[var(--color-accent-dark)] transition-colors"
                 >
                   {t('detail.cta.button')}
                 </Link>
@@ -164,9 +164,9 @@ export default async function PortfolioDetailPage({ params }: Props) {
                   <Link
                     key={related.id}
                     href={`/${locale}/portfolio/${related.slug}`}
-                    className="group block p-6 rounded-2xl bg-[var(--color-gray-900)] border border-[var(--color-gray-800)] hover:border-[var(--color-lime)]/50 transition-all duration-300"
+                    className="group block p-6 rounded-2xl bg-[var(--color-gray-900)] border border-[var(--color-gray-800)] hover:border-[var(--color-brand)]/50 transition-all duration-300"
                   >
-                    <h3 className="text-lg font-semibold text-white group-hover:text-[var(--color-lime)] transition-colors mb-2">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-[var(--color-brand)] transition-colors mb-2">
                       {related.title}
                     </h3>
                     <p className="text-sm text-[var(--color-gray-400)] line-clamp-2">
@@ -183,7 +183,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <ScrollReveal className="mt-12">
           <Link
             href={`/${locale}/portfolio`}
-            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-lime)] transition-colors"
+            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-brand)] transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

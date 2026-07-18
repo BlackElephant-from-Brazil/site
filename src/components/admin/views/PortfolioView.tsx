@@ -213,7 +213,7 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
           <button
             onClick={openNew}
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
-            style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
           >
             + Novo Item
           </button>
@@ -309,14 +309,14 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
             </select>
           </div>
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Salvando…' : editing ? 'Salvar dados' : 'Criar item'}
             </button>
@@ -365,7 +365,7 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
                         className="block w-full overflow-hidden rounded-lg"
                         style={{
                           border: `2px solid ${isCover ? 'var(--primary)' : 'var(--card-border)'}`,
-                          boxShadow: isCover ? '0 0 12px rgba(57,255,20,0.3)' : undefined,
+                          boxShadow: isCover ? '0 0 12px rgba(31,111,107,0.3)' : undefined,
                         }}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -374,7 +374,7 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
                       {isCover && (
                         <span
                           className="absolute left-1 top-1 rounded px-1.5 py-0.5 text-[0.6rem] font-bold"
-                          style={{ background: 'var(--primary)', color: '#000' }}
+                          style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
                         >
                           CAPA
                         </span>
@@ -383,7 +383,7 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
                         type="button"
                         onClick={() => handleDeleteImage(img.id)}
                         className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full text-xs"
-                        style={{ background: 'rgba(0,0,0,0.7)', color: '#ff4d4f' }}
+                        style={{ background: 'rgba(0,0,0,0.7)', color: 'var(--color-error)' }}
                         aria-label="Excluir imagem"
                       >
                         ×
@@ -394,13 +394,13 @@ export function PortfolioView({ initialItems, projectTypes }: Props) {
               </div>
             )}
 
-            {imageError && <p className="mb-2 text-xs" style={{ color: '#ff4d4f' }}>{imageError}</p>}
+            {imageError && <p className="mb-2 text-xs" style={{ color: 'var(--color-error)' }}>{imageError}</p>}
 
             <button
               type="button"
               onClick={handleSaveCovers}
               className="w-full rounded-lg py-2 text-sm font-semibold transition-all"
-              style={{ background: 'rgba(57,255,20,0.1)', color: 'var(--primary)', border: '1px solid rgba(57,255,20,0.3)' }}
+              style={{ background: 'rgba(31,111,107,0.1)', color: 'var(--primary)', border: '1px solid rgba(31,111,107,0.3)' }}
             >
               Salvar capas
             </button>
@@ -415,7 +415,7 @@ function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => 
   return (
     <div className="flex items-center justify-end gap-2">
       <button onClick={onEdit} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
-      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: '#ff4d4f' }}>Excluir</button>
+      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--color-error)' }}>Excluir</button>
     </div>
   )
 }
