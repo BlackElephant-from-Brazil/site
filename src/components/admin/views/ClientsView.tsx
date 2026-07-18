@@ -21,7 +21,7 @@ const EMPTY_USER_FORM = { name: '', email: '', avatar_url: '' }
 
 const TYPE_LABELS: Record<ClientType, string> = { cliente: 'Cliente', parceiro: 'Parceiro' }
 const TYPE_COLORS: Record<ClientType, { bg: string; color: string; border: string }> = {
-  cliente: { bg: 'rgba(57,255,20,0.08)', color: 'var(--color-lime)', border: 'rgba(57,255,20,0.2)' },
+  cliente: { bg: 'rgba(31,111,107,0.08)', color: 'var(--color-brand)', border: 'rgba(31,111,107,0.2)' },
   parceiro: { bg: 'rgba(99,102,241,0.1)', color: '#818cf8', border: 'rgba(99,102,241,0.3)' },
 }
 
@@ -158,8 +158,8 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
             style={{
               background: 'var(--primary)',
-              color: '#000',
-              boxShadow: '0 0 16px rgba(57,255,20,0.4)',
+              color: 'var(--primary-contrast)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           >
             + Novo Cliente ou Parceiro
@@ -177,7 +177,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
             style={{
               borderColor: viewMode === mode ? 'var(--primary)' : 'var(--card-border)',
               color: viewMode === mode ? 'var(--primary)' : 'var(--foreground-muted)',
-              background: viewMode === mode ? 'rgba(57,255,20,0.07)' : 'transparent',
+              background: viewMode === mode ? 'rgba(31,111,107,0.07)' : 'transparent',
             }}
             title={mode === 'list' ? 'Lista' : 'Cards'}
           >
@@ -383,7 +383,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
           </div>
 
           {error && (
-            <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>
+            <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>
           )}
 
           <div className="flex gap-3 pt-2">
@@ -393,7 +393,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
               style={{
                 background: saving ? 'var(--card-border)' : 'var(--primary)',
-                color: '#000',
+                color: 'var(--primary-contrast)',
               }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
@@ -470,7 +470,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
           </div>
 
           {userError && (
-            <p className="text-xs" style={{ color: '#ff4d4f' }}>{userError}</p>
+            <p className="text-xs" style={{ color: 'var(--color-error)' }}>{userError}</p>
           )}
 
           <p className="text-xs" style={{ color: 'var(--foreground-muted)' }}>
@@ -484,7 +484,7 @@ export function ClientsView({ initialClients }: { initialClients: Client[] }) {
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
               style={{
                 background: userSaving ? 'var(--card-border)' : 'var(--primary)',
-                color: '#000',
+                color: 'var(--primary-contrast)',
               }}
             >
               {userSaving ? 'Salvando…' : 'Salvar'}
@@ -524,7 +524,7 @@ function RowActions({ onAddUser, onEdit, onDelete }: { onAddUser: () => void; on
       <button
         onClick={onDelete}
         className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors"
-        style={{ color: '#ff4d4f' }}
+        style={{ color: 'var(--color-error)' }}
       >
         Excluir
       </button>

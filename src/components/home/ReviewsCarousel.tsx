@@ -15,7 +15,7 @@ const REVIEWS: Review[] = [
     name: 'Marcelo Pereira',
     role: 'CEO, Logística SP',
     initial: 'M',
-    accent: '#39FF14',
+    accent: '#1F6F6B',
     text: 'Reduzimos 40% dos custos operacionais em seis meses. Equipe técnica acima da média e entregas sempre dentro do prazo combinado.',
   },
   {
@@ -50,7 +50,7 @@ const REVIEWS: Review[] = [
     name: 'Patrícia Lemos',
     role: 'Gerente de Marketing',
     initial: 'P',
-    accent: '#39FF14',
+    accent: '#1F6F6B',
     text: 'Site institucional ficou impecável. Carregamento rápido, design moderno e a página já apareceu no Google em poucas semanas.',
   },
   {
@@ -93,7 +93,7 @@ function Stars() {
           height="14"
           viewBox="0 0 24 24"
           fill="currentColor"
-          style={{ color: 'var(--color-lime)' }}
+          style={{ color: 'var(--color-accent)' }}
         >
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
@@ -107,13 +107,9 @@ function ReviewCard({ review }: { review: Review }) {
     <article
       className="flex-shrink-0 w-[320px] sm:w-[360px] md:w-[400px] p-7 rounded-2xl"
       style={{
-        background:
-          'linear-gradient(150deg, rgba(20,20,20,0.85) 0%, rgba(12,12,12,0.7) 100%)',
-        backdropFilter: 'blur(18px) saturate(150%)',
-        WebkitBackdropFilter: 'blur(18px) saturate(150%)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        boxShadow:
-          '0 16px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)',
+        background: 'var(--card-background)',
+        border: '1px solid var(--card-border)',
+        boxShadow: 'var(--shadow-soft)',
       }}
     >
       <div className="flex items-center justify-between mb-5">
@@ -142,7 +138,7 @@ function ReviewCard({ review }: { review: Review }) {
             <div
               className="text-[11.5px] mt-0.5"
               style={{
-                color: 'rgba(255,255,255,0.5)',
+                color: 'var(--foreground-subtle)',
                 fontFamily: 'var(--font-primary)',
               }}
             >
@@ -156,7 +152,7 @@ function ReviewCard({ review }: { review: Review }) {
       <p
         className="text-[14px] leading-[1.6]"
         style={{
-          color: 'rgba(255,255,255,0.78)',
+          color: 'var(--foreground-muted)',
           fontFamily: 'var(--font-primary)',
         }}
       >
@@ -188,11 +184,11 @@ export function ReviewsCarousel() {
               <span
                 aria-hidden
                 className="h-px w-10"
-                style={{ backgroundColor: 'var(--color-lime)' }}
+                style={{ backgroundColor: 'var(--color-brand)' }}
               />
               <span
                 className="text-[11px] font-bold uppercase tracking-[0.32em]"
-                style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+                style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
               >
                 O que dizem
               </span>
@@ -209,9 +205,9 @@ export function ReviewsCarousel() {
               <em
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontStyle: 'normal',
-                  fontWeight: 100,
-                  color: 'var(--color-lime)',
+                  fontStyle: 'italic',
+                  fontWeight: 400,
+                  color: 'var(--color-brand)',
                 }}
               >
                 trabalha com a gente
@@ -221,7 +217,7 @@ export function ReviewsCarousel() {
           </div>
           <p
             className="text-[15px] lg:text-[16px] max-w-md leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.55)' }}
+            style={{ color: 'var(--foreground-muted)' }}
           >
             Histórias reais de quem confiou na engenharia da BlackElephant.
           </p>

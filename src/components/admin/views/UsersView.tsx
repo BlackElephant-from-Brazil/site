@@ -110,8 +110,8 @@ export function UsersView({ initialUsers }: { initialUsers: User[] }) {
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
             style={{
               background: 'var(--primary)',
-              color: '#000',
-              boxShadow: '0 0 16px rgba(57,255,20,0.4)',
+              color: 'var(--primary-contrast)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           >
             + Novo Usuário
@@ -129,7 +129,7 @@ export function UsersView({ initialUsers }: { initialUsers: User[] }) {
             style={{
               borderColor: viewMode === mode ? 'var(--primary)' : 'var(--card-border)',
               color: viewMode === mode ? 'var(--primary)' : 'var(--foreground-muted)',
-              background: viewMode === mode ? 'rgba(57,255,20,0.07)' : 'transparent',
+              background: viewMode === mode ? 'rgba(31,111,107,0.07)' : 'transparent',
             }}
             title={mode === 'list' ? 'Lista' : 'Cards'}
           >
@@ -238,7 +238,7 @@ export function UsersView({ initialUsers }: { initialUsers: User[] }) {
             ) : (
               <div
                 className="flex h-16 w-16 items-center justify-center rounded-full text-xl font-bold"
-                style={{ background: 'rgba(57,255,20,0.15)', color: 'var(--primary)' }}
+                style={{ background: 'rgba(31,111,107,0.15)', color: 'var(--primary)' }}
               >
                 {form.name ? form.name.charAt(0).toUpperCase() : '?'}
               </div>
@@ -302,7 +302,7 @@ export function UsersView({ initialUsers }: { initialUsers: User[] }) {
           </div>
 
           {error && (
-            <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>
+            <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>
           )}
 
           {!editing && (
@@ -318,7 +318,7 @@ export function UsersView({ initialUsers }: { initialUsers: User[] }) {
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
               style={{
                 background: saving ? 'var(--card-border)' : 'var(--primary)',
-                color: '#000',
+                color: 'var(--primary-contrast)',
               }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
@@ -362,7 +362,7 @@ function Avatar({ user, size }: { user: User; size: number }) {
         width: size,
         height: size,
         borderRadius: '50%',
-        background: 'rgba(57,255,20,0.15)',
+        background: 'rgba(31,111,107,0.15)',
         color: 'var(--primary)',
         display: 'flex',
         alignItems: 'center',
@@ -383,9 +383,9 @@ function RoleBadge({ role }: { role: UserRole }) {
     <span
       className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider"
       style={{
-        background: isAdmin ? 'rgba(57,255,20,0.12)' : 'rgba(148,163,184,0.12)',
+        background: isAdmin ? 'rgba(31,111,107,0.12)' : 'rgba(148,163,184,0.12)',
         color: isAdmin ? 'var(--primary)' : 'var(--foreground-muted)',
-        border: `1px solid ${isAdmin ? 'rgba(57,255,20,0.25)' : 'var(--card-border)'}`,
+        border: `1px solid ${isAdmin ? 'rgba(31,111,107,0.25)' : 'var(--card-border)'}`,
       }}
     >
       {role}
@@ -406,7 +406,7 @@ function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => 
       <button
         onClick={onDelete}
         className="rounded px-2 py-1 text-xs transition-colors"
-        style={{ color: '#ff4d4f' }}
+        style={{ color: 'var(--color-error)' }}
       >
         Excluir
       </button>

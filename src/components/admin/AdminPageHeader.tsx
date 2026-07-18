@@ -9,46 +9,42 @@ interface AdminPageHeaderProps {
 export function AdminPageHeader({ title, subtitle, action }: AdminPageHeaderProps) {
   return (
     <div style={{ marginBottom: '2rem' }}>
-      {/* gradient banner — contained with rounded corners */}
+      {/* banner navy → teal com título branco (padrão de seção escura da marca) */}
       <div
         style={{
           position: 'relative',
           overflow: 'hidden',
           padding: '2.25rem 2rem 1.75rem',
           borderRadius: '1rem',
-          border: '1px solid rgba(57,255,20,0.18)',
-          boxShadow: '0 0 40px rgba(57,255,20,0.10), 0 0 80px rgba(57,255,20,0.05)',
-          background:
-            'linear-gradient(120deg, rgba(57,255,20,0.10) 0%, rgba(57,255,20,0.03) 45%, transparent 70%)',
+          boxShadow: 'var(--shadow-soft)',
+          background: 'linear-gradient(120deg, #123B4F 0%, #1F6F6B 100%)',
         }}
       >
-        {/* glow orb */}
+        {/* grão sutil */}
         <div
+          aria-hidden
           style={{
             position: 'absolute',
-            top: '-60px',
-            left: '-40px',
-            width: '280px',
-            height: '280px',
-            borderRadius: '50%',
-            background: 'var(--primary)',
-            opacity: 0.07,
-            filter: 'blur(70px)',
+            inset: 0,
+            opacity: 0.06,
+            mixBlendMode: 'overlay',
             pointerEvents: 'none',
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>\")",
           }}
         />
-        {/* second smaller orb for depth */}
+        {/* orb âmbar decorativo */}
         <div
           style={{
             position: 'absolute',
-            top: '10px',
-            left: '60px',
-            width: '120px',
-            height: '120px',
+            top: '-70px',
+            right: '-30px',
+            width: '260px',
+            height: '260px',
             borderRadius: '50%',
-            background: 'var(--primary)',
-            opacity: 0.06,
-            filter: 'blur(40px)',
+            background: 'var(--color-accent)',
+            opacity: 0.12,
+            filter: 'blur(80px)',
             pointerEvents: 'none',
           }}
         />
@@ -59,10 +55,7 @@ export function AdminPageHeader({ title, subtitle, action }: AdminPageHeaderProp
             fontSize: '1.6rem',
             fontWeight: 700,
             letterSpacing: '-0.01em',
-            background: 'linear-gradient(90deg, #fff 0%, rgba(57,255,20,0.85) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            color: '#ffffff',
             position: 'relative',
             margin: 0,
           }}
@@ -75,7 +68,7 @@ export function AdminPageHeader({ title, subtitle, action }: AdminPageHeaderProp
             style={{
               fontFamily: 'var(--font-primary)',
               fontSize: '0.8125rem',
-              color: 'var(--foreground-muted)',
+              color: 'rgba(255,255,255,0.75)',
               marginTop: '0.35rem',
               position: 'relative',
             }}

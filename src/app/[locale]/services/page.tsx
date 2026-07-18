@@ -128,7 +128,7 @@ function ServicesGrid() {
               
               <div className="relative z-10">
                 <div 
-                  className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[var(--primary)] group-hover:text-[var(--color-black)]"
+                  className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[var(--primary)] group-hover:text-[var(--primary-contrast)]"
                   style={{ 
                     backgroundColor: 'var(--primary-soft)',
                     color: 'var(--primary)',
@@ -181,10 +181,10 @@ function CTASection() {
           </p>
           <Link
             href="/contact?tab=consultation"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:shadow-glow"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
             style={{
               backgroundColor: 'var(--primary)',
-              color: 'var(--color-black)',
+              color: 'var(--primary-contrast)',
             }}
           >
             {t('ctaPrimary')}

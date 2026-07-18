@@ -11,7 +11,7 @@ import type { Client, ClientType, ProjectType, ProjectWithRefs } from '@/types'
 
 const CLIENT_TYPE_LABELS: Record<ClientType, string> = { cliente: 'Cliente', parceiro: 'Parceiro' }
 const CLIENT_TYPE_COLORS: Record<ClientType, { bg: string; color: string; border: string }> = {
-  cliente: { bg: 'rgba(57,255,20,0.08)', color: 'var(--color-lime)', border: 'rgba(57,255,20,0.2)' },
+  cliente: { bg: 'rgba(31,111,107,0.08)', color: 'var(--color-brand)', border: 'rgba(31,111,107,0.2)' },
   parceiro: { bg: 'rgba(99,102,241,0.1)', color: '#818cf8', border: 'rgba(99,102,241,0.3)' },
 }
 
@@ -37,8 +37,8 @@ function Switch({ checked, onChange }: { checked: boolean; onChange: (v: boolean
         width: '40px',
         height: '22px',
         borderRadius: '11px',
-        background: checked ? 'var(--primary)' : 'rgba(255,255,255,0.12)',
-        boxShadow: checked ? '0 0 10px rgba(57,255,20,0.4)' : undefined,
+        background: checked ? 'var(--primary)' : 'rgba(18,59,79,0.10)',
+        boxShadow: checked ? '0 0 10px rgba(31,111,107,0.4)' : undefined,
         border: 'none',
         cursor: 'pointer',
         padding: 0,
@@ -55,7 +55,7 @@ function Switch({ checked, onChange }: { checked: boolean; onChange: (v: boolean
           width: '18px',
           height: '18px',
           borderRadius: '50%',
-          background: checked ? '#000' : 'rgba(255,255,255,0.5)',
+          background: '#fff',
           transition: 'left 0.2s',
           display: 'block',
         }}
@@ -231,8 +231,8 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
             style={{
               background: 'var(--primary)',
-              color: '#000',
-              boxShadow: '0 0 16px rgba(57,255,20,0.4)',
+              color: 'var(--primary-contrast)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           >
             + Novo Projeto
@@ -250,7 +250,7 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
             style={{
               borderColor: viewMode === mode ? 'var(--primary)' : 'var(--card-border)',
               color: viewMode === mode ? 'var(--primary)' : 'var(--foreground-muted)',
-              background: viewMode === mode ? 'rgba(57,255,20,0.07)' : 'transparent',
+              background: viewMode === mode ? 'rgba(31,111,107,0.07)' : 'transparent',
             }}
           >
             {mode === 'list' ? (
@@ -290,7 +290,7 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
                   <td className="px-4 py-3">
                     <span
                       className="rounded px-2 py-0.5 text-xs font-bold tracking-widest"
-                      style={{ background: 'rgba(57,255,20,0.1)', color: 'var(--primary)', fontFamily: 'var(--font-title)' }}
+                      style={{ background: 'rgba(31,111,107,0.1)', color: 'var(--primary)', fontFamily: 'var(--font-title)' }}
                     >
                       {p.acronym}
                     </span>
@@ -302,9 +302,9 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
                         <span
                           className="rounded px-1.5 py-0.5 text-xs font-semibold"
                           style={{
-                            background: 'rgba(57,255,20,0.08)',
-                            color: 'var(--color-lime)',
-                            border: '1px solid rgba(57,255,20,0.2)',
+                            background: 'rgba(31,111,107,0.08)',
+                            color: 'var(--color-brand)',
+                            border: '1px solid rgba(31,111,107,0.2)',
                           }}
                         >
                           Interno
@@ -338,7 +338,7 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
               <div className="flex items-start justify-between">
                 <span
                   className="rounded px-2 py-0.5 text-xs font-bold tracking-widest"
-                  style={{ background: 'rgba(57,255,20,0.1)', color: 'var(--primary)', fontFamily: 'var(--font-title)' }}
+                  style={{ background: 'rgba(31,111,107,0.1)', color: 'var(--primary)', fontFamily: 'var(--font-title)' }}
                 >
                   {p.acronym}
                 </span>
@@ -391,7 +391,7 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
           {/* projeto interno switch */}
           <div
             className="flex items-center justify-between rounded-lg px-4 py-3"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)' }}
+            style={{ background: 'rgba(18,59,79,0.05)', border: '1px solid var(--card-border)' }}
           >
             <div>
               <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
@@ -471,7 +471,7 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
                 )}
               </label>
               <input
-                style={{ ...inputStyle, borderColor: isRecurring ? 'rgba(57,255,20,0.35)' : undefined }}
+                style={{ ...inputStyle, borderColor: isRecurring ? 'rgba(31,111,107,0.35)' : undefined }}
                 type="number"
                 step="0.01"
                 min="0"
@@ -482,14 +482,14 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
             </div>
           )}
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
             </button>
@@ -605,14 +605,14 @@ export function ProjectsView({ initialProjects, clients: initialClients, project
                 />
               </div>
 
-              {clientError && <p className="text-xs" style={{ color: '#ff4d4f' }}>{clientError}</p>}
+              {clientError && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{clientError}</p>}
 
               <div className="flex gap-3 pt-1">
                 <button
                   type="submit"
                   disabled={clientSaving}
                   className="flex-1 rounded-lg py-2.5 text-sm font-semibold"
-                  style={{ background: clientSaving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+                  style={{ background: clientSaving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
                 >
                   {clientSaving ? 'Salvando…' : 'Salvar'}
                 </button>
@@ -637,7 +637,7 @@ function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => 
   return (
     <div className="flex items-center gap-2">
       <button onClick={onEdit} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
-      <button onClick={onDelete} className="rounded px-2 py-1 text-xs" style={{ color: '#ff4d4f' }}>Excluir</button>
+      <button onClick={onDelete} className="rounded px-2 py-1 text-xs" style={{ color: 'var(--color-error)' }}>Excluir</button>
     </div>
   )
 }

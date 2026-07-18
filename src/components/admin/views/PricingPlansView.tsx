@@ -136,7 +136,7 @@ export function PricingPlansView({ initialPlans, projectTypes }: Props) {
           <button
             onClick={openNew}
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
-            style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
           >
             + Novo Plano
           </button>
@@ -218,7 +218,7 @@ export function PricingPlansView({ initialPlans, projectTypes }: Props) {
                 type="button"
                 onClick={addBenefit}
                 className="shrink-0 rounded-lg px-3 py-2 text-sm font-semibold"
-                style={{ background: 'rgba(57,255,20,0.1)', color: 'var(--primary)', border: '1px solid rgba(57,255,20,0.3)' }}
+                style={{ background: 'rgba(31,111,107,0.1)', color: 'var(--primary)', border: '1px solid rgba(31,111,107,0.3)' }}
               >
                 + add
               </button>
@@ -235,7 +235,7 @@ export function PricingPlansView({ initialPlans, projectTypes }: Props) {
                     <div className="flex items-center gap-1">
                       <button type="button" onClick={() => moveBenefit(i, -1)} disabled={i === 0} className="text-xs" style={{ color: 'var(--foreground-muted)', opacity: i === 0 ? 0.3 : 1 }}>↑</button>
                       <button type="button" onClick={() => moveBenefit(i, 1)} disabled={i === benefits.length - 1} className="text-xs" style={{ color: 'var(--foreground-muted)', opacity: i === benefits.length - 1 ? 0.3 : 1 }}>↓</button>
-                      <button type="button" onClick={() => removeBenefit(i)} className="text-xs" style={{ color: '#ff4d4f' }}>×</button>
+                      <button type="button" onClick={() => removeBenefit(i)} className="text-xs" style={{ color: 'var(--color-error)' }}>×</button>
                     </div>
                   </li>
                 ))}
@@ -243,14 +243,14 @@ export function PricingPlansView({ initialPlans, projectTypes }: Props) {
             )}
           </div>
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
             </button>
@@ -273,7 +273,7 @@ function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => 
   return (
     <div className="flex items-center justify-end gap-2">
       <button onClick={onEdit} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
-      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: '#ff4d4f' }}>Excluir</button>
+      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--color-error)' }}>Excluir</button>
     </div>
   )
 }

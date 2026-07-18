@@ -19,7 +19,7 @@ function Asterisk() {
       aria-hidden
       className="inline-block mx-4 lg:mx-7 text-[1.5rem] lg:text-[2rem]"
       style={{
-        color: 'var(--color-lime)',
+        color: 'var(--color-brand)',
         transform: 'translateY(-0.05em)',
         opacity: 0.85,
       }}
@@ -38,8 +38,8 @@ export function SectorsMarquee() {
       className="relative py-20 lg:py-28 overflow-hidden"
       style={{
         backgroundColor: 'var(--background-secondary)',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid var(--color-line)',
+        borderBottom: '1px solid var(--color-line)',
       }}
     >
       {/* Background lime atmosphere */}
@@ -48,7 +48,7 @@ export function SectorsMarquee() {
         className="absolute inset-0 pointer-events-none opacity-[0.06]"
         style={{
           background:
-            'radial-gradient(ellipse at center, var(--color-lime) 0%, transparent 70%)',
+            'radial-gradient(ellipse at center, var(--color-brand) 0%, transparent 70%)',
         }}
       />
 
@@ -63,11 +63,11 @@ export function SectorsMarquee() {
             <span
               aria-hidden
               className="h-px w-10"
-              style={{ backgroundColor: 'var(--color-lime)' }}
+              style={{ backgroundColor: 'var(--color-brand)' }}
             />
             <span
               className="text-[11px] font-bold uppercase tracking-[0.32em]"
-              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
             >
               Verticais
             </span>
@@ -100,7 +100,7 @@ export function SectorsMarquee() {
                   fontFamily: sector.style === 'italic' ? 'var(--font-serif)' : 'var(--font-title)',
                   fontStyle: 'normal',
                   fontWeight: sector.style === 'italic' ? 100 : 700,
-                  color: sector.style === 'italic' ? 'var(--color-lime)' : 'var(--foreground)',
+                  color: sector.style === 'italic' ? 'var(--color-brand)' : 'var(--foreground)',
                 }}
               >
                 {sector.name}

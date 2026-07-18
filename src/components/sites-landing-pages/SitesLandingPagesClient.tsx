@@ -39,9 +39,9 @@ function SectionTitle({ segments }: { segments: readonly TitleSegment[] }) {
           );
         }
         if (seg.variant === 'lime') {
-          return <span key={i} className="font-black text-[var(--color-lime)]">{seg.text}</span>;
+          return <span key={i} className="font-black text-[var(--color-brand)]">{seg.text}</span>;
         }
-        return <span key={i} className="font-black text-white">{seg.text}</span>;
+        return <span key={i} className="font-black text-[var(--foreground)]">{seg.text}</span>;
       })}
     </>
   );
@@ -642,11 +642,11 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
       initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
       animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative aspect-[4/3] select-none overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
+      className="relative aspect-[4/3] select-none overflow-hidden rounded-[2rem] border border-[var(--color-line)] shadow-2xl shadow-black/50 lg:aspect-auto lg:min-h-[460px]"
     >
       <Image src="/images/site-new.png" alt="Depois" fill className="object-cover object-top" sizes="(min-width: 1024px) 50vw, 100vw" priority draggable={false} />
       <div className="pointer-events-none absolute right-4 top-4 z-10">
-        <span className="rounded-xl bg-[var(--color-lime)] px-4 py-2 text-sm font-black uppercase tracking-widest text-black">Depois</span>
+        <span className="rounded-xl bg-[var(--color-accent)] px-4 py-2 text-sm font-black uppercase tracking-widest text-[var(--color-accent-ink)]">Depois</span>
       </div>
       <div
         className="absolute inset-0 z-20"
@@ -669,7 +669,7 @@ function BeforeAfterSlider({ reduceMotion }: { reduceMotion: boolean | null }) {
 
 function HeroMarquee({ items, reduceMotion }: { items: readonly string[]; reduceMotion: boolean | null }) {
   return (
-    <div className="relative overflow-hidden bg-[var(--color-lime)]" role="marquee" aria-label="Destaques">
+    <div className="relative overflow-hidden bg-[var(--color-accent)]" role="marquee" aria-label="Destaques">
       <ul className="sr-only">{items.map((item) => <li key={item}>{item}</li>)}</ul>
       <motion.div
         aria-hidden
@@ -681,8 +681,8 @@ function HeroMarquee({ items, reduceMotion }: { items: readonly string[]; reduce
           <div key={track} className="flex items-center gap-0 pr-0">
             {items.map((item) => (
               <span key={`${track}-${item}`} className="flex items-center">
-                <span className="whitespace-nowrap px-5 text-[11px] font-black uppercase tracking-[0.22em] text-black">{item}</span>
-                <span className="text-[8px] text-black/40">◆</span>
+                <span className="whitespace-nowrap px-5 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--color-accent-ink)]">{item}</span>
+                <span className="text-[8px] text-[var(--color-accent-ink)]/40">◆</span>
               </span>
             ))}
           </div>
@@ -720,14 +720,14 @@ function HeroCounter({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
   return (
     <div ref={ref} className="flex items-start gap-3 pt-1">
       <div className="flex shrink-0 items-center gap-2 pt-0.5">
-        <div className="h-px w-6 bg-[var(--color-lime)]/35" aria-hidden />
-        <span className="text-xl font-black text-white/80" aria-label={`${count}+ ${copy.heroCounter}`}>
-          {count}<span className="text-[var(--color-lime)]">+</span>
+        <div className="h-px w-6 bg-[var(--color-brand)]/35" aria-hidden />
+        <span className="text-xl font-black text-[var(--foreground)]" aria-label={`${count}+ ${copy.heroCounter}`}>
+          {count}<span className="text-[var(--color-brand)]">+</span>
         </span>
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-sm text-white/42">{copy.heroCounter}</span>
-        <span className="text-xs font-semibold text-[var(--color-lime)]/50">{copy.heroAvgDelivery}</span>
+        <span className="text-sm text-[var(--foreground-subtle)]">{copy.heroCounter}</span>
+        <span className="text-xs font-semibold text-[var(--color-brand)]/50">{copy.heroAvgDelivery}</span>
       </div>
     </div>
   );
@@ -739,9 +739,9 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
   return (
     <section id="inicio" className="relative scroll-mt-24 overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-24 -top-10 h-[500px] w-[500px] rounded-full opacity-[0.07] blur-[160px]" style={{ backgroundColor: 'var(--color-lime)' }} />
+        <div className="absolute -right-24 -top-10 h-[500px] w-[500px] rounded-full opacity-[0.07] blur-[160px]" style={{ backgroundColor: 'var(--color-brand)' }} />
         <div className="absolute -left-20 bottom-0 h-[380px] w-[380px] rounded-full bg-fuchsia-500/8 blur-[160px]" />
-        <div className="absolute inset-0 opacity-[0.028]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
+        <div className="absolute inset-0 opacity-[0.028]" style={{ backgroundImage: 'linear-gradient(rgba(18,59,79,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(18,59,79,0.05) 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
       </div>
 
       <div className="site-container relative z-10 pb-12 pt-12 lg:pb-16 lg:pt-20">
@@ -754,14 +754,14 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
             className="flex flex-col gap-5"
           >
             {/* Eyebrow — pill com dot animado */}
-            <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[var(--color-lime)]/20 bg-[var(--color-lime)]/[0.05] px-3.5 py-1.5 backdrop-blur-sm">
+            <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[var(--color-brand)]/20 bg-[var(--color-brand)]/[0.05] px-3.5 py-1.5 backdrop-blur-sm">
               <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden>
                 {!reduceMotion && (
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-lime)]/40" style={{ animationDuration: '2s' }} />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-brand)]/40" style={{ animationDuration: '2s' }} />
                 )}
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-lime)]" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
               </span>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-lime)]/75">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--color-brand)]/75">
                 <span className="font-medium">{copy.eyebrowLead}</span>
                 <span className="font-black">{copy.eyebrowStrong}</span>
               </p>
@@ -775,7 +775,7 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
               {copy.heroTitle.split('\n').map((line, i, arr) => {
                 if (arr.length === 3) {
                   if (i === 0) return (
-                    <span key={i} className="block text-white" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
+                    <span key={i} className="block text-[var(--foreground)]" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
                       {line}
                     </span>
                   );
@@ -786,19 +786,19 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
                     const hasPeriod = rawWord.endsWith('.');
                     const lastWord = hasPeriod ? rawWord.slice(0, -1) : rawWord;
                     return (
-                      <span key={i} className="block font-black text-white">
-                        {before}<span className="text-[var(--color-lime)]">{lastWord}</span>{hasPeriod && '.'}
+                      <span key={i} className="block font-black text-[var(--foreground)]">
+                        {before}<span className="text-[var(--color-brand)]">{lastWord}</span>{hasPeriod && '.'}
                       </span>
                     );
                   }
                   return (
-                    <span key={i} className="block font-black text-white">
+                    <span key={i} className="block font-black text-[var(--foreground)]">
                       {line}
                     </span>
                   );
                 }
                 return (
-                  <span key={i} className={`block font-black ${i === arr.length - 1 ? 'text-[var(--color-lime)]' : ''}`}>
+                  <span key={i} className={`block font-black ${i === arr.length - 1 ? 'text-[var(--color-brand)]' : ''}`}>
                     {line}
                   </span>
                 );
@@ -811,7 +811,7 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
             </div>
 
             {/* Subtexto */}
-            <p className="max-w-md text-sm leading-[1.7] text-white/56 sm:text-base">
+            <p className="max-w-md text-sm leading-[1.7] text-[var(--foreground-muted)] sm:text-base">
               {copy.heroText}
             </p>
 
@@ -823,7 +823,7 @@ function HeroSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: boo
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={reportContatoWhatsappConversion}
-                  className="inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-8 text-sm font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_36px_rgba(57,255,20,0.28)] active:scale-[0.97] sm:w-auto sm:text-base"
+                  className="inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[var(--color-accent)] px-8 text-sm font-black text-[var(--color-accent-ink)] transition-all duration-300 hover:bg-[var(--color-accent-dark)] hover:shadow-[var(--shadow-cta-hover)] active:scale-[0.97] sm:w-auto sm:text-base"
                 >
                   {copy.whatsapp}
                 </a>
@@ -856,7 +856,7 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
     <section className="relative py-20 lg:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-red-500/6 blur-[120px]" />
-        <div className="absolute right-0 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[var(--color-lime)]/6 blur-[120px]" />
+        <div className="absolute right-0 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[var(--color-brand)]/6 blur-[120px]" />
       </div>
 
       <div className="site-container relative">
@@ -869,8 +869,8 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
         >
           {/* Eyebrow editorial — linha + texto (padrão home) */}
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.problemEyebrow}
             </span>
           </div>
@@ -880,9 +880,9 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
           </h2>
 
           <div className="mt-6">
-            <p className="text-base leading-[1.75] text-white/58 lg:text-lg">
+            <p className="text-base leading-[1.75] text-[var(--foreground-muted)] lg:text-lg">
               {copy.problemParagraph.pre}
-              <strong className="font-black text-white">{copy.problemParagraph.strong}</strong>
+              <strong className="font-black text-[var(--foreground)]">{copy.problemParagraph.strong}</strong>
               {copy.problemParagraph.mid}
               <em style={{ fontStyle: 'italic', fontFamily: 'var(--font-serif)', fontWeight: 300, color: 'rgba(255,255,255,0.85)' }}>{copy.problemParagraph.em}</em>
               {copy.problemParagraph.end}
@@ -912,21 +912,21 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
                   </div>
                   <span className="text-[10px] font-black uppercase tracking-[0.22em] text-red-400/80">{copy.problemBeforeLabel}</span>
                 </div>
-                <p className="text-sm leading-[1.65] text-white/50">{before}</p>
+                <p className="text-sm leading-[1.65] text-[var(--foreground-subtle)]">{before}</p>
               </div>
               {/* Divisor */}
               <div className="mx-5 border-t border-white/[0.07]" />
               {/* DEPOIS */}
               <div className="flex flex-col gap-3 p-5">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/15">
-                    <svg className="h-3.5 w-3.5 text-[var(--color-lime)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/15">
+                    <svg className="h-3.5 w-3.5 text-[var(--color-brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-lime)]/80">{copy.problemAfterLabel}</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--color-brand)]/80">{copy.problemAfterLabel}</span>
                 </div>
-                <p className="text-sm font-semibold leading-[1.65] text-white/85">{after}</p>
+                <p className="text-sm font-semibold leading-[1.65] text-[var(--foreground)]">{after}</p>
               </div>
             </motion.div>
           ))}
@@ -941,7 +941,7 @@ function ProblemSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
 function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; reduceMotion: boolean | null; calendlyUrl: string }) {
   return (
     <section id="oferta" className="relative py-20 lg:py-28">
-      <div aria-hidden className="absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-[var(--color-lime)]/8 blur-[120px]" />
+      <div aria-hidden className="absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-[var(--color-brand)]/8 blur-[120px]" />
       <div className="site-container relative">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 18 }}
@@ -950,10 +950,10 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10 max-w-3xl lg:mb-14"
         >
-          <h2 className="text-4xl font-black leading-[1.02] text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
+          <h2 className="text-4xl font-black leading-[1.02] text-[var(--foreground)] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
             {copy.productsTitle}
           </h2>
-          <p className="mt-6 text-lg leading-[1.7] text-white/64">{copy.productsText}</p>
+          <p className="mt-6 text-lg leading-[1.7] text-[var(--foreground-muted)]">{copy.productsText}</p>
         </motion.div>
 
         <motion.article
@@ -961,19 +961,19 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-2xl rounded-[1.75rem] border border-[var(--color-lime)]/35 bg-[var(--color-lime)]/[0.07] p-6 lg:p-10"
+          className="mx-auto max-w-2xl rounded-[1.75rem] border border-[var(--color-brand)]/35 bg-[var(--color-brand)]/[0.07] p-6 lg:p-10"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h3 className="text-2xl font-black text-white">{copy.landingName}</h3>
-              <p className="mt-3 max-w-lg text-sm leading-[1.7] text-white/62">{copy.landingDescription}</p>
+              <h3 className="text-2xl font-black text-[var(--foreground)]">{copy.landingName}</h3>
+              <p className="mt-3 max-w-lg text-sm leading-[1.7] text-[var(--foreground-muted)]">{copy.landingDescription}</p>
             </div>
-            <div className="shrink-0 text-4xl font-black text-[var(--color-lime)]">{copy.landingPrice}</div>
+            <div className="shrink-0 text-4xl font-black text-[var(--color-brand)]">{copy.landingPrice}</div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-lime)]/30 bg-[var(--color-lime)]/10 px-3.5 py-2 text-xs font-bold text-[var(--color-lime)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-lime)]" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-brand)]/30 bg-[var(--color-brand)]/10 px-3.5 py-2 text-xs font-bold text-[var(--color-brand)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
               {copy.deliveryBadge}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3.5 py-2 text-xs font-bold text-fuchsia-200">
@@ -985,8 +985,8 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
           {/* Itens incluídos com benefício */}
           <div className="mt-7 grid gap-3 sm:grid-cols-2">
             {copy.productIncludes.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 text-sm font-semibold text-white/76">
-                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--color-lime)]" />
+              <div key={i} className="flex items-start gap-3 text-sm font-semibold text-[var(--foreground)]">
+                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)]" />
                 {item}
               </div>
             ))}
@@ -1005,7 +1005,7 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
               href={LINKS.landingCheckout}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-lime)] px-8 text-sm font-bold text-black transition-all duration-300 active:scale-95 hover:bg-[var(--color-lime-light)]"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-accent)] px-8 text-sm font-bold text-[var(--color-accent-ink)] transition-all duration-300 active:scale-95 hover:bg-[var(--color-accent-dark)]"
             >
               {copy.buyLanding}
             </a>
@@ -1014,7 +1014,7 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
               target="_blank"
               rel="noopener noreferrer"
               onClick={reportContatoWhatsappConversion}
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-6 text-sm font-bold text-white transition-all duration-300 active:scale-95 hover:border-white/30"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--card-background)] px-6 text-sm font-bold text-[var(--foreground)] transition-all duration-300 active:scale-95 hover:border-[var(--color-line)]"
             >
               {copy.whatsapp}
             </a>
@@ -1022,7 +1022,7 @@ function OfferSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; red
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/[0.05] px-6 text-sm font-bold text-white transition-all duration-300 active:scale-95 hover:border-white/30"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--color-line)] bg-[var(--card-background)] px-6 text-sm font-bold text-[var(--foreground)] transition-all duration-300 active:scale-95 hover:border-[var(--color-line)]"
             >
               {copy.calendly}
             </a>
@@ -1066,14 +1066,14 @@ function StatCounter({
 
   return (
     <div ref={ref} className="flex flex-col gap-2 px-6 py-8 lg:px-10 lg:py-10" style={{ backgroundColor: 'var(--background-secondary)' }}>
-      <div aria-hidden className="mb-1 h-px w-8" style={{ backgroundColor: index === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.15)' }} />
+      <div aria-hidden className="mb-1 h-px w-8" style={{ backgroundColor: index === 0 ? 'var(--color-brand)' : 'var(--color-line)' }} />
       <span
         className="text-[2.5rem] font-black leading-none lg:text-[3.5rem]"
-        style={{ fontFamily: 'var(--font-title)', color: index === 0 ? 'var(--color-lime)' : 'white' }}
+        style={{ fontFamily: 'var(--font-title)', color: index === 0 ? 'var(--color-brand)' : 'white' }}
       >
         {displayed}
       </span>
-      <span className="text-sm leading-snug text-white/52">{label}</span>
+      <span className="text-sm leading-snug text-[var(--foreground-muted)]">{label}</span>
     </div>
   );
 }
@@ -1082,7 +1082,7 @@ function StatsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bo
   return (
     <section id="quem-somos" className="relative scroll-mt-24 py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-lime)]/6 blur-[160px]" />
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand)]/6 blur-[160px]" />
       </div>
       <div className="site-container relative">
         <motion.div
@@ -1093,8 +1093,8 @@ function StatsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bo
           className="mb-12 max-w-2xl"
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.statsEyebrow}
             </span>
           </div>
@@ -1103,7 +1103,7 @@ function StatsSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bo
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-px border border-white/8 lg:grid-cols-4" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+        <div className="grid grid-cols-2 gap-px border border-[var(--color-line)] lg:grid-cols-4" style={{ backgroundColor: 'var(--color-line)' }}>
           {copy.stats.map((stat, i) => (
             <StatCounter
               key={stat.label}
@@ -1139,7 +1139,7 @@ function IncludedSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
   return (
     <section id="beneficios" className="relative scroll-mt-24 py-20 lg:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 top-1/3 h-[400px] w-[400px] rounded-full bg-[var(--color-lime)]/5 blur-[150px]" />
+        <div className="absolute -left-20 top-1/3 h-[400px] w-[400px] rounded-full bg-[var(--color-brand)]/5 blur-[150px]" />
       </div>
       <div className="site-container relative">
         <motion.div
@@ -1150,15 +1150,15 @@ function IncludedSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
           className="mb-12 max-w-3xl"
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.includedEyebrow}
             </span>
           </div>
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
             <SectionTitle segments={copy.includedTitleParts} />
           </h2>
-          <p className="mt-5 max-w-xl text-base leading-[1.7] text-white/56">
+          <p className="mt-5 max-w-xl text-base leading-[1.7] text-[var(--foreground-muted)]">
             {copy.includedParagraph}
           </p>
         </motion.div>
@@ -1173,13 +1173,13 @@ function IncludedSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex w-[260px] shrink-0 flex-col gap-3 rounded-2xl border border-white/8 bg-white/[0.03] p-5 sm:w-auto"
+                className="flex w-[260px] shrink-0 flex-col gap-3 rounded-2xl border border-[var(--color-line)] bg-[var(--card-background)] p-5 sm:w-auto"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-lime)]/25 bg-[var(--color-lime)]/10 text-[var(--color-lime)]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-brand)]/25 bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
                   {INCLUDED_ICONS[i]}
                 </div>
-                <h3 className="text-sm font-black text-white">{title}</h3>
-                <p className="text-xs leading-[1.7] text-white/52">{text}</p>
+                <h3 className="text-sm font-black text-[var(--foreground)]">{title}</h3>
+                <p className="text-xs leading-[1.7] text-[var(--foreground-muted)]">{text}</p>
               </motion.div>
             ))}
           </div>
@@ -1195,7 +1195,7 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
   return (
     <section id="diferenciais" className="relative scroll-mt-24 py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[var(--color-lime)]/5 blur-[140px]" />
+        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-[var(--color-brand)]/5 blur-[140px]" />
       </div>
 
       <div className="site-container relative">
@@ -1206,8 +1206,8 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.whyEyebrow}
             </span>
           </div>
@@ -1221,8 +1221,8 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
               >
                 <SectionTitle segments={copy.whyTitleParts} />
               </h2>
-              <div className="mt-5 h-px w-12" style={{ background: 'linear-gradient(90deg, var(--color-lime), transparent)' }} aria-hidden />
-              <p className="mt-5 text-base leading-[1.7] text-white/60">{copy.whyText}</p>
+              <div className="mt-5 h-px w-12" style={{ background: 'linear-gradient(90deg, var(--color-brand), transparent)' }} aria-hidden />
+              <p className="mt-5 text-base leading-[1.7] text-[var(--foreground-muted)]">{copy.whyText}</p>
             </div>
 
             {/* Coluna direita: lista numerada /01–/04 */}
@@ -1238,13 +1238,13 @@ function WhySection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
                 >
                   <span
                     className="mt-0.5 shrink-0 text-[11px] font-black tabular-nums tracking-[0.2em]"
-                    style={{ fontFamily: 'var(--font-title)', color: i === 0 ? 'var(--color-lime)' : 'rgba(255,255,255,0.28)' }}
+                    style={{ fontFamily: 'var(--font-title)', color: i === 0 ? 'var(--color-brand)' : 'rgba(255,255,255,0.28)' }}
                   >
                     /{String(i + 1).padStart(2, '0')}
                   </span>
                   <div>
-                    <p className="text-sm font-black text-white">{label}</p>
-                    <p className="mt-1 text-sm leading-[1.65] text-white/52">{text}</p>
+                    <p className="text-sm font-black text-[var(--foreground)]">{label}</p>
+                    <p className="mt-1 text-sm leading-[1.65] text-[var(--foreground-muted)]">{text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -1280,15 +1280,15 @@ function AudienceSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
           className="mb-12 max-w-3xl"
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.audienceEyebrow}
             </span>
           </div>
           <h2 className="text-4xl leading-[1.02] sm:text-5xl lg:text-[3.25rem]" style={{ fontFamily: 'var(--font-title)' }}>
             <SectionTitle segments={copy.audienceTitleParts} />
           </h2>
-          <p className="mt-5 text-base leading-[1.7] text-white/52">
+          <p className="mt-5 text-base leading-[1.7] text-[var(--foreground-muted)]">
             {copy.audienceParagraph}
           </p>
         </motion.div>
@@ -1301,14 +1301,14 @@ function AudienceSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion:
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.4, delay: i * 0.07 }}
-              className="flex flex-col gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition-colors hover:border-[var(--color-lime)]/20 hover:bg-[var(--color-lime)]/[0.03]"
+              className="flex flex-col gap-4 rounded-2xl border border-[var(--color-line)] bg-[var(--card-background)] p-6 transition-colors hover:border-[var(--color-brand)]/20 hover:bg-[var(--color-brand)]/[0.03]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/70">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[var(--color-line)] bg-[var(--card-background)] text-[var(--foreground-muted)]">
                 {AUDIENCE_ICONS[i]}
               </div>
               <div>
-                <h3 className="text-base font-black text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-[1.65] text-white/52">{text}</p>
+                <h3 className="text-base font-black text-[var(--foreground)]">{title}</h3>
+                <p className="mt-2 text-sm leading-[1.65] text-[var(--foreground-muted)]">{text}</p>
               </div>
             </motion.div>
           ))}
@@ -1356,8 +1356,8 @@ function RecentWorkSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotio
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.recentWorkEyebrow}
             </span>
           </div>
@@ -1376,7 +1376,7 @@ function RecentWorkSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotio
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.4, delay: Math.min(i, 8) * 0.05 }}
-              className="relative aspect-[1837/960] w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 sm:w-[340px] lg:w-[400px]"
+              className="relative aspect-[1837/960] w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[var(--color-line)] sm:w-[340px] lg:w-[400px]"
             >
               <Image
                 src={`/portfolio/lps/${file}`}
@@ -1412,8 +1412,8 @@ function TestimonialsSection({
       <div aria-hidden className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-fuchsia-500/6 blur-[140px]" />
       <div className="site-container mb-10">
         <div className="mb-6 flex items-center gap-3">
-          <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-          <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+          <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+          <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
             {copy.testimonialsEyebrow}
           </span>
         </div>
@@ -1433,27 +1433,27 @@ function TestimonialsSection({
           {doubled.map((testimonial, index) => (
             <article
               key={`${testimonial.name}-${index}`}
-              className="flex w-[min(80vw,380px)] shrink-0 flex-col justify-between rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6"
+              className="flex w-[min(80vw,380px)] shrink-0 flex-col justify-between rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--card-background)] p-6"
             >
               <div>
-                <div className="flex gap-1 text-[var(--color-lime)]" aria-hidden>
+                <div className="flex gap-1 text-[var(--color-brand)]" aria-hidden>
                   {Array.from({ length: 5 }).map((_, i) => (
                     <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <blockquote className="mt-4 text-sm leading-[1.75] text-white/78">
+                <blockquote className="mt-4 text-sm leading-[1.75] text-[var(--foreground)]">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
               </div>
-              <div className="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-lime)]/15 text-[11px] font-black text-[var(--color-lime)]">
+              <div className="mt-5 flex items-center gap-3 border-t border-[var(--color-line)] pt-4">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)]/15 text-[11px] font-black text-[var(--color-brand)]">
                   {testimonial.initials}
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-white">{testimonial.name}</div>
-                  <div className="text-xs text-white/45">{testimonial.role} · {testimonial.company}</div>
+                  <div className="text-sm font-bold text-[var(--foreground)]">{testimonial.name}</div>
+                  <div className="text-xs text-[var(--foreground-subtle)]">{testimonial.role} · {testimonial.company}</div>
                 </div>
               </div>
             </article>
@@ -1477,7 +1477,7 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
   return (
     <section className="relative py-20 lg:py-28" style={{ backgroundColor: 'var(--background-secondary)' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[var(--color-lime)]/5 blur-[180px]" />
+        <div className="absolute left-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[var(--color-brand)]/5 blur-[180px]" />
       </div>
       <div className="site-container relative">
         <motion.div
@@ -1488,15 +1488,15 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
           className="mb-14"
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.processEyebrow}
             </span>
           </div>
           <h2 className="max-w-3xl text-4xl leading-[1.02] sm:text-5xl lg:text-6xl" style={{ fontFamily: 'var(--font-title)' }}>
             <SectionTitle segments={copy.processTitleParts} />
           </h2>
-          <p className="mt-4 text-base text-white/50" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
+          <p className="mt-4 text-base text-[var(--foreground-subtle)]" style={{ fontFamily: 'var(--font-serif)', fontWeight: 100 }}>
             {copy.processSubtitle}
           </p>
         </motion.div>
@@ -1516,18 +1516,18 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
               >
                 {/* Conector horizontal desktop */}
                 {!isLast && (
-                  <div aria-hidden className="absolute left-[calc(50%+28px)] top-[26px] hidden h-px lg:block" style={{ right: 0, background: 'linear-gradient(90deg, rgba(57,255,20,0.35), rgba(57,255,20,0.08))' }} />
+                  <div aria-hidden className="absolute left-[calc(50%+28px)] top-[26px] hidden h-px lg:block" style={{ right: 0, background: 'linear-gradient(90deg, rgba(31,111,107,0.35), rgba(31,111,107,0.08))' }} />
                 )}
 
-                <div className="flex gap-5 border-b border-white/7 py-7 lg:flex-col lg:border-b-0 lg:border-r lg:px-8 lg:py-0 lg:first:pl-0 lg:last:border-r-0">
+                <div className="flex gap-5 border-b border-[var(--color-line)] py-7 lg:flex-col lg:border-b-0 lg:border-r lg:px-8 lg:py-0 lg:first:pl-0 lg:last:border-r-0">
                   {/* Número + ícone */}
                   <div className="flex shrink-0 flex-col items-center gap-2 lg:flex-row lg:items-center">
                     <div
                       className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-sm font-black"
                       style={{
-                        borderColor: isLast ? 'rgba(57,255,20,0.5)' : 'rgba(255,255,255,0.12)',
-                        backgroundColor: isLast ? 'rgba(57,255,20,0.12)' : 'rgba(255,255,255,0.04)',
-                        color: isLast ? 'var(--color-lime)' : 'rgba(255,255,255,0.5)',
+                        borderColor: isLast ? 'rgba(31,111,107,0.5)' : 'rgba(255,255,255,0.12)',
+                        backgroundColor: isLast ? 'rgba(31,111,107,0.12)' : 'rgba(255,255,255,0.04)',
+                        color: isLast ? 'var(--color-brand)' : 'rgba(255,255,255,0.5)',
                         fontFamily: 'var(--font-title)',
                       }}
                     >
@@ -1535,7 +1535,7 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
                     </div>
                     {/* Conector vertical mobile */}
                     {!isLast && (
-                      <div aria-hidden className="h-full w-px lg:hidden" style={{ background: 'linear-gradient(180deg, rgba(57,255,20,0.3), rgba(57,255,20,0.05))' }} />
+                      <div aria-hidden className="h-full w-px lg:hidden" style={{ background: 'linear-gradient(180deg, rgba(31,111,107,0.3), rgba(31,111,107,0.05))' }} />
                     )}
                   </div>
 
@@ -1543,8 +1543,8 @@ function ProcessSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: 
                     <div className="mb-3">
                       {PROCESS_ICONS[index]}
                     </div>
-                    <h3 className="text-base font-black leading-snug text-white lg:text-lg">{title}</h3>
-                    <p className="mt-2 text-sm leading-[1.7] text-white/52">{text}</p>
+                    <h3 className="text-base font-black leading-snug text-[var(--foreground)] lg:text-lg">{title}</h3>
+                    <p className="mt-2 text-sm leading-[1.7] text-[var(--foreground-muted)]">{text}</p>
                   </div>
                 </div>
               </motion.article>
@@ -1567,7 +1567,7 @@ function FaqItem({ question, answer, index, reduceMotion }: { question: string; 
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
-      className="border-b border-white/8"
+      className="border-b border-[var(--color-line)]"
     >
       <button
         type="button"
@@ -1575,13 +1575,13 @@ function FaqItem({ question, answer, index, reduceMotion }: { question: string; 
         aria-expanded={open}
         className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
-        <h3 className="text-sm font-black leading-snug text-white sm:text-base">{question}</h3>
+        <h3 className="text-sm font-black leading-snug text-[var(--foreground)] sm:text-base">{question}</h3>
         <span
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
           style={{
-            borderColor: open ? 'rgba(57,255,20,0.4)' : 'rgba(255,255,255,0.12)',
-            backgroundColor: open ? 'rgba(57,255,20,0.1)' : 'rgba(255,255,255,0.04)',
-            color: open ? 'var(--color-lime)' : 'rgba(255,255,255,0.4)',
+            borderColor: open ? 'rgba(31,111,107,0.4)' : 'rgba(255,255,255,0.12)',
+            backgroundColor: open ? 'rgba(31,111,107,0.1)' : 'rgba(255,255,255,0.04)',
+            color: open ? 'var(--color-brand)' : 'rgba(255,255,255,0.4)',
           }}
           aria-hidden
         >
@@ -1594,7 +1594,7 @@ function FaqItem({ question, answer, index, reduceMotion }: { question: string; 
         className="overflow-hidden transition-all duration-300"
         style={{ maxHeight: open ? '400px' : '0px', opacity: open ? 1 : 0 }}
       >
-        <p className="pb-5 text-sm leading-[1.75] text-white/55 lg:text-base">{answer}</p>
+        <p className="pb-5 text-sm leading-[1.75] text-[var(--foreground-muted)] lg:text-base">{answer}</p>
       </div>
     </motion.div>
   );
@@ -1612,8 +1612,8 @@ function FaqSection({ copy, reduceMotion }: { copy: HeroCopy; reduceMotion: bool
           className="mb-12"
         >
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-lime)' }} aria-hidden />
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-lime)]" style={{ fontFamily: 'var(--font-title)' }}>
+            <span className="h-px w-8" style={{ backgroundColor: 'var(--color-brand)' }} aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[var(--color-brand)]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.faqEyebrow}
             </span>
           </div>
@@ -1649,38 +1649,38 @@ function FinalCtaSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; 
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-[2rem] border border-[var(--color-lime)]/20 bg-[var(--color-lime)]/[0.05] px-6 py-14 lg:px-16 lg:py-20"
+          className="relative overflow-hidden rounded-[2rem] border border-[var(--color-brand)]/20 bg-[var(--color-brand)]/[0.05] px-6 py-14 lg:px-16 lg:py-20"
         >
           {/* Grid bg */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(rgba(57,255,20,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(57,255,20,0.8) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(rgba(31,111,107,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(31,111,107,0.8) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
           {/* Center glow */}
-          <div aria-hidden className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-lime)]/10 blur-[120px]" />
+          <div aria-hidden className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand)]/10 blur-[120px]" />
 
           {/* Corner brackets (padrão home) */}
-          <div aria-hidden className="absolute left-5 top-5 h-5 w-5" style={{ borderTop: '1.5px solid rgba(57,255,20,0.4)', borderLeft: '1.5px solid rgba(57,255,20,0.4)' }} />
-          <div aria-hidden className="absolute right-5 top-5 h-5 w-5" style={{ borderTop: '1.5px solid rgba(57,255,20,0.4)', borderRight: '1.5px solid rgba(57,255,20,0.4)' }} />
-          <div aria-hidden className="absolute bottom-5 left-5 h-5 w-5" style={{ borderBottom: '1.5px solid rgba(57,255,20,0.4)', borderLeft: '1.5px solid rgba(57,255,20,0.4)' }} />
-          <div aria-hidden className="absolute bottom-5 right-5 h-5 w-5" style={{ borderBottom: '1.5px solid rgba(57,255,20,0.4)', borderRight: '1.5px solid rgba(57,255,20,0.4)' }} />
+          <div aria-hidden className="absolute left-5 top-5 h-5 w-5" style={{ borderTop: '1.5px solid rgba(31,111,107,0.4)', borderLeft: '1.5px solid rgba(31,111,107,0.4)' }} />
+          <div aria-hidden className="absolute right-5 top-5 h-5 w-5" style={{ borderTop: '1.5px solid rgba(31,111,107,0.4)', borderRight: '1.5px solid rgba(31,111,107,0.4)' }} />
+          <div aria-hidden className="absolute bottom-5 left-5 h-5 w-5" style={{ borderBottom: '1.5px solid rgba(31,111,107,0.4)', borderLeft: '1.5px solid rgba(31,111,107,0.4)' }} />
+          <div aria-hidden className="absolute bottom-5 right-5 h-5 w-5" style={{ borderBottom: '1.5px solid rgba(31,111,107,0.4)', borderRight: '1.5px solid rgba(31,111,107,0.4)' }} />
 
           <div className="relative text-center">
             {/* Eyebrow */}
-            <p className="mb-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[var(--color-lime)]/70">
-              <span className="h-px w-6 bg-[var(--color-lime)]/40" aria-hidden />
+            <p className="mb-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[var(--color-brand)]/70">
+              <span className="h-px w-6 bg-[var(--color-brand)]/40" aria-hidden />
               {copy.finalCtaEyebrow}
-              <span className="h-px w-6 bg-[var(--color-lime)]/40" aria-hidden />
+              <span className="h-px w-6 bg-[var(--color-brand)]/40" aria-hidden />
             </p>
 
-            <h2 className="mx-auto max-w-3xl text-[2.25rem] font-black leading-[0.98] text-white sm:text-[3rem] lg:text-[4rem]" style={{ fontFamily: 'var(--font-title)' }}>
+            <h2 className="mx-auto max-w-3xl text-[2.25rem] font-black leading-[0.98] text-[var(--foreground)] sm:text-[3rem] lg:text-[4rem]" style={{ fontFamily: 'var(--font-title)' }}>
               {copy.finalCtaTitle}
             </h2>
 
             {/* Texto com custo de oportunidade */}
-            <p className="mx-auto mt-6 max-w-lg text-sm leading-[1.75] text-white/52 lg:text-base">
+            <p className="mx-auto mt-6 max-w-lg text-sm leading-[1.75] text-[var(--foreground-muted)] lg:text-base">
               {copy.finalCtaText}
             </p>
 
             {/* Hairline divisor */}
-            <div className="mx-auto mt-8 h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(57,255,20,0.4), transparent)' }} aria-hidden />
+            <div className="mx-auto mt-8 h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(31,111,107,0.4), transparent)' }} aria-hidden />
 
             {/* CTA */}
             <div className="mt-8 flex justify-center">
@@ -1689,7 +1689,7 @@ function FinalCtaSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={reportContatoWhatsappConversion}
-                className="inline-flex min-h-[56px] w-full items-center justify-center rounded-full bg-[var(--color-lime)] px-10 text-base font-black text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_48px_rgba(57,255,20,0.4)] active:scale-[0.97] sm:w-auto"
+                className="inline-flex min-h-[56px] w-full items-center justify-center rounded-full bg-[var(--color-accent)] px-10 text-base font-black text-[var(--color-accent-ink)] transition-all duration-300 hover:bg-[var(--color-accent-dark)] hover:shadow-[0_0_48px_rgba(31,111,107,0.4)] active:scale-[0.97] sm:w-auto"
               >
                 {copy.finalCtaBuyLabel}
               </a>
@@ -1697,7 +1697,7 @@ function FinalCtaSection({ copy, reduceMotion, calendlyUrl }: { copy: HeroCopy; 
 
             {/* PS — aviso final (passo 12 da carta de vendas) */}
             <p
-              className="mx-auto mt-10 max-w-md text-sm leading-[1.8] text-white/58"
+              className="mx-auto mt-10 max-w-md text-sm leading-[1.8] text-[var(--foreground-muted)]"
               style={{ fontFamily: 'var(--font-serif)', fontWeight: 300 }}
             >
               P.S. {copy.finalCtaPs}

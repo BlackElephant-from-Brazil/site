@@ -76,14 +76,16 @@ export function Header({ className }: HeaderProps) {
       <header
         className={cn(
           'mx-auto w-full transition-all duration-300 ease-out',
-          isScrolled 
-            ? 'max-w-[var(--container-max-width)] rounded-2xl border border-white/10 shadow-2xl shadow-black/20'
-            : 'border-b border-white/5'
+          isScrolled
+            ? 'max-w-[var(--container-max-width)] rounded-2xl border'
+            : 'border-b'
         )}
         style={{
-          backgroundColor: isScrolled 
-            ? 'rgba(10, 10, 10, 0.85)' 
-            : 'rgba(10, 10, 10, 0.5)',
+          backgroundColor: isScrolled
+            ? 'rgba(255, 255, 255, 0.85)'
+            : 'rgba(255, 255, 255, 0.6)',
+          borderColor: 'var(--nav-border)',
+          boxShadow: isScrolled ? 'var(--shadow-soft)' : 'none',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         }}
@@ -109,9 +111,9 @@ export function Header({ className }: HeaderProps) {
                 href={link.href}
                 className={cn(
                   'relative px-4 py-2 text-sm font-medium transition-all duration-300',
-                  'hover:text-white rounded-lg hover:bg-white/5'
+                  'hover:text-[var(--color-brand)] rounded-lg hover:bg-[var(--background-tertiary)]'
                 )}
-                style={{ 
+                style={{
                   color: 'var(--foreground-muted)',
                   fontFamily: 'var(--font-primary)',
                 }}
@@ -129,8 +131,8 @@ export function Header({ className }: HeaderProps) {
                 onClick={() => setIsLangOpen(!isLangOpen)}
                 className={cn(
                   'flex items-center gap-1.5 px-3 py-2 rounded-xl text-xl transition-all duration-300',
-                  'hover:bg-white/10 active:scale-95',
-                  isLangOpen && 'bg-white/10'
+                  'hover:bg-[var(--background-tertiary)] active:scale-95',
+                  isLangOpen && 'bg-[var(--background-tertiary)]'
                 )}
                 aria-label="Selecionar idioma"
               >
@@ -149,14 +151,16 @@ export function Header({ className }: HeaderProps) {
               {/* Dropdown */}
               <div
                 className={cn(
-                  'absolute right-0 top-full mt-2 py-2 rounded-xl border border-white/10 shadow-xl',
+                  'absolute right-0 top-full mt-2 py-2 rounded-xl border',
                   'transition-all duration-200 origin-top-right',
-                  isLangOpen 
-                    ? 'opacity-100 scale-100 pointer-events-auto' 
+                  isLangOpen
+                    ? 'opacity-100 scale-100 pointer-events-auto'
                     : 'opacity-0 scale-95 pointer-events-none'
                 )}
                 style={{
-                  backgroundColor: 'rgba(20, 20, 20, 0.95)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                  borderColor: 'var(--nav-border)',
+                  boxShadow: 'var(--shadow-soft)',
                   backdropFilter: 'blur(20px)',
                   minWidth: '140px',
                 }}
@@ -167,11 +171,11 @@ export function Header({ className }: HeaderProps) {
                     onClick={() => handleLocaleChange(code)}
                     className={cn(
                       'w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200',
-                      'hover:bg-white/10',
-                      locale === code && 'bg-white/5'
+                      'hover:bg-[var(--background-tertiary)]',
+                      locale === code && 'bg-[var(--primary-soft)]'
                     )}
-                    style={{ 
-                      color: locale === code ? 'var(--color-lime)' : 'var(--foreground-muted)',
+                    style={{
+                      color: locale === code ? 'var(--color-brand)' : 'var(--foreground-muted)',
                     }}
                   >
                     <span className="text-lg">{flag}</span>
@@ -184,13 +188,13 @@ export function Header({ className }: HeaderProps) {
             <Link
               href="/login"
               className={cn(
-                'px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300',
-                'hover:shadow-lg hover:shadow-[var(--color-lime)]/20 hover:scale-105',
-                'active:scale-95'
+                'px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300',
+                'hover:-translate-y-0.5 active:scale-95'
               )}
               style={{
                 backgroundColor: 'var(--button-primary-bg)',
                 color: 'var(--button-primary-text)',
+                boxShadow: 'var(--shadow-cta)',
               }}
             >
               {t('login')}
@@ -239,7 +243,7 @@ export function Header({ className }: HeaderProps) {
           isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
-        <div className="px-4 py-4 border-t border-white/5">
+        <div className="px-4 py-4 border-t" style={{ borderColor: 'var(--nav-border)' }}>
           <nav className="space-y-1">
             {navLinks.map((link, index) => (
               <Link
@@ -247,7 +251,7 @@ export function Header({ className }: HeaderProps) {
                 href={link.href}
                 className={cn(
                   'block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300',
-                  'hover:bg-white/5 hover:text-white'
+                  'hover:bg-[var(--background-tertiary)] hover:text-[var(--color-brand)]'
                 )}
                 style={{ 
                   color: 'var(--foreground-muted)',
@@ -260,7 +264,7 @@ export function Header({ className }: HeaderProps) {
               </Link>
             ))}
           </nav>
-          <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
+          <div className="mt-4 pt-4 border-t space-y-3" style={{ borderColor: 'var(--nav-border)' }}>
             {/* Language Selector - Mobile */}
             <div className="flex flex-wrap gap-2 px-2">
               {Object.entries(localeFlags).map(([code, { flag }]) => (
@@ -272,23 +276,24 @@ export function Header({ className }: HeaderProps) {
                   }}
                   className={cn(
                     'flex items-center justify-center w-10 h-10 rounded-xl text-xl transition-all duration-200',
-                    'hover:bg-white/10 active:scale-95',
-                    locale === code 
-                      ? 'bg-[var(--color-lime)]/20 ring-1 ring-[var(--color-lime)]' 
-                      : 'bg-white/5'
+                    'hover:bg-[var(--background-tertiary)] active:scale-95',
+                    locale === code
+                      ? 'bg-[var(--primary-soft)] ring-1 ring-[var(--color-brand)]'
+                      : 'bg-[var(--background-tertiary)]'
                   )}
                 >
                   {flag}
                 </button>
               ))}
             </div>
-            
+
             <Link
               href="/login"
-              className="block px-4 py-3 rounded-xl text-base font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-lime)]/20"
+              className="block px-4 py-3 rounded-full text-base font-semibold text-center transition-all duration-300 hover:-translate-y-0.5"
               style={{
                 backgroundColor: 'var(--button-primary-bg)',
                 color: 'var(--button-primary-text)',
+                boxShadow: 'var(--shadow-cta)',
               }}
               onClick={() => setIsMenuOpen(false)}
             >

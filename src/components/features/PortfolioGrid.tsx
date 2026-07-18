@@ -47,7 +47,7 @@ export function PortfolioGrid({
               {activeCategory === category.value && (
                 <motion.div
                   layoutId="activeCategory"
-                  className="absolute inset-0 bg-[var(--color-lime)] rounded-full"
+                  className="absolute inset-0 bg-[var(--color-brand)] rounded-full"
                   transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                 />
               )}

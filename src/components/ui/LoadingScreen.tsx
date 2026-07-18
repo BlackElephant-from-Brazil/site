@@ -74,9 +74,9 @@ export function LoadingScreen({
         {/* Progress Bar Container */}
         <div className="mt-8 w-64 flex flex-col items-center gap-3">
           {/* Progress Bar */}
-          <div className="w-full h-[2px] bg-[var(--color-gray-800)] rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-[var(--primary)] transition-all duration-100 ease-out shadow-glow"
+          <div className="w-full h-[2px] bg-[var(--color-line)] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[var(--primary)] transition-all duration-100 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

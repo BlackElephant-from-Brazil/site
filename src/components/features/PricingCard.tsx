@@ -40,32 +40,32 @@ export function PricingCard({ plan, index = 0, locale, compact = false }: Pricin
 
   const getColorClasses = () => {
     switch (plan.color) {
-      case 'lime':
+      case 'lime': // teal (marca)
         return {
-          border: 'border-[var(--color-lime)]/30 hover:border-[var(--color-lime)]',
-          glow: 'group-hover:shadow-[0_0_40px_rgba(57,255,20,0.2)]',
-          icon: 'bg-[var(--color-lime)]/10 text-[var(--color-lime)]',
-          badge: 'bg-[var(--color-lime)] text-[var(--color-black)]',
-          button: 'bg-[var(--color-lime)] text-[var(--color-black)] hover:bg-[var(--color-lime-light)]',
-          accent: 'from-[var(--color-lime)]',
+          border: 'border-[var(--color-brand)]/30 hover:border-[var(--color-brand)]',
+          glow: 'group-hover:shadow-[var(--shadow-soft-lg)]',
+          icon: 'bg-[var(--color-brand)]/10 text-[var(--color-brand)]',
+          badge: 'bg-[var(--color-brand)] text-white',
+          button: 'bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand-dark)]',
+          accent: 'from-[var(--color-brand)]',
         };
-      case 'blue':
+      case 'blue': // navy
         return {
-          border: 'border-blue-500/30 hover:border-blue-500',
-          glow: 'group-hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]',
-          icon: 'bg-blue-500/10 text-blue-400',
-          badge: 'bg-blue-500 text-white',
-          button: 'bg-blue-500 text-white hover:bg-blue-400',
-          accent: 'from-blue-500',
+          border: 'border-[var(--color-deep)]/30 hover:border-[var(--color-deep)]',
+          glow: 'group-hover:shadow-[var(--shadow-soft-lg)]',
+          icon: 'bg-[var(--color-deep)]/10 text-[var(--color-deep)]',
+          badge: 'bg-[var(--color-deep)] text-white',
+          button: 'bg-[var(--color-deep)] text-white hover:opacity-90',
+          accent: 'from-[var(--color-deep)]',
         };
-      case 'purple':
+      case 'purple': // âmbar
         return {
-          border: 'border-purple-500/30 hover:border-purple-500',
-          glow: 'group-hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]',
-          icon: 'bg-purple-500/10 text-purple-400',
-          badge: 'bg-purple-500 text-white',
-          button: 'bg-purple-500 text-white hover:bg-purple-400',
-          accent: 'from-purple-500',
+          border: 'border-[var(--color-accent)]/40 hover:border-[var(--color-accent)]',
+          glow: 'group-hover:shadow-[var(--shadow-soft-lg)]',
+          icon: 'bg-[var(--color-accent)]/12 text-[var(--color-accent-dark)]',
+          badge: 'bg-[var(--color-accent)] text-[var(--color-accent-ink)]',
+          button: 'bg-[var(--color-accent)] text-[var(--color-accent-ink)] hover:bg-[var(--color-accent-dark)]',
+          accent: 'from-[var(--color-accent)]',
         };
     }
   };
@@ -87,18 +87,18 @@ export function PricingCard({ plan, index = 0, locale, compact = false }: Pricin
             {/* Decorative side elements */}
             <div 
               className="absolute -left-2 top-1/2 -translate-y-1/2 w-2 h-2 rotate-45"
-              style={{ backgroundColor: 'var(--color-lime-dark, #2dd416)' }}
+              style={{ backgroundColor: 'var(--color-accent-dark)' }}
             />
             <div 
               className="absolute -right-2 top-1/2 -translate-y-1/2 w-2 h-2 rotate-45"
-              style={{ backgroundColor: 'var(--color-lime-dark, #2dd416)' }}
+              style={{ backgroundColor: 'var(--color-accent-dark)' }}
             />
             {/* Main badge with hexagonal shape */}
             <span 
               className={`relative block px-6 py-2 text-xs font-bold uppercase tracking-widest shadow-lg ${compact ? "mt-[-14px]" : "mt-[-23px]"}`}
               style={{
-                backgroundColor: 'var(--color-lime)',
-                color: 'var(--color-black)',
+                backgroundColor: 'var(--color-accent)',
+                color: 'var(--color-accent-ink)',
                 clipPath: 'polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%)',
               }}
             >
@@ -113,8 +113,8 @@ export function PricingCard({ plan, index = 0, locale, compact = false }: Pricin
           isRecommended ? 'lg:scale-105' : ''
         }`}
         style={{
-          backgroundColor: 'rgba(17, 17, 17, 0.6)',
-          backdropFilter: 'blur(20px)',
+          backgroundColor: 'var(--card-background)',
+          boxShadow: 'var(--shadow-soft)',
         }}
       >
         {/* Subtle gradient accent top */}
@@ -127,35 +127,35 @@ export function PricingCard({ plan, index = 0, locale, compact = false }: Pricin
               {getIcon()}
             </div>
             <div>
-              <h3 className="text-xl lg:text-2xl font-bold text-white">{plan.name}</h3>
-              <p className="text-sm text-[var(--color-gray-400)]">{plan.tagline}</p>
+              <h3 className="text-xl lg:text-2xl font-bold text-[var(--foreground)]">{plan.name}</h3>
+              <p className="text-sm text-[var(--foreground-muted)]">{plan.tagline}</p>
             </div>
           </div>
 
           {/* Pricing */}
-          <div className="mb-6 pb-6 border-b border-[var(--color-gray-800)]">
+          <div className="mb-6 pb-6 border-b border-[var(--card-border)]">
             {plan.pricing.initial > 0 ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-sm text-[var(--color-gray-400)]">R$</span>
-                  <span className="text-4xl lg:text-5xl font-bold text-white">{plan.pricing.initial}</span>
-                  <span className="text-[var(--color-gray-400)]">/início</span>
+                  <span className="text-sm text-[var(--foreground-muted)]">R$</span>
+                  <span className="text-4xl lg:text-5xl font-bold text-[var(--foreground)]">{plan.pricing.initial}</span>
+                  <span className="text-[var(--foreground-muted)]">/início</span>
                 </div>
-                <div className="mt-2 text-[var(--color-gray-400)]">
-                  + <span className="text-white font-semibold">{formatPrice(plan.pricing.monthly)}</span>/mês
+                <div className="mt-2 text-[var(--foreground-muted)]">
+                  + <span className="text-[var(--foreground)] font-semibold">{formatPrice(plan.pricing.monthly)}</span>/mês
                 </div>
               </>
             ) : (
-              <div className="text-2xl font-bold text-white">Sob Consulta</div>
+              <div className="text-2xl font-bold text-[var(--foreground)]">Sob Consulta</div>
             )}
-            <p className="mt-2 text-xs text-[var(--color-gray-500)]">
+            <p className="mt-2 text-xs text-[var(--foreground-subtle)]">
               Cada usuário adicional: +{formatPrice(plan.pricing.additionalUserCost)}/mês
             </p>
           </div>
 
           {/* Description */}
           {!compact && (
-            <p className="text-[var(--color-gray-400)] mb-6">
+            <p className="text-[var(--foreground-muted)] mb-6">
               {plan.description}
             </p>
           )}
@@ -165,21 +165,21 @@ export function PricingCard({ plan, index = 0, locale, compact = false }: Pricin
             {(compact ? plan.features.slice(0, 5) : plan.features).map((feature, idx) => (
               <li key={idx} className="flex items-start gap-3">
                 {feature.included ? (
-                  <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${feature.highlight ? 'text-[var(--color-lime)]' : 'text-green-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${feature.highlight ? 'text-[var(--color-brand)]' : 'text-[var(--color-success)]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 ) : (
-                  <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-[var(--color-gray-600)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-[var(--foreground-subtle)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 )}
-                <span className={`text-sm ${feature.included ? (feature.highlight ? 'text-white font-medium' : 'text-[var(--color-gray-300)]') : 'text-[var(--color-gray-600)]'}`}>
+                <span className={`text-sm ${feature.included ? (feature.highlight ? 'text-[var(--foreground)] font-medium' : 'text-[var(--foreground-muted)]') : 'text-[var(--foreground-subtle)]'}`}>
                   {feature.text}
                 </span>
               </li>
             ))}
             {compact && plan.features.length > 5 && (
-              <li className="text-sm text-[var(--color-gray-500)] pl-8">
+              <li className="text-sm text-[var(--foreground-subtle)] pl-8">
                 + mais {plan.features.length - 5} recursos...
               </li>
             )}

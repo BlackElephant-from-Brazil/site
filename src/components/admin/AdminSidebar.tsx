@@ -184,7 +184,7 @@ function NavLink({ href, label, icon, exact, indent }: NavLinkProps) {
       className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150"
       style={{
         color: active ? 'var(--primary)' : 'var(--foreground-muted)',
-        background: active ? 'rgba(57,255,20,0.07)' : 'transparent',
+        background: active ? 'rgba(31,111,107,0.07)' : 'transparent',
         paddingLeft: indent ? '2.5rem' : undefined,
       }}
     >
@@ -197,7 +197,7 @@ function NavLink({ href, label, icon, exact, indent }: NavLinkProps) {
             height: 6,
             borderRadius: '50%',
             background: 'var(--primary)',
-            boxShadow: '0 0 8px var(--primary)',
+            boxShadow: 'none',
             flexShrink: 0,
           }}
         />
@@ -317,18 +317,18 @@ export function AdminSidebar({ user }: { user: User }) {
         <div
           className="rounded-xl p-4"
           style={{
-            background: 'linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(57,255,20,0.03) 100%)',
-            border: '1px solid rgba(57,255,20,0.18)',
-            boxShadow: '0 0 24px rgba(57,255,20,0.06)',
+            background: 'linear-gradient(135deg, rgba(31,111,107,0.1) 0%, rgba(31,111,107,0.03) 100%)',
+            border: '1px solid rgba(31,111,107,0.18)',
+            boxShadow: '0 0 24px rgba(31,111,107,0.06)',
           }}
         >
           <div className="mb-3 flex items-center gap-2.5">
             <div
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold"
               style={{
-                background: 'rgba(57,255,20,0.15)',
+                background: 'rgba(31,111,107,0.15)',
                 color: 'var(--primary)',
-                boxShadow: '0 0 12px rgba(57,255,20,0.2)',
+                boxShadow: '0 0 12px rgba(31,111,107,0.2)',
               }}
             >
               {user.name.charAt(0).toUpperCase()}
@@ -354,9 +354,9 @@ export function AdminSidebar({ user }: { user: User }) {
               type="submit"
               className="w-full rounded-lg py-1.5 text-xs font-semibold transition-all"
               style={{
-                background: 'rgba(255,59,48,0.12)',
-                color: '#ff3b30',
-                border: '1px solid rgba(255,59,48,0.25)',
+                background: 'rgba(214,69,69,0.12)',
+                color: 'var(--color-error)',
+                border: '1px solid rgba(214,69,69,0.25)',
               }}
             >
               Sair

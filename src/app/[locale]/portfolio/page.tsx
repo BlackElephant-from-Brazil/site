@@ -32,19 +32,19 @@ export default async function PortfolioPage({ params }: Props) {
     <main className="min-h-screen pt-24 pb-20">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[var(--color-lime)]/5 rounded-full blur-[150px]" />
+        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[var(--color-brand)]/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-500/5 rounded-full blur-[150px]" />
       </div>
 
       <div className="site-container relative z-10">
         {/* Header */}
         <ScrollReveal className="text-center mb-16">
-          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[var(--color-lime)] bg-[var(--color-lime)]/10 rounded-full border border-[var(--color-lime)]/20">
+          <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[var(--color-brand)] bg-[var(--color-brand)]/10 rounded-full border border-[var(--color-brand)]/20">
             {t('badge')}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             {t('title.part1')}{' '}
-            <span className="text-[var(--color-lime)]">{t('title.part2')}</span>
+            <span className="text-[var(--color-brand)]">{t('title.part2')}</span>
           </h1>
           <p className="text-lg md:text-xl text-[var(--color-gray-400)] max-w-3xl mx-auto">
             {t('description')}
@@ -55,25 +55,25 @@ export default async function PortfolioPage({ params }: Props) {
         <ScrollReveal delay={0.2} className="mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
-              <div className="text-3xl md:text-4xl font-bold text-[var(--color-lime)] mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.length}+
               </div>
               <div className="text-sm text-[var(--color-gray-400)]">{t('stats.projects')}</div>
             </div>
             <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
-              <div className="text-3xl md:text-4xl font-bold text-[var(--color-lime)] mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'sites').length}
               </div>
               <div className="text-sm text-[var(--color-gray-400)]">{t('stats.sites')}</div>
             </div>
             <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
-              <div className="text-3xl md:text-4xl font-bold text-[var(--color-lime)] mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'sistemas').length}
               </div>
               <div className="text-sm text-[var(--color-gray-400)]">{t('stats.systems')}</div>
             </div>
             <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
-              <div className="text-3xl md:text-4xl font-bold text-[var(--color-lime)] mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'apps').length}
               </div>
               <div className="text-sm text-[var(--color-gray-400)]">{t('stats.apps')}</div>

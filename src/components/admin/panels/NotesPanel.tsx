@@ -5,13 +5,27 @@ import { fetchUserNotes, createUserNote, updateUserNote, updateUserNoteColor, de
 import type { UserNote } from '@/types'
 
 const NOTE_COLORS = [
-  { value: '#2a2a1a', label: 'Amarelo escuro' },
-  { value: '#0a2a0a', label: 'Verde escuro' },
-  { value: '#0a1a2a', label: 'Azul escuro' },
-  { value: '#1a0a2a', label: 'Roxo escuro' },
-  { value: '#2a0a0a', label: 'Vermelho escuro' },
-  { value: '#1c1c1c', label: 'Cinza' },
+  { value: '#fdf3d8', label: 'Amarelo' },
+  { value: '#e2f0ec', label: 'Verde' },
+  { value: '#e8eef4', label: 'Azul' },
+  { value: '#ece6f6', label: 'Roxo' },
+  { value: '#f7e4e4', label: 'Vermelho' },
+  { value: '#eef1f3', label: 'Cinza' },
 ]
+
+// Cores antigas (dark) persistidas no banco → equivalente pastel no render.
+const LEGACY_COLOR_MAP: Record<string, string> = {
+  '#2a2a1a': '#fdf3d8',
+  '#0a2a0a': '#e2f0ec',
+  '#0a1a2a': '#e8eef4',
+  '#1a0a2a': '#ece6f6',
+  '#2a0a0a': '#f7e4e4',
+  '#1c1c1c': '#eef1f3',
+}
+
+function noteColor(c: string): string {
+  return LEGACY_COLOR_MAP[c] ?? c
+}
 
 function escapeHtml(text: string): string {
   return text
@@ -30,7 +44,7 @@ function renderMarkdown(content: string): string {
     .replace(/^# (.+)$/gm, '<strong style="font-size:0.9rem">$1</strong>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/`(.+?)`/g, '<code style="background:rgba(0,0,0,0.3);padding:1px 4px;border-radius:3px;font-size:0.7rem">$1</code>')
+    .replace(/`(.+?)`/g, '<code style="background:rgba(18,59,79,0.1);padding:1px 4px;border-radius:3px;font-size:0.7rem">$1</code>')
     .replace(/\n/g, '<br/>')
 }
 
@@ -84,15 +98,15 @@ function NoteCard({ note, onUpdate, onColorChange, onDelete }: NoteCardProps) {
     <div
       className="group relative flex flex-col rounded-lg"
       style={{
-        background: note.color,
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: noteColor(note.color),
+        border: '1px solid rgba(18,59,79,0.12)',
         minHeight: 120,
       }}
     >
       <button
         onClick={() => onDelete(note.id)}
         className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded opacity-0 transition-all group-hover:opacity-100"
-        style={{ color: 'rgba(255,255,255,0.5)', background: 'rgba(0,0,0,0.3)' }}
+        style={{ color: 'var(--foreground-muted)', background: 'rgba(255,255,255,0.6)' }}
       >
         <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -114,7 +128,7 @@ function NoteCard({ note, onUpdate, onColorChange, onDelete }: NoteCardProps) {
                   type="button"
                   onMouseDown={e => { e.preventDefault(); insertFormat(btn.before, btn.after, btn.ph) }}
                   className="flex h-5 w-5 items-center justify-center rounded text-[0.6rem] font-bold transition-colors"
-                  style={{ background: 'rgba(0,0,0,0.25)', color: 'rgba(255,255,255,0.7)' }}
+                  style={{ background: 'rgba(18,59,79,0.08)', color: 'var(--foreground-muted)' }}
                 >
                   {btn.label}
                 </button>
@@ -127,14 +141,14 @@ function NoteCard({ note, onUpdate, onColorChange, onDelete }: NoteCardProps) {
               onBlur={handleBlur}
               rows={5}
               className="w-full resize-none bg-transparent text-xs outline-none"
-              style={{ color: 'rgba(255,255,255,0.9)', caretColor: 'var(--color-lime)' }}
+              style={{ color: 'var(--foreground)', caretColor: 'var(--color-brand)' }}
               placeholder="Escreva sua nota em markdown..."
             />
           </div>
         ) : (
           <div
             className="text-xs leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.85)', minHeight: 60, cursor: 'text' }}
+            style={{ color: 'var(--foreground)', minHeight: 60, cursor: 'text' }}
             dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
           />
         )}
@@ -149,7 +163,7 @@ function NoteCard({ note, onUpdate, onColorChange, onDelete }: NoteCardProps) {
             className="h-3 w-3 rounded-full border transition-transform hover:scale-125"
             style={{
               background: c.value,
-              borderColor: note.color === c.value ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.15)',
+              borderColor: noteColor(note.color) === c.value ? 'rgba(18,59,79,0.5)' : 'rgba(18,59,79,0.15)',
             }}
           />
         ))}
@@ -198,7 +212,7 @@ export function NotesPanel({ userId, onClose }: Props) {
     <div className="flex h-full flex-col" style={{ width: 320, borderLeft: '1px solid var(--card-border)', background: 'var(--nav-background)' }}>
       <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid var(--card-border)' }}>
         <div className="flex items-center gap-2">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-lime)' }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-brand)' }}>
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
             <polyline points="14 2 14 8 20 8" />
           </svg>
@@ -209,7 +223,7 @@ export function NotesPanel({ userId, onClose }: Props) {
             onClick={handleCreate}
             disabled={isPending}
             className="flex h-7 w-7 items-center justify-center rounded-md transition-colors"
-            style={{ color: 'var(--color-lime)', background: 'rgba(57,255,20,0.1)' }}
+            style={{ color: 'var(--color-brand)', background: 'rgba(31,111,107,0.1)' }}
             title="Nova nota"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -231,7 +245,7 @@ export function NotesPanel({ userId, onClose }: Props) {
       <div className="flex-1 overflow-y-auto p-3">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/10" style={{ borderTopColor: 'var(--color-lime)' }} />
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/10" style={{ borderTopColor: 'var(--color-brand)' }} />
           </div>
         ) : notes.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
@@ -243,7 +257,7 @@ export function NotesPanel({ userId, onClose }: Props) {
             <button
               onClick={handleCreate}
               className="mt-3 rounded-md px-3 py-1.5 text-xs font-semibold transition-all"
-              style={{ background: 'var(--color-lime)', color: '#000' }}
+              style={{ background: 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               Criar primeira nota
             </button>

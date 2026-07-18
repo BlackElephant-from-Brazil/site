@@ -57,8 +57,8 @@ export function LandingPageHeader({ locale }: LandingPageHeaderProps) {
         className={cn(
           'mx-auto w-full transition-all duration-300 ease-out',
           isScrolled
-            ? 'max-w-[var(--container-max-width)] rounded-2xl border border-white/10 shadow-2xl shadow-black/20'
-            : 'border-b border-white/5'
+            ? 'max-w-[var(--container-max-width)] rounded-2xl border border-[var(--color-line)] shadow-2xl shadow-black/20'
+            : 'border-b border-[var(--color-line)]'
         )}
         style={{
           backgroundColor: isScrolled ? 'rgba(10, 10, 10, 0.85)' : 'rgba(10, 10, 10, 0.5)',
@@ -89,7 +89,7 @@ export function LandingPageHeader({ locale }: LandingPageHeaderProps) {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-white rounded-lg hover:bg-white/5"
+                  className="relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-[var(--foreground)] rounded-lg hover:bg-white/5"
                   style={{ color: 'var(--foreground-muted)', fontFamily: 'var(--font-primary)' }}
                 >
                   {link.label}
@@ -97,7 +97,7 @@ export function LandingPageHeader({ locale }: LandingPageHeaderProps) {
               ))}
               <a
                 href={ctaLink.href}
-                className="ml-2 inline-flex items-center justify-center rounded-full bg-[var(--color-lime)] px-5 py-2 text-sm font-bold text-black transition-all duration-300 hover:bg-[var(--color-lime-light)] hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] active:scale-95"
+                className="ml-2 inline-flex items-center justify-center rounded-full bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-[var(--color-accent-ink)] transition-all duration-300 hover:bg-[var(--color-accent-dark)] hover:shadow-[0_0_20px_rgba(31,111,107,0.3)] active:scale-95"
               >
                 {ctaLink.label}
               </a>
@@ -145,13 +145,13 @@ export function LandingPageHeader({ locale }: LandingPageHeaderProps) {
             isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
           )}
         >
-          <div className="px-4 py-4 border-t border-white/5">
+          <div className="px-4 py-4 border-t border-[var(--color-line)]">
             <nav className="space-y-1">
               {mainLinks.map((link, index) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 hover:bg-white/5 hover:text-white"
+                  className="block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 hover:bg-white/5 hover:text-[var(--foreground)]"
                   style={{
                     color: 'var(--foreground-muted)',
                     fontFamily: 'var(--font-primary)',
@@ -163,11 +163,11 @@ export function LandingPageHeader({ locale }: LandingPageHeaderProps) {
                 </a>
               ))}
             </nav>
-            <div className="mt-4 pt-4 border-t border-white/5">
+            <div className="mt-4 pt-4 border-t border-[var(--color-line)]">
               <a
                 href={ctaLink.href}
-                className="block px-4 py-3 rounded-xl text-base font-bold text-center text-black transition-all duration-300 active:scale-[0.98]"
-                style={{ backgroundColor: 'var(--color-lime)' }}
+                className="block px-4 py-3 rounded-xl text-base font-bold text-center text-[var(--color-accent-ink)] transition-all duration-300 active:scale-[0.98]"
+                style={{ backgroundColor: 'var(--color-brand)' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {ctaLink.label}

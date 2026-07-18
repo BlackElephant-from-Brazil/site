@@ -150,7 +150,7 @@ export function BlogView({ initialPosts }: { initialPosts: BlogPostWithAuthor[] 
           <button
             onClick={openNew}
             className="rounded-lg px-4 py-2 text-sm font-semibold transition-all"
-            style={{ background: 'var(--primary)', color: '#000', boxShadow: '0 0 16px rgba(57,255,20,0.4)' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-contrast)', boxShadow: 'var(--shadow-soft)' }}
           >
             + Novo Post
           </button>
@@ -276,14 +276,14 @@ export function BlogView({ initialPosts }: { initialPosts: BlogPostWithAuthor[] 
             <RichTextEditor content={form.content_html} onChange={html => setForm(f => ({ ...f, content_html: html }))} />
           </div>
 
-          {error && <p className="text-xs" style={{ color: '#ff4d4f' }}>{error}</p>}
+          {error && <p className="text-xs" style={{ color: 'var(--color-error)' }}>{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <button
               type="submit"
               disabled={saving}
               className="flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all"
-              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: '#000' }}
+              style={{ background: saving ? 'var(--card-border)' : 'var(--primary)', color: 'var(--primary-contrast)' }}
             >
               {saving ? 'Salvando…' : 'Salvar'}
             </button>
@@ -306,7 +306,7 @@ function RowActions({ onEdit, onDelete }: { onEdit: () => void; onDelete: () => 
   return (
     <div className="flex items-center justify-end gap-2">
       <button onClick={onEdit} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--foreground-muted)' }}>Editar</button>
-      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: '#ff4d4f' }}>Excluir</button>
+      <button onClick={onDelete} className="whitespace-nowrap rounded px-2 py-1 text-xs transition-colors" style={{ color: 'var(--color-error)' }}>Excluir</button>
     </div>
   )
 }

@@ -32,14 +32,14 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
         <div
           className="absolute -left-32 top-0 h-[600px] w-[600px] rounded-full blur-[200px]"
-          style={{ backgroundColor: 'var(--color-lime)', opacity: 0.04 }}
+          style={{ backgroundColor: 'var(--color-brand)', opacity: 0.04 }}
         />
       </div>
 
       <div className="site-container relative z-10 max-w-3xl">
         {/* Breadcrumb */}
         <div className="mb-8 flex items-center gap-2 text-xs" style={{ color: 'var(--foreground-muted)' }}>
-          <Link href="/" className="hover:text-[var(--color-lime)] transition-colors">Início</Link>
+          <Link href="/" className="hover:text-[var(--color-brand)] transition-colors">Início</Link>
           <span>/</span>
           <span>Política de Privacidade</span>
         </div>
@@ -48,9 +48,9 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
         <div
           className="mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em]"
           style={{
-            borderColor: 'color-mix(in srgb, var(--color-lime) 20%, transparent)',
-            color: 'color-mix(in srgb, var(--color-lime) 75%, transparent)',
-            backgroundColor: 'color-mix(in srgb, var(--color-lime) 5%, transparent)',
+            borderColor: 'color-mix(in srgb, var(--color-brand) 20%, transparent)',
+            color: 'color-mix(in srgb, var(--color-brand) 75%, transparent)',
+            backgroundColor: 'color-mix(in srgb, var(--color-brand) 5%, transparent)',
           }}
         >
           Legal
@@ -124,7 +124,7 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
               Para exercer qualquer desses direitos, entre em contato pelo e-mail{' '}
               <a
                 href="mailto:guilherme@blackelephant.com.br"
-                className="transition-colors hover:text-[var(--color-lime)]"
+                className="transition-colors hover:text-[var(--color-brand)]"
                 style={{ color: 'var(--foreground)' }}
               >
                 guilherme@blackelephant.com.br
@@ -183,7 +183,7 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
               <p className="mt-1">
                 <a
                   href="mailto:guilherme@blackelephant.com.br"
-                  className="transition-colors hover:text-[var(--color-lime)]"
+                  className="transition-colors hover:text-[var(--color-brand)]"
                   style={{ color: 'var(--foreground)' }}
                 >
                   guilherme@blackelephant.com.br
@@ -214,7 +214,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Li({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex gap-2">
-      <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ backgroundColor: 'var(--color-lime)' }} />
+      <span className="mt-2 h-1 w-1 shrink-0 rounded-full" style={{ backgroundColor: 'var(--color-brand)' }} />
       <span>{children}</span>
     </li>
   )

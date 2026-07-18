@@ -113,7 +113,7 @@ function ServiceCardItem({
   const indexBaseClass = 'text-[11px] font-bold tabular-nums tracking-[0.22em]';
   const indexStyle = {
     fontFamily: 'var(--font-title)',
-    color: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.4)',
+    color: service.highlight ? 'var(--color-brand)' : 'var(--foreground-subtle)',
   };
 
   return (
@@ -123,14 +123,14 @@ function ServiceCardItem({
       className="group relative h-full p-7 lg:p-8 rounded-2xl flex flex-col"
       style={{
         background: service.highlight
-          ? 'linear-gradient(150deg, rgba(57,255,20,0.06) 0%, rgba(15,15,15,0.7) 60%)'
-          : 'linear-gradient(150deg, rgba(20,20,20,0.7) 0%, rgba(12,12,12,0.5) 100%)',
+          ? 'linear-gradient(150deg, rgba(31,111,107,0.06) 0%, #FFFFFF 60%)'
+          : 'var(--card-background)',
         backdropFilter: 'blur(18px) saturate(150%)',
         WebkitBackdropFilter: 'blur(18px) saturate(150%)',
         border: service.highlight
-          ? '1px solid rgba(57,255,20,0.32)'
-          : '1px solid rgba(255,255,255,0.08)',
-        boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
+          ? '1px solid rgba(31,111,107,0.28)'
+          : '1px solid var(--card-border)',
+        boxShadow: 'var(--shadow-soft)',
       }}
     >
       {/* Header: index + ícone */}
@@ -153,12 +153,12 @@ function ServiceCardItem({
           className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors"
           style={{
             backgroundColor: service.highlight
-              ? 'rgba(57,255,20,0.12)'
-              : 'rgba(255,255,255,0.04)',
+              ? 'rgba(31,111,107,0.10)'
+              : 'var(--background-tertiary)',
             border: service.highlight
-              ? '1px solid rgba(57,255,20,0.3)'
-              : '1px solid rgba(255,255,255,0.08)',
-            color: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.6)',
+              ? '1px solid rgba(31,111,107,0.28)'
+              : '1px solid var(--card-border)',
+            color: service.highlight ? 'var(--color-brand)' : 'var(--foreground-muted)',
           }}
         >
           {service.icon}
@@ -180,7 +180,7 @@ function ServiceCardItem({
       {/* Descrição */}
       <p
         className="text-[14px] lg:text-[15px] leading-[1.55] mb-7 flex-grow"
-        style={{ color: 'rgba(255,255,255,0.6)' }}
+        style={{ color: 'var(--foreground-muted)' }}
       >
         {service.description}
       </p>
@@ -191,8 +191,8 @@ function ServiceCardItem({
         className="h-px w-full mb-5"
         style={{
           background: service.highlight
-            ? 'linear-gradient(90deg, rgba(57,255,20,0.4) 0%, transparent 100%)'
-            : 'rgba(255,255,255,0.08)',
+            ? 'linear-gradient(90deg, rgba(31,111,107,0.4) 0%, transparent 100%)'
+            : 'var(--color-line)',
         }}
       />
 
@@ -203,7 +203,7 @@ function ServiceCardItem({
             className="text-[10.5px] font-semibold uppercase tracking-[0.2em] mb-1.5"
             style={{
               fontFamily: 'var(--font-title)',
-              color: 'rgba(255,255,255,0.45)',
+              color: 'var(--foreground-subtle)',
             }}
           >
             Investimento
@@ -216,7 +216,7 @@ function ServiceCardItem({
               style={{
                 fontFamily: 'var(--font-title)',
                 fontWeight: service.highlight ? 800 : 600,
-                color: service.highlight ? 'var(--color-lime)' : 'var(--foreground)',
+                color: service.highlight ? 'var(--color-brand)' : 'var(--foreground)',
               }}
             >
               {service.price}
@@ -226,9 +226,9 @@ function ServiceCardItem({
             className="text-[11px] mt-1"
             style={{
               fontFamily: 'var(--font-serif)',
-              fontStyle: 'normal',
-              fontWeight: 100,
-              color: 'rgba(255,255,255,0.4)',
+              fontStyle: 'italic',
+              fontWeight: 400,
+              color: 'var(--foreground-subtle)',
             }}
           >
             {service.priceNote}
@@ -239,7 +239,7 @@ function ServiceCardItem({
             className="text-[10.5px] font-semibold uppercase tracking-[0.2em] mb-1.5"
             style={{
               fontFamily: 'var(--font-title)',
-              color: 'rgba(255,255,255,0.45)',
+              color: 'var(--foreground-subtle)',
             }}
           >
             Entrega
@@ -265,9 +265,9 @@ function ServiceCardItem({
           rel="noopener noreferrer"
           className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
           style={{
-            backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
-            color: service.highlight ? '#0a0a0a' : 'var(--foreground)',
-            border: service.highlight ? 'none' : '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: service.highlight ? 'var(--color-accent)' : 'var(--background-tertiary)',
+            color: service.highlight ? 'var(--color-accent-ink)' : 'var(--foreground)',
+            border: service.highlight ? 'none' : '1px solid var(--card-border)',
           }}
         >
           <span>Solicitar agora</span>
@@ -283,9 +283,9 @@ function ServiceCardItem({
           onClick={reportReservarHorarioConversion}
           className="inline-flex items-center justify-between gap-2 px-5 py-3 rounded-xl font-semibold text-[13px] transition-all duration-300 mt-auto"
           style={{
-            backgroundColor: service.highlight ? 'var(--color-lime)' : 'rgba(255,255,255,0.05)',
-            color: service.highlight ? '#0a0a0a' : 'var(--foreground)',
-            border: service.highlight ? 'none' : '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: service.highlight ? 'var(--color-accent)' : 'var(--background-tertiary)',
+            color: service.highlight ? 'var(--color-accent-ink)' : 'var(--foreground)',
+            border: service.highlight ? 'none' : '1px solid var(--card-border)',
           }}
         >
           <span>Solicitar agora</span>
@@ -308,13 +308,13 @@ export function ServicesSection() {
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full opacity-[0.05] blur-[160px]"
-          style={{ backgroundColor: 'var(--color-lime)' }}
+          style={{ backgroundColor: 'var(--color-brand)' }}
         />
         <div
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.5]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+              'linear-gradient(rgba(18,59,79,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(18,59,79,0.04) 1px, transparent 1px)',
             backgroundSize: '80px 80px',
           }}
         />
@@ -333,11 +333,11 @@ export function ServicesSection() {
             <span
               aria-hidden
               className="h-px w-10"
-              style={{ backgroundColor: 'var(--color-lime)' }}
+              style={{ backgroundColor: 'var(--color-brand)' }}
             />
             <span
               className="text-[11px] font-bold uppercase tracking-[0.32em]"
-              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-lime)' }}
+              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-brand)' }}
             >
               Nossas frentes
             </span>
@@ -357,7 +357,7 @@ export function ServicesSection() {
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'normal',
                 fontWeight: 100,
-                color: 'var(--color-lime)',
+                color: 'var(--color-brand)',
               }}
             >
               ajudar hoje?
@@ -418,8 +418,8 @@ export function ServicesSection() {
           className="mt-16 lg:mt-20 mx-1 sm:mx-0 overflow-hidden rounded-[28px] p-7 sm:p-9 lg:p-12 text-center"
           style={{
             background:
-              'radial-gradient(circle at 18% 0%, rgba(57,255,20,0.30) 0%, rgba(57,255,20,0.10) 28%, transparent 48%), linear-gradient(135deg, rgba(57,255,20,0.18) 0%, rgba(24,24,24,0.95) 42%, rgba(10,10,10,0.96) 100%)',
-            border: '1px solid rgba(57,255,20,0.24)',
+              'radial-gradient(circle at 18% 0%, rgba(232,169,60,0.25) 0%, rgba(232,169,60,0.08) 28%, transparent 48%), linear-gradient(135deg, #17516a 0%, #123B4F 42%, #0e2f3f 100%)',
+            border: '1px solid rgba(255,255,255,0.10)',
             boxShadow:
               '0 24px 70px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.10)',
           }}
@@ -450,10 +450,10 @@ export function ServicesSection() {
             onClick={reportReservarHorarioConversion}
             className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-[14px] transition-all duration-300 active:scale-95"
             style={{
-              backgroundColor: 'var(--color-lime)',
-              color: '#0a0a0a',
+              backgroundColor: 'var(--color-accent)',
+              color: 'var(--color-accent-ink)',
               boxShadow:
-                '0 0 0 1px rgba(57,255,20,0.35), 0 18px 38px rgba(57,255,20,0.20), inset 0 1px 0 rgba(255,255,255,0.35)',
+                'var(--shadow-cta)',
             }}
           >
             Agendar consultoria de 1h
