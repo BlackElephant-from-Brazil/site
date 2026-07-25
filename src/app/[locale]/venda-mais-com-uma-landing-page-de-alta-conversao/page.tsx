@@ -20,13 +20,14 @@ const metadataByLocale = {
 };
 
 function getMetadataCopy(locale: string) {
-  return locale === 'pt' ? metadataByLocale.pt : metadataByLocale.en;
+  return locale.startsWith('pt') ? metadataByLocale.pt : metadataByLocale.en;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const copy = getMetadataCopy(locale);
-  const canonicalLocale = locale === 'pt' ? 'pt' : 'en';
+  const isPt = locale.startsWith('pt');
+  const canonicalLocale = isPt ? 'pt-br' : 'en';
 
   return {
     title: copy.title,
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: copy.description,
       type: 'website',
       siteName: 'BlackElephant',
-      locale: locale === 'pt' ? 'pt_BR' : 'en_US',
+      locale: locale === 'pt-pt' ? 'pt_PT' : isPt ? 'pt_BR' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `/${canonicalLocale}/venda-mais-com-uma-landing-page-de-alta-conversao`,
       languages: {
-        'pt-BR': '/pt/venda-mais-com-uma-landing-page-de-alta-conversao',
+        'pt-BR': '/pt-br/venda-mais-com-uma-landing-page-de-alta-conversao',
+        'pt-PT': '/pt-pt/venda-mais-com-uma-landing-page-de-alta-conversao',
         en: '/en/venda-mais-com-uma-landing-page-de-alta-conversao',
       },
     },

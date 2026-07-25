@@ -70,8 +70,8 @@ export default async function TermsOfUsePage({ params }: { params: Params }) {
 
           <Section title="1. Aceitação dos Termos">
             <p>
-              Ao acessar ou utilizar o site <strong className="text-white">blackelephant.com.br</strong> e os serviços da{' '}
-              <strong className="text-white">BlackElephant Tecnologia</strong>, você concorda com estes Termos de Uso. Caso
+              Ao acessar ou utilizar o site <strong className="text-[var(--foreground)]">blackelephant.com.br</strong> e os serviços da{' '}
+              <strong className="text-[var(--foreground)]">BlackElephant Tecnologia</strong>, você concorda com estes Termos de Uso. Caso
               não concorde com alguma cláusula, pedimos que não utilize o site.
             </p>
           </Section>
@@ -156,7 +156,7 @@ export default async function TermsOfUsePage({ params }: { params: Params }) {
           <Section title="9. Lei Aplicável e Foro">
             <p>
               Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da
-              comarca de <strong className="text-white">Santana de Parnaíba, SP</strong>, para dirimir quaisquer
+              comarca de <strong className="text-[var(--foreground)]">Santana de Parnaíba, SP</strong>, para dirimir quaisquer
               conflitos decorrentes deste instrumento, com renúncia a qualquer outro, por mais privilegiado que seja.
             </p>
           </Section>
@@ -172,7 +172,7 @@ export default async function TermsOfUsePage({ params }: { params: Params }) {
                 borderColor: 'var(--glass-border)',
               }}
             >
-              <p className="font-semibold text-white">BlackElephant Tecnologia</p>
+              <p className="font-semibold text-[var(--foreground)]">BlackElephant Tecnologia</p>
               <p className="mt-1">Santana de Parnaíba, SP — Brasil</p>
               <p className="mt-1">
                 <a
@@ -195,7 +195,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h2
-        className="mb-4 text-base font-black text-white sm:text-lg"
+        className="mb-4 text-base font-black text-[var(--foreground)] sm:text-lg"
         style={{ fontFamily: 'var(--font-title)' }}
       >
         {title}

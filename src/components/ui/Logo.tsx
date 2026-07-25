@@ -53,7 +53,8 @@ export function BrandName({ className, size = 'md', tone = 'dark' }: BrandNamePr
     md: 'text-xl',
     lg: 'text-2xl',
   }
-  const color = tone === 'light' ? '#ffffff' : 'var(--color-deep)'
+  // Preto puro para casar com o elefante da logo (não navy).
+  const color = tone === 'light' ? '#ffffff' : '#000000'
 
   return (
     <span

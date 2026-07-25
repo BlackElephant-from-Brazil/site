@@ -106,13 +106,13 @@ export function PricingComparison({ locale }: { locale: string }) {
     >
       <table className="w-full min-w-[800px]">
         <thead>
-          <tr className="border-b border-[var(--color-gray-800)]">
-            <th className="py-6 px-4 text-left text-[var(--color-gray-400)] font-medium">
+          <tr className="border-b border-[var(--card-border)]">
+            <th className="py-6 px-4 text-left text-[var(--foreground-muted)] font-medium">
               Recursos
             </th>
             {plans.map((plan) => (
               <th key={plan.id} className="py-6 px-4 text-center">
-                <span className={`text-lg font-bold ${plan.recommended ? 'text-[var(--color-brand)]' : 'text-white'}`}>
+                <span className={`text-lg font-bold ${plan.recommended ? 'text-[var(--color-brand)]' : 'text-[var(--foreground)]'}`}>
                   {plan.name}
                 </span>
               </th>
@@ -123,9 +123,9 @@ export function PricingComparison({ locale }: { locale: string }) {
           {allFeatures.map((feature, idx) => (
             <tr
               key={idx}
-              className="border-b border-[var(--color-gray-800)]/50 hover:bg-[var(--color-gray-900)]/50 transition-colors"
+              className="border-b border-[var(--card-border)]/50 hover:bg-[var(--background-tertiary)] transition-colors"
             >
-              <td className="py-4 px-4 text-[var(--color-gray-300)]">
+              <td className="py-4 px-4 text-[var(--foreground)]">
                 {feature.name}
               </td>
               {plans.map((plan) => (
@@ -135,7 +135,7 @@ export function PricingComparison({ locale }: { locale: string }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   ) : (
-                    <svg className="w-6 h-6 mx-auto text-[var(--color-gray-700)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-6 h-6 mx-auto text-[var(--foreground-subtle)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                     </svg>
                   )}

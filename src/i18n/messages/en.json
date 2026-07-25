@@ -39,9 +39,19 @@
   },
   "home": {
     "meta": {
-      "title": "BlackElephant | Technology and Innovation for your Business",
-      "description": "Websites, Systems, Apps and Automation with Artificial Intelligence. Transform your business with cutting-edge technology. Free consultation!",
-      "keywords": "web development, apps, systems, automation, artificial intelligence, digital transformation"
+      "title": "MVP & Custom Software Development for Non-Technical Founders",
+      "description": "We build web apps, SaaS platforms and mobile products for non-technical founders, from scratch or from a stalled Lovable, Bolt, Cursor or Replit prototype, all the way to production-ready software.",
+      "keywords": "MVP development, custom software, SaaS development, web apps, mobile apps, non-technical founders, prototype to production, Lovable, Bolt, Cursor, Replit"
+    },
+    "hero": {
+      "eyebrow": "from scratch to production",
+      "h1": "<hl>MVP</hl> Development Company for <em>Non-Technical Founders</em>",
+      "subtitle": "Web apps, SaaS platforms, and mobile products built from scratch, or taken from a stalled Lovable, Bolt, Codex, Claude Code, Cursor, or Replit prototype to production-ready software.",
+      "ctaPrimary": "Book a free call",
+      "ctaSecondary": "Chat on WhatsApp",
+      "toolsLabel": "We rescue prototypes built with",
+      "imagePlaceholder": "Product preview",
+      "badge": "Production-ready"
     },
     "title": "BlackElephant",
     "subtitle": "Transforming ideas into reality",
@@ -314,7 +324,8 @@
     "plans": "Plans",
     "contact": "Contact",
     "dashboard": "Dashboard",
-    "login": "Log in"
+    "login": "Log in",
+    "blog": "Blog"
   },
   "footer": {
     "description": "Transforming businesses through technology and innovation.",

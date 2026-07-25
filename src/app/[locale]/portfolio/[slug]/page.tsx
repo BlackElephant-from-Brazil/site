@@ -63,12 +63,12 @@ export default async function PortfolioDetailPage({ params }: Props) {
       <div className="site-container relative z-10">
         {/* Breadcrumb */}
         <ScrollReveal>
-          <nav className="flex items-center gap-2 text-sm text-[var(--color-gray-400)] mb-8">
-            <Link href={`/${locale}`} className="hover:text-white transition-colors">
+          <nav className="flex items-center gap-2 text-sm text-[var(--foreground-muted)] mb-8">
+            <Link href={`/${locale}`} className="hover:text-[var(--color-brand)] transition-colors">
               Home
             </Link>
             <span>/</span>
-            <Link href={`/${locale}/portfolio`} className="hover:text-white transition-colors">
+            <Link href={`/${locale}/portfolio`} className="hover:text-[var(--color-brand)] transition-colors">
               {t('breadcrumb')}
             </Link>
             <span>/</span>
@@ -83,14 +83,14 @@ export default async function PortfolioDetailPage({ params }: Props) {
               <span className="px-3 py-1 text-sm font-medium bg-[var(--color-brand)]/10 text-[var(--color-brand)] rounded-full border border-[var(--color-brand)]/30">
                 {getCategoryLabel(project.category)}
               </span>
-              <span className="text-[var(--color-gray-500)] font-mono">
+              <span className="text-[var(--foreground-subtle)] font-mono">
                 {project.year}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--foreground)] mb-4">
               {project.title}
             </h1>
-            <p className="text-lg md:text-xl text-[var(--color-gray-400)] max-w-3xl">
+            <p className="text-lg md:text-xl text-[var(--foreground-muted)] max-w-3xl">
               {project.shortDescription}
             </p>
           </div>
@@ -107,14 +107,14 @@ export default async function PortfolioDetailPage({ params }: Props) {
           <ScrollReveal delay={0.3}>
             <div className="space-y-6">
               {/* Client Info */}
-              <div className="p-6 rounded-2xl bg-[var(--color-gray-900)] border border-[var(--color-gray-800)]">
-                <h3 className="text-lg font-semibold text-white mb-4">{t('detail.client')}</h3>
-                <p className="text-[var(--color-gray-400)]">{project.client}</p>
+              <div className="p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
+                <h3 className="text-lg font-semibold text-[var(--foreground)] mb-4">{t('detail.client')}</h3>
+                <p className="text-[var(--foreground-muted)]">{project.client}</p>
               </div>
 
               {/* Technologies */}
-              <div className="p-6 rounded-2xl bg-[var(--color-gray-900)] border border-[var(--color-gray-800)]">
-                <h3 className="text-lg font-semibold text-white mb-4">{t('detail.technologies')}</h3>
+              <div className="p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
+                <h3 className="text-lg font-semibold text-[var(--foreground)] mb-4">{t('detail.technologies')}</h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
@@ -129,8 +129,8 @@ export default async function PortfolioDetailPage({ params }: Props) {
 
               {/* CTA */}
               <div className="p-6 rounded-2xl bg-gradient-to-br from-[var(--color-brand)]/10 to-transparent border border-[var(--color-brand)]/20">
-                <h3 className="text-lg font-semibold text-white mb-2">{t('detail.cta.title')}</h3>
-                <p className="text-sm text-[var(--color-gray-400)] mb-4">{t('detail.cta.description')}</p>
+                <h3 className="text-lg font-semibold text-[var(--foreground)] mb-2">{t('detail.cta.title')}</h3>
+                <p className="text-sm text-[var(--foreground-muted)] mb-4">{t('detail.cta.description')}</p>
                 <Link
                   href={`/${locale}/contact`}
                   className="inline-block w-full py-3 px-6 text-center font-semibold bg-[var(--color-accent)] text-[var(--color-accent-ink)] rounded-xl hover:bg-[var(--color-accent-dark)] transition-colors"
@@ -145,9 +145,9 @@ export default async function PortfolioDetailPage({ params }: Props) {
         {/* Full Description */}
         <ScrollReveal className="mb-20">
           <div className="max-w-4xl">
-            <h2 className="text-2xl font-bold text-white mb-6">{t('detail.about')}</h2>
+            <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">{t('detail.about')}</h2>
             <div className="prose prose-invert prose-lg max-w-none">
-              <p className="text-[var(--color-gray-300)] leading-relaxed whitespace-pre-line">
+              <p className="text-[var(--foreground-muted)] leading-relaxed whitespace-pre-line">
                 {project.fullDescription}
               </p>
             </div>
@@ -158,18 +158,18 @@ export default async function PortfolioDetailPage({ params }: Props) {
         {relatedProjects.length > 0 && (
           <ScrollReveal>
             <div>
-              <h2 className="text-2xl font-bold text-white mb-8">{t('detail.related')}</h2>
+              <h2 className="text-2xl font-bold text-[var(--foreground)] mb-8">{t('detail.related')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedProjects.map((related) => (
                   <Link
                     key={related.id}
                     href={`/${locale}/portfolio/${related.slug}`}
-                    className="group block p-6 rounded-2xl bg-[var(--color-gray-900)] border border-[var(--color-gray-800)] hover:border-[var(--color-brand)]/50 transition-all duration-300"
+                    className="group block p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)] hover:border-[var(--color-brand)]/50 transition-all duration-300"
                   >
-                    <h3 className="text-lg font-semibold text-white group-hover:text-[var(--color-brand)] transition-colors mb-2">
+                    <h3 className="text-lg font-semibold text-[var(--foreground)] group-hover:text-[var(--color-brand)] transition-colors mb-2">
                       {related.title}
                     </h3>
-                    <p className="text-sm text-[var(--color-gray-400)] line-clamp-2">
+                    <p className="text-sm text-[var(--foreground-muted)] line-clamp-2">
                       {related.shortDescription}
                     </p>
                   </Link>
@@ -183,7 +183,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <ScrollReveal className="mt-12">
           <Link
             href={`/${locale}/portfolio`}
-            className="inline-flex items-center gap-2 text-[var(--color-gray-400)] hover:text-[var(--color-brand)] transition-colors"
+            className="inline-flex items-center gap-2 text-[var(--foreground-muted)] hover:text-[var(--color-brand)] transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

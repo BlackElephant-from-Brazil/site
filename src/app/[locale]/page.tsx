@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t('meta.description'),
       type: 'website',
       siteName: 'BlackElephant',
-      locale: locale === 'pt' ? 'pt_BR' : locale,
+      locale: locale === 'pt-pt' ? 'pt_PT' : locale.startsWith('pt') ? 'pt_BR' : locale === 'es' ? 'es_ES' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
@@ -29,12 +29,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: '/',
       languages: {
-        'pt-BR': '/pt',
         'en': '/en',
+        'pt-BR': '/pt-br',
+        'pt-PT': '/pt-pt',
         'es': '/es',
-        'de': '/de',
-        'fr': '/fr',
-        'it': '/it',
       },
     },
   };

@@ -70,19 +70,19 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
 
           <Section title="1. Quem Somos">
             <p>
-              A <strong className="text-white">BlackElephant Tecnologia</strong> é uma empresa de desenvolvimento de
+              A <strong className="text-[var(--foreground)]">BlackElephant Tecnologia</strong> é uma empresa de desenvolvimento de
               software e automação digital com sede em Santana de Parnaíba, SP, Brasil. Esta Política de Privacidade
               descreve como coletamos, usamos e protegemos as informações dos visitantes e clientes do nosso site
-              <strong className="text-white"> blackelephant.com.br</strong>.
+              <strong className="text-[var(--foreground)]"> blackelephant.com.br</strong>.
             </p>
           </Section>
 
           <Section title="2. Dados que Coletamos">
             <p>Podemos coletar as seguintes categorias de dados:</p>
             <ul className="mt-3 space-y-2 pl-4">
-              <Li><strong className="text-white">Dados de contato:</strong> nome, e-mail, telefone e empresa, fornecidos voluntariamente via formulários de contato ou orçamento.</Li>
-              <Li><strong className="text-white">Dados de navegação:</strong> endereço IP, tipo de navegador, páginas visitadas, tempo de sessão e origem do acesso, coletados automaticamente por cookies e ferramentas de análise.</Li>
-              <Li><strong className="text-white">Dados de conversão:</strong> interações com botões de WhatsApp e formulários, para medir o desempenho das campanhas de marketing.</Li>
+              <Li><strong className="text-[var(--foreground)]">Dados de contato:</strong> nome, e-mail, telefone e empresa, fornecidos voluntariamente via formulários de contato ou orçamento.</Li>
+              <Li><strong className="text-[var(--foreground)]">Dados de navegação:</strong> endereço IP, tipo de navegador, páginas visitadas, tempo de sessão e origem do acesso, coletados automaticamente por cookies e ferramentas de análise.</Li>
+              <Li><strong className="text-[var(--foreground)]">Dados de conversão:</strong> interações com botões de WhatsApp e formulários, para medir o desempenho das campanhas de marketing.</Li>
             </ul>
           </Section>
 
@@ -178,7 +178,7 @@ export default async function PrivacyPolicyPage({ params }: { params: Params }) 
                 borderColor: 'var(--glass-border)',
               }}
             >
-              <p className="font-semibold text-white">BlackElephant Tecnologia</p>
+              <p className="font-semibold text-[var(--foreground)]">BlackElephant Tecnologia</p>
               <p className="mt-1">Santana de Parnaíba, SP — Brasil</p>
               <p className="mt-1">
                 <a
@@ -201,7 +201,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h2
-        className="mb-4 text-base font-black text-white sm:text-lg"
+        className="mb-4 text-base font-black text-[var(--foreground)] sm:text-lg"
         style={{ fontFamily: 'var(--font-title)' }}
       >
         {title}

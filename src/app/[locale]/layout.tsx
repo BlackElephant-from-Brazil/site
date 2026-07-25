@@ -15,32 +15,35 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
+const OG_LOCALE: Record<string, string> = {
+  en: 'en_US',
+  'pt-br': 'pt_BR',
+  'pt-pt': 'pt_PT',
+  es: 'es_ES',
+}
+
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params
-  
+
   const siteUrl = 'https://blackelephant.com.br'
-  
+
   const titles: Record<string, string> = {
-    pt: 'BlackElephant | Desenvolvimento de Software & Automações',
     en: 'BlackElephant | Software Development & Automation',
+    'pt-br': 'BlackElephant | Desenvolvimento de Software & Automações',
+    'pt-pt': 'BlackElephant | Desenvolvimento de Software & Automações',
     es: 'BlackElephant | Desarrollo de Software y Automatización',
-    de: 'BlackElephant | Softwareentwicklung & Automatisierung',
-    fr: 'BlackElephant | Développement de Logiciels & Automatisation',
-    it: 'BlackElephant | Sviluppo Software e Automazione',
   }
-  
+
   const descriptions: Record<string, string> = {
-    pt: 'Transformamos ideias em soluções digitais. Sites, aplicativos, sistemas web e automações inteligentes para impulsionar seu negócio.',
     en: 'We transform ideas into digital solutions. Websites, apps, web systems and smart automation to boost your business.',
+    'pt-br': 'Transformamos ideias em soluções digitais. Sites, aplicativos, sistemas web e automações inteligentes para impulsionar seu negócio.',
+    'pt-pt': 'Transformamos ideias em soluções digitais. Sites, aplicações, sistemas web e automações inteligentes para impulsionar o seu negócio.',
     es: 'Transformamos ideas en soluciones digitales. Sitios web, aplicaciones, sistemas web y automatización inteligente para impulsar tu negocio.',
-    de: 'Wir verwandeln Ideen in digitale Lösungen. Websites, Apps, Websysteme und intelligente Automatisierung für Ihr Unternehmen.',
-    fr: 'Nous transformons les idées en solutions numériques. Sites web, applications, systèmes web et automatisation intelligente pour votre entreprise.',
-    it: 'Trasformiamo le idee in soluzioni digitali. Siti web, app, sistemi web e automazione intelligente per la tua azienda.',
   }
-  
+
   return {
-    title: titles[locale] || titles.pt,
-    description: descriptions[locale] || descriptions.pt,
+    title: titles[locale] || titles.en,
+    description: descriptions[locale] || descriptions.en,
     keywords: ['desenvolvimento de software', 'automação', 'sites', 'aplicativos', 'sistemas web', 'BlackElephant', 'tecnologia', 'inovação'],
     authors: [{ name: 'BlackElephant' }],
     creator: 'BlackElephant',
@@ -49,12 +52,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     alternates: {
       canonical: `${siteUrl}/${locale}`,
       languages: {
-        'pt-BR': '/pt',
-        'es': '/es',
         'en': '/en',
-        'de': '/de',
-        'fr': '/fr',
-        'it': '/it',
+        'pt-BR': '/pt-br',
+        'pt-PT': '/pt-pt',
+        'es': '/es',
       },
     },
     icons: {
@@ -63,11 +64,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     openGraph: {
       type: 'website',
       siteName: 'BlackElephant',
-      title: titles[locale] || titles.pt,
-      description: descriptions[locale] || descriptions.pt,
+      title: titles[locale] || titles.en,
+      description: descriptions[locale] || descriptions.en,
       url: `${siteUrl}/${locale}`,
-      locale: locale,
-      alternateLocale: routing.locales.filter(l => l !== locale),
+      locale: OG_LOCALE[locale] || 'en_US',
+      alternateLocale: routing.locales.filter(l => l !== locale).map(l => OG_LOCALE[l]).filter(Boolean),
       images: [
         {
           url: `${siteUrl}/logo.png`,
@@ -79,8 +80,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     },
     twitter: {
       card: 'summary_large_image',
-      title: titles[locale] || titles.pt,
-      description: descriptions[locale] || descriptions.pt,
+      title: titles[locale] || titles.en,
+      description: descriptions[locale] || descriptions.en,
       images: [`${siteUrl}/logo.png`],
     },
     robots: {
@@ -117,8 +118,13 @@ export default async function LocaleLayout({
   // Carregar mensagens do locale
   const messages = await getMessages()
 
+  const htmlLang =
+    locale === 'pt-br' ? 'pt-BR' :
+    locale === 'pt-pt' ? 'pt-PT' :
+    locale
+
   return (
-    <html lang={locale}>
+    <html lang={htmlLang}>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           <LoadingProvider>

@@ -35,9 +35,10 @@ const WHATSAPP_URL = 'https://wa.me/5519978055531';
 
 export default function ObrigadoPage() {
   const params = useParams();
-  const locale = typeof params?.locale === 'string' && params.locale === 'pt' ? 'pt' : 'en';
-  const copy = COPY[locale];
-  const landingPath = `/${locale}/venda-mais-com-uma-landing-page-de-alta-conversao`;
+  const routeLocale = typeof params?.locale === 'string' ? params.locale : 'en';
+  const lang = routeLocale.startsWith('pt') ? 'pt' : 'en';
+  const copy = COPY[lang];
+  const landingPath = `/${routeLocale}/venda-mais-com-uma-landing-page-de-alta-conversao`;
 
   useEffect(() => {
     window.scrollTo(0, 0);

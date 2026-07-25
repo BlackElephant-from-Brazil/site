@@ -42,11 +42,11 @@ export default async function PortfolioPage({ params }: Props) {
           <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-[var(--color-brand)] bg-[var(--color-brand)]/10 rounded-full border border-[var(--color-brand)]/20">
             {t('badge')}
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--foreground)] mb-6">
             {t('title.part1')}{' '}
             <span className="text-[var(--color-brand)]">{t('title.part2')}</span>
           </h1>
-          <p className="text-lg md:text-xl text-[var(--color-gray-400)] max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-[var(--foreground-muted)] max-w-3xl mx-auto">
             {t('description')}
           </p>
         </ScrollReveal>
@@ -54,29 +54,29 @@ export default async function PortfolioPage({ params }: Props) {
         {/* Stats */}
         <ScrollReveal delay={0.2} className="mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
+            <div className="text-center p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
               <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.length}+
               </div>
-              <div className="text-sm text-[var(--color-gray-400)]">{t('stats.projects')}</div>
+              <div className="text-sm text-[var(--foreground-muted)]">{t('stats.projects')}</div>
             </div>
-            <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
+            <div className="text-center p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
               <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'sites').length}
               </div>
-              <div className="text-sm text-[var(--color-gray-400)]">{t('stats.sites')}</div>
+              <div className="text-sm text-[var(--foreground-muted)]">{t('stats.sites')}</div>
             </div>
-            <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
+            <div className="text-center p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
               <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'sistemas').length}
               </div>
-              <div className="text-sm text-[var(--color-gray-400)]">{t('stats.systems')}</div>
+              <div className="text-sm text-[var(--foreground-muted)]">{t('stats.systems')}</div>
             </div>
-            <div className="text-center p-6 rounded-2xl bg-[var(--color-gray-900)]/50 border border-[var(--color-gray-800)]">
+            <div className="text-center p-6 rounded-2xl bg-[var(--card-background)] border border-[var(--card-border)]">
               <div className="text-3xl md:text-4xl font-bold text-[var(--color-brand)] mb-2">
                 {portfolioItems.filter(p => p.category === 'apps').length}
               </div>
-              <div className="text-sm text-[var(--color-gray-400)]">{t('stats.apps')}</div>
+              <div className="text-sm text-[var(--foreground-muted)]">{t('stats.apps')}</div>
             </div>
           </div>
         </ScrollReveal>

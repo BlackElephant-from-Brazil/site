@@ -39,9 +39,19 @@
   },
   "home": {
     "meta": {
-      "title": "BlackElephant | Tecnologia e Inovação para sua Empresa",
-      "description": "Sites, Sistemas, Apps e Automação com Inteligência Artificial. Transforme sua empresa com tecnologia de ponta. Consultoria gratuita!",
-      "keywords": "desenvolvimento web, aplicativos, sistemas, automação, inteligência artificial, transformação digital"
+      "title": "Desenvolvimento de MVP e software sob medida para fundadores não técnicos",
+      "description": "Criamos web apps, plataformas SaaS e produtos mobile para fundadores não técnicos, do zero ou a partir de um protótipo travado no Lovable, Bolt, Cursor ou Replit, até um software pronto para produção.",
+      "keywords": "desenvolvimento de MVP, software sob medida, desenvolvimento SaaS, web apps, aplicativos mobile, fundadores não técnicos, protótipo para produção, Lovable, Bolt, Cursor, Replit"
+    },
+    "hero": {
+      "eyebrow": "do zero à produção",
+      "h1": "Empresa de desenvolvimento de <hl>MVP</hl> para <em>fundadores não técnicos</em>",
+      "subtitle": "Web apps, plataformas SaaS e produtos mobile criados do zero, ou levados de um protótipo travado no Lovable, Bolt, Codex, Claude Code, Cursor ou Replit até um software pronto para produção.",
+      "ctaPrimary": "Agendar conversa gratuita",
+      "ctaSecondary": "Falar no WhatsApp",
+      "toolsLabel": "Resgatamos protótipos feitos no",
+      "imagePlaceholder": "Prévia do produto",
+      "badge": "Pronto para produção"
     },
     "heroTagline": "Tecnologia & Inovação",
     "heroTitle": "Integre-se ao FUTURO",
@@ -293,7 +303,8 @@
     "plans": "Planos",
     "contact": "Contato",
     "dashboard": "Painel",
-    "login": "Entrar"
+    "login": "Entrar",
+    "blog": "Blog"
   },
   "member": {
     "dashboard": "Painel do Membro",
