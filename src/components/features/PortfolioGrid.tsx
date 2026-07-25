@@ -41,7 +41,7 @@ export function PortfolioGrid({
               className={`relative px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeCategory === category.value
                   ? 'text-[var(--color-black)]'
-                  : 'text-[var(--color-gray-400)] hover:text-white border border-[var(--color-gray-700)] hover:border-[var(--color-gray-500)]'
+                  : 'text-[var(--color-gray-400)] hover:text-[var(--color-brand)] border border-[var(--color-gray-700)] hover:border-[var(--color-gray-500)]'
               }`}
             >
               {activeCategory === category.value && (
@@ -85,7 +85,7 @@ export function PortfolioGrid({
           animate={{ opacity: 1 }}
           className="text-center py-20"
         >
-          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--color-gray-800)] flex items-center justify-center">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[var(--background-tertiary)] flex items-center justify-center">
             <svg className="w-10 h-10 text-[var(--color-gray-600)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>

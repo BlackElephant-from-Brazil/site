@@ -76,7 +76,7 @@ function ContactPageContent() {
                   'px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300',
                   activeTab === 'contact' 
                     ? 'shadow-lg' 
-                    : 'hover:text-white'
+                    : 'hover:text-[var(--color-brand)]'
                 )}
                 style={{
                   backgroundColor: activeTab === 'contact' ? 'var(--primary)' : 'transparent',
@@ -96,7 +96,7 @@ function ContactPageContent() {
                   'px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300',
                   activeTab === 'consultation' 
                     ? 'shadow-lg' 
-                    : 'hover:text-white'
+                    : 'hover:text-[var(--color-brand)]'
                 )}
                 style={{
                   backgroundColor: activeTab === 'consultation' ? 'var(--primary)' : 'transparent',

@@ -7,12 +7,10 @@ import { Logo } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 const localeFlags: Record<string, { flag: string; name: string }> = {
-  pt: { flag: '🇧🇷', name: 'Português' },
   en: { flag: '🇺🇸', name: 'English' },
+  'pt-br': { flag: '🇧🇷', name: 'Português (Brasil)' },
+  'pt-pt': { flag: '🇵🇹', name: 'Português (Portugal)' },
   es: { flag: '🇪🇸', name: 'Español' },
-  de: { flag: '🇩🇪', name: 'Deutsch' },
-  fr: { flag: '🇫🇷', name: 'Français' },
-  it: { flag: '🇮🇹', name: 'Italiano' },
 }
 
 export interface HeaderProps {
@@ -62,6 +60,7 @@ export function Header({ className }: HeaderProps) {
     { href: '/portfolio', label: t('portfolio') },
     { href: '/plans', label: t('plans') },
     { href: '/about', label: t('about') },
+    { href: '/blog', label: t('blog') },
     { href: '/contact', label: t('contact') },
   ]
 

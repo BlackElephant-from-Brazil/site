@@ -1,5 +1,5 @@
 // ─── Auth ───────────────────────────────────────────────────
-export type Locale = 'pt' | 'es' | 'en' | 'de' | 'fr' | 'it'
+export type Locale = 'en' | 'pt-br' | 'pt-pt' | 'es'
 export type UserRole = 'admin' | 'customer'
 
 export interface User {

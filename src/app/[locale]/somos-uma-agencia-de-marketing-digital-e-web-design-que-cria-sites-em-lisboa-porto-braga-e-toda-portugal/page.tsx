@@ -36,7 +36,8 @@ function getMetadataCopy(locale: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const copy = getMetadataCopy(locale);
-  const canonicalLocale = locale === 'en' ? 'en' : 'pt';
+  // LP focada em Portugal: a versão portuguesa canoniza em pt-pt.
+  const canonicalLocale = locale === 'en' ? 'en' : 'pt-pt';
 
   return {
     title: copy.title,
@@ -58,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `/${canonicalLocale}/${SLUG}`,
       languages: {
-        'pt-PT': `/pt/${SLUG}`,
+        'pt-PT': `/pt-pt/${SLUG}`,
         en: `/en/${SLUG}`,
       },
     },

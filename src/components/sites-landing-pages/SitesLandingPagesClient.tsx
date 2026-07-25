@@ -20,7 +20,7 @@ export const LINKS = {
 } as const;
 
 function getLocale(locale: string): LocaleKey {
-  return locale === 'pt' ? 'pt' : 'en';
+  return locale.startsWith('pt') ? 'pt' : 'en';
 }
 
 // Segmento de título editorial: "serif" = linha introdutória leve, "bold" = texto
