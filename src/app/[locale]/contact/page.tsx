@@ -6,43 +6,39 @@ import { useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 export default function ContactPage() {
-  return (
-    <Suspense fallback={<ContactPageLoading />}>
-      <ContactPageContent />
-    </Suspense>
-  )
+  return <ContactPageContent />
 }
 
-function ContactPageLoading() {
-  return (
-    <main className="min-h-screen pt-16 lg:pt-20" style={{ backgroundColor: 'var(--background)' }}>
-      <section className="py-20 lg:py-32">
-        <div className="site-container">
-          <div className="animate-pulse">
-            <div className="h-16 w-64 bg-gray-800 rounded mb-6" />
-            <div className="h-6 w-full max-w-md bg-gray-800 rounded" />
-          </div>
-        </div>
-      </section>
-    </main>
-  )
+/**
+ * Lê `?tab=` da URL. Fica isolado num leaf que não renderiza nada porque
+ * `useSearchParams()` faz o prerender estático cair no fallback do Suspense —
+ * envolvendo a página inteira, o conteúdo (incluindo o h1) sumiria do HTML.
+ */
+function TabFromQuery({
+  onSelectTab,
+}: {
+  onSelectTab: (tab: 'contact' | 'consultation') => void
+}) {
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if (searchParams.get('tab') === 'consultation') {
+      onSelectTab('consultation')
+    }
+  }, [searchParams, onSelectTab])
+
+  return null
 }
 
 function ContactPageContent() {
   const t = useTranslations('contact')
-  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<'contact' | 'consultation'>('contact')
-  
-  // Handle tab from URL query parameter
-  useEffect(() => {
-    const tab = searchParams.get('tab')
-    if (tab === 'consultation') {
-      setActiveTab('consultation')
-    }
-  }, [searchParams])
 
   return (
     <main className="min-h-screen pt-16 lg:pt-20" style={{ backgroundColor: 'var(--background)' }}>
+      <Suspense fallback={null}>
+        <TabFromQuery onSelectTab={setActiveTab} />
+      </Suspense>
       <section className="py-20 lg:py-32">
         <div className="site-container">
           {/* Header */}

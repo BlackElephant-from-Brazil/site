@@ -63,6 +63,19 @@ function FloatingWhatsAppButton({ isLandingPage }: { isLandingPage: boolean }) {
   )
 }
 
+// Sem JavaScript, as animações de entrada (framer-motion) nunca rodam e o
+// conteúdo ficaria congelado no estado inicial `opacity: 0`. Este override só
+// existe quando o JS está desligado — para quem tem JS, nada muda.
+function NoScriptRevealFallback() {
+  return (
+    <noscript>
+      <style>{
+        '[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important;transform:none!important}'
+      }</style>
+    </noscript>
+  )
+}
+
 function PublicUmamiAnalytics() {
   return (
     <Script
@@ -96,6 +109,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <NoScriptRevealFallback />
       <PublicGoogleTagManager />
       <PublicUmamiAnalytics />
       <PublicClarityAnalytics />
