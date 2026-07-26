@@ -44,9 +44,16 @@ export async function middleware(request: NextRequest) {
     intlResponse.cookies.set(name, value)
   })
 
-  // Lembra o idioma da URL atual para a próxima visita (persistência em storage/cookie).
+  // Lembra o idioma da URL atual para a próxima visita (persistência em cookie).
+  // Só grava quando a preferência muda de fato: cookie ausente significa
+  // "sem preferência", ou seja, o idioma padrão. Assim as respostas do locale
+  // padrão saem sem Set-Cookie e continuam cacheáveis em CDN.
   const current = localeFromPath(pathname)
-  if (current) {
+  const storedLocale = request.cookies.get(LOCALE_COOKIE)?.value
+  const effectiveLocale =
+    storedLocale && LOCALES.includes(storedLocale) ? storedLocale : routing.defaultLocale
+
+  if (current && current !== effectiveLocale) {
     intlResponse.cookies.set(LOCALE_COOKIE, current, {
       path: '/',
       maxAge: 60 * 60 * 24 * 365,

@@ -27,7 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t('meta.description'),
     },
     alternates: {
-      canonical: '/',
+      // Canonical da própria URL com locale — a raiz redireciona (307),
+      // então canonicalizar para '/' mandaria o crawler a um redirect.
+      canonical: `/${locale}`,
       languages: {
         'en': '/en',
         'pt-BR': '/pt-br',

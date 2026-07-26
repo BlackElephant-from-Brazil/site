@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { reportReservarHorarioConversion } from '@/lib/analytics/google-ads';
 
 // ============================================================================
@@ -292,7 +291,7 @@ function HeroImageFrame({ placeholderLabel, badgeLabel }: { placeholderLabel: st
 }
 
 // ----------------------------------------------------------------------------
-// Hero — split editorial: imagem à esquerda, mensagem à direita (desktop);
+// Hero — split editorial: mensagem à esquerda, imagem à direita (desktop);
 // empilhado (texto → imagem) no mobile.
 // ----------------------------------------------------------------------------
 
@@ -313,13 +312,13 @@ function HeroBlock() {
       <div className="relative z-10 flex flex-1 items-center">
         <div className="mx-auto w-full max-w-7xl px-6 lg:px-10 pt-28 lg:pt-32 pb-16 lg:pb-20">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* ===== Coluna esquerda — imagem (abaixo do texto no mobile) ===== */}
-            <div className="order-2 lg:order-1">
+            {/* ===== Coluna direita — imagem (abaixo do texto no mobile) ===== */}
+            <div className="order-2 lg:order-2">
               <HeroImageFrame placeholderLabel={t('imagePlaceholder')} badgeLabel={t('badge')} />
             </div>
 
-            {/* ===== Coluna direita — mensagem ===== */}
-            <div className="order-1 lg:order-2">
+            {/* ===== Coluna esquerda — mensagem ===== */}
+            <div className="order-1 lg:order-1">
               {/* Eyebrow */}
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
@@ -336,11 +335,9 @@ function HeroBlock() {
                 </span>
               </motion.div>
 
-              {/* Título */}
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.08, ease: EASE_OUT }}
+              {/* Título — sem animação de entrada: é o elemento de LCP e precisa
+                  pintar imediatamente, já visível no HTML do servidor. */}
+              <h1
                 className="text-[clamp(2.15rem,8vw,2.9rem)] lg:text-[clamp(2.6rem,3.6vw,3.7rem)] leading-[1.06] tracking-[-0.025em]"
                 style={{ fontFamily: 'var(--font-title)', fontWeight: 800, color: 'var(--foreground)' }}
               >
@@ -359,26 +356,18 @@ function HeroBlock() {
                     </em>
                   ),
                 })}
-              </motion.h1>
+              </h1>
 
-              {/* Subtítulo */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: EASE_OUT }}
+              {/* Subtítulo — sem animação de entrada (acima da dobra). */}
+              <p
                 className="mt-6 max-w-[34rem] text-[15.5px] lg:text-[17px] leading-[1.62]"
                 style={{ color: 'var(--foreground-muted)', fontFamily: 'var(--font-primary)' }}
               >
                 {t('subtitle')}
-              </motion.p>
+              </p>
 
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.32, ease: EASE_OUT }}
-                className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
-              >
+              {/* CTAs — sem animação de entrada (acima da dobra). */}
+              <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <a
                   href="https://calendly.com/guilherme-blackelephant/30min"
                   target="_blank"
@@ -421,7 +410,7 @@ function HeroBlock() {
                 >
                   {t('ctaSecondary')}
                 </a>
-              </motion.div>
+              </div>
 
               {/* Prova: prototipagens que levamos à produção */}
               <motion.div
@@ -976,13 +965,12 @@ export function HeroSection() {
   );
 }
 
-/** Bloco de benefícios — exclusivo do fluxo mobile (<1024px). */
+/** Bloco de benefícios — exclusivo do fluxo mobile (<1024px).
+ *  Visibilidade via CSS (`lg:hidden`) em vez de media query em JS, para que a
+ *  copy exista no HTML do servidor mesmo sem JavaScript. */
 export function MobileSystemBenefitsSection() {
-  const isMobile = useMediaQuery('(max-width: 1023.98px)', false);
-  if (!isMobile) return null;
-
   return (
-    <section style={{ backgroundColor: 'var(--background)' }}>
+    <section className="lg:hidden" style={{ backgroundColor: 'var(--background)' }}>
       <SystemBenefitsBlock />
     </section>
   );
